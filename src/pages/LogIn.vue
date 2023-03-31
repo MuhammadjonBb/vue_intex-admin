@@ -4,6 +4,10 @@
       <q-page class="login">
         <q-card class="login__modal modal">
           <q-card-section class="q-pa-xl">
+            <q-btn class="absolute-top-left q-pa-sm" color="primary" style="top:25px;left: 27px;border-radius: 7px;"
+              v-if="isResetMode || isSMSMode" @click="onBackBtn">
+              <q-icon name="arrow_back_ios" style="left:5px;"></q-icon>
+            </q-btn>
             <q-img src="src/assets/intex-logo.svg" alt="Logo" class="modal__logo" />
             <form style="position: relative;">
               <Transition name="slide-fade" mode="out-in">
@@ -24,15 +28,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import MainAuth from 'src/components/form/MainAuth.vue'
 import ResetPassword from 'src/components/form/ResetPassword.vue'
 import ConfirmSMS from 'src/components/form/ConfirmSMS.vue'
 import SetPassword from 'src/components/form/SetPassword.vue'
 
-const isResetMode = ref(false)
-const isSMSMode = ref(false)
-const isSetPasswordMode = ref(false)
+const isResetMode: Ref<boolean> = ref(false)
+const isSMSMode: Ref<boolean> = ref(false)
+const isSetPasswordMode: Ref<boolean> = ref(false)
 
 // eslint-disable-next-line space-before-function-paren
 function onResetMode() {
@@ -47,6 +51,16 @@ function onSMSmode() {
 function onResetPasswordMode() {
   isSetPasswordMode.value = true
   isSMSMode.value = false
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onBackBtn() {
+  if (isResetMode.value) {
+    isResetMode.value = false
+  } else {
+    isResetMode.value = true
+    isSMSMode.value = false
+  }
 }
 </script>
 

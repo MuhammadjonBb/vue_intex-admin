@@ -1,88 +1,3 @@
-<!-- <template>
-  <q-layout view="lHh Lpr lFf" class="bg-grey-2">
-    <q-header>
-      <q-toolbar class="bg-white text-black">
-        <q-toolbar-title class="q-my-md">
-          <q-input model-value="" dense style="width: 300px" bg-color="grey-3" standout label="ksdcns">
-            <template v-slot:prepend>
-              <q-icon color="blue" name="search" />
-            </template>
-
-          </q-input>
-        </q-toolbar-title>
-      </q-toolbar>
-      <q-separator class="bg-grey-4" />
-      <div class="q-pl-sm q-pa-sm text-grey bg-white">
-        <q-icon name="home" color="blue" />
-      </div>
-    </q-header>
-    <q-drawer show-if-above>
-      <q-list>
-        <q-toolbar header class="q-my-sm" style="margin-top: 13px">
-          <q-toolbar-title class="text-blue text-weight-bolder" style="font-size:25px ">INTEX-MARKET</q-toolbar-title>
-        </q-toolbar>
-        <q-separator inset class="q-mb-md" />
-        <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
-</template>
-
-<script setup lang="ts">
-
-import EssentialLink from 'components/EssentialLink.vue'
-interface EssentialLinkProps {
-  title: string;
-  caption?: string;
-  icon?: string;
-  link?: string;
-}
-const essentialLinks: EssentialLinkProps[] = [
-  {
-    title: 'Продукты',
-    icon: '',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Заказы',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Обратный связ',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Пользователи',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Настройки сайта',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Выйти',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-</script>
-
-<style ></style> -->
-
 <template>
   <q-header class="header row justify-between bg-white absolute-top-left">
     <div class="search">
@@ -92,7 +7,11 @@ const essentialLinks: EssentialLinkProps[] = [
     <div class="tools">
       <q-list class="tools__list row">
         <q-item class="tools__item" dense>
-          <q-select filled v-model="selectValue" :options="options" dense />
+          <q-select filled v-model="selectValue" :options="options" dense>
+            <template v-slot:prepend>
+              <q-icon name="language" />
+            </template>
+          </q-select>
         </q-item>
         <q-item class="tools__item" dense>
           <q-img src="src/assets/notification.svg" alt="Notifications" />
