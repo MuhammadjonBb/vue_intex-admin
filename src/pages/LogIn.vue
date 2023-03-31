@@ -17,7 +17,7 @@
 
                 <ConfirmSMS v-else-if="isSMSMode" @to-reset-password-mode="onResetPasswordMode" />
 
-                <SetPassword v-else-if="isSetPasswordMode" />
+                <SetPassword v-else-if="isSetPasswordMode" @to-login="onLoginMode" />
               </Transition>
             </form>
           </q-card-section>
@@ -53,6 +53,10 @@ function onResetPasswordMode() {
   isSMSMode.value = false
 }
 
+// eslint-disable-next-line space-before-function-paren
+function onLoginMode() {
+  isSetPasswordMode.value = false
+}
 // eslint-disable-next-line space-before-function-paren
 function onBackBtn() {
   if (isResetMode.value) {

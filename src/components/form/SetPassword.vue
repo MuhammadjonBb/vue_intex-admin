@@ -21,7 +21,8 @@
         </template>
       </q-input>
     </label>
-    <q-btn label="Войти" class="q-pa-sm q-mt-xl" type="submit" color="primary" style="width: 100%;" />
+    <q-btn label="Сохранить" class="q-pa-sm q-mt-md" type="button" color="primary" style="width: 100%;"
+      @click="$emit('toLogin')" />
   </div>
 </template>
 
@@ -32,7 +33,6 @@ const newPassword = {
   new: '',
   confirm: ''
 }
-
 const isPwd1: Ref<boolean> = ref(true)
 const isPwd2: Ref<boolean> = ref(true)
 
