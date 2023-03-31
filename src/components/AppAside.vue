@@ -132,8 +132,7 @@ function onProductsClick() {
     font-size: 22px;
   }
 
-  &__products-item:hover,
-  &__products-item:focus {
+  &__products-item:hover {
     filter: grayscale(0);
   }
 

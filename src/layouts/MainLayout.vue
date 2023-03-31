@@ -1,17 +1,11 @@
 <template>
-  <div class="row wrapper">
+  <q-layout class="row wrapper">
     <AppAside />
     <AppHeader />
-  </div>
+  </q-layout>
 </template>
 
-<style lang="scss">
-.wrapper {
-  width: 1480px;
-  padding: 0 20px;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>
 
 <script setup>
 import AppHeader from 'src/components/AppHeader.vue'
