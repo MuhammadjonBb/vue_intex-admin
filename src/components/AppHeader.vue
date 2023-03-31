@@ -1,27 +1,35 @@
 <template>
-  <q-header class="header row justify-between bg-white absolute-top-left">
-    <div class="search">
-      <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
-      <input class="search__input" v-model="searchValue" placeholder="Поиск" />
-    </div>
-    <div class="tools">
-      <q-list class="tools__list row">
-        <q-item class="tools__item" dense>
-          <q-select filled v-model="selectValue" :options="options" dense>
-            <template v-slot:prepend>
-              <q-icon name="language" />
-            </template>
-          </q-select>
-        </q-item>
-        <q-item class="tools__item" dense>
-          <q-img src="src/assets/notification.svg" alt="Notifications" />
-        </q-item>
-        <q-item class="tools__item" dense>
-          <q-img src="src/assets/profile.svg" alt="Notifications" />
-        </q-item>
-      </q-list>
-    </div>
-  </q-header>
+  <div>
+    <q-header class="header row justify-between bg-white absolute-top-left">
+      <div class="search">
+        <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
+        <input class="search__input" v-model="searchValue" placeholder="Поиск" />
+      </div>
+      <div class="tools">
+        <q-list class="tools__list row">
+          <q-item class="tools__item" dense>
+            <q-select filled v-model="selectValue" :options="options" dense>
+              <template v-slot:prepend>
+                <q-icon name="language" />
+              </template>
+            </q-select>
+          </q-item>
+          <q-item class="tools__item" dense>
+            <q-img src="src/assets/notification.svg" alt="Notifications" />
+          </q-item>
+          <q-item class="tools__item" dense>
+            <q-img src="src/assets/profile.svg" alt="Notifications" />
+          </q-item>
+        </q-list>
+      </div>
+    </q-header>
+    <q-toolbar dense class="text-grey-6">
+      <q-breadcrumbs>
+        <q-breadcrumbs-el icon="home"></q-breadcrumbs-el>
+        <q-breadcrumbs-el>Продукты</q-breadcrumbs-el>
+      </q-breadcrumbs>
+    </q-toolbar>
+  </div>
 </template>
 
 <script setup lang="ts">
