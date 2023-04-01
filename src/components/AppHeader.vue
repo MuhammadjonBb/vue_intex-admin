@@ -45,9 +45,8 @@ const selectValue: Ref<string> = ref(options[0])
 @import "src/css/quasar.variables.scss";
 
 .header {
-  max-width: 1187px;
+  width: 1187px;
   position: static;
-  width: 100%;
   height: 80px;
   padding: 20px 30px;
   border-bottom: 1px solid #6666661c;
