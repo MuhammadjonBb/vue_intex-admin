@@ -1,11 +1,11 @@
 <template>
   <aside class="aside column">
-    <img src="src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
+    <img src="/src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
     <ul class="aside__list">
       <li class="aside__item row" @click="onProductsClick">
-        <img src="src/assets/products.svg" alt="orders" class="aside__item-icon">
+        <img src="/src/assets/products.svg" alt="orders" class="aside__item-icon">
         Products
-        <img src="src/assets/dropdown-arrow.svg" alt=">" class="dropdown-icon"
+        <img src="/src/assets/dropdown-arrow.svg" alt=">" class="dropdown-icon"
           :style="{ 'transform': `rotate(${transformValue ? '90deg' : 0})` }">
         <ul class="aside__products-list"
           :style="{ 'opacity': Number(!!transformValue), 'visibility': !!transformValue ? 'visible' : 'hidden' }">
@@ -22,23 +22,23 @@
       </li>
       <div class="list-dropdown" :style="{ 'transform': `translateY(${transformValue}px)` }">
         <li class="aside__item row">
-          <img src="src/assets/orders.svg" alt="orders" class="aside__item-icon">
+          <img src="/src/assets/orders.svg" alt="orders" class="aside__item-icon">
           <router-link class="aside__link" to="/orders/">Заказы</router-link>
         </li>
         <li class="aside__item row">
-          <img src="src/assets/feedback.svg" alt="feedback" class="aside__item-icon">
+          <img src="/src/assets/feedback.svg" alt="feedback" class="aside__item-icon">
           <router-link class="aside__link" to="/feedback/">Обратная связь</router-link>
         </li>
         <li class="aside__item row">
-          <img src="src/assets/users.svg" alt="users" class="aside__item-icon">
+          <img src="/src/assets/users.svg" alt="users" class="aside__item-icon">
           <router-link class="aside__link" to="/users/">Пользователи</router-link>
         </li>
         <li class="aside__item row">
-          <img src="src/assets/settings.svg" alt="settings" class="aside__item-icon">
+          <img src="/src/assets/settings.svg" alt="settings" class="aside__item-icon">
           <router-link class="aside__link" to="/setting/">Настройки сайта</router-link>
         </li>
         <li class="aside__item row">
-          <img src="src/assets/exit.svg" alt="exit" class="aside__item-icon">
+          <img src="/src/assets/exit.svg" alt="exit" class="aside__item-icon">
           <router-link class="aside__link" to="/exit/">Выйти</router-link>
         </li>
       </div>

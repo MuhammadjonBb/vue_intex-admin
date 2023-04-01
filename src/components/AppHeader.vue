@@ -1,35 +1,34 @@
 <template>
-  <div>
-    <q-header class="header row justify-between bg-white absolute-top-left">
-      <div class="search">
-        <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
-        <input class="search__input" v-model="searchValue" placeholder="Поиск" />
-      </div>
-      <div class="tools">
-        <q-list class="tools__list row">
-          <q-item class="tools__item" dense>
-            <q-select filled v-model="selectValue" :options="options" dense>
-              <template v-slot:prepend>
-                <q-icon name="language" />
-              </template>
-            </q-select>
-          </q-item>
-          <q-item class="tools__item" dense>
-            <q-img src="src/assets/notification.svg" alt="Notifications" />
-          </q-item>
-          <q-item class="tools__item" dense>
-            <q-img src="src/assets/profile.svg" alt="Notifications" />
-          </q-item>
-        </q-list>
-      </div>
-    </q-header>
-    <q-toolbar dense class="text-grey-6">
+  <q-header class="header row justify-between bg-white absolute-top-right">
+    <div class="search">
+      <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
+      <input class="search__input" v-model="searchValue" placeholder="Поиск" />
+    </div>
+    <div class="tools">
+      <q-list class="tools__list row">
+        <q-item class="tools__item" dense>
+          <q-select filled v-model="selectValue" :options="options" dense>
+            <template v-slot:prepend>
+              <q-icon name="language" />
+            </template>
+          </q-select>
+        </q-item>
+        <q-item class="tools__item" dense>
+          <q-img src="/src/assets/notification.svg" alt="Notifications" />
+        </q-item>
+        <q-item class="tools__item" dense>
+          <q-img src="/src/assets/profile.svg" alt="Notifications" />
+        </q-item>
+      </q-list>
+    </div>
+
+    <q-toolbar dense class="text-grey-6 q-mt-md" style="border-top: 1px solid #6666661c;">
       <q-breadcrumbs>
         <q-breadcrumbs-el icon="home"></q-breadcrumbs-el>
         <q-breadcrumbs-el>Продукты</q-breadcrumbs-el>
       </q-breadcrumbs>
     </q-toolbar>
-  </div>
+  </q-header>
 </template>
 
 <script setup lang="ts">
@@ -45,11 +44,7 @@ const selectValue: Ref<string> = ref(options[0])
 @import "src/css/quasar.variables.scss";
 
 .header {
-  width: 1187px;
-  position: static;
-  height: 80px;
   padding: 20px 30px;
-  border-bottom: 1px solid #6666661c;
 }
 
 .search {

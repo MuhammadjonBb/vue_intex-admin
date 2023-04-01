@@ -1,11 +1,16 @@
 <template>
-  <q-layout class="row wrapper">
-    <AppAside />
-    <AppHeader />
+  <q-layout view="lHh Lpr lFf">
+    <q-drawer show-if-above>
+      <AppAside />
+    </q-drawer>
+    <div>
+      <AppHeader />
+      <q-page-container>
+        <router-view></router-view>
+      </q-page-container>
+    </div>
   </q-layout>
 </template>
-
-<style lang="scss"></style>
 
 <script setup>
 import AppHeader from 'src/components/AppHeader.vue'
