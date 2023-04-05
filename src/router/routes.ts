@@ -11,17 +11,19 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/EmptyLayout.vue'),
     children: [{ path: '', component: () => import('pages/LogIn.vue') }]
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  },
   {
     path: '/orders/',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/OrdersPage.vue') }]
+  },
+  {
+    path: '/orders/edit',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/OrdersEditPage.vue') }]
+  },
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('pages/ErrorNotFound.vue')
   }
 ]
 

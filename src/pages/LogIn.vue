@@ -8,7 +8,7 @@
               v-if="isResetMode || isSMSMode" @click="onBackBtn">
               <q-icon name="arrow_back_ios" style="left:5px;"></q-icon>
             </q-btn>
-            <q-img src="src/assets/intex-logo.svg" alt="Logo" class="modal__logo" />
+            <q-img src="/src/assets/intex-logo.svg" alt="Logo" class="modal__logo" />
             <form style="position: relative;">
               <Transition name="slide-fade" mode="out-in">
                 <MainAuth v-if="!(isResetMode || isSMSMode || isSetPasswordMode)" @to-reset-mode="onResetMode" />

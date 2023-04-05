@@ -1,5 +1,5 @@
 <template>
-  <q-header class="header row justify-between bg-white absolute-top-right">
+  <q-header class="header row justify-between bg-white absolute-top-right" style="padding-bottom: 0;">
     <div class="search">
       <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
       <input class="search__input" v-model="searchValue" placeholder="Поиск" />
@@ -7,17 +7,20 @@
     <div class="tools">
       <q-list class="tools__list row">
         <q-item class="tools__item" dense>
-          <q-select filled v-model="selectValue" :options="options" dense>
+          <q-select borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;" v-model="selectValue"
+            :options="options" dense>
             <template v-slot:prepend>
               <q-icon name="language" />
             </template>
           </q-select>
         </q-item>
         <q-item class="tools__item" dense>
-          <q-img src="/src/assets/notification.svg" alt="Notifications" />
+          <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
+          <!-- <q-img src="/src/assets/notification.svg" alt="Notifications" /> -->
         </q-item>
         <q-item class="tools__item" dense>
-          <q-img src="/src/assets/profile.svg" alt="Notifications" />
+          <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
+          <!-- <q-img src="/src/assets/profile.svg" alt="Notifications" /> -->
         </q-item>
       </q-list>
     </div>
@@ -72,67 +75,6 @@ const selectValue: Ref<string> = ref(options[0])
     height: 15px;
     top: 14px;
     left: 15px;
-  }
-}
-
-.tools {
-  &__list {
-    gap: 30px;
-  }
-
-  &__item {
-    height: 40px;
-    display: flex;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background .3s ease;
-  }
-
-  &__item:hover:not(:first-child),
-  &__item:focus-within:not(:first-child) {
-    background: rgba(0, 0, 0, 0.2) !important;
-  }
-
-  &__item:not(:first-child) {
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    background: $gray;
-    border-radius: 50%;
-  }
-}
-
-.q {
-  &-menu {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0px 2px rgba(0, 0, 0, 0.14), 0 0 1px -10px rgba(0, 0, 0, 0.12);
-  }
-
-  &-field__marginal {
-    color: #109EF4;
-  }
-
-  &-field--filled &-field__control {
-    padding: 1px 14px;
-    background: $gray;
-    border-radius: 8px;
-  }
-
-  &-field__control {
-    color: transparent;
-  }
-
-  &-field--filled &-field__control::before {
-    background: $gray;
-    border-bottom: none;
-    opacity: 0;
-  }
-
-  &-menu--square {
-    border-radius: 8px;
-  }
-
-  &-item--active {
-    color: #109EF4;
   }
 }
 </style>

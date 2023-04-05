@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" style="background-color: #f2f2f2;">
     <q-drawer show-if-above>
       <AppAside />
     </q-drawer>

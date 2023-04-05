@@ -20,28 +20,30 @@
           </li>
         </ul>
       </li>
-      <div class="list-dropdown" :style="{ 'transform': `translateY(${transformValue}px)` }">
-        <li class="aside__item row">
-          <img src="/src/assets/orders.svg" alt="orders" class="aside__item-icon">
-          <router-link class="aside__link" to="/orders/">Заказы</router-link>
-        </li>
-        <li class="aside__item row">
-          <img src="/src/assets/feedback.svg" alt="feedback" class="aside__item-icon">
-          <router-link class="aside__link" to="/feedback/">Обратная связь</router-link>
-        </li>
-        <li class="aside__item row">
-          <img src="/src/assets/users.svg" alt="users" class="aside__item-icon">
-          <router-link class="aside__link" to="/users/">Пользователи</router-link>
-        </li>
-        <li class="aside__item row">
-          <img src="/src/assets/settings.svg" alt="settings" class="aside__item-icon">
-          <router-link class="aside__link" to="/setting/">Настройки сайта</router-link>
-        </li>
-        <li class="aside__item row">
-          <img src="/src/assets/exit.svg" alt="exit" class="aside__item-icon">
-          <router-link class="aside__link" to="/exit/">Выйти</router-link>
-        </li>
-      </div>
+      <li class="list-dropdown" :style="{ 'transform': `translateY(${transformValue}px)` }">
+        <ul>
+          <li class="aside__item row">
+            <img src="/src/assets/orders.svg" alt="orders" class="aside__item-icon">
+            <router-link class="aside__link" to="/orders/">Заказы</router-link>
+          </li>
+          <li class="aside__item row">
+            <img src="/src/assets/feedback.svg" alt="feedback" class="aside__item-icon">
+            <router-link class="aside__link" to="/feedback/">Обратная связь</router-link>
+          </li>
+          <li class="aside__item row">
+            <img src="/src/assets/users.svg" alt="users" class="aside__item-icon">
+            <router-link class="aside__link" to="/users/">Пользователи</router-link>
+          </li>
+          <li class="aside__item row">
+            <img src="/src/assets/settings.svg" alt="settings" class="aside__item-icon">
+            <router-link class="aside__link" to="/setting/">Настройки сайта</router-link>
+          </li>
+          <li class="aside__item row">
+            <img src="/src/assets/exit.svg" alt="exit" class="aside__item-icon">
+            <router-link class="aside__link" to="/exit/">Выйти</router-link>
+          </li>
+        </ul>
+      </li>
     </ul>
   </aside>
 </template>
@@ -58,12 +60,11 @@ function onProductsClick() {
 
 <style lang="scss">
 .aside {
-  width: 250px;
   padding: 30px 0;
 
   &__logo {
     align-self: start;
-    padding: 0 40px 32px 0;
+    padding: 0 40px 32px 15px;
     margin-bottom: 30px;
     border-bottom: 1px solid #6666661c;
   }

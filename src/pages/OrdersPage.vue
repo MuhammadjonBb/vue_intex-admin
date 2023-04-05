@@ -1,10 +1,8 @@
 <template>
   <q-layout>
-    <q-page-container>
-      <q-page>
-        <OrdersTable :data="fakeData" />
-      </q-page>
-    </q-page-container>
+    <q-page>
+      <OrdersTable :data="fakeData" />
+    </q-page>
   </q-layout>
 </template>
 
