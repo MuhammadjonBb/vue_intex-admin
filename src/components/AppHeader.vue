@@ -10,6 +10,7 @@
     </div>
     <div>
       <q-list class="row">
+
         <q-item class="tools__item" dense>
           <q-select dropdown-icon="expand_more" borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;"
             v-model="selectValue" :options="options" dense>
@@ -28,6 +29,7 @@
             </template>
           </q-select>
         </q-item>
+
         <q-item dense>
           <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
           <!-- <q-img src="/src/assets/notification.svg" alt="Notifications" /> -->

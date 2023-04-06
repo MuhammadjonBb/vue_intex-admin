@@ -2,8 +2,8 @@
   <aside class="aside column">
     <img src="/src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
     <q-list>
-      <q-expansion-item label="Продукты" icon="list" header-class="text-primary"
-        class="aside__products-parent text-weight-medium">
+      <q-expansion-item expand-icon-class="text-primary" label="Продукты" icon="summarize"
+        header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium">
         <q-list>
 
           <q-item clickable :active="true" active-class="text-primary">
@@ -36,7 +36,7 @@
         </q-list>
       </q-expansion-item>
 
-      <q-item clickable class="items-center aside__item" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="email" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/orders/">
@@ -45,7 +45,7 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="phone" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/feedback/">
@@ -54,7 +54,7 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="person" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
@@ -63,7 +63,7 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="settings" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/settings/">
@@ -72,7 +72,7 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="logout" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/exit/">
@@ -109,7 +109,7 @@
   &__logo {
     align-self: start;
     padding: 0 40px 32px 0;
-    margin-left: 15px;
+    margin-left: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid #6666661c;
   }
@@ -124,7 +124,6 @@
 
   &__item {
     filter: grayscale(1);
-    padding: 15px 20px;
     align-items: center;
     transition: all .3s ease;
   }
