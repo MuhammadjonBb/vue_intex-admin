@@ -1,25 +1,39 @@
 <template>
   <q-header class="header row justify-between bg-white absolute-top-right" style="padding-bottom: 0;">
-    <div class="search">
-      <q-img src="/src/assets/search.svg" alt="intex-logo" class="search__icon" />
-      <input class="search__input" v-model="searchValue" placeholder="Поиск" />
+    <div>
+      <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
+        dense placeholder="Поиск">
+        <template #prepend>
+          <q-icon name="search" color="primary"></q-icon>
+        </template>
+      </q-input>
     </div>
-    <div class="tools">
-      <q-list class="tools__list row">
+    <div>
+      <q-list class="row">
         <q-item class="tools__item" dense>
           <q-select borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;" v-model="selectValue"
             :options="options" dense>
+            <template #option="scope">
+              <q-item class="row" v-bind="scope.itemProps">
+                <q-item-section class="no-wrap items-center" style="flex-direction: row;">
+                  <img :src="`/src/assets/${(scope.index)}-lang.png`" alt="язык" style="width: 28px; height: 20px;"
+                    class="q-mr-sm">
+                  <span>{{ scope.opt }}</span>
+                </q-item-section>
+              </q-item>
+            </template>
             <template v-slot:prepend>
-              <q-icon name="language" />
+              <img :src="`/src/assets/${options.indexOf(selectValue)}-lang.png`" alt="язык"
+                style="width: 28px;height: 20px;" class="q-mr-xs">
             </template>
           </q-select>
         </q-item>
-        <q-item class="tools__item" dense>
+        <q-item dense>
           <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
           <!-- <q-img src="/src/assets/notification.svg" alt="Notifications" /> -->
         </q-item>
-        <q-item class="tools__item" dense>
-          <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
+        <q-item dense>
+          <q-avatar icon="account-circle" dense color="grey-3" text-color="grey-8" size="40px" />
           <!-- <q-img src="/src/assets/profile.svg" alt="Notifications" /> -->
         </q-item>
       </q-list>
@@ -40,7 +54,6 @@ import { ref, Ref } from 'vue'
 const options: string[] = ['Ru', 'En', 'Uz']
 const searchValue: Ref<string> = ref('')
 const selectValue: Ref<string> = ref(options[0])
-
 </script>
 
 <style lang="scss">
@@ -48,33 +61,5 @@ const selectValue: Ref<string> = ref(options[0])
 
 .header {
   padding: 20px 30px;
-}
-
-.search {
-  position: relative;
-
-  &__input {
-    border-radius: 12px;
-    width: 260px;
-    padding: 10px 10px 10px 40px;
-    background: $light;
-    border: none;
-  }
-
-  &__input:focus {
-    outline: none;
-  }
-
-  &__input::placeholder {
-    color: #A8A8A8;
-  }
-
-  &__icon {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    top: 14px;
-    left: 15px;
-  }
 }
 </style>

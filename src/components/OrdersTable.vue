@@ -69,6 +69,7 @@
         align: 'right'
       }
     ]">
+    <!-- PAGINATION -->
     <template #bottom="scope">
       <div class="row items-center q-pa-sm full-width">
 
@@ -99,11 +100,13 @@
         </div>
       </div>
     </template>
+    <!-- PAGINATION -->
 
     <!-- SELECTION -->
     <template #header-selection="props">
       <q-checkbox v-model="props.selected" />
     </template>
+
     <template #body-selection="props">
       <q-checkbox v-model="props.selected" />
     </template>
@@ -116,18 +119,21 @@
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
+
     <template #header-cell-client="props">
       <q-th class="bg-grey-1 text-left" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
+
     <template #header-cell-goods="props">
       <q-th class="bg-grey-1 text-left" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
+
     <template #header-cell-action>
       <q-th class="bg-grey-1 text-right">
         <q-icon name="more_vert" size="sm" color="dark" class="q-mr-xs" />
@@ -144,6 +150,7 @@
         </div>
       </q-td>
     </template>
+
     <template #body-cell-status="props">
       <q-td :props="props">
         <q-chip square :color="getStatusClass(props.row.status)" class="full-width justify-center">
@@ -151,6 +158,7 @@
         </q-chip>
       </q-td>
     </template>
+
     <template #body-cell-goods="props">
       <q-td :props="props">
         <div class="" style=""
@@ -169,6 +177,7 @@
         </div>
       </q-td>
     </template>
+
     <template #body-cell-action="props">
       <q-td :props="props">
         <q-btn flat icon="more_vert" rounded dense></q-btn>
@@ -222,8 +231,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord'
 
+const router = useRouter()
 const selected = ref()
 defineProps(['data'])
 
@@ -238,7 +249,7 @@ function getPageNums(n: number) {
 
 // eslint-disable-next-line space-before-function-paren
 function toEditPage() {
-  //
+  router.push('/orders/edit')
 }
 
 // eslint-disable-next-line space-before-function-paren

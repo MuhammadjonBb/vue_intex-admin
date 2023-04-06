@@ -97,4 +97,10 @@ const selectedValue = {
   border: 1px solid #E3E5E5;
   border-radius: 8px;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
