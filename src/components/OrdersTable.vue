@@ -74,8 +74,9 @@
       <div class="row items-center q-pa-sm full-width">
 
         <div class="row items-center q-mr-md">
-          <q-select borderless dense v-model="scope.pagination.rowsPerPage" :options="[5, 10, 20, 50]" emit-value
-            class="q-mr-sm q-pl-md q-pr-sm bg-grey-3" style="border-radius: 12px;" />
+          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
+            :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
           <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
         </div>
 
@@ -89,8 +90,9 @@
         <q-space />
 
         <div class="row items-center">
-          <q-select borderless dense v-model="scope.pagination.page" :options="getPageNums(scope.pagesNumber)" emit-value
-            class="q-mr-sm q-pl-md q-pr-sm bg-grey-3" style="border-radius: 12px;" />
+          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
+            :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
           <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
         </div>
 
@@ -102,9 +104,19 @@
     </template>
     <!-- PAGINATION -->
 
+    <!-- TOP-SELECT -->
+    <template #top>
+      <q-tr class="item-center q-pl-md">
+        <q-checkbox v-model:model-value="allSelect" />
+        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
+        <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />
+      </q-tr>
+    </template>
+    <!-- TOP-SELECT -->
+
     <!-- SELECTION -->
     <template #header-selection="props">
-      <q-checkbox v-model="props.selected" />
+      <q-checkbox v-model:model-value="props.selected" style="border-color: green;" />
     </template>
 
     <template #body-selection="props">
@@ -216,6 +228,10 @@
 </template>
 
 <style lang="scss">
+.q-checkbox__bg {
+  border-radius: 5px;
+}
+
 .q-pagination__middle {
   display: none;
 }
@@ -235,7 +251,8 @@ import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord'
 
 const router = useRouter()
-const selected = ref()
+const selected = ref([])
+const allSelect = ref(false)
 defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
@@ -263,5 +280,10 @@ function getStatusClass(status: string) {
   } else {
     return 'light-blue-13 text-white'
   }
+}
+
+// eslint-disable-next-line space-before-function-paren
+function clearSelections() {
+  selected.value.splice(0)
 }
 </script>
