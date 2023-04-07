@@ -1,5 +1,5 @@
 <template>
-  <q-header class="header row justify-between bg-white absolute-top-right" style="padding-bottom: 0;">
+  <q-header class="header row justify-between bg-white fixed-top sticky" style="padding-bottom: 0;">
     <div>
       <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
         dense placeholder="Поиск">
@@ -10,8 +10,7 @@
     </div>
     <div>
       <q-list class="row">
-
-        <q-item class="tools__item" dense>
+        <q-item class="items-center" dense>
           <q-select dropdown-icon="expand_more" borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;"
             v-model="selectValue" :options="options" dense>
             <template #option="scope">
@@ -30,13 +29,18 @@
           </q-select>
         </q-item>
 
-        <q-item dense>
-          <q-avatar icon="notifications" dense color="grey-3" text-color="grey-8" size="40px" />
-          <!-- <q-img src="/src/assets/notification.svg" alt="Notifications" /> -->
+        <q-item dense class="items-center">
+          <q-chip class="justify-center items-center q-ma-none" color="grey-3"
+            style="width:40px;padding: 21px; border-radius: 50%;">
+            <q-icon name="notifications" color="grey-8" size="20px" />
+          </q-chip>
         </q-item>
-        <q-item dense>
-          <q-avatar icon="account-circle" dense color="grey-3" text-color="grey-8" size="40px" />
-          <!-- <q-img src="/src/assets/profile.svg" alt="Notifications" /> -->
+
+        <q-item dense class="items-center">
+          <q-chip class="justify-center items-center q-ma-none" color="grey-3"
+            style="width:40px;padding: 21px; border-radius: 50%;">
+            <q-icon name="person" color="grey-8" size="20px" />
+          </q-chip>
         </q-item>
       </q-list>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <q-table table-style="max-width: ;" dense table-class="q-mx-md" table-header-style="font-weight: 500;font-size: 14px;"
-    table-header-class="text-grey-7" :rows="data.data" row-key="id" square v-model:selected="selected"
-    selection="multiple" :columns="[
+    table-header-class="text-grey-7" :rows="data.data" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="[
       {
         name: 'id',
         label: '№ Заказа',
@@ -69,40 +69,6 @@
         align: 'right'
       }
     ]">
-    <!-- PAGINATION -->
-    <template #bottom="scope">
-      <div class="row items-center q-pa-sm full-width">
-
-        <div class="row items-center q-mr-md">
-          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
-            :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-            style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
-        </div>
-
-        <div class="text-grey-8" style="font-size: 15px;">
-          {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
-            scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
-          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
-        </div>
-
-        <q-space />
-
-        <div class="row items-center">
-          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
-            :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-            style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
-        </div>
-
-        <div class="row items-center">
-          <q-pagination dense v-model="scope.pagination.page" :min="1" no-number :max="scope.pagesNumber" direction-links
-            color="grey" />
-        </div>
-      </div>
-    </template>
-    <!-- PAGINATION -->
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -113,16 +79,6 @@
       </q-tr>
     </template>
     <!-- TOP-SELECT -->
-
-    <!-- SELECTION -->
-    <template #header-selection="props">
-      <q-checkbox v-model:model-value="props.selected" style="border-color: green;" />
-    </template>
-
-    <template #body-selection="props">
-      <q-checkbox v-model="props.selected" />
-    </template>
-    <!--SELECTION -->
 
     <!-- HEADER -->
     <template #header-cell-id="props">
@@ -224,6 +180,51 @@
       </q-td>
     </template>
     <!-- BODY  -->
+
+    <!-- SELECTION -->
+    <template #header-selection="props">
+      <q-checkbox v-model:model-value="props.selected" style="border-color: green;" />
+    </template>
+
+    <template #body-selection="props">
+      <q-checkbox v-model="props.selected" />
+    </template>
+    <!--SELECTION -->
+
+    <!-- PAGINATION -->
+    <template #bottom="scope">
+      <div class="row items-center q-pa-sm full-width">
+
+        <div class="row items-center q-mr-md">
+          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
+            :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
+          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
+        </div>
+
+        <div class="text-grey-8" style="font-size: 15px;">
+          {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
+            scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
+          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
+          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+        </div>
+
+        <q-space />
+
+        <div class="row items-center">
+          <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
+            :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
+          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
+        </div>
+
+        <div class="row items-center">
+          <q-pagination dense v-model="scope.pagination.page" :min="1" no-number :max="scope.pagesNumber" direction-links
+            color="grey" />
+        </div>
+      </div>
+    </template>
+    <!-- PAGINATION -->
   </q-table>
 </template>
 

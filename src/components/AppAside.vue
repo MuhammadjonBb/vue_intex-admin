@@ -56,7 +56,7 @@
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
         <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="person" size="24px" class="q-mr-md" />
+          <q-icon color="primary" name="account_circle" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
             Пользователи
           </router-link>
