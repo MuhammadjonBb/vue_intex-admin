@@ -111,6 +111,7 @@
     <!-- HEADER -->
 
     <!-- BODY  -->
+    <!-- DATE -->
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
@@ -119,7 +120,9 @@
         </div>
       </q-td>
     </template>
+    <!-- DATE -->
 
+    <!-- STATUS -->
     <template #body-cell-status="props">
       <q-td :props="props">
         <q-chip square :color="getStatusClass(props.row.status)" class="full-width justify-center">
@@ -127,7 +130,9 @@
         </q-chip>
       </q-td>
     </template>
+    <!-- STATUS -->
 
+    <!-- PRODUCTS -->
     <template #body-cell-goods="props">
       <q-td :props="props">
         <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
@@ -145,7 +150,10 @@
         </div>
       </q-td>
     </template>
+    <!-- PRODUCTS -->
+    <!-- BODY  -->
 
+    <!-- ACTIONS -->
     <template #body-cell-action="props">
       <q-td :props="props">
         <q-btn flat icon="more_vert" rounded dense />
@@ -179,7 +187,7 @@
         </q-menu>
       </q-td>
     </template>
-    <!-- BODY  -->
+    <!-- ACTIONS -->
 
     <!-- SELECTION -->
     <template #header-selection="props">

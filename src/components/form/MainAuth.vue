@@ -4,13 +4,14 @@
 
     <label for="name" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
       Имя
-      <q-input id="name" outlined v-model="form.name" placeholder="Введите ваше имя" class="q-mt-sm" />
+      <q-input id="name" borderless v-model="form.name" placeholder="Введите ваше имя"
+        class="q-mt-sm border-reset q-px-md" />
     </label>
 
     <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
       Пароль
-      <q-input placeholder="Введите ваш пароль" id="password" v-model="form.password" outlined
-        :type="isPwd ? 'password' : 'text'" class="q-mt-sm">
+      <q-input placeholder="Введите ваш пароль" id="password" v-model="form.password" borderless
+        :type="isPwd ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
         <template v-slot:append>
           <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
         </template>

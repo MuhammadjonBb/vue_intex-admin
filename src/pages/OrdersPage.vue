@@ -9,6 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import OrdersTable from 'src/components/OrdersTable.vue'
+import OrdersTable from 'src/components/table/OrdersTable.vue'
 import fakeData from 'src/helpers/orderData'
 </script>
