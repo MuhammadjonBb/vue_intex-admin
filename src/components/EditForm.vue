@@ -1,5 +1,5 @@
 <template>
-  <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="max-width: 1187px; border-radius: 12px;">
+  <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;">
     <div class="row no-wrap q-mb-lg" style="gap:20px;">
       <label style="width: 25%;">
         Имя

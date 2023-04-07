@@ -1,5 +1,5 @@
 <template>
-  <q-header class="header row justify-between bg-white fixed-top sticky" style="padding-bottom: 0;">
+  <q-header class="header row justify-between bg-white fixed-top" style="padding-bottom: 0;">
     <div>
       <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
         dense placeholder="Поиск">

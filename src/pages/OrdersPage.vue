@@ -1,6 +1,8 @@
 <template>
   <q-layout>
-    <q-page>
+    <q-page class="q-pa-md main__container">
+      <h1 class="text-h5 text-weight-bold">Заказы</h1>
+
       <OrdersTable :data="fakeData" />
     </q-page>
   </q-layout>

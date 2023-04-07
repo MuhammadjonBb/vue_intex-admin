@@ -80,6 +80,16 @@
           </router-link>
         </q-item-section>
       </q-item>
+      <q-item class="items-center q-pl-lg q-py-md" style="position: fixed; bottom: 0;">
+        <q-item-section class="column text-weight-medium">
+          <span class="text-dark">
+            Developed by
+          </span>
+          <a href="https://supportsolution.uz/" target="_blank" rel="noopener noreferrer" class="text-primary">
+            Support IT Solution
+          </a>
+        </q-item-section>
+      </q-item>
     </q-list>
   </aside>
 </template>

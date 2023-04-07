@@ -1,13 +1,14 @@
 <template>
-  <q-table table-style="max-width: ;" dense table-class="q-mx-md" table-header-style="font-weight: 500;font-size: 14px;"
-    table-header-class="text-grey-7" :rows="data.data" row-key="id" v-model:selected="selected" selection="multiple"
-    :columns="[
+  <q-table dense table-class="q-mx-none" flat
+    table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
+    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    selection="multiple" :columns="[
       {
         name: 'id',
         label: '№ Заказа',
         field: row => `#${row.id}`,
         sortable: true,
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
@@ -15,28 +16,28 @@
         label: 'Имя клиента',
         field: 'client',
         sortable: true,
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'phone',
         label: 'Tелефон',
         field: 'phone',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left',
       },
       {
         name: 'address',
         label: 'Адрес',
         field: 'address',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'goods',
         label: 'Товары',
         field: 'goods',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left',
         sortable: true,
       },
@@ -44,14 +45,14 @@
         name: 'cost',
         label: 'Обшая цена',
         field: 'cost',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'date',
         label: 'Время заказа',
         field: 'date',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
@@ -59,20 +60,20 @@
         label: 'Статус',
         field: 'status',
         align: 'left',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
       },
       {
         name: 'action',
         label: 'Action',
         field: '',
-        headerClasses: 'bg-grey-1',
+        headerStyle: 'background-color: #f2f2f2;',
         align: 'right'
       }
     ]">
 
     <!-- TOP-SELECT -->
     <template #top>
-      <q-tr class="item-center q-pl-md">
+      <q-tr class="item-center">
         <q-checkbox v-model:model-value="allSelect" />
         <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
         <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />
@@ -82,28 +83,28 @@
 
     <!-- HEADER -->
     <template #header-cell-id="props">
-      <q-th class="bg-grey-1 text-left" :props="props">
+      <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
     <template #header-cell-client="props">
-      <q-th class="bg-grey-1 text-left" :props="props">
+      <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
     <template #header-cell-goods="props">
-      <q-th class="bg-grey-1 text-left" :props="props">
+      <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
     <template #header-cell-action>
-      <q-th class="bg-grey-1 text-right">
+      <q-th class="text-right" style="background-color: #f2f2f2;">
         <q-icon name="more_vert" size="sm" color="dark" class="q-mr-xs" />
       </q-th>
     </template>
@@ -129,8 +130,7 @@
 
     <template #body-cell-goods="props">
       <q-td :props="props">
-        <div class="" style=""
-          :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
+        <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
           <div v-if="props.row.goods.length > 1">
             {{ getRightWord(props.row.goods.length) }}
             <q-tooltip :offset="[1, 1]" class="bg-dark">
@@ -148,12 +148,12 @@
 
     <template #body-cell-action="props">
       <q-td :props="props">
-        <q-btn flat icon="more_vert" rounded dense></q-btn>
+        <q-btn flat icon="more_vert" rounded dense />
         <q-menu>
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left " text-color="grey-8" @click="toEditPage">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEditPage">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -183,7 +183,7 @@
 
     <!-- SELECTION -->
     <template #header-selection="props">
-      <q-checkbox v-model:model-value="props.selected" style="border-color: green;" />
+      <q-checkbox v-model="props.selected" />
     </template>
 
     <template #body-selection="props">
