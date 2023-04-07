@@ -4,8 +4,8 @@
 
     <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
       Новый пароль
-      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.new" outlined
-        :type="isPwd1 ? 'password' : 'text'" class="q-mt-sm">
+      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.new" borderless
+        :type="isPwd1 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
         <template v-slot:append>
           <q-icon :name="isPwd1 ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd1 = !isPwd1" />
         </template>
@@ -14,8 +14,8 @@
 
     <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
       Потвердить новый пароль
-      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.confirm" outlined
-        :type="isPwd2 ? 'password' : 'text'" class="q-mt-sm">
+      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.confirm" borderless
+        :type="isPwd2 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
         <template v-slot:append>
           <q-icon :name="isPwd2 ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd2 = !isPwd2" />
         </template>
