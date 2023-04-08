@@ -3,7 +3,7 @@
   <q-card class="q-pa-md" flat>
     <q-card-section horizontal>
       <q-card-section class=" flex justify-center items-center " horizontal>
-        <q-btn size="10px" class="bg-blue flex justify-center items-center q-mr-md q-pa-sm btn" color="white">
+        <q-btn size="10px" class="bg-blue flex justify-center items-center q-mr-md q-pa-sm q-pr-md btn" color="white">
           <img src="/src/assets/filter.svg" alt="filter_icon" sizes="10px" class="q-mr-sm">
           Фильтр
         </q-btn>
@@ -19,7 +19,7 @@
         <q-select model-value="" v-model="model" dense :options="options" style="width: 200px" bg-color="grey-2" standout
           label="Сортировка"></q-select>
       </div>
-      <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md" />
+      <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md" @click="$emit('onAddClick')" />
     </q-card-section>
   </q-card>
 </template>

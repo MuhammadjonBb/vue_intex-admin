@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="prompt" persistent>
+  <q-dialog :="promptVal" v-model="_promptVal" persistent>
     <q-card style="min-width: 700px;border-radius: 16px;" class="q-pa-md">
       <q-card-section>
         <div class="text-h6 font-weight-bold">Добавить обратную связь</div>
@@ -26,10 +26,10 @@
 
         <div class="row q-mt-lg">
           <q-space />
-          <q-btn v-close-popup color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
-            class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn v-close-popup color="white" flat label="Сохранить" style="border-radius: 12px;"
-            class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
+          <q-btn @click="$emit('onCLoseModal')" v-close-popup color="indigo-10" flat label="Отменить"
+            style="border-radius: 12px;" class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+          <q-btn @click="$emit('onCLoseModal')" v-close-popup color="white" flat label="Сохранить"
+            style="border-radius: 12px;" class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </div>
       </q-card-section>
     </q-card>
@@ -37,11 +37,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-const prompt = ref(true)
+const props = defineProps(['promptVal'])
 const dialog = ref({
   name: '',
   phone: ''
+})
+const _promptVal = ref(false)
+
+watch(props, () => {
+  _promptVal.value = props.promptVal
 })
 </script>

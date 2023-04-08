@@ -1,8 +1,9 @@
 <template>
-  <q-dialog v-model="prompt" persistent>
+  <!-- eslint-disable-next-line vue/no-mutating-props -->
+  <q-dialog :="promptVal" persistent v-model="_promptVal">
     <q-card style="min-width: 730px;border-radius: 16px;" class="q-pa-md">
       <q-card-section>
-        <div class="text-h6 font-weight-bold">Добавить пользоватея</div>
+        <div class="text-h6 font-weight-bold">{{ label }}</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
@@ -10,7 +11,7 @@
           <q-uploader accept="image/*" url="http://localhost:9005/users/upload" class="row" style="box-shadow: none;">
 
             <template #header="scope">
-              <div class="bg-white column jusify-start">
+              <div class="bg-white column" style="justify-content: center;">
                 <span class="q-mb-md text-dark">Загрузите аватар</span>
                 <q-btn v-model="profileImg" type="a" @click="scope.pickFiles" flat no-caps text-color="blue-12"
                   style="background: rgba(55, 125, 255, 0.1); border-radius: 12px;">
@@ -22,7 +23,8 @@
             </template>
 
             <template #list="scope">
-              <q-img :src="scope.files[0]?.__img?.src" alt="Profile image" style="height: 100%;width: 100%;" />
+              <q-img :src="scope.files[0]?.__img?.src" alt="Profile image"
+                :style="`${!scope.files.length ? 'border: 1px dashed #CDCDCD;' : ''}`" class="upload-img" />
               <q-img v-if="!scope.files.length" type="a" @click="scope.pickFiles" src="/src/assets/uploadIcon.svg"
                 class="upload-preview" />
             </template>
@@ -96,12 +98,12 @@
           </label>
         </div>
 
-        <div class="row q-mt-lg no-wrap" style="gap: 20px;">
-          <q-btn v-close-popup color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
-            class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn v-close-popup color="white" flat label="Сохранить" style="border-radius: 12px;"
-            class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
-        </div>
+        <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
+          <q-btn v-close-popup @click="$emit('onCloseModal')" color="indigo-10" flat label="Отменить"
+            style="border-radius: 12px;" class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+          <q-btn v-close-popup @click="$emit('onCloseModal')" color="white" flat label="Сохранить"
+            style="border-radius: 12px;" class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
+        </q-card-actions>
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -130,12 +132,10 @@
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding: 0;
-  border-radius: 12px;
   display: flex;
   width: 397px;
   height: 160px;
   align-self: stretch;
-  border: 1px dashed #CDCDCD;
 }
 
 .upload-preview {
@@ -145,14 +145,23 @@
   left: 10px;
   top: 25%;
 }
+
+.upload-img {
+  height: 100%;
+  border-radius: 12px;
+  width: 100%;
+  border-radius: 12px;
+}
 </style>
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref, Ref, watch } from 'vue'
 
-const prompt = ref(true)
 const statusArr = ['Актив', 'Не актив', 'Удален']
 const roleArr = ['Админ', 'Супер Админ']
 const profileImg = ref()
+
+const props = defineProps(['label', 'promptVal'])
+const _promptVal = ref(false)
 
 const dialog = ref({
   name: '',
@@ -171,5 +180,9 @@ const isPwd2: Ref<boolean> = ref(true)
 const select = ref({
   status: statusArr[0],
   role: roleArr[0]
+})
+
+watch(props, () => {
+  _promptVal.value = props.promptVal
 })
 </script>
