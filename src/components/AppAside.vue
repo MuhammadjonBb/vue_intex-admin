@@ -4,34 +4,37 @@
     <q-list>
       <q-expansion-item expand-icon-class="text-primary" label="Продукты" icon="summarize"
         header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium"
-        :class="isPageActive('/products')">
+        :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`">
         <q-list>
 
-          <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
-              :class="isPageActive('/products/list')">
-              <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
-              <router-link class="text-weight-medium aside__products-link" to="/products/list">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product-list')">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+              <q-icon name="circle" color="primary" class="q-mr-md products-icon"
+                :class="isPageActive('product-list', false, true)" />
+              <router-link class="text-weight-medium aside__products-link" to="/product-list"
+                :class="isPageActive('product-list', true)">
                 Список продуктов
               </router-link>
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
-              :class="isPageActive('/products/categories')">
-              <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
-              <router-link class="text-weight-medium aside__products-link" to="/products/categories">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product-categories')">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+              <q-icon name="circle" color="primary" class="q-mr-md products-icon"
+                :class="isPageActive('product-categories', false, true)" />
+              <router-link class="text-weight-medium aside__products-link" to="/product-categories"
+                :class="isPageActive('product-categories', true)">
                 Категории
               </router-link>
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
-              :class="isPageActive('/products/attributes')">
-              <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
-              <router-link class="text-weight-medium aside__products-link" to="/products/attributes">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('/product-attributes')">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+              <q-icon name="circle" color="primary" class="q-mr-md products-icon"
+                :class="isPageActive('product-attributes', false, true)" />
+              <router-link class="text-weight-medium aside__products-link" to="/product-attributes"
+                :class="isPageActive('product-attributes', true)">
                 Атрибуты
               </router-link>
             </q-item-section>
@@ -110,8 +113,15 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 // eslint-disable-next-line space-before-function-paren
-function isPageActive(page: string) {
+function isPageActive(page: string, isLink = false, isIcon = false) {
   if (route.path.includes(page)) {
+    if (isLink) {
+      return 'link-active'
+    }
+    if (isIcon) {
+      return 'icon-active'
+    }
+
     return 'page-active'
   }
 }
@@ -173,5 +183,13 @@ function isPageActive(page: string) {
 .page-active {
   filter: grayscale(0) !important;
   background-color: #109df416;
+}
+
+.icon-active {
+  opacity: 1;
+}
+
+.link-active {
+  color: #109EF4;
 }
 </style>
