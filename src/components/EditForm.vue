@@ -25,13 +25,13 @@
       <div class="row no-wrap" style="gap: 20px;">
         <label style="width: 85%;" class="column">
           Товары
-          <q-select v-for="i in 3" :key="i" class="q-mt-md q-px-md border-reset q-py-xs" dense borderless
-            v-model="selectedValue.products" :options="products" />
+          <q-select dropdown-icon="expand_more" v-for="i in 3" :key="i" class="q-mt-md q-px-md border-reset q-py-xs" dense
+            borderless v-model="selectedValue.products" :options="products" />
         </label>
         <label style="width: 15%;" class="column">
           Кол-во
-          <q-select v-for="i in 3" :key="i" class="q-mt-md q-px-md border-reset q-py-xs" dense borderless
-            v-model="selectedValue.amount" :options="amount" />
+          <q-select dropdown-icon="expand_more" v-for="i in 3" :key="i" class="q-mt-md q-px-md border-reset q-py-xs" dense
+            borderless v-model="selectedValue.amount" :options="amount" />
         </label>
       </div>
       <q-btn flat icon="add" label="Добавить товары" no-caps style="align-self: start; font-size: 14px;" class="q-mt-md"
@@ -41,8 +41,8 @@
     <div class="row no-wrap" style="gap: 20px; justify-content: space-between;">
       <label style="width: 33%;">
         Статус
-        <q-select dense color="primary" class="q-py-xs q-px-md q-mt-sm border-reset" borderless
-          v-model="selectedValue.status" :options="statusArr"></q-select>
+        <q-select dropdown-icon="expand_more" dense color="primary" class="q-py-xs q-px-md q-mt-sm border-reset"
+          borderless v-model="selectedValue.status" :options="statusArr"></q-select>
       </label>
       <label style="width: 33%;">
         Время заказа
@@ -85,11 +85,11 @@ const products = ['Samsung Galaxy A53 5G 6/128GB']
 const amount = [1]
 const statusArr = ['Оплачен', 'Отменен', 'В ожидании', 'В проссесе']
 
-const selectedValue = {
+const selectedValue = ref({
   status: statusArr[0],
   products: products[0],
   amount: amount[0]
-}
+})
 </script>
 
 <style>

@@ -107,7 +107,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()

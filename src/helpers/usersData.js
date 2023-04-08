@@ -13,7 +13,7 @@ export default {
     {
       id: 1223,
       name: 'Абдулла Убайдуллаев',
-      role: 'Админ',
+      role: 'Супер Админ',
       status: 'Не актив',
       lastActiveDate: ['28.09.2022', '14:00'],
       phone: '+998 90 123 45 67',
@@ -63,7 +63,7 @@ export default {
     {
       id: 3321,
       name: 'Абдулла Убайдуллаев',
-      role: 'Админ',
+      role: 'Супер Админ',
       status: 'Удален',
       lastActiveDate: ['28.09.2022', '14:00'],
       phone: '+998 90 123 45 67',
