@@ -5,62 +5,57 @@
     selection="multiple" :columns="[
       {
         name: 'id',
-        label: '№ Заказа',
-        field: row => `#${row.id}`,
+        field: 'id',
+        label: 'ID',
         sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
-        name: 'client',
-        label: 'Имя клиента',
-        field: 'client',
+        name: 'name',
+        field: 'name',
+        label: 'Имя',
         sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
-        name: 'phone',
-        label: 'Tелефон',
-        field: 'phone',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
-      },
-      {
-        name: 'address',
-        label: 'Адрес',
-        field: 'address',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'goods',
-        label: 'Товары',
-        field: 'goods',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
+        name: 'role',
+        field: 'role',
+        label: 'Роль ползователя',
         sortable: true,
-      },
-      {
-        name: 'cost',
-        label: 'Обшая цена',
-        field: 'cost',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'date',
-        label: 'Время заказа',
-        field: 'date',
-        headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'status',
-        label: 'Статус',
         field: 'status',
-        align: 'left',
-        headerStyle: 'background-color: #f2f2f2;',
+        label: 'Статус',
+        align: 'left'
+      },
+      {
+        name: 'lastActiveDate',
+        field: 'lastActiveDate',
+        label: 'Последняя активность',
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'phone',
+        field: 'phone',
+        label: 'Номер телефона',
+        sortable: true,
+        align: 'left'
+      },
+      {
+        name: 'registerDate',
+        field: 'registerDate',
+        label: 'Дата регистрация',
+        align: 'left'
+      },
+      {
+        name: 'birthDate',
+        field: 'birthDate',
+        label: 'Дата рождение',
+        sortable: true,
+        align: 'left'
       },
       {
         name: 'action',
@@ -80,7 +75,6 @@
       </q-tr>
     </template>
     <!-- TOP-SELECT -->
-
     <!-- HEADER -->
     <template #header-cell-id="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
@@ -89,39 +83,51 @@
       </q-th>
     </template>
 
-    <template #header-cell-client="props">
+    <template #header-cell-name="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-goods="props">
+    <template #header-cell-phone="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
+    <!-- DATE -->
+    <template #body-cell-lastActiveDate="props">
+      <q-td :props="props">
+        <div class="column">
+          <span> {{ props.row.lastActiveDate[0] }}</span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.lastActiveDate[1] }}</span>
+        </div>
+      </q-td>
+    </template>
+    <template #body-cell-registerDate="props">
+      <q-td :props="props">
+        <div class="column">
+          <span> {{ props.row.registerDate[0] }}</span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.registerDate[1] }}</span>
+        </div>
+      </q-td>
+    </template>
+    <template #body-cell-birthDate="props">
+      <q-td :props="props">
+        <div class="column">
+          <span> {{ props.row.birthDate[0] }}</span>
+        </div>
+      </q-td>
+    </template>
+    <!-- DATE -->
     <template #header-cell-action>
       <q-th class="text-right" style="background-color: #f2f2f2;">
         <q-icon name="more_vert" size="sm" color="dark" class="q-mr-xs" />
       </q-th>
     </template>
     <!-- HEADER -->
-
-    <!-- BODY  -->
-    <!-- DATE -->
-    <template #body-cell-date="props">
-      <q-td :props="props">
-        <div class="column">
-          <span> {{ props.row.date[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
-        </div>
-      </q-td>
-    </template>
-    <!-- DATE -->
-
     <!-- STATUS -->
     <template #body-cell-status="props">
       <q-td :props="props">
@@ -131,64 +137,6 @@
       </q-td>
     </template>
     <!-- STATUS -->
-
-    <!-- PRODUCTS -->
-    <template #body-cell-goods="props">
-      <q-td :props="props">
-        <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
-          <div v-if="props.row.goods.length > 1">
-            {{ getRightWord(props.row.goods.length) }}
-            <q-tooltip :offset="[1, 1]" class="bg-dark">
-              <q-list>
-                <q-item dense v-for="(item, index) in props.row.goods" :key="index">
-                  <q-item-section dense>{{ item }}</q-item-section>
-                </q-item>
-              </q-list>
-            </q-tooltip>
-          </div>
-          <div v-else>1 x {{ props.row.goods[0] }}</div>
-        </div>
-      </q-td>
-    </template>
-    <!-- PRODUCTS -->
-    <!-- BODY  -->
-
-    <!-- ACTIONS -->
-    <template #body-cell-action="props">
-      <q-td :props="props">
-        <q-btn flat icon="more_vert" rounded dense />
-        <q-menu>
-          <q-list style="min-width: 100px">
-            <q-item v-close-popup>
-              <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEditPage">
-                  <q-icon size="xs" name="edit" color="positive" class="on-left" />
-                  Изменить
-                </q-btn>
-              </q-item-section>
-            </q-item>
-            <q-item v-close-popup>
-              <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
-                  <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
-                  Дублировать
-                </q-btn>
-              </q-item-section>
-            </q-item>
-            <q-item v-close-popup>
-              <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
-                  <q-icon name="delete" size="xs" color="negative" class="on-left" />
-                  Удалить
-                </q-btn>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-      </q-td>
-    </template>
-    <!-- ACTIONS -->
-
     <!-- SELECTION -->
     <template #header-selection="props">
       <q-checkbox v-model="props.selected" />
@@ -233,18 +181,70 @@
       </div>
     </template>
     <!-- PAGINATION -->
+
+    <!-- BODY -->
+    <template #body-cell-name="props">
+      <q-td :props="props">
+        <div class="row items-center">
+          <q-avatar icon="person" class="bg-grey-4 q-mr-sm" text-color="grey-7" size="24px"></q-avatar>
+          {{ props.row.name }}
+        </div>
+      </q-td>
+    </template>
+    <!-- BODY -->
+
+    <!-- ACTIONS -->
+    <template #body-cell-action="props">
+      <q-td :props="props">
+        <q-btn flat icon="more_vert" rounded dense />
+        <q-menu>
+          <q-list style="min-width: 100px">
+            <q-item v-close-popup>
+              <q-item-section>
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                  <q-icon size="xs" name="edit" color="positive" class="on-left" />
+                  Изменить
+                </q-btn>
+              </q-item-section>
+            </q-item>
+            <q-item v-close-popup>
+              <q-item-section>
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                  <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
+                  Дублировать
+                </q-btn>
+              </q-item-section>
+            </q-item>
+            <q-item v-close-popup>
+              <q-item-section>
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                  <q-icon name="delete" size="xs" color="negative" class="on-left" />
+                  Удалить
+                </q-btn>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-td>
+    </template>
+    <!-- ACTIONS -->
+
   </q-table>
 </template>
 
+<style lang="scss"></style>
+
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import getRightWord from 'src/helpers/getRightWord'
 
-const router = useRouter()
-const selected = ref([])
-const allSelect = ref(false)
 defineProps(['data'])
+const allSelect = ref(false)
+const selected = ref([])
+
+// eslint-disable-next-line space-before-function-paren
+function clearSelections() {
+  selected.value.splice(0)
+}
 
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
@@ -256,25 +256,13 @@ function getPageNums(n: number) {
 }
 
 // eslint-disable-next-line space-before-function-paren
-function toEditPage() {
-  router.push('/orders/edit')
-}
-
-// eslint-disable-next-line space-before-function-paren
 function getStatusClass(status: string) {
-  if (status === 'Оплачен') {
+  if (status === 'Актив') {
     return 'positive text-white'
-  } else if (status === 'Отменен') {
+  } else if (status === 'Не актив') {
     return 'red-6 text-white'
-  } else if (status === 'В ожидании') {
-    return 'amber-2 text-amber-9'
-  } else {
-    return 'light-blue-13 text-white'
+  } else if (status === 'Удален') {
+    return 'text-white dark'
   }
-}
-
-// eslint-disable-next-line space-before-function-paren
-function clearSelections() {
-  selected.value.splice(0)
 }
 </script>
