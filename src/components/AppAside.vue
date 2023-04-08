@@ -3,11 +3,13 @@
     <img src="/src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
     <q-list>
       <q-expansion-item expand-icon-class="text-primary" label="Продукты" icon="summarize"
-        header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium">
+        header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium"
+        :class="isPageActive('/products')">
         <q-list>
 
           <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
+              :class="isPageActive('/products/list')">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
               <router-link class="text-weight-medium aside__products-link" to="/products/list">
                 Список продуктов
@@ -16,7 +18,8 @@
           </q-item>
 
           <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
+              :class="isPageActive('/products/categories')">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
               <router-link class="text-weight-medium aside__products-link" to="/products/categories">
                 Категории
@@ -25,7 +28,8 @@
           </q-item>
 
           <q-item clickable :active="true" active-class="text-primary">
-            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
+            <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
+              :class="isPageActive('/products/attributes')">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
               <router-link class="text-weight-medium aside__products-link" to="/products/attributes">
                 Атрибуты
@@ -36,7 +40,8 @@
         </q-list>
       </q-expansion-item>
 
-      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
+        :class="isPageActive('/orders/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="email" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/orders/">
@@ -45,7 +50,8 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
+        :class="isPageActive('/feedback/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="phone" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/feedback/">
@@ -54,7 +60,8 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
+        :class="isPageActive('/users/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="account_circle" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
@@ -63,7 +70,8 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
+        :class="isPageActive('/settings/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="settings" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/settings/">
@@ -72,7 +80,8 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary">
+      <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
+        :class="isPageActive('/exit/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="logout" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/exit/">
@@ -95,21 +104,17 @@
 </template>
 
 <script setup lang="ts">
-// import { ref, Ref } from 'vue'
-// import { useRoute } from 'vue-router'
+import { ref, Ref } from 'vue'
+import { useRoute } from 'vue-router'
 
-// const route = useRoute()
+const route = useRoute()
 
-// // eslint-disable-next-line space-before-function-paren
-// function isPageActive(page: string) {
-//   if (route.path.includes(page)) {
-//     return `
-//       border-right: 3px solid #109ef4;
-//       filter: grayscale(0);
-//       background-color: #109df41d;
-//     `
-//   }
-// }
+// eslint-disable-next-line space-before-function-paren
+function isPageActive(page: string) {
+  if (route.path.includes(page)) {
+    return 'page-active'
+  }
+}
 </script>
 
 <style lang="scss">
@@ -163,5 +168,10 @@
 .items-row-start {
   flex-direction: row;
   justify-content: start;
+}
+
+.page-active {
+  filter: grayscale(0) !important;
+  background-color: #109df416;
 }
 </style>
