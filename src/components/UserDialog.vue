@@ -32,34 +32,16 @@
 
         </div>
         <div class="row no-wrap" style="gap:20px;">
-          <label for="name" class="font-weight-medium q-mb-md full-width" style="display: block;">
-            Имя
-            <q-input id="name" borderless v-model="dialog.name" placeholder="Введите ваше имя"
-              class="q-mt-sm border-reset q-px-md" />
-          </label>
-          <label for="surname" class="font-weight-medium q-mb-md full-width" style="display: block;">
-            Фамилия
-            <q-input id="surname" borderless v-model="dialog.surname" placeholder="Введите ваше имя"
-              class="q-mt-sm border-reset q-px-md" />
-          </label>
+          <DefaultInput name="name" label="Имя" v-model="dialog.name" placeholder="Введите ваше имя" type="text"
+            @input="onNameInput" />
+          <DefaultInput name="surname" label="Фамилия" v-model="dialog.surname" placeholder="Введите вашу фамилию"
+            type="text" @input="onSurnameInput" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <label for="tel" class="font-weight-medium full-width q-mb-md " style="display: block;">
-            Номер телефона
-            <q-input id="tel" borderless v-model="dialog.phone" placeholder="+998 (90) 123 45 67"
-              class="q-mt-sm border-reset q-px-md" mask="+998 (##) ###-##-##" fill-mask>
-              <template #prepend>
-                <q-img src="/src/assets/uzb-svg.svg" width="22px" height="15px" />
-              </template>
-            </q-input>
-          </label>
-
-          <label for="birth" class="font-weight-medium q-mb-md full-width" style="display: block;">
-            Дата рождение
-            <q-input id="birth" type="date" borderless v-model="dialog.surname" placeholder="Введите ваше имя"
-              class="q-mt-sm border-reset q-px-md" />
-          </label>
+          <PhoneInput v-model="dialog.phone" @input="onPhoneInput" />
+          <DefaultInput name="birth" label="Дата рождения" v-model="dialog.birth" type="date" placeholder=""
+            @input="onBirthInput" />
         </div>
         <div class="row no-wrap" style="gap: 20px;">
           <label for="status" class="full-width">
@@ -75,27 +57,10 @@
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
-          <label for="password" class="font-weight-medium text-subtitle1 q-mb-md full-width" style="display: block;">
-            Новый пароль
-            <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.new" borderless
-              :type="isPwd1 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
-              <template v-slot:append>
-                <q-icon :name="isPwd1 ? 'visibility_off' : 'visibility'" class="cursor-pointer"
-                  @click="isPwd1 = !isPwd1" />
-              </template>
-            </q-input>
-          </label>
-
-          <label for="password" class="font-weight-medium text-subtitle1 q-mb-md full-width" style="display: block;">
-            Потвердить новый пароль
-            <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.confirm" borderless
-              :type="isPwd2 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
-              <template v-slot:append>
-                <q-icon :name="isPwd2 ? 'visibility_off' : 'visibility'" class="cursor-pointer"
-                  @click="isPwd2 = !isPwd2" />
-              </template>
-            </q-input>
-          </label>
+          <password-input class="full-width" label="Введите новый пароль" @input="onNewPasswordInput"
+            v-model="newPassword.new" />
+          <password-input class="full-width" label="Потвердите новый пароль" @input="onConfirmPasswordInput"
+            v-model="newPassword.confirm" />
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
@@ -154,7 +119,10 @@
 }
 </style>
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue'
+import { ref, watch } from 'vue'
+import DefaultInput from 'src/components/input/DefaultInput.vue'
+import PhoneInput from 'src/components/input/PhoneInput.vue'
+import PasswordInput from 'src/components/input/PasswordInput.vue'
 
 const statusArr = ['Актив', 'Не актив', 'Удален']
 const roleArr = ['Админ', 'Супер Админ']
@@ -166,21 +134,43 @@ const _promptVal = ref(false)
 const dialog = ref({
   name: '',
   surname: '',
-  phone: ''
+  phone: '',
+  birth: ''
 })
 
 const newPassword = ref({
   new: '',
   confirm: ''
 })
-
-const isPwd1: Ref<boolean> = ref(true)
-const isPwd2: Ref<boolean> = ref(true)
-
 const select = ref({
   status: statusArr[0],
   role: roleArr[0]
 })
+
+// eslint-disable-next-line space-before-function-paren
+function onNameInput(e: { target: { value: string } }) {
+  dialog.value.name = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onSurnameInput(e: { target: { value: string } }) {
+  dialog.value.surname = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onPhoneInput(e: { target: { value: string } }) {
+  dialog.value.phone = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onBirthInput(e: { target: { value: string } }) {
+  dialog.value.birth = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onNewPasswordInput(e: { target: { value: string } }) {
+  newPassword.value.new = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onConfirmPasswordInput(e: { target: { value: string } }) {
+  newPassword.value.confirm = e.target.value
+}
 
 watch(props, () => {
   _promptVal.value = props.promptVal

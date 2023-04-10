@@ -1,24 +1,11 @@
 <template>
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;">
     <div class="row no-wrap q-mb-lg" style="gap:20px;">
-      <label style="width: 25%;">
-        Имя
-        <q-input class="q-mt-sm q-px-md q-py-xs border-reset" dense borderless v-model="input.name" />
-      </label>
-
-      <label style="width: 25%;">
-        Номер телефона
-        <q-input class="q-mt-sm q-px-md q-py-xs border-reset" dense borderless v-model="input.phone" />
-      </label>
-
-      <label style="width: 50%;">
-        Адрес
-        <q-input class="q-mt-sm q-px-md q-py-xs border-reset" dense borderless v-model="input.address">
-          <template #append>
-            <q-icon name="location_on" color="primary" />
-          </template>
-        </q-input>
-      </label>
+      <div style="width: 85%; gap: 20px;" class="row no-wrap">
+        <DefaultInput name="name" label="Имя" v-model="input.name" style="width: 25%;" @input="onNameInput" />
+        <PhoneInput v-model="input.phone" style="width: 25%;" @input="onPhoneInput" />
+      </div>
+      <DefaultInput name="address" icon="location_on" label="Адрес" v-model="input.address" @input="onAddressInput" />
     </div>
     <!-- ==================== -->
     <div class="column no-wrap q-mb-lg">
@@ -49,7 +36,7 @@
         <q-input dense borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="date" v-model="input.date"></q-input>
       </label>
       <label style="width: 33%;">
-        Обшая цена
+        Общяя цена
         <q-input dense clear-icon="" borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="number"
           v-model="input.price">
           <template #append>
@@ -73,6 +60,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import DefaultInput from 'src/components/input/DefaultInput.vue'
+import PhoneInput from 'src/components/input/PhoneInput.vue'
 
 const input = ref({
   name: '',
@@ -90,6 +79,20 @@ const selectedValue = ref({
   products: products[0],
   amount: amount[0]
 })
+
+// eslint-disable-next-line space-before-function-paren
+function onNameInput(e: { target: { value: string } }) {
+  input.value.name = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onPhoneInput(e: { target: { value: string } }) {
+  input.value.phone = e.target.value
+}
+// eslint-disable-next-line space-before-function-paren
+function onAddressInput(e: { target: { value: string } }) {
+  input.value.address = e.target.value
+}
 </script>
 
 <style>

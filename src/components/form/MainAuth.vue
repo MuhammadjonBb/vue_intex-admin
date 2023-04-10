@@ -1,22 +1,10 @@
 <template>
   <div class="auth">
     <h1 class="modal__title">Авторизоваться</h1>
+    <DefaultInput name="name" label="Имя" v-model="form.name" placeholder="Введите ваше имя" type="text"
+      @input="onNameInput" />
 
-    <label for="name" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
-      Имя
-      <q-input id="name" borderless v-model="form.name" placeholder="Введите ваше имя"
-        class="q-mt-sm border-reset q-px-md" />
-    </label>
-
-    <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
-      Пароль
-      <q-input placeholder="Введите ваш пароль" id="password" v-model="form.password" borderless
-        :type="isPwd ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
-        <template v-slot:append>
-          <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
-        </template>
-      </q-input>
-    </label>
+    <password-input label="Введите пароль" @input="onPasswordInput" v-model="form.password" />
 
     <div class="row" style="justify-content: space-between;">
       <q-checkbox v-model="isRememberCheck" label="Запомнить меня" />
@@ -27,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import DefaultInput from 'src/components/input/DefaultInput.vue'
+import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { ref, Ref, defineEmits } from 'vue'
 
 interface IForm {
@@ -40,6 +30,16 @@ const form: Ref<IForm> = ref({
 })
 
 const isRememberCheck: Ref<boolean> = ref(false)
-const isPwd: Ref<boolean> = ref(true)
+
 defineEmits(['toResetMode'])
+
+// eslint-disable-next-line space-before-function-paren
+function onNameInput(e: { target: { value: string } }) {
+  form.value.name = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onPasswordInput(e: { target: { value: string } }) {
+  form.value.password = e.target.value
+}
 </script>

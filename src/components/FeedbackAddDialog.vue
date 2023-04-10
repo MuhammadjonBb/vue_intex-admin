@@ -7,23 +7,11 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <label for="name" class="font-weight-medium q-mb-md full-width" style="display: block;">
-            Имя
-            <q-input id="name" borderless v-model="dialog.name" placeholder="Введите ваше имя"
-              class="q-mt-sm border-reset q-px-md" />
-          </label>
+          <default-input v-model="dialog.name" name="name" placeholder="Введите ваше имя" type="text" label="Имя"
+            @input="onNameInput"></default-input>
 
-          <label for="tel" class="font-weight-medium full-width q-mb-md " style="display: block;">
-            Номер телефона
-            <q-input id="tel" borderless v-model="dialog.phone" placeholder="+998 (90) 123 45 67"
-              class="q-mt-sm border-reset q-px-md" mask="+998 (##) ###-##-##" fill-mask>
-              <template #prepend>
-                <q-img src="/src/assets/uzb-svg.svg" width="22px" height="15px" />
-              </template>
-            </q-input>
-          </label>
+          <phone-input @input="onPhoneInput" v-model="dialog.phone"></phone-input>
         </div>
-
         <div class="row q-mt-lg">
           <q-space />
           <q-btn @click="$emit('onCLoseModal')" v-close-popup color="indigo-10" flat label="Отменить"
@@ -38,6 +26,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import DefaultInput from 'src/components/input/DefaultInput.vue'
+import PhoneInput from 'src/components/input/PhoneInput.vue'
 
 const props = defineProps(['promptVal'])
 const dialog = ref({
@@ -45,6 +35,16 @@ const dialog = ref({
   phone: ''
 })
 const _promptVal = ref(false)
+
+// eslint-disable-next-line space-before-function-paren
+function onNameInput(e: { target: { value: string } }) {
+  dialog.value.name = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onPhoneInput(e: { target: { value: string } }) {
+  dialog.value.phone = e.target.value
+}
 
 watch(props, () => {
   _promptVal.value = props.promptVal

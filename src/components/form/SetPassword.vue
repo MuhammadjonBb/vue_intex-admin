@@ -2,39 +2,32 @@
   <div class="reset-password">
     <h1 class="modal__title">Введите новый пароль</h1>
 
-    <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
-      Новый пароль
-      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.new" borderless
-        :type="isPwd1 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
-        <template v-slot:append>
-          <q-icon :name="isPwd1 ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd1 = !isPwd1" />
-        </template>
-      </q-input>
-    </label>
+    <password-input label="Введите новый пароль" @input="onNewPasswordInput" v-model="newPassword.new" />
+    <password-input label="Потвердите новый пароль" @input="onConfirmPasswordInput" v-model="newPassword.confirm" />
 
-    <label for="password" class="font-weight-medium text-subtitle1 q-mb-md " style="display: block;">
-      Потвердить новый пароль
-      <q-input placeholder="Введите новый пароль" id="password" v-model="newPassword.confirm" borderless
-        :type="isPwd2 ? 'password' : 'text'" class="q-mt-sm border-reset q-px-md">
-        <template v-slot:append>
-          <q-icon :name="isPwd2 ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd2 = !isPwd2" />
-        </template>
-      </q-input>
-    </label>
     <q-btn label="Сохранить" class="q-pa-sm q-mt-md" type="button" color="primary" style="width: 100%;"
       @click="$emit('toLogin')" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, defineEmits } from 'vue'
+import { ref, defineEmits } from 'vue'
+import PasswordInput from 'src/components/input/PasswordInput.vue'
 
-const newPassword = {
+const newPassword = ref({
   new: '',
   confirm: ''
-}
-const isPwd1: Ref<boolean> = ref(true)
-const isPwd2: Ref<boolean> = ref(true)
+})
 
 defineEmits(['toResetMode'])
+
+// eslint-disable-next-line space-before-function-paren
+function onNewPasswordInput(e: { target: { value: string } }) {
+  newPassword.value.new = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onConfirmPasswordInput(e: { target: { value: string } }) {
+  newPassword.value.confirm = e.target.value
+}
 </script>
