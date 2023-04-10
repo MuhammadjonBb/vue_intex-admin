@@ -14,7 +14,7 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import FeedbackTable from 'src/components/table/FeedbackTable.vue'
 import fakeData from 'src/helpers/feedbackData'
-import FeedbackAddDialog from 'src/components/FeedbackAddDialog.vue'
+import FeedbackAddDialog from 'src/components/dialog/FeedbackAddDialog.vue'
 import { ref } from 'vue'
 
 const feedbackDialog = ref(false)

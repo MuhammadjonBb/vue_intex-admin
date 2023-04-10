@@ -1,43 +1,9 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
-    selection="multiple" :columns="[
-      {
-        name: 'id',
-        field: 'id',
-        label: 'ID',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'name',
-        field: 'name',
-        label: 'Имя',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'phone',
-        field: 'phone',
-        label: 'Номер телефона',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'date',
-        field: 'date',
-        label: 'Время заяавки',
-        align: 'left',
-      },
-      {
-        name: 'action',
-        label: 'Action',
-        field: '',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+    table-header-class="text-grey-7 q-pa-none" :rows="rows" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="columns">
+
     <!-- TOP-SELECT -->
     <template #top>
       <q-tr class="item-center">
@@ -56,14 +22,14 @@
       </q-th>
     </template>
 
-    <template #header-cell-name="props">
+    <template #header-cell-client="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-phone="props">
+    <template #header-cell-goods="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
@@ -76,6 +42,50 @@
       </q-th>
     </template>
     <!-- HEADER -->
+    <!-- BODY  -->
+
+    <!-- DATE -->
+    <template #body-cell-date="props">
+      <q-td :props="props">
+        <div class="column">
+          <span> {{ props.row.date[0] }}</span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
+        </div>
+      </q-td>
+    </template>
+    <!-- DATE -->
+
+    <!-- STATUS -->
+    <template #body-cell-status="props">
+      <q-td :props="props">
+        <q-chip square :color="getStatusClass(props.row.status)" class="full-width justify-center">
+          {{ props.row.status }}
+        </q-chip>
+      </q-td>
+    </template>
+    <!-- STATUS -->
+
+    <!-- PRODUCTS -->
+    <template #body-cell-goods="props">
+      <q-td :props="props">
+        <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
+          <div v-if="props.row.goods.length > 1">
+            {{ getRightWord(props.row.goods.length) }}
+            <q-tooltip :offset="[1, 1]" class="bg-dark">
+              <q-list>
+                <q-item dense v-for="(item, index) in props.row.goods" :key="index">
+                  <q-item-section dense>{{ item }}</q-item-section>
+                </q-item>
+              </q-list>
+            </q-tooltip>
+          </div>
+          <div v-else>1 x {{ props.row.goods[0] }}</div>
+        </div>
+      </q-td>
+    </template>
+    <!-- PRODUCTS -->
+    <!-- BODY  -->
+
     <!-- ACTIONS -->
     <template #body-cell-action="props">
       <q-td :props="props">
@@ -84,7 +94,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="$emit('onEditClick')">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -111,17 +121,6 @@
       </q-td>
     </template>
     <!-- ACTIONS -->
-
-    <!-- DATE -->
-    <template #body-cell-date="props">
-      <q-td :props="props">
-        <div class="column">
-          <span> {{ props.row.date[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
-        </div>
-      </q-td>
-    </template>
-    <!-- DATE -->
 
     <!-- SELECTION -->
     <template #header-selection="props">
@@ -170,10 +169,9 @@
   </q-table>
 </template>
 
-<style></style>
-
 <script setup lang="ts">
 import { ref } from 'vue'
+import getRightWord from 'src/helpers/getRightWord'
 
 const selected = ref([])
 const allSelect = ref(false)
@@ -183,6 +181,8 @@ function clearSelections() {
   selected.value.splice(0)
 }
 
+defineProps(['columns', 'rows'])
+
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
   const numsArr = []
@@ -191,5 +191,17 @@ function getPageNums(n: number) {
   }
   return numsArr
 }
-defineProps(['data'])
+
+// eslint-disable-next-line space-before-function-paren
+function getStatusClass(status: string) {
+  if (status === 'Оплачен') {
+    return 'positive text-white'
+  } else if (status === 'Отменен') {
+    return 'red-6 text-white'
+  } else if (status === 'В ожидании') {
+    return 'amber-2 text-amber-9'
+  } else {
+    return 'light-blue-13 text-white'
+  }
+}
 </script>
