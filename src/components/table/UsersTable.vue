@@ -185,7 +185,7 @@
     <!-- BODY -->
     <template #body-cell-name="props">
       <q-td :props="props">
-        <div class="row items-center">
+        <div class="row items-center" @click="$router.push('/users/about')" style="cursor: pointer;">
           <q-avatar icon="person" class="bg-grey-4 q-mr-sm" text-color="grey-7" size="24px"></q-avatar>
           {{ props.row.name }}
         </div>

@@ -2,8 +2,11 @@
   <!-- eslint-disable-next-line vue/no-mutating-props -->
   <q-dialog :="promptVal" persistent v-model="_promptVal">
     <q-card style="min-width: 730px;border-radius: 16px;" class="q-pa-md">
-      <q-card-section>
+      <q-card-section class="row items-center">
         <div class="text-h6 font-weight-bold">{{ label }}</div>
+        <q-space />
+        <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="$emit('onCLoseModal')" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">

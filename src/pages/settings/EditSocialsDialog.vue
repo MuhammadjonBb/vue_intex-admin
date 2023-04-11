@@ -1,8 +1,11 @@
 <template>
   <q-dialog :="promptVal" v-model="_promptVal" persistent>
     <q-card style="min-width: 700px;border-radius: 16px;" class="q-pa-md">
-      <q-card-section>
+      <q-card-section class="row items-center">
         <div class="text-h6 font-weight-bold">Изменить информацию</div>
+        <q-space />
+        <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="$emit('onCLoseModal')" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
@@ -10,7 +13,7 @@
 
           <q-item class="column q-pa-none q-mt-lg">
             <default-input v-model="dialog.facebook" name="instagram" type="text" label="Instagram"
-              @input="onFacebookInput" />
+              @input="onInstagramInput" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
@@ -23,15 +26,14 @@
           </q-item>
 
           <q-item class="column q-pa-none q-mt-lg">
-            <default-input v-model="dialog.facebook" name="twitteer" type="text" label="Twitter"
-              @input="onFacebookInput" />
+            <default-input v-model="dialog.facebook" name="twitter" type="text" label="Twitter" @input="onTwitterInput" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
 
           <q-item class="column q-pa-none q-mt-lg">
             <default-input v-model="dialog.facebook" name="linkedin" type="text" label="Linkedin"
-              @input="onFacebookInput" />
+              @input="onLinkedinInput" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
@@ -68,6 +70,20 @@ function onFacebookInput(e: { target: { value: string } }) {
   dialog.value.facebook = e.target.value
 }
 
+// eslint-disable-next-line space-before-function-paren
+function onTwitterInput(e: { target: { value: string } }) {
+  dialog.value.facebook = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onInstagramInput(e: { target: { value: string } }) {
+  dialog.value.facebook = e.target.value
+}
+
+// eslint-disable-next-line space-before-function-paren
+function onLinkedinInput(e: { target: { value: string } }) {
+  dialog.value.facebook = e.target.value
+}
 watch(props, () => {
   _promptVal.value = props.promptVal
 })

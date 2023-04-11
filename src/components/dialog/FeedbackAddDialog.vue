@@ -1,16 +1,19 @@
 <template>
   <q-dialog :="promptVal" v-model="_promptVal" persistent>
     <q-card style="min-width: 700px;border-radius: 16px;" class="q-pa-md">
-      <q-card-section>
+      <q-card-section class="row items-center">
         <div class="text-h6 font-weight-bold">Добавить обратную связь</div>
+        <q-space />
+        <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="$emit('onCLoseModal')" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
           <default-input v-model="dialog.name" name="name" placeholder="Введите ваше имя" type="text" label="Имя"
-            @input="onNameInput"></default-input>
+            @input="onNameInput" />
 
-          <phone-input @input="onPhoneInput" v-model="dialog.phone"></phone-input>
+          <phone-input @input="onPhoneInput" v-model="dialog.phone" />
         </div>
         <div class="row q-mt-lg">
           <q-space />

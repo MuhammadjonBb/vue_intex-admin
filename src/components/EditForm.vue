@@ -1,9 +1,9 @@
 <template>
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;">
     <div class="row no-wrap q-mb-lg" style="gap:20px;">
-      <div style="width: 85%; gap: 20px;" class="row no-wrap">
-        <DefaultInput name="name" label="Имя" v-model="input.name" style="width: 25%;" @input="onNameInput" />
-        <PhoneInput v-model="input.phone" style="width: 25%;" @input="onPhoneInput" />
+      <div style="width: 90%; gap: 20px;" class="row no-wrap">
+        <DefaultInput name="name" label="Имя" v-model="input.name" class="full-width" @input="onNameInput" />
+        <PhoneInput v-model="input.phone" class="full-width" @input="onPhoneInput" />
       </div>
       <DefaultInput name="address" icon="location_on" label="Адрес" v-model="input.address" @input="onAddressInput" />
     </div>
