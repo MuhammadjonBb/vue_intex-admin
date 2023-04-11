@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import OrdersTable from 'src/components/table/OrdersTable.vue'
+import OrdersTable from 'src/pages/orders/OrdersTable.vue'
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import fakeData from 'src/helpers/orderData'
 </script>

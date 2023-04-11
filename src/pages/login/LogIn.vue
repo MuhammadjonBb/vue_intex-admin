@@ -29,10 +29,10 @@
 
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
-import MainAuth from 'src/components/form/MainAuth.vue'
-import ResetPassword from 'src/components/form/ResetPassword.vue'
-import ConfirmSMS from 'src/components/form/ConfirmSMS.vue'
-import SetPassword from 'src/components/form/SetPassword.vue'
+import MainAuth from 'src/pages/login/form/MainAuth.vue'
+import ResetPassword from 'src/pages/login/form/ResetPassword.vue'
+import ConfirmSMS from 'src/pages/login/form/ConfirmSMS.vue'
+import SetPassword from 'src/pages/login/form/SetPassword.vue'
 
 const isResetMode: Ref<boolean> = ref(false)
 const isSMSMode: Ref<boolean> = ref(false)

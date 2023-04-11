@@ -10,22 +10,22 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     component: () => import('layouts/EmptyLayout.vue'),
-    children: [{ path: '', component: () => import('pages/LogIn.vue') }]
+    children: [{ path: '', component: () => import('src/pages/login/LogIn.vue') }]
   },
   {
     path: '/orders/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/OrdersPage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/orders/OrdersPage.vue') }]
   },
   {
     path: '/orders/edit',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/OrdersEditPage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/orders/OrdersEditPage.vue') }]
   },
   {
     path: '/feedback',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/FeedbackPage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/feedback/FeedbackPage.vue') }]
   },
   {
     path: '/settings',
@@ -35,12 +35,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/users/about',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/AboutUserPage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/users/AboutUserPage.vue') }]
   },
   {
     path: '/users',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/UsersPage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/users/UsersPage.vue') }]
   },
   {
     path: '/:catchAll(.*)*',

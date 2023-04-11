@@ -13,8 +13,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
-import UsersTable from 'src/components/table/UsersTable.vue'
-import UserDialog from 'src/components/dialog/UserDialog.vue'
+import UsersTable from 'src/pages/users/UsersTable.vue'
+import UserDialog from 'src/pages/users/UserDialog.vue'
 import usersData from 'src/helpers/usersData'
 
 const editModal = ref(false)

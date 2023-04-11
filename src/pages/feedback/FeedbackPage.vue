@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
-import FeedbackTable from 'src/components/table/FeedbackTable.vue'
+import FeedbackTable from 'src/pages/feedback/FeedbackTable.vue'
 import fakeData from 'src/helpers/feedbackData'
-import FeedbackAddDialog from 'src/components/dialog/FeedbackAddDialog.vue'
+import FeedbackAddDialog from 'src/pages/feedback/FeedbackAddDialog.vue'
 import { ref } from 'vue'
 
 const feedbackDialog = ref(false)

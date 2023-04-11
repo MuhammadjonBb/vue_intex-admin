@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import UserDialog from 'src/components/dialog/UserDialog.vue'
+import UserDialog from 'src/pages/users/UserDialog.vue'
 import { ref } from 'vue'
 
 const editModal = ref(false)
