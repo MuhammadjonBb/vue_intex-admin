@@ -2,10 +2,19 @@ import { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '',
     component: () => import('layouts/MainLayout.vue'),
-    redirect: '/product-list',
-    children: [{ path: 'product-list', component: () => import('pages/product/ProductList.vue') }]
+    redirect: '/product/list',
+    children: [
+      { path: 'product/list', component: () => import('pages/product/ProductList.vue') }
+    ]
+  },
+  {
+    path: '/product',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '/product/create', component: () => import('components/product/listProduct/ProductCreate.vue') }
+    ]
   },
   {
     path: '/login',

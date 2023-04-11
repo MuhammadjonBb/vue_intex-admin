@@ -16,17 +16,27 @@
         </q-card-section>
         <q-space/>
         <div class="flex items-center">
-          <span class="text-weight-bold q-mr-sm">Сортировка:</span>
+          <span class="text-weight-bold q-mr-sm">Сортировка: </span>
           <q-select  model-value="" v-model="model" dense :options="options" style="width: 200px" bg-color="grey-2" standout label="Сортировка"></q-select>
         </div>
-        <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md" />
+        <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md" @click="togleCreate()" />
       </q-card-section>
     </q-card>
 </template>
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { ref, defineProps, watch } from 'vue'
+const {dinamicRoute} = defineProps(['dinamicRoute'])
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const options = ['По названию', 'По цене', 'По возрастанию']
 const model = ref('По названию')
+const togleCreate = () => {
+  router.push( `/product/${dinamicRoute}`)
+}
+watch(dinamicRoute, (newValue) => {
+  console.log(newValue)
+})
+
 </script>
 <style scoped lang="scss">
 .btn{

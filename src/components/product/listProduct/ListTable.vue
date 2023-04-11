@@ -43,7 +43,7 @@
       </template>
       <template  #body-cell-status="data">
         <q-td  class="bg-white" :props="data">
-          <q-btn size="10px" square :color="getStatusClass(data.row.status)" class="full-width ">
+          <q-btn size="10px" square :color="store.getStatusClass(data.row.status)" class="full-width ">
             {{ data.row.status }}
           </q-btn>
         </q-td>
@@ -101,9 +101,9 @@
           {{ props.row.category}}
         </q-td>
       </template>
-      <template #body-cell-skitka="props">
+      <template #body-cell-discount="props">
         <q-td  class="bg-white" :props="props">
-          {{ props.row.skitka.toLocaleString('uz-Uz')+' сум' }}
+          {{ props.row.discount.toLocaleString('uz-Uz')+' сум' }}
         </q-td>
       </template>
       <template #body-cell-desc="props">
@@ -126,20 +126,6 @@ const selected = ref([]),
   store = useCounterStore()
 
 store.setColRow(rows, columns)
-function getStatusClass (status: string) {
-  if (status === 'Новый') {
-    return 'positive text-white'
-  } else if (status === 'Хит продаж') {
-    return 'red-6 text-white'
-  } else if (status === 'Обичный') {
-    return 'grey-4'
-  } else {
-    return 'red-4 text-white'
-  }
-}
-function handleCheckboxInput (number: object) {
-  console.log(number, 'lll')
-}
 watch(selectAll, () => {
   if (selectAll.value) {
     selected.value.splice(0, selected.value.length)

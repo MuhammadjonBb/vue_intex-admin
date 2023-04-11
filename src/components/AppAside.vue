@@ -9,9 +9,9 @@
 
           <q-item clickable :active="true" active-class="text-primary">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start"
-              :class="isPageActive('/products/list')">
+              :class="isPageActive('/product/list')">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon" />
-              <router-link class="text-weight-medium aside__products-link" to="/products/list">
+              <router-link class="text-weight-medium aside__products-link" to="/product/list">
                 Список продуктов
               </router-link>
             </q-item-section>

@@ -12,35 +12,20 @@ export const useCounterStore = defineStore('counter', {
     getColumns: (state) => state.columns
   },
   actions: {
-    setColRow (rows: any, columns: any) {
+    setColRow (rows:any, columns:any) {
       this.rows = rows
       this.columns = columns
     },
-    sortRows (colum: any, keys: any) {
-      if (this.key !== colum[keys[3]]) {
-        this.key = colum[keys[3]]
-        this.count = 0
+    getStatusClass (status: string) {
+      if (status === 'Новый') {
+        return 'positive text-white'
+      } else if (status === 'Хит продаж') {
+        return 'red-6 text-white'
+      } else if (status === 'Обичный') {
+        return 'grey-4 text-black'
+      } else {
+        return 'red-4 text-white'
       }
-      this.rows = this.rows.sort((a:any, b:any) => {
-        if (this.count === 0) {
-          if (a[colum[keys[3]]] < b[colum[keys[3]]]) {
-            return -1
-          }
-          if (a[colum[keys[3]]] > b[colum[keys[3]]]) {
-            return 1
-          }
-          return 0
-        } else {
-          if (b[colum[keys[3]]] < a[colum[keys[3]]]) {
-            return -1
-          }
-          if (b[colum[keys[3]]] > a[colum[keys[3]]]) {
-            return 1
-          }
-          return 0
-        }
-      })
-      this.count === 0 ? this.count = 1 : this.count = 0
     }
   }
 })
