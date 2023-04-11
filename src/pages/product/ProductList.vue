@@ -2,7 +2,7 @@
 // eslint-disable-next-line
 import SearchFilterCreatePanel from "components/SearchFilterCreatePanel.vue";
 // eslint-disable-next-line
-import ProductTable from "components/product/ListTable.vue";
+import ProductTable from "components/product/listProduct/ListTable.vue";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import ProductTable from "components/product/ListTable.vue";
     <div class="text-h5 text-weight-bold q-my-md">
       Список продуктов
     </div>
-  <SearchFilterCreatePanel/>
-  <ProductTable/>
+    <SearchFilterCreatePanel :dinamicRoute="'create'" />
+    <ProductTable />
   </div>
 </template>
