@@ -1,10 +1,10 @@
 <template>
   <div class="auth">
     <h1 class="modal__title">Авторизоваться</h1>
-    <DefaultInput name="name" label="Имя" v-model="form.name" placeholder="Введите ваше имя" type="text"
-      @input="onNameInput" />
+    <DefaultInput name="name" :inputData="{ component: 'mainAuth', inputName: 'name' }" label="Имя"
+      placeholder="Введите ваше имя" type="text" />
 
-    <password-input label="Введите пароль" @input="onPasswordInput" v-model="form.password" />
+    <password-input label="Введите пароль" :inputData="{ component: 'mainAuth', inputName: 'password' }" />
 
     <div class="row" style="justify-content: space-between;">
       <q-checkbox v-model="isRememberCheck" label="Запомнить меня" />
@@ -32,14 +32,4 @@ const form: Ref<IForm> = ref({
 const isRememberCheck: Ref<boolean> = ref(false)
 
 defineEmits(['toResetMode'])
-
-// eslint-disable-next-line space-before-function-paren
-function onNameInput(e: { target: { value: string } }) {
-  form.value.name = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onPasswordInput(e: { target: { value: string } }) {
-  form.value.password = e.target.value
-}
 </script>

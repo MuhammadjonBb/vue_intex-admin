@@ -9,15 +9,17 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
-        <default-input v-model="dialog.address" name="address" type="text" label="Адрес" @input="onAddressInput" />
+        <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address' }" name="address" type="text"
+          label="Адрес" />
 
         <div class="row no-wrap" style="gap: 20px;">
-          <phone-input @input="onPhoneInput" v-model="dialog.phone" class="fullwdith" />
-          <default-input v-model="dialog.email" name="email" type="text" label="E-mail" @input="onEmailInput" />
+          <phone-input :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'email' }" name="email" type="text"
+            label="E-mail" />
         </div>
 
-        <default-input v-model="dialog.schedule" name="schedule" type="text" label="График работы"
-          @input="onScheduleInput" style="max-width: 50%;" />
+        <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'schedule' }" name="schedule" type="text"
+          label="График работы" style="max-width: 50%;" />
         <div class="row q-mt-lg no-wrap" style="gap: 20px">
           <q-space />
           <q-btn @click="$emit('onCLoseModal')" v-close-popup color="indigo-10" flat label="Отменить"
@@ -44,22 +46,6 @@ const dialog = ref({
 })
 const _promptVal = ref(false)
 
-// eslint-disable-next-line space-before-function-paren
-function onAddressInput(e: { target: { value: string } }) {
-  dialog.value.address = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onPhoneInput(e: { target: { value: string } }) {
-  dialog.value.phone = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onScheduleInput(e: { target: { value: string } }) {
-  dialog.value.schedule = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onEmailInput(e: { target: { value: string } }) {
-  dialog.value.email = e.target.value
-}
 watch(props, () => {
   _promptVal.value = props.promptVal
 })

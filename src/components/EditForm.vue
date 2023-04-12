@@ -2,10 +2,12 @@
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;">
     <div class="row no-wrap q-mb-lg" style="gap:20px;">
       <div style="width: 90%; gap: 20px;" class="row no-wrap">
-        <DefaultInput name="name" label="Имя" v-model="input.name" class="full-width" @input="onNameInput" />
-        <PhoneInput v-model="input.phone" class="full-width" @input="onPhoneInput" />
+        <DefaultInput name="name" label="Имя" :inputData="{ component: 'ordersEdit', inputName: 'name' }"
+          class="full-width" />
+        <PhoneInput class="full-width" :inputData="{ component: 'ordersEdit', inputName: 'phone' }" />
       </div>
-      <DefaultInput name="address" icon="location_on" label="Адрес" v-model="input.address" @input="onAddressInput" />
+      <DefaultInput name="address" icon="location_on" label="Адрес"
+        :inputData="{ component: 'ordersEdit', inputName: 'address' }" />
     </div>
     <!-- ==================== -->
     <div class="column no-wrap q-mb-lg">
@@ -33,12 +35,12 @@
       </label>
       <label style="width: 33%;">
         Время заказа
-        <q-input dense borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="date" v-model="input.date"></q-input>
+        <q-input dense borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="date" v-model="orderDate"></q-input>
       </label>
       <label style="width: 33%;">
         Общяя цена
         <q-input dense clear-icon="" borderless class="q-py-xs q-px-md q-mt-sm border-reset" type="number"
-          v-model="input.price">
+          v-model="price">
           <template #append>
             <div style="color: #464A4D; font-size: 16px;">
               Сум
@@ -59,17 +61,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
+import { useInputStore } from 'src/stores/input';
 
-const input = ref({
-  name: '',
-  phone: '',
-  address: '',
-  date: '',
-  price: ''
-})
+const inputStore = useInputStore()
+
+const name = computed(() => inputStore.input.orders.name)
+const phone = computed(() => inputStore.input.orders.address)
+const address = computed(() => inputStore.input.orders.phone)
+const orderDate = ref('')
+const price = ref('')
+
+
 const products = ['Samsung Galaxy A53 5G 6/128GB']
 const amount = [1]
 const statusArr = ['Оплачен', 'Отменен', 'В ожидании', 'В проссесе']
@@ -79,20 +84,6 @@ const selectedValue = ref({
   products: products[0],
   amount: amount[0]
 })
-
-// eslint-disable-next-line space-before-function-paren
-function onNameInput(e: { target: { value: string } }) {
-  input.value.name = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onPhoneInput(e: { target: { value: string } }) {
-  input.value.phone = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onAddressInput(e: { target: { value: string } }) {
-  input.value.address = e.target.value
-}
 </script>
 
 <style>

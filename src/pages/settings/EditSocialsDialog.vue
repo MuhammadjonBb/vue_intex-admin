@@ -12,28 +12,28 @@
         <q-list class="column no-wrap">
 
           <q-item class="column q-pa-none q-mt-lg">
-            <default-input v-model="dialog.facebook" name="instagram" type="text" label="Instagram"
-              @input="onInstagramInput" />
+            <DefaultInput :inputData="{ component: 'editSocialsDialog', inputName: 'instagram' }" name="instagram"
+              type="text" label="Instagram" />
+            <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
+              style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
+          </q-item>
+          <q-item class="column q-pa-none q-mt-lg">
+            <DefaultInput :inputData="{ component: 'editSocialsDialog', inputName: 'facebook' }" name="facebook"
+              type="text" label="Facebook" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
 
           <q-item class="column q-pa-none q-mt-lg">
-            <default-input v-model="dialog.facebook" name="facebook" type="text" label="Facebook"
-              @input="onFacebookInput" />
+            <DefaultInput :inputData="{ component: 'editSocialsDialog', inputName: 'twitter' }" name="twitter" type="text"
+              label="Twitter" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
 
           <q-item class="column q-pa-none q-mt-lg">
-            <default-input v-model="dialog.facebook" name="twitter" type="text" label="Twitter" @input="onTwitterInput" />
-            <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
-              style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
-          </q-item>
-
-          <q-item class="column q-pa-none q-mt-lg">
-            <default-input v-model="dialog.facebook" name="linkedin" type="text" label="Linkedin"
-              @input="onLinkedinInput" />
+            <DefaultInput :inputData="{ component: 'editSocialsDialog', inputName: 'linkedin' }" name="linkedin"
+              type="text" label="Linkedin" />
             <q-btn flat icon="remove" label="Удалить социальную сеть" no-caps
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
@@ -60,30 +60,8 @@ import { ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 
 const props = defineProps(['promptVal'])
-const dialog = ref({
-  facebook: ''
-})
 const _promptVal = ref(false)
 
-// eslint-disable-next-line space-before-function-paren
-function onFacebookInput(e: { target: { value: string } }) {
-  dialog.value.facebook = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onTwitterInput(e: { target: { value: string } }) {
-  dialog.value.facebook = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onInstagramInput(e: { target: { value: string } }) {
-  dialog.value.facebook = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onLinkedinInput(e: { target: { value: string } }) {
-  dialog.value.facebook = e.target.value
-}
 watch(props, () => {
   _promptVal.value = props.promptVal
 })

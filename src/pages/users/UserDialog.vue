@@ -35,16 +35,16 @@
 
         </div>
         <div class="row no-wrap" style="gap:20px;">
-          <DefaultInput name="name" label="Имя" v-model="dialog.name" placeholder="Введите ваше имя" type="text"
-            @input="onNameInput" />
-          <DefaultInput name="surname" label="Фамилия" v-model="dialog.surname" placeholder="Введите вашу фамилию"
-            type="text" @input="onSurnameInput" />
+          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" label="Имя"
+            placeholder="Введите ваше имя" type="text" />
+          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname" label="Фамилия"
+            placeholder="Введите вашу фамилию" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <PhoneInput v-model="dialog.phone" @input="onPhoneInput" />
-          <DefaultInput name="birth" label="Дата рождения" v-model="dialog.birth" type="date" placeholder=""
-            @input="onBirthInput" />
+          <PhoneInput :inputData="{ component: 'userDialog', inputName: 'phone' }" />
+          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth" label="Дата рождения"
+            type="date" placeholder="" />
         </div>
         <div class="row no-wrap" style="gap: 20px;">
           <label for="status" class="full-width">
@@ -60,10 +60,10 @@
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
-          <password-input class="full-width" label="Введите новый пароль" @input="onNewPasswordInput"
-            v-model="newPassword.new" />
-          <password-input class="full-width" label="Потвердите новый пароль" @input="onConfirmPasswordInput"
-            v-model="newPassword.confirm" />
+          <password-input class="full-width" label="Введите новый пароль"
+            :inputData="{ component: 'userDialog', inputName: 'newPassword' }" />
+          <password-input class="full-width" label="Потвердите новый пароль"
+            :inputData="{ component: 'userDialog', inputName: 'confirmPassword' }" />
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
@@ -149,31 +149,6 @@ const select = ref({
   status: statusArr[0],
   role: roleArr[0]
 })
-
-// eslint-disable-next-line space-before-function-paren
-function onNameInput(e: { target: { value: string } }) {
-  dialog.value.name = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onSurnameInput(e: { target: { value: string } }) {
-  dialog.value.surname = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onPhoneInput(e: { target: { value: string } }) {
-  dialog.value.phone = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onBirthInput(e: { target: { value: string } }) {
-  dialog.value.birth = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onNewPasswordInput(e: { target: { value: string } }) {
-  newPassword.value.new = e.target.value
-}
-// eslint-disable-next-line space-before-function-paren
-function onConfirmPasswordInput(e: { target: { value: string } }) {
-  newPassword.value.confirm = e.target.value
-}
 
 watch(props, () => {
   _promptVal.value = props.promptVal

@@ -10,10 +10,10 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <default-input v-model="dialog.name" name="name" placeholder="Введите ваше имя" type="text" label="Имя"
-            @input="onNameInput" />
+          <DefaultInput :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
+            placeholder="Введите ваше имя" type="text" label="Имя" />
 
-          <phone-input @input="onPhoneInput" v-model="dialog.phone" />
+          <phone-input :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
         </div>
         <div class="row q-mt-lg">
           <q-space />
@@ -38,16 +38,6 @@ const dialog = ref({
   phone: ''
 })
 const _promptVal = ref(false)
-
-// eslint-disable-next-line space-before-function-paren
-function onNameInput(e: { target: { value: string } }) {
-  dialog.value.name = e.target.value
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onPhoneInput(e: { target: { value: string } }) {
-  dialog.value.phone = e.target.value
-}
 
 watch(props, () => {
   _promptVal.value = props.promptVal

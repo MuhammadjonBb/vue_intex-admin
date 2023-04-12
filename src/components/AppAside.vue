@@ -7,18 +7,20 @@
         :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`">
         <q-list>
 
-          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product-list')">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product/list')"
+            @click="$router.push('/product/list')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
-                :class="isPageActive('product-list', false, true)" />
-              <router-link class="text-weight-medium aside__products-link" to="/product-list"
-                :class="isPageActive('product-list', true)">
+                :class="isPageActive('product/list', false, true)" />
+              <router-link class="text-weight-medium aside__products-link" to="/product/list"
+                :class="isPageActive('product/list', true)">
                 Список продуктов
               </router-link>
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product-categories')">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product-categories')"
+            @click="$router.push('/product/list')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
                 :class="isPageActive('product-categories', false, true)" />
@@ -29,7 +31,8 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('/product-attributes')">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('/product-attributes')"
+            @click="$router.push('/product/list')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
                 :class="isPageActive('product-attributes', false, true)" />
@@ -44,7 +47,7 @@
       </q-expansion-item>
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
-        :class="isPageActive('/orders/')">
+        :class="isPageActive('/orders/')" @click="$router.push('/orders/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="email" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/orders/">
@@ -54,7 +57,7 @@
       </q-item>
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
-        :class="isPageActive('/feedback/')">
+        :class="isPageActive('/feedback/')" @click="$router.push('/feedback/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="phone" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/feedback/">
@@ -64,7 +67,7 @@
       </q-item>
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
-        :class="isPageActive('/users/')">
+        :class="isPageActive('/users/')" @click="$router.push('/users/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="account_circle" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
@@ -74,7 +77,7 @@
       </q-item>
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
-        :class="isPageActive('/settings/')">
+        :class="isPageActive('/settings/')" @click="$router.push('/settings/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="settings" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/settings/">
@@ -84,7 +87,7 @@
       </q-item>
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
-        :class="isPageActive('/exit/')">
+        :class="isPageActive('/exit/')" @click="$router.push('/exit/')">
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="logout" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/exit/">
@@ -190,5 +193,4 @@ function isPageActive(page: string, isLink = false, isIcon = false) {
 
 .link-active {
   color: #109EF4;
-}
-</style>
+}</style>
