@@ -90,7 +90,8 @@
     <template #body-cell-subCategories="props">
       <q-td :props="props">
         <q-chip v-for="(item, index) in props.row.subCategories" style="background-color: #9CDAFF;" square
-          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[props.rowIndex]">
+          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategories(item)]"
+          icon-remove="close">
           {{ item }}
         </q-chip>
 
@@ -194,7 +195,7 @@ const router = useRouter()
 const selected = ref([])
 const allSelect = ref(false)
 const subCategoriesArr = ref([])
-defineProps(['data'])
+const { data } = defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
@@ -213,5 +214,10 @@ function toEditPage() {
 // eslint-disable-next-line space-before-function-paren
 function clearSelections() {
   selected.value.splice(0)
+}
+
+function getIndexOfSubCategories(value: string): number {
+  const subCategories: string[] = data.data.map((el: any) => el.subCategories).flat(1);
+  return subCategories.indexOf(value)
 }
 </script>
