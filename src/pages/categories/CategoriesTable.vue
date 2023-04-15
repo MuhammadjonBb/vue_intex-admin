@@ -90,7 +90,7 @@
     <template #body-cell-subCategories="props">
       <q-td :props="props">
         <q-chip v-for="(item, index) in props.row.subCategories" style="background-color: #9CDAFF;" square
-          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategories(item)]"
+          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategory(item)]"
           icon-remove="close">
           {{ item }}
         </q-chip>
@@ -216,7 +216,7 @@ function clearSelections() {
   selected.value.splice(0)
 }
 
-function getIndexOfSubCategories(value: string): number {
+function getIndexOfSubCategory(value: string): number {
   const subCategories: string[] = data.data.map((el: any) => el.subCategories).flat(1);
   return subCategories.indexOf(value)
 }
