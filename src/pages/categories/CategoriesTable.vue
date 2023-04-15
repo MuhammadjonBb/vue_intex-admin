@@ -5,69 +5,35 @@
     selection="multiple" :columns="[
       {
         name: 'id',
-        label: '№ Заказа',
-        field: row => `#${row.id}`,
+        label: 'ID',
+        field: 'id',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
-        name: 'client',
-        label: 'Имя клиента',
-        field: 'client',
+        name: 'category',
+        label: 'Категория продукта',
+        field: 'category',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
-        name: 'phone',
-        label: 'Tелефон',
-        field: 'phone',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
-      },
-      {
-        name: 'address',
-        label: 'Адрес',
-        field: 'address',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'goods',
-        label: 'Товары',
-        field: 'goods',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
+        name: 'amount',
+        label: 'Кол-во под категория',
+        field: 'amount',
         sortable: true,
-      },
-      {
-        name: 'cost',
-        label: 'Обшая цена',
-        field: 'cost',
         headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'date',
-        label: 'Время заказа',
-        field: 'date',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'status',
-        label: 'Статус',
-        field: 'status',
         align: 'left',
-        headerStyle: 'background-color: #f2f2f2;',
       },
       {
-        name: 'action',
-        label: 'Action',
-        field: '',
+        name: 'subCategories',
+        label: 'Под категории',
+        field: 'subCategories',
+        sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
+        align: 'left'
       }
     ]">
 
@@ -89,19 +55,27 @@
       </q-th>
     </template>
 
-    <template #header-cell-client="props">
+    <template #header-cell-category="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
 
-    <template #header-cell-goods="props">
+    <template #header-cell-amount="props">
       <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
         {{ props.col.label }}
         <q-icon name="filter_list" size="sm" color="indigo-10" />
       </q-th>
     </template>
+
+    <template #header-cell-subCategories="props">
+      <q-th class="text-left" style="background-color: #f2f2f2;" :props="props">
+        {{ props.col.label }}
+        <q-icon name="filter_list" size="sm" color="indigo-10" />
+      </q-th>
+    </template>
+
 
     <template #header-cell-action>
       <q-th class="text-right" style="background-color: #f2f2f2;">
@@ -111,46 +85,21 @@
     <!-- HEADER -->
 
     <!-- BODY  -->
-    <!-- DATE -->
-    <template #body-cell-date="props">
-      <q-td :props="props">
-        <div class="column">
-          <span> {{ props.row.date[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
-        </div>
-      </q-td>
-    </template>
-    <!-- DATE -->
 
-    <!-- STATUS -->
-    <template #body-cell-status="props">
+    <!-- SUB_CATEGORIES -->
+    <template #body-cell-subCategories="props">
       <q-td :props="props">
-        <q-chip square :color="getStatusClass(props.row.status)" class="full-width justify-center">
-          {{ props.row.status }}
+        <q-chip v-for="(item, index) in props.row.subCategories" style="background-color: #9CDAFF;" square
+          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategory(item)]"
+          icon-remove="close">
+          {{ item }}
         </q-chip>
-      </q-td>
-    </template>
-    <!-- STATUS -->
 
-    <!-- PRODUCTS -->
-    <template #body-cell-goods="props">
-      <q-td :props="props">
-        <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
-          <div v-if="props.row.goods.length > 1">
-            {{ getRightWord(props.row.goods.length) }}
-            <q-tooltip :offset="[1, 1]" class="bg-dark">
-              <q-list>
-                <q-item dense v-for="(item, index) in props.row.goods" :key="index">
-                  <q-item-section dense>{{ item }}</q-item-section>
-                </q-item>
-              </q-list>
-            </q-tooltip>
-          </div>
-          <div v-else>1 x {{ props.row.goods[0] }}</div>
-        </div>
+        <!-- <pre>{{ props }}</pre> -->
       </q-td>
     </template>
-    <!-- PRODUCTS -->
+    <!-- SUB_CATEGORIES -->
+
     <!-- BODY  -->
 
     <!-- ACTIONS -->
@@ -241,12 +190,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import getRightWord from 'src/helpers/getRightWord'
 
 const router = useRouter()
 const selected = ref([])
 const allSelect = ref(false)
-defineProps(['data'])
+const subCategoriesArr = ref([])
+const { data } = defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
@@ -263,20 +212,12 @@ function toEditPage() {
 }
 
 // eslint-disable-next-line space-before-function-paren
-function getStatusClass(status: string) {
-  if (status === 'Оплачен') {
-    return 'positive text-white'
-  } else if (status === 'Отменен') {
-    return 'red-6 text-white'
-  } else if (status === 'В ожидании') {
-    return 'amber-2 text-amber-9'
-  } else {
-    return 'light-blue-13 text-white'
-  }
-}
-
-// eslint-disable-next-line space-before-function-paren
 function clearSelections() {
   selected.value.splice(0)
+}
+
+function getIndexOfSubCategory(value: string): number {
+  const subCategories: string[] = data.data.map((el: any) => el.subCategories).flat(1);
+  return subCategories.indexOf(value)
 }
 </script>

@@ -19,6 +19,14 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/product',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '/product/categories', component: () => import('src/pages/categories/CategoriesPage.vue') },
+      { path: '/product/categories/add', component: () => import('src/pages/categories/CategoriesAddPage.vue') },
+    ]
+  },
+  {
     path: '/login',
     component: () => import('layouts/EmptyLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/login/LogIn.vue') }]
