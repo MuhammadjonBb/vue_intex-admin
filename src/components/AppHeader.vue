@@ -16,14 +16,14 @@
             <template #option="scope">
               <q-item class="row" v-bind="scope.itemProps">
                 <q-item-section class="no-wrap items-center" style="flex-direction: row;">
-                  <img :src="`/src/assets/${(scope.index)}-lang.png`" alt="язык" style="width: 28px; height: 20px;"
+                  <img :src="`/src/assets/lang/${(scope.index)}-lang.png`" alt="язык" style="width: 28px; height: 20px;"
                     class="q-mr-sm">
                   <span>{{ scope.opt }}</span>
                 </q-item-section>
               </q-item>
             </template>
             <template v-slot:prepend>
-              <img :src="`/src/assets/${options.indexOf(selectValue)}-lang.png`" alt="язык"
+              <img :src="`/src/assets/lang/${options.indexOf(selectValue)}-lang.png`" alt="язык"
                 style="width: 28px;height: 20px;" class="q-mr-xs">
             </template>
           </q-select>

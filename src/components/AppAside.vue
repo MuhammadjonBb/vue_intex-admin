@@ -11,7 +11,7 @@
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
                 :class="isPageActive('product-list', false, true)" />
-              <router-link class="text-weight-medium aside__products-link" to="/product-list"
+              <router-link class="text-weight-medium aside__products-link" to="/product/list"
                 :class="isPageActive('product-list', true)">
                 Список продуктов
               </router-link>
@@ -22,7 +22,7 @@
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
                 :class="isPageActive('product-categories', false, true)" />
-              <router-link class="text-weight-medium aside__products-link" to="/product-categories"
+              <router-link class="text-weight-medium aside__products-link" to="/product/categories"
                 :class="isPageActive('product-categories', true)">
                 Категории
               </router-link>
@@ -33,7 +33,7 @@
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
                 :class="isPageActive('product-attributes', false, true)" />
-              <router-link class="text-weight-medium aside__products-link" to="/product-attributes"
+              <router-link class="text-weight-medium aside__products-link" to="attribute"
                 :class="isPageActive('product-attributes', true)">
                 Атрибуты
               </router-link>

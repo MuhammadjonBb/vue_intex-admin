@@ -94,8 +94,8 @@
       </q-td>
     </template>
     <template #body-cell-discount="props">
-      <q-td class="bg-white" :props="props">
-        {{ props.row.discount.toLocaleString('uz-Uz') + ' сум' }}
+      <q-td class="bg-white discount" style="background-color: white" :props="props">
+        {{ (props.row.discount.toLocaleString('uz-Uz') + ' сум') }}
       </q-td>
     </template>
     <template #body-cell-desc="props">
@@ -135,6 +135,7 @@ watch(selectAll, () => {
 .header__card
   height: 50px
   padding: 0
+
 //   table__body
 .table__img
   padding: 5px

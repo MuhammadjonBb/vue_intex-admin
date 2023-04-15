@@ -2,60 +2,66 @@ export default {
   data: [
     {
       id: 12345,
-      client: 'Абдулла  У.',
+      client: 'Абдулла',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
-      goods: ['SamsungSamsungSamsungSamsungSamsungSamsung', 'Samsung', 'Samsung', 'Artel', 'iPhone'],
+      goods: [ 'Samsung', 'Samsung', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
-      status: 'Оплачен'
+      status: 'Оплачен',
     },
     {
       id: 23423,
-      client: 'Абдулла  У.',
+      client: 'Абдулла',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'Artel', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'Отменен'
     },
     {
       id: 56729,
-      client: 'Абдулла  У.',
+      client: 'Абдулла',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'iPhone', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'В ожидании'
     },
     {
       id: 38048,
-      client: 'Абдулла  У.',
+      client: 'Абдулла',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'В проссесе'
     },
     {
       id: 38903,
-      client: 'Абдулла  У.',
+      client: 'Абдулла',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'Оплачен'
     },
     {
       id: 84782,
-      client: 'Абдулла  У.',
+      client: 'Абдулла ',
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'Artel', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'Оплачен'
@@ -66,6 +72,7 @@ export default {
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'Отменен'
@@ -76,6 +83,7 @@ export default {
       phone: '90 123 45 67',
       address: 'Г Ташкент, Чиланзарский... ',
       goods: ['Samsung', 'Artel', 'iPhone'],
+      looks: ['Смартфон', 'Смартфон', 'Смартфон', 'Смартфон'],
       cost: '1 520 000 сум',
       date: ['28.09.2022', '14:00'],
       status: 'Оплачен'
