@@ -6,14 +6,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     redirect: '/product/list',
     children: [
-      { path: 'product/list', component: () => import('pages/product/ProductList.vue') }
+      { path: 'product/list', component: () => import('pages/product/list/ProductList.vue') },
+      { path: 'product/create', component: () => import('pages/product/list/ProductCreate.vue') }
     ]
   },
   {
-    path: '/product',
+    path: '/product/attribute',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/product/create', component: () => import('components/product/listProduct/ProductCreate.vue') }
+      { path: '/product/attribute', component: () => import('pages/product/attributes/MainAttribute.vue') },
+      { path: '/product/attribute-create', component: () => import('pages/product/attributes/CreateAtribute.vue') }
     ]
   },
   {
