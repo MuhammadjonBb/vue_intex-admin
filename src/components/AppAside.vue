@@ -11,7 +11,7 @@
             @click="$router.push('/product/list')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
-                :class="isPageActive('product-list', false, true)" />
+                :class="isPageActive('product/list', false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/list"
                 :class="isPageActive('product/list', false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/list"

@@ -13,6 +13,7 @@
         <q-item class="items-center" dense>
           <q-select dropdown-icon="expand_more" borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;"
             v-model="selectValue" :options="options" dense>
+
             <template #option="scope">
               <q-item class="row" v-bind="scope.itemProps">
                 <q-item-section class="no-wrap items-center" style="flex-direction: row;">
@@ -22,6 +23,7 @@
                 </q-item-section>
               </q-item>
             </template>
+
             <template v-slot:prepend>
               <img :src="`/src/assets/lang/${options.indexOf(selectValue)}-lang.png`" alt="язык"
                 style="width: 28px;height: 20px;" class="q-mr-xs">

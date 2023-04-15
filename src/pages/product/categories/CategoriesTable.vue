@@ -95,7 +95,6 @@
           {{ item }}
         </q-chip>
 
-        <!-- <pre>{{ props }}</pre> -->
       </q-td>
     </template>
     <!-- SUB_CATEGORIES -->
@@ -206,7 +205,7 @@ const { data } = defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
-  const numsArr = []
+  const numsArr: number[] = []
   for (let i = 1; i <= n; i++) {
     numsArr.push(i)
   }

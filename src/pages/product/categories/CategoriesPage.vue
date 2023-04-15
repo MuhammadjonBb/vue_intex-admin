@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
-import CategoriesTable from 'src/pages/categories/CategoriesTable.vue'
+import CategoriesTable from 'src/pages/product/categories/CategoriesTable.vue'
 import categoriesData from 'src/helpers/categoriesData'
 
 </script>
