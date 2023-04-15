@@ -19,16 +19,6 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { ref, Ref, defineEmits } from 'vue'
 
-interface IForm {
-  name: string
-  password: string
-}
-
-const form: Ref<IForm> = ref({
-  name: '',
-  password: ''
-})
-
 const isRememberCheck: Ref<boolean> = ref(false)
 
 defineEmits(['toResetMode'])

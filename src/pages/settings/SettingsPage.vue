@@ -128,7 +128,22 @@ import { Ref, ref } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
 
-const lang = ref({
+interface ILang {
+  ru: {
+    enabled: boolean,
+    default: boolean
+  }
+  uz: {
+    enabled: boolean,
+    default: boolean
+  }
+  en: {
+    enabled: boolean,
+    default: boolean
+  }
+}
+
+const lang: Ref<ILang> = ref({
   ru: {
     enabled: true,
     default: false
@@ -149,7 +164,7 @@ const editDialog = ref({
 })
 
 // eslint-disable-next-line space-before-function-paren
-function onOpenDialog(dialog: string) {
+function onOpenDialog(dialog: string): void {
   if (dialog === 'contacts') {
     editDialog.value.contacts = true
   } else if (dialog === 'socials') {
@@ -157,7 +172,7 @@ function onOpenDialog(dialog: string) {
   }
 }
 // eslint-disable-next-line space-before-function-paren
-function onCloseModal() {
+function onCloseModal(): void {
   editDialog.value.socials = false
   editDialog.value.contacts = false
 }

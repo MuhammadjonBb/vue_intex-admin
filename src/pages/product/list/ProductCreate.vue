@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ref, computed, reactive} from 'vue'
+import { ref, computed, reactive } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
 
 const tab = ref('en-US')
@@ -8,7 +8,7 @@ const locales = [
     name: 'Pусский язык',
     code: 'ru-RU'
   },
-  {name: 'Узбекский язык', code: 'uz'},
+  { name: 'Узбекский язык', code: 'uz' },
   {
     name: 'Engilish', code: 'en-EN'
   }
@@ -16,23 +16,23 @@ const locales = [
 const code = ref('')
 const images = reactive<object[]>([])
 
-function handleDrop(event:object|any ) {
+function handleDrop(event: object | any) {
   const files = event.dataTransfer.files
   console.log(files.length)
   for (let i = 0; i < files.length; i++) {
     if (images.length >= 4) return
     if (images.length === 0) {
       const path = URL.createObjectURL(files[i])
-      images.push({name:files[i].name,link:path})
+      images.push({ name: files[i].name, link: path })
     }
     else {
-    for (let j = 0; j < images.length; j++) {
-      if (images[j].name === files[i].name) continue
-      else {
-        const path = URL.createObjectURL(files[i])
-        images.push({name:files[i].name,link:path})
+      for (let j = 0; j < images.length; j++) {
+        if (images[j].name === files[i].name) continue
+        else {
+          const path = URL.createObjectURL(files[i])
+          images.push({ name: files[i].name, link: path })
+        }
       }
-    }
     }
   }
 
@@ -52,7 +52,7 @@ function useCycle<T>(list: T[], index: number) {
   }
 }
 
-const {next, current} = useCycle(locales, 0)
+const { next, current } = useCycle(locales, 0)
 const editor = ref('What you see is <b>what</b> you get.')
 const img = ref<String>('')
 </script>
@@ -62,57 +62,50 @@ const img = ref<String>('')
   </div>
   <q-card class=" q-ma-md card ">
     <div class=" text-center q-ml-md q-pt-md card__lang">
-      <q-tabs v-model="tab" active-class="text-black" align="left" class="text-grey card__tabs"
-              dense indicator-color="blue" @update:model-value="$i18n.locale=tab">
-        <q-tab name="ru-RU" style="font-size: 12px">Pусский язык</q-tab>
-        <q-tab name="uz-UZ" style="font-size: 12px">Узбекский язык</q-tab>
-        <q-tab name="en-US" style="font-size: 12px">Engilish</q-tab>
+      <q-tabs v-model="tab" active-class="text-black" align="left" class="text-grey card__tabs" dense
+        indicator-color="blue" @update:model-value="$i18n.locale = tab">
+        <q-tab name="ru-RU" no-caps style="font-size: 12px">Pусский язык</q-tab>
+        <q-tab name="uz-UZ" no-caps style="font-size: 12px">Узбекский язык</q-tab>
+        <q-tab name="en-US" no-caps style="font-size: 12px">Engilish</q-tab>
       </q-tabs>
     </div>
     <q-card-section class="q-py-none" horizontal>
       <q-card-section class="q-py-none q-mr-none card__section__one">
         <h6 class="card__title ">{{ $t('productCreate.title') }}</h6>
-        <default-input v-model="img" label="Название продукта" name="twitter" type="text"/>
-        <default-input label="Цена" name="twitter" type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: 'name' }" v-model="img"
+          label="Название продукта" name="twitter" type="text" />
+        <default-input :input-data="{ component: 'productCreate', inputName: 'price' }" label="Цена" name="twitter"
+          type="text" />
         <span class="text-weight-bold q-my-sm">Категория</span>
-        <q-select :options="['Категория 1', 'Категория 2', 'Категория 3']" behavior="menu"
-                  borderless
-                  menu-anchor="top start"
-                  class="input input__name" dense label="Категория" outlined
-                  standout="text-grey"/>
-        <default-input label="Скидка" name="twitter" type="text"/>
+        <q-select :options="['Категория 1', 'Категория 2', 'Категория 3']" behavior="menu" borderless
+          menu-anchor="top start" class="input input__name" dense label="Категория" outlined standout="text-grey" />
+        <default-input :input-data="{ component: 'productCreate', inputName: 'discount' }" label="Скидка" name="twitter"
+          type="text" />
       </q-card-section>
       <q-card-section class=" q-pb-none q-mt-md card__section__two">
         <p class=" text-weight-bold">Описание</p>
-        <q-editor v-model="editor"
-                  :toolbar="[
-        ['bold', 'italic', 'strike', 'underline','left', 'center', 'right','link'],
-      ]"
-                  height="140px"
-                  max-height="140px"
-                  min-height="5rem" style="border-radius: 10px;"/>
+        <q-editor v-model="editor" :toolbar="[
+          ['bold', 'italic', 'strike', 'underline', 'left', 'center', 'right', 'link'],
+        ]" height="140px" max-height="140px" min-height="5rem" style="border-radius: 10px;" />
         <p class="text-weight-bold title">Картинка</p>
         <div class="card__img">
           <div class="dropzone" @drop.prevent="handleDrop" @dragover.prevent>
             <div class="img__container">
-              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px"/>
+              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px" />
               <span class="q-mt-sm">Загрузите изображения продукта</span>
             </div>
           </div>
           <div class="row flex flex-left q-mb-sm">
             <div class="flex flex-center q-mb-sm  card__uploud__img " v-for="object in images" :key="object.link">
-              <q-img :src="`${object.link}`"
-                     alt="img"
-                     fit="cover"
-                     width="100%"
-                     height="100%"
-                     class="q-ma-sm" style="border-radius: 15px">
-                <div class="absolute-top icon__card" >
+              <q-img :src="`${object.link}`" alt="img" fit="cover" width="100%" height="100%" class="q-ma-sm"
+                style="border-radius: 15px">
+                <div class="absolute-top icon__card">
                   <div class="icon__item">
-                    <q-img name="delete" class="icon__upload"  src="/src/assets/fi_upload-cloud.png"/>
+                    <q-img name="delete" class="icon__upload" src="/src/assets/fi_upload-cloud.png" />
                   </div>
                   <div class="icon__item">
-                    <q-img name="delete" class="icon__upload"  src="/src/assets/trash.png" @click="images.splice(images.indexOf(object),1)"/>
+                    <q-img name="delete" class="icon__upload" src="/src/assets/trash.png"
+                      @click="images.splice(images.indexOf(object), 1)" />
                   </div>
                 </div>
               </q-img>
@@ -126,14 +119,14 @@ const img = ref<String>('')
 
 
 <style lang="scss">
-.icon{
-  &__card{
+.icon {
+  &__card {
     width: 100%;
     display: flex;
     justify-content: right;
   }
 
-  &__item{
+  &__item {
     margin-right: 8px;
     margin-top: 8px;
     width: 32px;
@@ -144,18 +137,21 @@ const img = ref<String>('')
     background-color: white;
     border-radius: 8px;
   }
-  &__upload{
+
+  &__upload {
     width: 18px;
     height: 18px;
     cursor: pointer;
   }
 
 }
+
 .title {
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
 .dropzone {
   border: 2px dashed #ccc;
   border-radius: 10px;
@@ -172,22 +168,28 @@ const img = ref<String>('')
 
 .card {
   border-radius: 10px;
+
   &__uploud__img {
     width: 163px;
     height: 116px;
     border-radius: 20px;
   }
-  .q-img__content > div {
+
+  .q-img__content>div {
     padding: 0;
     background: none;
   }
-  .q-field--auto-height.q-field--dense .q-field__control, .q-field--auto-height.q-field--dense .q-field__native {
+
+  .q-field--auto-height.q-field--dense .q-field__control,
+  .q-field--auto-height.q-field--dense .q-field__native {
     min-height: 30px;
     padding-top: 10px;
   }
-  .q-field--outlined .q-field__control:before{
+
+  .q-field--outlined .q-field__control:before {
     border: none;
   }
+
   .q-field--outlined .q-field__control {
     border-radius: 10px;
     border: 0.1px solid #cecece;
@@ -200,10 +202,12 @@ const img = ref<String>('')
     margin-bottom: 20px;
     color: #2B3D90;
   }
+
   &__lang {
     width: 43%;
     border-bottom: 1px solid #a6a6a6;
   }
+
   &__tabs {
     width: 70%;
   }
@@ -228,7 +232,11 @@ const img = ref<String>('')
   }
 
   &__img {
-    .q-field--auto-height, .q-field__control, .q-field--auto-height, .q-field__native {
+
+    .q-field--auto-height,
+    .q-field__control,
+    .q-field--auto-height,
+    .q-field__native {
       width: 100%;
       min-height: 138px !important;
       border-radius: 10px;

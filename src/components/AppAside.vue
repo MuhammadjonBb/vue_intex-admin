@@ -4,7 +4,7 @@
     <q-list>
       <q-expansion-item expand-icon-class="text-primary" label="Продукты" icon="summarize"
         header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium"
-        :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`">
+        :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`" default-opened>
         <q-list>
 
           <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product/list')"
@@ -22,10 +22,10 @@
           </q-item>
 
           <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('product/categories')"
-            @click="$router.push('/product/list')">
+            @click="$router.push('/product/categories')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
-                :class="isPageActive('product-categories', false, true)" />
+                :class="isPageActive('product/categories', false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/categories"
                 :class="isPageActive('product/categories', true)">
                 Категории
@@ -33,13 +33,13 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('/product-attributes')"
-            @click="$router.push('/product/list')">
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive('/product/attributes')"
+            @click="$router.push('/product/attributes')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"
-                :class="isPageActive('product-attributes', false, true)" />
-              <router-link class="text-weight-medium aside__products-link" to="attribute"
-                :class="isPageActive('product-attributes', true)">
+                :class="isPageActive('product/attributes', false, true)" />
+              <router-link class="text-weight-medium aside__products-link" to="/product/attributes"
+                :class="isPageActive('product/attributes', true)">
                 Атрибуты
               </router-link>
             </q-item-section>
@@ -195,4 +195,5 @@ function isPageActive(page: string, isLink = false, isIcon = false) {
 
 .link-active {
   color: #109EF4;
-}</style>
+}
+</style>

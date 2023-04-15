@@ -239,17 +239,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord'
 
+interface ISelected {
+  id: number
+  address: string
+  status: string
+  goods: string[]
+  cost: string
+  date: [string, string]
+  client: string
+  phone: string
+}
+
 const router = useRouter()
-const selected = ref([])
-const allSelect = ref(false)
+const selected: Ref<ISelected[]> = ref([])
+const allSelect: Ref<boolean> = ref(false)
 defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
-function getPageNums(n: number) {
+function getPageNums(n: number): number[] {
   const numsArr = []
   for (let i = 1; i <= n; i++) {
     numsArr.push(i)
@@ -263,7 +274,7 @@ function toEditPage() {
 }
 
 // eslint-disable-next-line space-before-function-paren
-function getStatusClass(status: string) {
+function getStatusClass(status: string): string {
   if (status === 'Оплачен') {
     return 'positive text-white'
   } else if (status === 'Отменен') {
@@ -276,7 +287,7 @@ function getStatusClass(status: string) {
 }
 
 // eslint-disable-next-line space-before-function-paren
-function clearSelections() {
+function clearSelections(): void {
   selected.value.splice(0)
 }
 </script>

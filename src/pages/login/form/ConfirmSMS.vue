@@ -24,25 +24,26 @@
   </div>
 </template>
 
-<script setup>
-import { defineEmits, ref } from 'vue'
+<script setup lang="ts">
+import { defineEmits, ref, Ref } from 'vue'
 import { useInputStore } from 'src/stores/input';
 
 const inputStore = useInputStore()
 
 defineEmits(['toResetPasswordMode'])
 
-const smsInputs = ref(['', '', '', '', '', ''])
-const input1 = ref(null)
-const input2 = ref(null)
-const input3 = ref(null)
-const input4 = ref(null)
-const input5 = ref(null)
-const input6 = ref(null)
+const smsInputs: Ref<string[]> = ref(['', '', '', '', '', ''])
+const input1 = ref()
+const input2 = ref()
+const input3 = ref()
+const input4 = ref()
+const input5 = ref()
+const input6 = ref()
 
 // eslint-disable-next-line space-before-function-paren
-function focusNext(e, inputTndex) {
-  const isNumber = /^\d+$/.test(Number(e.key))
+function focusNext(e: any, inputTndex: number) {
+  const isNumber = /^\d+$/.test(e.key)
+
   if (isNumber) {
     switch (inputTndex) {
       case 1:

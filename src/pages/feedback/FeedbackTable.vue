@@ -175,18 +175,25 @@
 <style></style>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
-const selected = ref([])
-const allSelect = ref(false)
+interface ISelected {
+  date: [string, string]
+  name: string
+  phone: string
+  id: number
+}
+
+const selected: Ref<ISelected[]> = ref([])
+const allSelect: Ref<boolean> = ref(false)
 
 // eslint-disable-next-line space-before-function-paren
-function clearSelections() {
+function clearSelections(): void {
   selected.value.splice(0)
 }
 
 // eslint-disable-next-line space-before-function-paren
-function getPageNums(n: number) {
+function getPageNums(n: number): number[] {
   const numsArr = []
   for (let i = 1; i <= n; i++) {
     numsArr.push(i)

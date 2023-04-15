@@ -28,16 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 
 const props = defineProps(['promptVal'])
-const dialog = ref({
-  name: '',
-  phone: ''
-})
-const _promptVal = ref(false)
+
+const _promptVal: Ref<boolean> = ref(false)
 
 watch(props, () => {
   _promptVal.value = props.promptVal

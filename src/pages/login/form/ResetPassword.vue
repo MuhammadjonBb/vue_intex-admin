@@ -4,7 +4,7 @@
     <p class="q-mx-auto q-mb-md text-center " style="max-width: 85%;">
       Для сброса пароля на ваш номер телефона придет SMS-сообщение, через которое вы сможете обновить пароль.
     </p>
-    <PhoneInput :inputData="{ component: 'resetPassword', inputName: 'phone' }" v-model="tel" />
+    <PhoneInput :inputData="{ component: 'resetPassword', inputName: 'phone' }" />
     <q-btn label="Отправить СМС" class="reset__sms q-pa-sm q-mt-md" color="primary" style="width: 100%;" type="button"
       @click="$emit('toSmsMode')" />
   </div>
@@ -14,8 +14,5 @@
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { defineEmits, ref, Ref } from 'vue'
 
-const tel: Ref<string> = ref('')
-
 defineEmits(['toSmsMode'])
-
 </script>

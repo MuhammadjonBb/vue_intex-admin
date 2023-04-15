@@ -51,6 +51,11 @@ export const useInputStore: any = defineStore('input', () => {
       newPassword: '',
       confirmPassword: '',
     },
+    productCreate: {
+      name: '',
+      price: '',
+      discount: '',
+    }
 
   })
 

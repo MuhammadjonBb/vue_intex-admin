@@ -15,9 +15,9 @@ import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import FeedbackTable from 'src/pages/feedback/FeedbackTable.vue'
 import fakeData from 'src/helpers/feedbackData'
 import FeedbackAddDialog from 'src/pages/feedback/FeedbackAddDialog.vue'
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
-const feedbackDialog = ref(false)
+const feedbackDialog: Ref<boolean> = ref(false)
 
 // eslint-disable-next-line space-before-function-paren
 function onAddClick() {

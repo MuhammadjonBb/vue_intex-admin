@@ -188,13 +188,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+interface ISelected {
+  id: number
+  category: string
+  amount: number
+  subCategories: string[]
+}
+
 const router = useRouter()
-const selected = ref([])
-const allSelect = ref(false)
-const subCategoriesArr = ref([])
+const selected: Ref<ISelected[]> = ref([])
+const allSelect: Ref<boolean> = ref(false)
+const subCategoriesArr: Ref<boolean[]> = ref([])
 const { data } = defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
