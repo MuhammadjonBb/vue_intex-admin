@@ -47,8 +47,10 @@
 
     <q-toolbar dense class="text-grey-6 q-mt-md" style="border-top: 1px solid #6666661c;">
       <q-breadcrumbs>
-        <q-breadcrumbs-el icon="home"></q-breadcrumbs-el>
-        <q-breadcrumbs-el>Продукты</q-breadcrumbs-el>
+        <q-breadcrumbs-el icon="home" />
+        <q-breadcrumbs-el>{{ returnPageName($route.path) }}</q-breadcrumbs-el>
+        <q-breadcrumbs-el v-if="isChildPage($route.path)">{{ returnPageChild($route.path)
+        }}</q-breadcrumbs-el>
       </q-breadcrumbs>
     </q-toolbar>
   </q-header>
@@ -56,10 +58,39 @@
 
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
+import { useRoute } from 'vue-router';
 
+
+const route = useRoute()
 const options: string[] = ['Ru', 'En', 'Uz']
 const searchValue: Ref<string> = ref('')
 const selectValue: Ref<string> = ref(options[0])
+
+function isChildPage(path: string): boolean {
+  return (
+    (/\/.+\/.+$/.test(path))
+    && !(/\/product\/list$/.test(path))
+    && !(/\/product\/categories$/.test(path))
+    && !(/\/product\/attributes$/.test(path))
+  )
+}
+
+function returnPageName(pagePath: string): string | void {
+  if (pagePath.includes('categories')) return 'Категории'
+  else if (pagePath.includes('attributes')) return 'Атрибуты'
+  else if (pagePath.includes('orders')) return 'Заказы'
+  else if (pagePath.includes('users')) return 'Пользователи'
+  else if (pagePath.includes('settings')) return 'Настройки сайта'
+  else if (pagePath.includes('feedback')) return 'Обратная связь'
+  if (pagePath.includes('product')) return 'Продукты'
+}
+
+function returnPageChild(pagePath: string): string | void {
+  if (pagePath.includes('categories/add')) return 'Добавить категорию'
+  else if (pagePath.includes('attributes/create')) return 'Добавить атрибут'
+  else if (pagePath.includes('orders/edit')) return '#12345'
+  else if (pagePath.includes('product/create')) return 'Добавить продукт'
+}
 </script>
 
 <style lang="scss">
@@ -69,3 +100,4 @@ const selectValue: Ref<string> = ref(options[0])
   padding: 20px 30px;
 }
 </style>
+
