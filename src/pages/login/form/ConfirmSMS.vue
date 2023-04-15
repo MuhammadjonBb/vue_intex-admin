@@ -2,7 +2,7 @@
   <div class="confirm-sms">
     <h1 class="modal__title">Введите SMS-код</h1>
     <p class="q-mx-auto q-mb-md text-center" style="max-width: 85%;">
-      Введите SMS-код, полученный на ваш номер телефона {{ 'PHONE NUMBER' }}
+      Введите SMS-код, полученный на ваш номер телефона {{ inputStore.input.resetPassword.phone }}
     </p>
     <div class="confirm-sms__input-group row ">
       <q-input outlined v-model="smsInputs[0]" class="confirm-sms__input" mask="#" @keyup="focusNext($event, 1)"
@@ -26,6 +26,9 @@
 
 <script setup>
 import { defineEmits, ref } from 'vue'
+import { useInputStore } from 'src/stores/input';
+
+const inputStore = useInputStore()
 
 defineEmits(['toResetPasswordMode'])
 
