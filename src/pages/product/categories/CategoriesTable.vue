@@ -39,7 +39,7 @@
 
     <!-- TOP-SELECT -->
     <template #top>
-      <q-tr class="item-center q-pl-md">
+      <q-tr class="item-center">
         <q-checkbox v-model:model-value="allSelect" />
         <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
         <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />

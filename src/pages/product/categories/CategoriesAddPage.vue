@@ -13,7 +13,7 @@
                   <DefaultInput name="ruName" :inputData="{ component: 'categoriesAdd', inputName: 'ruName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
-                  <div class="full-width" @mouseover="setVisibleSubcategoryInput('ru')"
+                  <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('ru')"
                     @mouseleave="setInvisibleSubcategoryInput('ru')">
                     Под категория
                     <div class="full-width q-px-sm subcategory-wrapper">
@@ -39,7 +39,7 @@
                   <DefaultInput name="enName" :inputData="{ component: 'categoriesAdd', inputName: 'enName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
-                  <div class="full-width" @mouseover="setVisibleSubcategoryInput('en')"
+                  <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('en')"
                     @mouseleave="setInvisibleSubcategoryInput('en')">
                     Под категория
                     <div class="full-width q-px-sm subcategory-wrapper">
@@ -66,7 +66,7 @@
                   <DefaultInput name="uzName" :inputData="{ component: 'categoriesAdd', inputName: 'ruName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
-                  <div class="full-width" @mouseover="setVisibleSubcategoryInput('uz')"
+                  <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('uz')"
                     @mouseleave="setInvisibleSubcategoryInput('uz')">
                     Под категория
                     <div class="full-width q-px-sm subcategory-wrapper">
@@ -121,10 +121,19 @@ const subCategoryInputValue = ref('')
 function addSubCategory(value: string, lang: string) {
   subCategoriesArr.value[lang].push(value)
   subCategoryInputValue.value = ''
+
+  if (subCategoriesArr.value[lang].length === 4) {
+    isSubcategoryVisible.value[lang] = false
+  }
 }
 
 function setVisibleSubcategoryInput(lang: string) {
-  isSubcategoryVisible.value[lang] = true
+  if (subCategoriesArr.value[lang].length === 4) {
+    isSubcategoryVisible.value[lang] = false
+  } else {
+    isSubcategoryVisible.value[lang] = true
+
+  }
 }
 
 function setInvisibleSubcategoryInput(lang: string) {
