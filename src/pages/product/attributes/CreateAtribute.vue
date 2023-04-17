@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ref } from 'vue'
+import { ref } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
 
 const lang = ref({
@@ -14,34 +14,36 @@ const selectedOption = ref('')
   <div class="header__title">
     Добавить aтрибуты
   </div>
-  <q-card class=" q-ma-md card__attribute q-pa-sm">
+  <q-card flat class=" q-ma-md card__attribute q-pa-md">
     <div class="toggle-container">
       <div class="expansion__header " @click="lang.ru = !lang.ru">
         <span class="expansion__title">Ruscha</span>
         <div>
-          <q-img :class="lang.ru?'rotateActive':' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
-                 width="20px"></q-img>
+          <q-img :class="lang.ru ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+            width="20px"></q-img>
         </div>
       </div>
 
       <div v-if="lang.ru" class="content">
         <div class="input__group">
-          <div  class="input__name">
-            <default-input :label="'Название атрибута'" placeholder="Введите название атрибута" />
+          <div class="input__name">
+            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameRu' }" :label="'Название атрибута'"
+              placeholder="Введите название атрибута" />
           </div>
-          <div  class="input__dropdown">
+          <div class="input__dropdown">
             <label for="select">Тип ввода</label>
-            <div :class="!selectedOption?'input__label':'hidden'">Введите значение атрибута</div>
+            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
             <select id="select" v-model="selectedOption">
-              <option  >Num</option>
-              <option  >Num</option>
-              <option  >Num</option>
+              <option>Num</option>
+              <option>Num</option>
+              <option>Num</option>
             </select>
           </div>
         </div>
 
-        <div  class="iput__name q-pt-sm">
-          <default-input :label="'Значение атрибута'" placeholder="Введите значение атрибута" />
+        <div class="iput__name q-pt-sm">
+          <default-input :input-data="{ component: 'attributesAdd', inputName: 'valueRu' }" :label="'Значение атрибута'"
+            placeholder="Введите значение атрибута" />
         </div>
       </div>
     </div>
@@ -49,29 +51,31 @@ const selectedOption = ref('')
       <div class="expansion__header " @click="lang.en = !lang.en">
         <span class="expansion__title">Engilish</span>
         <div>
-          <q-img :class="lang.en?'rotateActive':' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
-                 width="20px"></q-img>
+          <q-img :class="lang.en ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+            width="20px"></q-img>
         </div>
       </div>
 
       <div v-if="lang.en" class="content">
         <div class="input__group">
-          <div  class="input__name">
-            <default-input :label="'Название атрибута'" placeholder="Введите значение атрибута" />
+          <div class="input__name">
+            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameEn' }" :label="'Название атрибута'"
+              placeholder="Введите значение атрибута" />
           </div>
-          <div  class="input__dropdown">
+          <div class="input__dropdown">
             <label for="select">Тип ввода</label>
-            <div :class="!selectedOption?'input__label':'hidden'">Введите значение атрибута</div>
+            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
             <select id="select" v-model="selectedOption">
-              <option  >Num</option>
-              <option  >Num</option>
-              <option  >Num</option>
+              <option>Num</option>
+              <option>Num</option>
+              <option>Num</option>
             </select>
           </div>
         </div>
 
-        <div  class="iput__name q-pt-sm">
-          <default-input :label="'Значение атрибута'" placeholder="Введите значение атрибута" />
+        <div class="iput__name q-pt-sm">
+          <default-input :input-data="{ component: 'attributesAdd', inputName: 'valueEn' }" :label="'Значение атрибута'"
+            placeholder="Введите значение атрибута" />
         </div>
       </div>
     </div>
@@ -79,35 +83,39 @@ const selectedOption = ref('')
       <div class="expansion__header " @click="lang.uz = !lang.uz">
         <span class="expansion__title">O'zbekcha</span>
         <div>
-          <q-img :class="lang.uz?'rotateActive':' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
-                 width="20px"></q-img>
+          <q-img :class="lang.uz ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+            width="20px"></q-img>
         </div>
       </div>
 
       <div v-if="lang.uz" class="content">
         <div class="input__group">
-          <div  class="input__name q-pt-sm">
-            <default-input :label="'Название атрибута'" placeholder="Введите значение атрибута" />
+          <div class="input__name q-pt-sm">
+            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameUz' }" :label="'Название атрибута'"
+              placeholder="Введите значение атрибута" />
           </div>
-          <div  class="input__dropdown">
+          <div class="input__dropdown">
             <label for="select">Тип ввода</label>
-            <div :class="!selectedOption?'input__label':'hidden'">Введите значение атрибута</div>
+            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
             <select id="select" v-model="selectedOption">
-              <option value="num"  >Num</option>
-              <option  >Num</option>
-              <option  >Num</option>
+              <option value="num">Num</option>
+              <option>Num</option>
+              <option>Num</option>
             </select>
           </div>
         </div>
 
-        <div  class="iput__name q-pt-sm">
-          <default-input :label="'Значение атрибута'" placeholder="Введите значение атрибута" />
+        <div class="iput__name q-pt-sm">
+          <default-input :input-data="{ component: 'attributesAdd', inputName: 'valueUz' }" :label="'Значение атрибута'"
+            placeholder="Введите значение атрибута" />
         </div>
       </div>
     </div>
-    <q-card-actions align="center">
-      <q-btn color="grey" text-color="black" padding="5px 80px" label="Отменить" />
-      <q-btn color="deep-purple-10"  padding="5px 80px" label="Добавить" />
+    <q-card-actions align="center" class="row no-wrap q-mx-auto" style="gap: 20px; max-width: 50%;">
+      <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+        class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;"
+        class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
     </q-card-actions>
   </q-card>
 </template>
@@ -126,7 +134,7 @@ const selectedOption = ref('')
 }
 
 .expansion__title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 900;
   display: flex;
   margin-left: 10px;
@@ -151,26 +159,30 @@ const selectedOption = ref('')
   transform: rotate(0deg);
   transition: all 0.3s ease-in-out;
 }
-.input{
-  &__label{
+
+.input {
+  &__label {
     font-size: 14px;
     position: absolute;
     top: 50%;
     left: 5%;
     color: grey;
   }
-  &__group{
+
+  &__group {
     display: flex;
     justify-content: space-between;
     width: 50%;
   }
-  &__name{
+
+  &__name {
     width: 48%;
     display: flex;
     flex-direction: column;
     padding-right: 2%;
   }
-  &__dropdown{
+
+  &__dropdown {
     width: 48%;
     display: flex;
     flex-direction: column;
@@ -182,6 +194,7 @@ const selectedOption = ref('')
   padding: 20px;
   margin-top: 10px;
 }
+
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -199,5 +212,4 @@ label {
   border-radius: 0.25rem;
   border: 1px solid #ccc;
 }
-
 </style>

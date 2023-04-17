@@ -14,5 +14,9 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import CategoriesTable from 'src/pages/product/categories/CategoriesTable.vue'
 import categoriesData from 'src/helpers/categoriesData'
+import { useCategoriesStore } from 'src/stores/moduls/categories'
 
+const store = useCategoriesStore()
+
+store.getCategories()
 </script>

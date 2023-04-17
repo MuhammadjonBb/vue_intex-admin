@@ -38,6 +38,13 @@ function handleDrop(event: object | any) {
 
 }
 
+const category = ref({
+  ru: '',
+  uz: '',
+  en: ''
+})
+
+
 function useCycle<T>(list: T[], index: number) {
   const i = ref(0)
 
@@ -60,7 +67,7 @@ const img = ref<String>('')
   <div class="header__title">
     Добавить продукт
   </div>
-  <q-card class=" q-ma-md card ">
+  <q-card class=" q-ma-md q-pa-lg card " flat>
     <div class=" text-center q-ml-md q-pt-md card__lang">
       <q-tabs v-model="tab" active-class="text-black" align="left" class="text-grey card__tabs" dense
         indicator-color="blue" @update:model-value="$i18n.locale = tab">
@@ -76,9 +83,12 @@ const img = ref<String>('')
           label="Название продукта" name="twitter" type="text" />
         <default-input :input-data="{ component: 'productCreate', inputName: 'price' }" label="Цена" name="twitter"
           type="text" />
-        <span class="text-weight-bold q-my-sm">Категория</span>
-        <q-select :options="['Категория 1', 'Категория 2', 'Категория 3']" behavior="menu" borderless
-          menu-anchor="top start" class="input input__name" dense label="Категория" outlined standout="text-grey" />
+        <span class="text-weight-medium q-my-sm" style="display: block;">Категория</span>
+
+        <q-select v-model="category.ru" :options="['Категория 1', 'Категория 2', 'Категория 3']" behavior="menu"
+          borderless menu-anchor="top start" class="input q-px-md"
+          style="border: 1px solid #e5e5e5; border-radius: 12px;" />
+
         <default-input :input-data="{ component: 'productCreate', inputName: 'discount' }" label="Скидка" name="twitter"
           type="text" />
       </q-card-section>
@@ -113,7 +123,15 @@ const img = ref<String>('')
           </div>
         </div>
       </q-card-section>
+
     </q-card-section>
+    <div class="row q-mt-lg no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
+      <q-space />
+      <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+        class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;"
+        class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
+    </div>
   </q-card>
 </template>
 
@@ -153,7 +171,7 @@ const img = ref<String>('')
 }
 
 .dropzone {
-  border: 2px dashed #ccc;
+  border: 1px dashed #ccc;
   border-radius: 10px;
   padding: 10px;
   text-align: center;

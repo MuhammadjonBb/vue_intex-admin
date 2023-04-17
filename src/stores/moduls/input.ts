@@ -22,6 +22,14 @@ export const useInputStore: any = defineStore('input', () => {
       uzName: '',
       uzSubName: '',
     },
+    attributesAdd: {
+      nameRu: '',
+      nameEn: '',
+      nameUz: '',
+      valueRu: '',
+      valueEn: '',
+      valueUz: '',
+    },
     userDialog: {
       name: '',
       surname: '',
@@ -55,8 +63,7 @@ export const useInputStore: any = defineStore('input', () => {
       name: '',
       price: '',
       discount: '',
-    }
-
+    },
   })
 
   return { input }

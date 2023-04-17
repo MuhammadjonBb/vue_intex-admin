@@ -101,10 +101,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 
-const subCategoriesArr = ref({
+interface ISubCategories {
+  ru: string[],
+  uz: string[],
+  en: string[]
+}
+
+const subCategoriesArr: Ref<ISubCategories> = ref({
   ru: [],
   uz: [],
   en: []

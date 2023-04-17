@@ -32,6 +32,7 @@ defineEmits(['toResetMode'])
 function login() {
   store.login().then(() => {
     $q.notify({
+      group: false,
       type: 'positive',
       message: 'Вы успешно авторизовались',
       position: 'top-right',
@@ -40,6 +41,7 @@ function login() {
     inputStore.input.mainAuth.password = ''
   }).catch(() => {
     $q.notify({
+      group: false,
       type: 'negative',
       message: 'Ошибка авторизации',
       position: 'top-right',

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
 import { useInputStore } from "stores/moduls/input";
 const inputStore = useInputStore()
-export const useAuthStore = defineStore('counter', {
+export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('token') || '',
   }),

@@ -1,13 +1,8 @@
 <template>
-  <q-table dense table-class="q-mx-none"
-           flat
-           class="my-table"
-           color="primary"
-           :virtual-scroll="true"
-           card-class="text-black"
-           table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-           table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
-           selection="multiple" :columns="[
+  <q-table dense table-class="q-mx-none" flat class="my-table" color="primary" :virtual-scroll="true"
+    card-class="text-black" table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
+    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    selection="multiple" :columns="[
       {
         name: 'id',
         label: 'ID',
@@ -34,7 +29,7 @@
       },
       {
         name: 'goods',
-        label: 'goods',
+        label: 'Значение атрибута',
         field: 'goods',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
@@ -100,12 +95,12 @@
     <!-- BODY  -->
     <template #body-cell-goods="props">
       <q-td :props="props">
-          <div v-if="props.row.goods.length > 1" class="row">
-                <q-chip style="background: #9CDAFF;" square v-for="(item, index) in props.row.goods" :key="index">
-                  {{ item }}
-                </q-chip>
-          </div>
-          <div v-else>1 x {{ props.row.goods[0] }}</div>
+        <div v-if="props.row.goods.length > 1" class="row">
+          <q-chip style="background: #9CDAFF;" square v-for="(item, index) in props.row.goods" :key="index">
+            {{ item }}
+          </q-chip>
+        </div>
+        <div v-else>1 x {{ props.row.goods[0] }}</div>
       </q-td>
     </template>
     <!-- DATE -->
@@ -166,14 +161,14 @@
 
         <div class="row items-center q-mr-md">
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
-                    :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-                    style="border-radius: 12px;" />
+            :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
           <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
         </div>
 
         <div class="text-grey-8" style="font-size: 15px;">
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
-          scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
+            scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
           {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
         </div>
@@ -182,14 +177,14 @@
 
         <div class="row items-center">
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
-                    :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-                    style="border-radius: 12px;" />
+            :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
           <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
         </div>
 
         <div class="row items-center">
           <q-pagination dense v-model="scope.pagination.page" :min="1" no-number :max="scope.pagesNumber" direction-links
-                        color="grey" />
+            color="grey" />
         </div>
       </div>
     </template>
@@ -198,7 +193,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref,computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import datas from 'src/helpers/orderData'
 
@@ -216,7 +211,7 @@ function getPageNums(n: number) {
   return numsArr
 }
 
-function deleteItem(id:string) {
+function deleteItem(id: string) {
   data = data.filter(item => item.id != id)
 }
 
