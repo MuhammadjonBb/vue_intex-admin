@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { defineEmits, ref, Ref } from 'vue'
-import { useInputStore } from 'src/stores/input';
+import { useInputStore } from 'stores/moduls/input';
 
 const inputStore = useInputStore()
 

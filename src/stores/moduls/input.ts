@@ -45,7 +45,7 @@ export const useInputStore: any = defineStore('input', () => {
     },
     mainAuth: {
       password: '',
-      name: ''
+      email: ''
     },
     setPassword: {
       newPassword: '',

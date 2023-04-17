@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useInputStore } from 'src/stores/input';
+import { useInputStore } from 'stores/moduls/input';
 
 const inputStore = useInputStore()
 

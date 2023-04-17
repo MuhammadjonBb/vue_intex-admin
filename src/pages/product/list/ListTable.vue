@@ -110,7 +110,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { useCounterStore } from 'stores/productTable'
+import { useCounterStore } from 'stores/moduls/productTable'
 import { rows, columns } from 'src/randomDate/tableDate'
 
 const selected = ref([]),

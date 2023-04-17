@@ -64,7 +64,7 @@
 import { computed, ref } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
-import { useInputStore } from 'src/stores/input';
+import { useInputStore } from 'stores/moduls/input';
 
 const inputStore = useInputStore()
 
