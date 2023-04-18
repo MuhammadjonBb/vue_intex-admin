@@ -1,8 +1,8 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data" row-key="id" v-model:selected="selected" selection="multiple"
-    :columns="[
+    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
+    selection="multiple" :columns="[
       {
         name: 'id',
         label: '№ Заказа',
@@ -214,7 +214,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+          {{ data.pageInfo.total_count }} предметов
         </div>
 
         <q-space />
