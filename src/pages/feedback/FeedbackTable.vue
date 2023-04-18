@@ -1,7 +1,7 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
       {
         name: 'id',
@@ -116,8 +116,8 @@
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ props.row.date[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
+          <span> {{ beautifyDate(props.row.created_at[0])[0] }} </span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at[0])[1] }}</span>
         </div>
       </q-td>
     </template>
@@ -148,7 +148,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+          {{ data.pageInfo.total_count }} предметов
         </div>
 
         <q-space />
@@ -175,6 +175,8 @@
 <script setup lang="ts">
 import { useModalStore } from 'src/stores/moduls/modal';
 import { Ref, ref } from 'vue'
+import beautifyDate from 'src/helpers/beautifyDate'
+
 
 interface ISelected {
   date: [string, string]

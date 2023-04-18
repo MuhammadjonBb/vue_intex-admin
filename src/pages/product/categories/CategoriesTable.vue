@@ -1,7 +1,7 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
       {
         name: 'id',
@@ -14,7 +14,7 @@
       {
         name: 'category',
         label: 'Категория продукта',
-        field: 'category',
+        field: row => row.category_ru,
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -22,7 +22,7 @@
       {
         name: 'amount',
         label: 'Кол-во под категория',
-        field: 'amount',
+        field: row => !row.ru[0] ? 0 : row.ru.length,
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left',
@@ -30,10 +30,17 @@
       {
         name: 'subCategories',
         label: 'Под категории',
-        field: 'subCategories',
+        field: row => row.ru,
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
+      },
+      {
+        name: 'actions',
+        label: '',
+        field: 'actions',
+        headerStyle: 'background-color: #f2f2f2;',
+        align: 'right'
       }
     ]">
 
@@ -77,7 +84,7 @@
     </template>
 
 
-    <template #header-cell-action>
+    <template #header-cell-actions>
       <q-th class="text-right" style="background-color: #f2f2f2;">
         <q-icon name="more_vert" size="sm" color="dark" class="q-mr-xs" />
       </q-th>
@@ -89,7 +96,7 @@
     <!-- SUB_CATEGORIES -->
     <template #body-cell-subCategories="props">
       <q-td :props="props">
-        <q-chip v-for="(item, index) in props.row.subCategories" style="background-color: #9CDAFF;" square
+        <q-chip v-if="props.row.ru[0]" v-for="(item, index) in props.row.ru" style="background-color: #9CDAFF;" square
           text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategory(item)]"
           icon-remove="close">
           {{ item }}
@@ -102,7 +109,7 @@
     <!-- BODY  -->
 
     <!-- ACTIONS -->
-    <template #body-cell-action="props">
+    <template #body-cell-actions="props">
       <q-td :props="props">
         <q-btn flat icon="more_vert" rounded dense />
         <q-menu>
@@ -162,7 +169,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+          {{ data.pageInfo.total_counthow }} предметов
         </div>
 
         <q-space />
@@ -212,7 +219,7 @@ function getPageNums(n: number) {
 
 // eslint-disable-next-line space-before-function-paren
 function toEditPage() {
-  router.push('/orders/edit')
+  router.push('categories/edit')
 }
 
 // eslint-disable-next-line space-before-function-paren
@@ -221,7 +228,7 @@ function clearSelections() {
 }
 
 function getIndexOfSubCategory(value: string): number {
-  const subCategories: string[] = data.data.map((el: any) => el.subCategories).flat(1);
+  const subCategories: string[] = data.result.map((el: any) => el.ru).flat(1);
   return subCategories.indexOf(value)
 }
 </script>

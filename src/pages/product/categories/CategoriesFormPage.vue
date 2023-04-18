@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">Добавить категорию</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $route.path.includes('add') ? 'Добавить' : 'Изменить' }} категорию</h1>
 
       <q-card flat>
         <q-card-section>
@@ -26,8 +26,8 @@
                       </q-chip>
 
                       <q-input v-show="isSubcategoryVisible.ru" placeholder="Введите название под категории" borderless
-                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
-                        @keydown.enter="addSubCategory(subCategoryInputValue, 'ru')" />
+                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'ru')" />
                     </div>
                   </div>
                 </q-card-section>
@@ -53,8 +53,8 @@
                       </q-chip>
 
                       <q-input v-show="isSubcategoryVisible.en" placeholder="Введите название под категории" borderless
-                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
-                        @keydown.enter="addSubCategory(subCategoryInputValue, 'en')" />
+                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'en')" />
                     </div>
 
                   </div>
@@ -81,8 +81,8 @@
                       </q-chip>
 
                       <q-input v-show="isSubcategoryVisible.uz" placeholder="Введите название под категории" borderless
-                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
-                        @keydown.enter="addSubCategory(subCategoryInputValue, 'uz')" />
+                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'uz')" />
                     </div>
                   </div>
 

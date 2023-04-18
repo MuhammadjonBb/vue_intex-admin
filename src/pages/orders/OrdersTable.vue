@@ -240,6 +240,7 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord'
+import beautifyDate from 'src/helpers/beautifyDate'
 
 interface ISelected {
   id: number
@@ -289,18 +290,10 @@ function clearSelections(): void {
   selected.value.splice(0)
 }
 
-function beautifyDate(dateValue: string): [string, string] {
-  const date = new Date(dateValue);
-  const options: any = { day: '2-digit', month: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric' };
-  const formattedDate = date.toLocaleString('en-GB', options);
-  const [datePart, timePart] = formattedDate.split(', ');
-  return [datePart.replace(/\//g, '.'), timePart.replace(':', '.')]
-}
-
 function beautifyPrice(price: number) {
-  const formattedPrice = price.toFixed(2);
-  const parts = formattedPrice.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  return parts.join('.');
+  const formattedPrice = price.toFixed(2)
+  const parts = formattedPrice.toString().split('.')
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  return parts.join('.')
 }
 </script>

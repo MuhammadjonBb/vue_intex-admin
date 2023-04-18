@@ -23,7 +23,9 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '/product/categories', component: () => import('src/pages/product/categories/CategoriesPage.vue') },
-      { path: '/product/categories/add', component: () => import('src/pages/product/categories/CategoriesAddPage.vue') },
+      { path: '/product/categories/add', component: () => import('src/pages/product/categories/CategoriesFormPage.vue') },
+      { path: '/product/categories/edit', component: () => import('src/pages/product/categories/CategoriesFormPage.vue') },
+
     ]
   },
   {

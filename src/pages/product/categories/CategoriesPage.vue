@@ -5,7 +5,7 @@
 
       <SearchFilterCreatePanel :dynamicRoute="'categories/add'" :isModal="false" />
 
-      <CategoriesTable :data="categoriesData" class="q-mt-md" />
+      <CategoriesTable v-if="store.categories" :data="store.categories" class="q-mt-md" />
     </q-page>
   </q-layout>
 </template>
@@ -13,7 +13,6 @@
 <script setup lang="ts">
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import CategoriesTable from 'src/pages/product/categories/CategoriesTable.vue'
-import categoriesData from 'src/helpers/categoriesData'
 import { useCategoriesStore } from 'src/stores/moduls/categories'
 
 const store = useCategoriesStore()
