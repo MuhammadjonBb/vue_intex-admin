@@ -10,9 +10,9 @@ import TableAttribute from "./TableAttribute.vue";
     <div class="text-h5 text-weight-bold q-my-md">
       Атрибуты
     </div>
-    <SearchFilterCreatePanel class="q-mb-lg" :dinamicRoute="'attribute-create'" />
+    <SearchFilterCreatePanel :dynamicRoute="'attributes-create'" :isModal="false" />
+
     <TableAttribute />
   </div>
 </template>
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

@@ -84,7 +84,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -129,9 +129,7 @@
     </template>
 
     <template #body-selection="props">
-      <q-td>
-        <q-checkbox v-model="props.selected" />
-      </q-td>
+      <q-checkbox v-model="props.selected" />
     </template>
     <!--SELECTION -->
 
@@ -175,6 +173,7 @@
 <style></style>
 
 <script setup lang="ts">
+import { useModalStore } from 'src/stores/moduls/modal';
 import { Ref, ref } from 'vue'
 
 interface ISelected {
@@ -183,7 +182,7 @@ interface ISelected {
   phone: string
   id: number
 }
-
+const modalStore = useModalStore()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
 
@@ -199,6 +198,10 @@ function getPageNums(n: number): number[] {
     numsArr.push(i)
   }
   return numsArr
+}
+
+function toEdit() {
+  modalStore.modal.feedback.edit = true
 }
 defineProps(['data'])
 </script>

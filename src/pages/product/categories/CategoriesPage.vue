@@ -3,7 +3,7 @@
     <q-page class="q-pa-md main__container">
       <h1 class="text-h5 text-weight-bold">Категории</h1>
 
-      <SearchFilterCreatePanel />
+      <SearchFilterCreatePanel :dynamicRoute="'categories/add'" :isModal="false" />
 
       <CategoriesTable :data="categoriesData" class="q-mt-md" />
     </q-page>

@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <UserDialog label="Изменить" :promptVal="editModal" @onCloseModal="onCloseModal" />
+      <UserDialog label="Изменить" :modal-name="'edit'" />
       <q-card class="row q-pa-lg no-wrap" flat>
         <q-card-section class="column items-center justify-center" style="width: 30%;">
           <q-avatar class="text-grey-7" color="grey-4" icon="person" size="170px"></q-avatar>
@@ -56,18 +56,13 @@
 </template>
 
 <script setup lang="ts">
-import UserDialog from 'src/pages/users/UserDialog.vue'
+import UserDialog from 'src/pages/users/UsersModal.vue'
 import { ref } from 'vue'
+import { useModalStore } from 'src/stores/moduls/modal';
 
-const editModal = ref(false)
+const modalStore = useModalStore()
 
-// eslint-disable-next-line space-before-function-paren
 function onEditClick() {
-  editModal.value = true
-}
-
-// eslint-disable-next-line space-before-function-paren
-function onCloseModal() {
-  editModal.value = false
+  modalStore.modal.users.edit = true
 }
 </script>

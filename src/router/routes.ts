@@ -34,12 +34,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/orders/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/orders/OrdersPage.vue') }]
-  },
-  {
-    path: '/orders/edit',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/orders/OrdersEditPage.vue') }]
+    children: [
+      { path: '', component: () => import('src/pages/orders/OrdersPage.vue') },
+      { path: '/orders/edit', component: () => import('src/pages/orders/OrdersFormPage.vue') },
+      { path: '/orders/create', component: () => import('src/pages/orders/OrdersFormPage.vue') }
+
+    ]
   },
   {
     path: '/feedback',

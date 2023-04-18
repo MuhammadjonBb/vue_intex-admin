@@ -21,27 +21,38 @@
           v-model="model" :options="options" dense>
         </q-select>
       </div>
-      <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md" @click="togleCreate()" />
+      <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md"
+        @click="onAddBtn(dynamicRoute, isModal)" />
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, watch } from 'vue'
+import { ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
+import { useModalStore } from 'src/stores/moduls/modal'
 
-const { dinamicRoute } = defineProps(['dinamicRoute'])
+const { dynamicRoute, isModal } = defineProps(['dynamicRoute', 'isModal'])
 const router = useRouter()
 const options = ['По названию', 'По цене', 'По возрастанию']
 const model = ref('По названию')
 const search = ref('')
-const togleCreate = () => {
-  router.push(`/product/${dinamicRoute}`)
-}
-watch(dinamicRoute, (newValue) => {
-  console.log(newValue)
-})
+const modalStore = useModalStore()
 
+interface IModalInfo {
+  component: string
+  modalName: string
+}
+
+function onAddBtn(value: string | IModalInfo, isModal: boolean = false): void {
+  console.log(isModal && typeof value === 'object')
+  if (!isModal && typeof value === 'string') {
+    router.push(value)
+  } else if (isModal && typeof value === 'object') {
+    console.log('object')
+    modalStore.modal[value.component][value.modalName] = true
+  }
+}
 </script>
 <style scoped lang="scss">
 .btn {

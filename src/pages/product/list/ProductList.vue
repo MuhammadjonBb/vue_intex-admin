@@ -10,7 +10,7 @@ import ProductTable from "./ListTable.vue";
     <div class="text-h5 text-weight-bold q-my-md">
       Список продуктов
     </div>
-    <SearchFilterCreatePanel :dinamicRoute="'create'" />
+    <SearchFilterCreatePanel :dynamicRoute="'create'" :isModal="false" />
     <ProductTable />
   </div>
 </template>

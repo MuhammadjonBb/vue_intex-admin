@@ -1,12 +1,12 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
-    selection="multiple" :columns="[
+    table-header-class="text-grey-7 q-pa-none" :rows="data" row-key="id" v-model:selected="selected" selection="multiple"
+    :columns="[
       {
         name: 'id',
         label: '№ Заказа',
-        field: row => `#${row.id}`,
+        field: 'order_number',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -14,7 +14,7 @@
       {
         name: 'client',
         label: 'Имя клиента',
-        field: 'client',
+        field: 'first_name',
         sortable: true,
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
@@ -42,23 +42,23 @@
         sortable: true,
       },
       {
-        name: 'cost',
+        name: 'total_price',
         label: 'Обшая цена',
-        field: 'cost',
+        field: row => beautifyPrice(row.total_price),
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'date',
         label: 'Время заказа',
-        field: 'date',
+        field: 'created_at',
         headerStyle: 'background-color: #f2f2f2;',
         align: 'left'
       },
       {
         name: 'status',
         label: 'Статус',
-        field: 'status',
+        field: 'name_ru',
         align: 'left',
         headerStyle: 'background-color: #f2f2f2;',
       },
@@ -115,8 +115,8 @@
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ props.row.date[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.date[1] }}</span>
+          <span> {{ beautifyDate(props.row.created_at[0])[0] }} </span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at[0])[1] }}</span>
         </div>
       </q-td>
     </template>
@@ -125,15 +125,15 @@
     <!-- STATUS -->
     <template #body-cell-status="props">
       <q-td :props="props">
-        <q-chip square :color="getStatusClass(props.row.status)" class="full-width justify-center">
-          {{ props.row.status }}
+        <q-chip square :color="getStatusClass(props.row.name_ru)" class="full-width justify-center">
+          {{ props.row.name_ru }}
         </q-chip>
       </q-td>
     </template>
     <!-- STATUS -->
 
     <!-- PRODUCTS -->
-    <template #body-cell-goods="props">
+    <!-- <template #body-cell-goods="props">
       <q-td :props="props">
         <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
           <div v-if="props.row.goods.length > 1">
@@ -149,7 +149,7 @@
           <div v-else>1 x {{ props.row.goods[0] }}</div>
         </div>
       </q-td>
-    </template>
+    </template> -->
     <!-- PRODUCTS -->
     <!-- BODY  -->
 
@@ -195,9 +195,7 @@
     </template>
 
     <template #body-selection="props">
-      <q-td>
-        <q-checkbox v-model="props.selected" />
-      </q-td>
+      <q-checkbox v-model="props.selected" />
     </template>
     <!--SELECTION -->
 
@@ -289,5 +287,20 @@ function getStatusClass(status: string): string {
 // eslint-disable-next-line space-before-function-paren
 function clearSelections(): void {
   selected.value.splice(0)
+}
+
+function beautifyDate(dateValue: string): [string, string] {
+  const date = new Date(dateValue);
+  const options: any = { day: '2-digit', month: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const formattedDate = date.toLocaleString('en-GB', options);
+  const [datePart, timePart] = formattedDate.split(', ');
+  return [datePart.replace(/\//g, '.'), timePart.replace(':', '.')]
+}
+
+function beautifyPrice(price: number) {
+  const formattedPrice = price.toFixed(2);
+  const parts = formattedPrice.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return parts.join('.');
 }
 </script>

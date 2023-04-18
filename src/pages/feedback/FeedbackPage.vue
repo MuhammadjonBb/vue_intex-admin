@@ -3,9 +3,11 @@
     <q-page class="q-pa-md main__container">
       <h1 class="text-h5 text-weight-bold">Обратная связь</h1>
 
-      <SearchFilterCreatePanel class="q-mb-md" @on-add-click="onAddClick" />
+      <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="{ component: 'feedback', modalName: 'create' }"
+        :isModal="true" />
       <FeedbackTable :data="fakeData" />
-      <FeedbackAddDialog @onCLoseModal="onCloseModal" :promptVal="feedbackDialog" />
+      <FeedbackModal :modal-name="'create'" label="Добавить" />
+      <FeedbackModal :modal-name="'edit'" label="Изменить" />
     </q-page>
   </q-layout>
 </template>
@@ -14,17 +16,5 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import FeedbackTable from 'src/pages/feedback/FeedbackTable.vue'
 import fakeData from 'src/helpers/feedbackData'
-import FeedbackAddDialog from 'src/pages/feedback/FeedbackAddDialog.vue'
-import { Ref, ref } from 'vue'
-
-const feedbackDialog: Ref<boolean> = ref(false)
-
-// eslint-disable-next-line space-before-function-paren
-function onAddClick() {
-  feedbackDialog.value = true
-}
-// eslint-disable-next-line space-before-function-paren
-function onCloseModal() {
-  feedbackDialog.value = false
-}
+import FeedbackModal from 'src/pages/feedback/FeedbackModal.vue'
 </script>

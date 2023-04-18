@@ -25,8 +25,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.ru" borderless dense class="q-mt-xs subcategory-input"
-                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'ru')" />
+                      <q-input v-show="isSubcategoryVisible.ru" placeholder="Введите название под категории" borderless
+                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
+                        @keydown.enter="addSubCategory(subCategoryInputValue, 'ru')" />
                     </div>
                   </div>
                 </q-card-section>
@@ -51,8 +52,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.en" borderless dense class="q-mt-xs subcategory-input"
-                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'en')" />
+                      <q-input v-show="isSubcategoryVisible.en" placeholder="Введите название под категории" borderless
+                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
+                        @keydown.enter="addSubCategory(subCategoryInputValue, 'en')" />
                     </div>
 
                   </div>
@@ -78,8 +80,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.uz" borderless dense class="q-mt-xs subcategory-input"
-                        v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'uz')" />
+                      <q-input v-show="isSubcategoryVisible.uz" placeholder="Введите название под категории" borderless
+                        dense class="q-mt-xs subcategory-input full-width" v-model="subCategoryInputValue"
+                        @keydown.enter="addSubCategory(subCategoryInputValue, 'uz')" />
                     </div>
                   </div>
 
@@ -104,19 +107,14 @@
 import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 
-interface ISubCategories {
-  ru: string[],
-  uz: string[],
-  en: string[]
-}
 
-const subCategoriesArr: Ref<ISubCategories> = ref({
+const subCategoriesArr: any = ref({
   ru: [],
   uz: [],
   en: []
 })
 
-const isSubcategoryVisible = ref({
+const isSubcategoryVisible: any = ref({
   uz: false,
   en: false,
   ru: false
@@ -125,27 +123,16 @@ const isSubcategoryVisible = ref({
 const subCategoryInputValue = ref('')
 
 function addSubCategory(value: string, lang: string) {
-  subCategoriesArr.value[lang].push(value)
+  subCategoriesArr.value[lang].push(value.trim())
   subCategoryInputValue.value = ''
-
-  if (subCategoriesArr.value[lang].length === 4) {
-    isSubcategoryVisible.value[lang] = false
-  }
 }
 
 function setVisibleSubcategoryInput(lang: string) {
-  if (subCategoriesArr.value[lang].length === 4) {
-    isSubcategoryVisible.value[lang] = false
-  } else {
-    isSubcategoryVisible.value[lang] = true
-
-  }
+  isSubcategoryVisible.value[lang] = true
 }
 
 function setInvisibleSubcategoryInput(lang: string) {
-  if (!subCategoryInputValue.value) {
-    isSubcategoryVisible.value[lang] = false
-  }
+  isSubcategoryVisible.value[lang] = false
 }
 </script>
 
@@ -156,8 +143,6 @@ function setInvisibleSubcategoryInput(lang: string) {
 }
 
 .subcategory-input {
-  border: 1px solid #9CDAFF;
-  border-radius: 12px;
   padding: 0 10px;
 }
 

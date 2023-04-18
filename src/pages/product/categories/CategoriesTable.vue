@@ -143,9 +143,7 @@
     </template>
 
     <template #body-selection="props">
-      <q-td>
-        <q-checkbox v-model="props.selected" />
-      </q-td>
+      <q-checkbox v-model="props.selected" />
     </template>
     <!--SELECTION -->
 

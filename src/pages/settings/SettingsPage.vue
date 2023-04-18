@@ -2,8 +2,8 @@
   <q-layout>
     <q-page class="q-pa-md main__container">
       <h1 class="text-h5 text-weight-bold">Настройки сайта</h1>
-      <EditSocialsDialog :promptVal="editDialog.socials" @onCLoseModal="onCloseModal" />
-      <EditContactsDialog :promptVal="editDialog.contacts" @onCLoseModal="onCloseModal" />
+      <EditSocialsDialog />
+      <EditContactsDialog />
       <q-card flat style="border-radius: 12px;">
         <q-card-section>
           <q-card-section class="row">
@@ -127,6 +127,7 @@
 import { Ref, ref } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
+import { useModalStore } from 'src/stores/moduls/modal';
 
 interface ILang {
   ru: {
@@ -142,7 +143,7 @@ interface ILang {
     default: boolean
   }
 }
-
+const modalStore = useModalStore()
 const lang: Ref<ILang> = ref({
   ru: {
     enabled: true,
@@ -158,22 +159,12 @@ const lang: Ref<ILang> = ref({
   }
 })
 
-const editDialog = ref({
-  contacts: false,
-  socials: false
-})
-
 // eslint-disable-next-line space-before-function-paren
 function onOpenDialog(dialog: string): void {
   if (dialog === 'contacts') {
-    editDialog.value.contacts = true
+    modalStore.modal.settings.contacts = true
   } else if (dialog === 'socials') {
-    editDialog.value.socials = true
+    modalStore.modal.settings.socials = true
   }
-}
-// eslint-disable-next-line space-before-function-paren
-function onCloseModal(): void {
-  editDialog.value.socials = false
-  editDialog.value.contacts = false
 }
 </script>

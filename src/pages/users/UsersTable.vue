@@ -143,9 +143,7 @@
     </template>
 
     <template #body-selection="props">
-      <q-td>
-        <q-checkbox v-model="props.selected" />
-      </q-td>
+      <q-checkbox v-model="props.selected" />
     </template>
     <!--SELECTION -->
 
@@ -203,7 +201,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="$emit('onEditClick')">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -237,11 +235,13 @@
 <style lang="scss"></style>
 
 <script setup lang="ts">
+import { useModalStore } from 'src/stores/moduls/modal';
 import { ref } from 'vue'
 
 defineProps(['data'])
 const allSelect = ref(false)
 const selected = ref([])
+const modalStore = useModalStore()
 
 // eslint-disable-next-line space-before-function-paren
 function clearSelections() {
@@ -266,5 +266,9 @@ function getStatusClass(status: string) {
   } else if (status === 'Удален') {
     return 'text-white dark'
   }
+}
+
+function toEdit() {
+  modalStore.modal.users.edit = true
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
   <!-- eslint-disable-next-line vue/no-mutating-props -->
-  <q-dialog :="promptVal" persistent v-model="_promptVal">
+  <q-dialog persistent v-model="modalStore.modal.users[modalName]">
     <q-card style="min-width: 730px;border-radius: 16px;" class="q-pa-md">
       <q-card-section class="row items-center">
         <div class="text-h6 font-weight-bold">{{ label }}</div>
         <q-space />
         <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
-          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="$emit('onCLoseModal')" />
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="modalStore.closeModal" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
@@ -67,9 +67,9 @@
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
-          <q-btn v-close-popup @click="$emit('onCloseModal')" color="indigo-10" flat label="Отменить"
+          <q-btn v-close-popup @click="modalStore.closeModal" color="indigo-10" flat label="Отменить"
             style="border-radius: 12px;" class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn v-close-popup @click="$emit('onCloseModal')" color="white" flat label="Сохранить"
+          <q-btn v-close-popup @click="modalStore.closeModal" color="white" flat label="Сохранить"
             style="border-radius: 12px;" class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </q-card-actions>
       </q-card-section>
@@ -126,31 +126,17 @@ import { ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
+import { useModalStore } from 'src/stores/moduls/modal'
 
+const modalStore = useModalStore()
 const statusArr = ['Актив', 'Не актив', 'Удален']
 const roleArr = ['Админ', 'Супер Админ']
 const profileImg = ref()
 
-const props = defineProps(['label', 'promptVal'])
-const _promptVal = ref(false)
+const { label, modalName } = defineProps(['label', 'modalName'])
 
-const dialog = ref({
-  name: '',
-  surname: '',
-  phone: '',
-  birth: ''
-})
-
-const newPassword = ref({
-  new: '',
-  confirm: ''
-})
 const select = ref({
   status: statusArr[0],
   role: roleArr[0]
-})
-
-watch(props, () => {
-  _promptVal.value = props.promptVal
 })
 </script>
