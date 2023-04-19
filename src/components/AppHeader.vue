@@ -2,7 +2,7 @@
   <q-header class="header row justify-between bg-white fixed-top" style="padding-bottom: 0;">
     <div>
       <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
-        dense placeholder="Поиск">
+        dense placeholder="Поиск">{{selectValue}}
         <template #prepend>
           <q-icon name="search" color="primary"></q-icon>
         </template>
@@ -59,15 +59,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import {ref, Ref, watch} from 'vue'
 import { useRoute } from 'vue-router';
-
+import { useI18n } from 'vue-i18n';
+const { t, locale } = useI18n()
 
 const route = useRoute()
-const options: string[] = ['Ru', 'En', 'Uz']
+const options: string[] = ['ru-RU', 'en-US', 'uz-UZ']
 const searchValue: Ref<string> = ref('')
-const selectValue: Ref<string> = ref(options[0])
+const selectValue: Ref<string> = ref('ru-RU')
 
+watch(selectValue, (newVal) => {
+  locale.value = newVal
+})
 function isChildPage(path: string): boolean {
   return (
     (/\/.+\/.+$/.test(path))

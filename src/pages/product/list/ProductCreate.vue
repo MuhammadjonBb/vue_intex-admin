@@ -10,7 +10,7 @@ const locales = [
   },
   { name: 'Узбекский язык', code: 'uz' },
   {
-    name: 'Engilish', code: 'en-EN'
+    name: 'Engilish', code: 'en-US'
   }
 ]
 const code = ref('')
@@ -78,7 +78,7 @@ const img = ref<String>('')
     </div>
     <q-card-section class="q-py-none" horizontal>
       <q-card-section class="q-py-none q-mr-none card__section__one">
-        <h6 class="card__title ">{{ $t('productCreate.title') }}</h6>
+        <h6 class="card__title ">{{ $t('product.productCreate.title') }}</h6>
         <default-input :input-data="{ component: 'productCreate', inputName: 'name' }" v-model="img"
           label="Название продукта" name="twitter" type="text" />
         <default-input :input-data="{ component: 'productCreate', inputName: 'price' }" label="Цена" name="twitter"

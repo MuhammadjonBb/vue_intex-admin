@@ -9,7 +9,7 @@ export const useCategoriesStore = defineStore('categories', {
   actions: {
     getCategories() {
       api.get('categories').then(r => {
-        console.log(r)
+        console.log('getCategories')
         this.categories = r.data
       })
     }

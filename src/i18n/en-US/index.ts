@@ -2,14 +2,11 @@
 // so you can safely delete all default props below
 
 export default {
-  button: 'Add',
-  // Product
-
-  product: {
     // Product list page
-    productList: {
+  product: {
       title: 'Product list',
-      // table header
+
+      // Table header
       productName: 'Product name',
       productCost: 'Cost',
       productCategory: 'Category',
@@ -22,13 +19,13 @@ export default {
         acces: 'Accessories',
         frame: 'Frame',
         typeThree: 'Inflatable',
-      }
+      },
+      productCreate:{
+        title: 'Information and image',
+      },
     },
     // Product create
-    productCreate:{
-      title: 'Information and image',
-    },
-  },
+
   failed: 'Action failed',
   success: 'Action was successful',
   cancel: 'Action was cancelled',

@@ -3,7 +3,7 @@ import ruRu from "./ru-Ru";
 import uzUz from "./uz-UZ";
 
 export default {
-  'en-US': enUS,
   'ru-RU':ruRu,
+  'en-US': enUS,
   'uz-UZ': uzUz
 };

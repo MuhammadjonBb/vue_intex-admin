@@ -1,8 +1,13 @@
 export default {
-  productCreate: {
-    title: 'Информация и изображение',
-    button: 'Добавить',
-},
+  product: {
+    title: 'Список продуктов',
+    productCreate: {
+      title: 'Информация и изображение',
+      button: 'Добавить',
+    },
+  },
+
+
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',
   cancel: 'Действие отменено',
