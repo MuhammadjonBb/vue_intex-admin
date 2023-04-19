@@ -49,23 +49,23 @@
           </q-card-section>
           <q-separator />
 
-          <q-card-section class="column">
+          <q-card-section class="column" v-if="siteSettingsStore.siteInfo">
             <div class="row items-center">
               <h2 class="text-h6">Контактная информация</h2>
               <q-space></q-space>
-              <q-btn icon="edit" flat color="primary" dense style="height: 35px;" @click="onOpenDialog('contacts')" />
+              <q-btn icon="edit" flat color="primary" dense style="height: 35px;" @click="openDialog('contacts')" />
             </div>
             <div class="column">
               <q-list class="row">
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Адрес</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">Улица Пахлавона Махмуда, Яшнабадский район, город
-                    Ташкент</q-item-label>
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo.address_ru
+                  }}</q-item-label>
                 </q-item>
 
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">E-mail</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">Intex@gmail.com</q-item-label>
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo.email }}</q-item-label>
                 </q-item>
               </q-list>
 
@@ -73,13 +73,14 @@
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Номер
                     телефона</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">+998 (90) 128 81 82</q-item-label>
+                  <q-item-label caption style="font-size: 14px;">+998 {{ siteSettingsStore.siteInfo.phone
+                  }}</q-item-label>
                 </q-item>
 
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">График
                     работы</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">10:00 - 22:00 Без выходных</q-item-label>
+                  <q-item-label caption style="font-size: 14px;">{{ siteSettingsStore.siteInfo.work_ru }}</q-item-label>
                 </q-item>
               </q-list>
             </div>
@@ -89,7 +90,7 @@
             <div class="row items-center">
               <h2 class="text-h6">Cоциальные сети</h2>
               <q-space></q-space>
-              <q-btn icon="edit" flat color="primary" dense style="height: 35px;" @click="onOpenDialog('socials')" />
+              <q-btn icon="edit" flat color="primary" dense style="height: 35px;" @click="openDialog('socials')" />
             </div>
             <div class="column">
               <q-list class="row">
@@ -124,10 +125,11 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { Ref, onMounted, reactive, ref } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
 import { useModalStore } from 'src/stores/moduls/modal';
+import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
 interface ILang {
   ru: {
@@ -144,23 +146,27 @@ interface ILang {
   }
 }
 const modalStore = useModalStore()
-const lang: Ref<ILang> = ref({
+const siteSettingsStore = useSiteSettingsStore()
+siteSettingsStore.getSiteInfo()
+
+const lang = reactive({
   ru: {
-    enabled: true,
+    enabled: siteSettingsStore?.siteInfo?.lang_ru,
     default: false
   },
   en: {
-    enabled: true,
+    enabled: siteSettingsStore?.siteInfo?.lang_en,
     default: false
   },
   uz: {
-    enabled: true,
+    enabled: siteSettingsStore?.siteInfo?.lang_uz,
     default: true
   }
 })
 
+
 // eslint-disable-next-line space-before-function-paren
-function onOpenDialog(dialog: string): void {
+function openDialog(dialog: string): void {
   if (dialog === 'contacts') {
     modalStore.modal.settings.contacts = true
   } else if (dialog === 'socials') {

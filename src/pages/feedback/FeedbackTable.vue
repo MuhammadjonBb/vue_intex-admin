@@ -116,8 +116,8 @@
     <template #body-cell-date="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ beautifyDate(props.row.created_at[0])[0] }} </span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at[0])[1] }}</span>
+          <span> {{ beautifyDate(props.row.created_at)[0] }} </span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at)[1] }}</span>
         </div>
       </q-td>
     </template>

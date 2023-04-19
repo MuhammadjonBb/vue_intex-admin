@@ -4,7 +4,7 @@
       <h1 class="text-h5 text-weight-bold">Пользователи</h1>
       <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="{ component: 'users', modalName: 'create' }"
         :is-modal="true" />
-      <UsersTable :data="usersData" />
+      <UsersTable :data="usersStore.users" v-if="usersStore.users" />
       <UserDialog label="Добавить пользователя" :modal-name="'create'" />
       <UserDialog label="Изменить" :modal-name="'edit'" />
     </q-page>
@@ -15,6 +15,9 @@
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import UsersTable from 'src/pages/users/UsersTable.vue'
 import UserDialog from 'src/pages/users/UsersModal.vue'
-import usersData from 'src/helpers/usersData'
+import { useUsersStore } from 'src/stores/moduls/users'
 
+const usersStore = useUsersStore()
+
+usersStore.getUsers()
 </script>

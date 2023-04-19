@@ -4,16 +4,16 @@ import { useAuthStore } from './auth'
 
 const { token } = useAuthStore()
 
-export const useOrdersStore = defineStore('orders', {
+export const useSiteSettingsStore: any = defineStore('siteSettings', {
   state: () => ({
-    orders: null,
+    siteInfo: null,
   }),
 
   actions: {
-    getOrders() {
-      api.get('orders?current_page=1')
+    getSiteInfo() {
+      api.get('sites')
         .then(r => {
-          this.orders = r.data
+          this.siteInfo = r.data[0]
         }).catch(e => {
           console.log(e)
         })

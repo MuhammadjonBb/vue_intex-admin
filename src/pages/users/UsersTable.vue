@@ -1,7 +1,7 @@
 <template>
   <q-table dense table-class="q-mx-none" flat
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
       {
         name: 'id',
@@ -20,7 +20,7 @@
       {
         name: 'role',
         field: 'role',
-        label: 'Роль ползователя',
+        label: 'Роль  ползователя',
         sortable: true,
         align: 'left'
       },
@@ -46,7 +46,7 @@
       },
       {
         name: 'registerDate',
-        field: 'registerDate',
+        field: 'created_at',
         label: 'Дата регистрация',
         align: 'left'
       },
@@ -98,29 +98,29 @@
     </template>
 
     <!-- DATE -->
-    <template #body-cell-lastActiveDate="props">
+    <!-- <template #body-cell-lastActiveDate="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ props.row.lastActiveDate[0] }}</span>
+          <span> {{ props.row.lastActiveDate }}</span>
           <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.lastActiveDate[1] }}</span>
         </div>
       </q-td>
-    </template>
+    </template>-->
     <template #body-cell-registerDate="props">
       <q-td :props="props">
         <div class="column">
-          <span> {{ props.row.registerDate[0] }}</span>
-          <span class="text-grey-7" style="font-size: 12px;"> {{ props.row.registerDate[1] }}</span>
+          <span> {{ beautifyDate(props.row.created_at)[0] }}</span>
+          <span class="text-grey-7" style="font-size: 12px;"> {{ beautifyDate(props.row.created_at)[1] }}</span>
         </div>
       </q-td>
     </template>
-    <template #body-cell-birthDate="props">
+    <!-- <template #body-cell-birthDate="props">
       <q-td :props="props">
         <div class="column">
           <span> {{ props.row.birthDate[0] }}</span>
         </div>
       </q-td>
-    </template>
+    </template> -->
     <!-- DATE -->
     <template #header-cell-action>
       <q-th class="text-right" style="background-color: #f2f2f2;">
@@ -162,7 +162,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+          {{ data.pageInfo.total_count }} предметов
         </div>
 
         <q-space />
@@ -186,8 +186,12 @@
     <template #body-cell-name="props">
       <q-td :props="props">
         <div class="row items-center" @click="$router.push('/users/about')" style="cursor: pointer;">
-          <q-avatar icon="person" class="bg-grey-4 q-mr-sm" text-color="grey-7" size="24px"></q-avatar>
-          {{ props.row.name }}
+          <q-avatar v-if="props.row.user_image">
+            <q-img :src="props.row.user_image" size="24px"></q-img>
+          </q-avatar>
+
+          <q-avatar v-else icon="person" class="bg-grey-4 q-mr-sm" text-color="grey-7" size="24px" />
+          {{ props.row.first_name }} {{ props.row.last_name }}
         </div>
       </q-td>
     </template>
@@ -235,6 +239,7 @@
 <style lang="scss"></style>
 
 <script setup lang="ts">
+import beautifyDate from 'src/helpers/beautifyDate';
 import { useModalStore } from 'src/stores/moduls/modal';
 import { ref } from 'vue'
 
