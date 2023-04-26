@@ -37,6 +37,11 @@ import { Ref, ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal';
+import { useInputStore } from 'src/stores/moduls/input';
+import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings';
 
+const siteSettingsStore = useSiteSettingsStore()
+const inputStore = useInputStore()
 const modalStore = useModalStore()
+
 </script>

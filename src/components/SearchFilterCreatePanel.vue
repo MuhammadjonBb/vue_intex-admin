@@ -49,7 +49,6 @@ function onAddBtn(value: string | IModalInfo, isModal: boolean = false): void {
   if (!isModal && typeof value === 'string') {
     router.push(value)
   } else if (isModal && typeof value === 'object') {
-    console.log('object')
     modalStore.modal[value.component][value.modalName] = true
   }
 }

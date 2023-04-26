@@ -2,18 +2,47 @@
   <label for="tel" class="font-weight-medium full-width q-mb-md " style="display: block;">
     Номер телефона
     <q-input v-model="inputStore.input[inputData.component][inputData.inputName]" id="tel" borderless
-      placeholder="+998 (90) 123 45 67" class="q-mt-sm border-reset q-px-md" mask="+998 (##) ###-##-##" fill-mask>
+      class="q-mt-sm border-reset q-px-md" :mask="returnMask()" fill-mask>
       <template #prepend>
-        <q-img src="/src/assets/uzb-svg.svg" width="22px" height="15px" />
+        <div class="q-mr-xs">
+          <q-img class="country-img" v-if="phoneCountry === '+998'" src="/src/assets/lang/2-lang.png" width="22px"
+            height="15px" />
+          <q-img class="country-img" v-else-if="phoneCountry === '+7'" src="/src/assets/lang/0-lang.png" width="22px"
+            height="15px" />
+        </div>
+
+        <q-select dropdown-icon="expand_more" v-model="phoneCountry" :options="phoneCountries" borderless />
       </template>
     </q-input>
   </label>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useInputStore } from 'stores/moduls/input';
 
 const inputStore = useInputStore()
 
+const phoneCountries = ['+998', '+7']
+const phoneCountry = ref(phoneCountries[0])
+
 defineProps(['inputData'])
+
+function returnMask() {
+  if (phoneCountry.value === '+998') {
+    return '(##) ###-##-##'
+  } else if (phoneCountry.value === '+7') {
+    return '(###) ###-##-##'
+  }
+}
 </script>
+
+<style>
+.q-field__append {
+  padding-left: 5px;
+}
+
+.country-img {
+  border-radius: 2px;
+}
+</style>
