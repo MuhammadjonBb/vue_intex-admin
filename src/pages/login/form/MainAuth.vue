@@ -21,7 +21,9 @@ import { useAuthStore } from 'src/stores/moduls/auth'
 import { useInputStore } from 'src/stores/moduls/input'
 import { ref, Ref, defineEmits } from 'vue'
 import { useQuasar } from 'quasar'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const $q = useQuasar()
 const inputStore = useInputStore()
 
@@ -39,6 +41,7 @@ function login() {
     })
     inputStore.input.mainAuth.email = ''
     inputStore.input.mainAuth.password = ''
+    router.push('/')
   }).catch(() => {
     $q.notify({
       group: false,
