@@ -133,6 +133,7 @@ import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
 import { useInputStore } from 'src/stores/moduls/input'
 import { useUsersStore } from 'src/stores/moduls/users'
+import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 
 const usersStore = useUsersStore()
 const inputStore = useInputStore()
@@ -155,20 +156,6 @@ const select = ref({
 const profileImg = ref()
 const props = defineProps(['label', 'modalName', 'id'])
 
-
-function getPrefix(str: string) {
-  const regex = /\(([^)]+)\)/g;
-  const brackets = str.match(regex);
-  if (brackets && brackets[0].length === 4) {
-    return "+998";
-  } else if (brackets && brackets[0].length === 5) {
-    return "+7";
-  }
-}
-
-function removeCharacters(str: string) {
-  return str.replace(/[-() ]/g, '');
-}
 
 function save() {
   const data = ref({

@@ -48,7 +48,8 @@ export const useInputStore: any = defineStore('input', () => {
     },
     mainAuth: {
       password: '',
-      email: ''
+      email: '',
+      phone: '',
     },
     setPassword: {
       newPassword: '',

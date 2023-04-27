@@ -43,16 +43,16 @@ export default boot(({ app, router }) => {
   }, function (e) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    if (e.response.status === 401 && e.response.data.error.name === 'JsonWebTokenError') {
+    if (e.response.status === 401) {
       router.push('/login')
-      if (localStorage.getItem('token') === null) {
+      if (localStorage.getItem('token') === null || e.response.data.error.name === "UnauthorizedException") {
         Notify.create({
           group: false,
           type: 'negative',
           message: 'Пользователь не авторизован.',
           position: 'top-right',
         })
-      } else {
+      } else if (e.response.data.error.name === 'JsonWebTokenError') {
         Notify.create({
           group: false,
           type: 'negative',

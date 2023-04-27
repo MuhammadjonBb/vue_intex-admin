@@ -1,9 +1,9 @@
 <template>
   <div class="auth">
     <h1 class="modal__title">Авторизоваться</h1>
-    <DefaultInput name="name" :inputData="{ component: 'mainAuth', inputName: 'email' }" label="Имя"
-      placeholder="Введите ваше имя" type="text" />
-
+    <DefaultInput name="name" :inputData="{ component: 'mainAuth', inputName: 'email' }" label="Email"
+      placeholder="Введите ваш email" type="text" />
+    <PhoneInput :input-data="{ component: 'mainAuth', inputName: 'phone' }"></PhoneInput>
     <password-input label="Введите пароль" :inputData="{ component: 'mainAuth', inputName: 'password' }" />
 
     <div class="row" style="justify-content: space-between;">
@@ -22,6 +22,8 @@ import { useInputStore } from 'src/stores/moduls/input'
 import { ref, Ref, defineEmits } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
+import PhoneInput from 'src/components/input/PhoneInput.vue'
+
 
 const router = useRouter()
 const $q = useQuasar()
@@ -39,9 +41,9 @@ function login() {
       message: 'Вы успешно авторизовались',
       position: 'top-right',
     })
+    router.push('/')
     inputStore.input.mainAuth.email = ''
     inputStore.input.mainAuth.password = ''
-    router.push('/')
   }).catch(() => {
     $q.notify({
       group: false,
