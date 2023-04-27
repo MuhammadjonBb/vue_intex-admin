@@ -5,8 +5,8 @@
       <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="{ component: 'users', modalName: 'create' }"
         :is-modal="true" />
       <UsersTable :data="usersStore.users" v-if="usersStore.users" @on-edit="onEdit" />
-      <UserDialog label="Добавить пользователя" :modal-name="'create'" :id="editId" />
-      <UserDialog label="Изменить" :modal-name="'edit'" :id="editId" />
+      <UserModal label="Добавить пользователя" :modal-name="'create'" :user-data="editData" />
+      <UserModal label="Изменить" :modal-name="'edit'" :user-data="editData" />
     </q-page>
   </q-layout>
 </template>
@@ -14,18 +14,18 @@
 <script setup lang="ts">
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import UsersTable from 'src/pages/users/UsersTable.vue'
-import UserDialog from 'src/pages/users/UsersModal.vue'
+import UserModal from 'src/pages/users/UsersModal.vue'
 import { useUsersStore } from 'src/stores/moduls/users'
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 const usersStore = useUsersStore()
 
 usersStore.getUsers()
 
-const editId = ref()
+const editData = ref(null)
 
 
-function onEdit(id: number) {
-  editId.value = id
+function onEdit(data: any) {
+  editData.value = data
 }
 </script>

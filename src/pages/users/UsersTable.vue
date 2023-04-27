@@ -205,7 +205,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit(props.row.id)">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit(props.row)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -277,8 +277,8 @@ function getStatusClass(status: string) {
   }
 }
 
-function toEdit(id: number) {
+function toEdit(data: object) {
   modalStore.modal.users.edit = true
-  emit('onEdit', id)
+  emit('onEdit', data)
 }
 </script>

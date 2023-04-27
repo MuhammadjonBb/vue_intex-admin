@@ -96,13 +96,12 @@ function returnPageChild(pagePath: string): string | void {
   if (pagePath.includes('categories/add')) return 'Добавить категорию'
   else if (pagePath.includes('attributes/create')) return 'Добавить атрибут'
   else if (pagePath.includes('orders/edit')) return '#12345'
+  else if (pagePath.includes('orders/create')) return 'Добавить заказ'
   else if (pagePath.includes('product/create')) return 'Добавить продукт'
 }
 </script>
 
 <style lang="scss">
-@import "src/css/quasar.variables.scss";
-
 .header {
   padding: 20px 30px;
 }

@@ -8,10 +8,7 @@ export const useCategoriesStore = defineStore('categories', {
 
   actions: {
     getCategories() {
-      api.get('categories').then(r => {
-        console.log('getCategories')
-        this.categories = r.data
-      })
+      return api.get('categories').then(r => this.categories = r.data)
     }
   }
 })

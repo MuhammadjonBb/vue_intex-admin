@@ -146,7 +146,6 @@ const statusArr = [
 const roleArr = [
   { label: 'Админ', value: 'user' },
   { label: 'Супер админ', value: 'super_admin' },
-
 ]
 const select = ref({
   status: statusArr[0].value,
@@ -154,8 +153,15 @@ const select = ref({
 })
 
 const profileImg = ref()
-const props = defineProps(['label', 'modalName', 'id'])
+const props = defineProps(['label', 'modalName', 'userData'])
 
+watch(() => props.userData, () => {
+  setInputValues()
+})
+
+if (props.modalName === 'edit') {
+  inputStore.input.userDialog.name = props?.userData?.first_name
+}
 
 function save() {
   const data = ref({
@@ -172,15 +178,9 @@ function save() {
   })
 
   if (props.modalName === 'create') {
-    usersStore.createUser(data.value).then((r) => {
-      closeModal()
-
-    }).catch(() => {
-
-    });
+    usersStore.createUser(data.value).then(() => closeModal())
   } else if (props.modalName === 'edit') {
-    const editObject = Object.assign(data.value, { id: props.id })
-    console.log(editObject)
+    const editObject = Object.assign(data.value, { id: props.userData.id })
     usersStore.editUser(editObject)
   }
 }
@@ -194,5 +194,11 @@ function closeModal() {
   inputStore.input.userDialog.birth = ''
   inputStore.input.userDialog.newPassword = ''
   inputStore.input.userDialog.confirmPassword = ''
+}
+
+function setInputValues() {
+  inputStore.input.userDialog.name = props?.userData?.first_name
+  inputStore.input.userDialog.surname = props?.userData?.last_name
+  inputStore.input.userDialog.email = props?.userData?.email
 }
 </script>
