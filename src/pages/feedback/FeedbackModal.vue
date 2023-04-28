@@ -36,6 +36,8 @@ import { useFeedbackStore } from 'src/stores/moduls/feedback'
 import { useInputStore } from 'src/stores/moduls/input'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import { useQuasar } from 'quasar'
+import cutPhoneString from "src/helpers/cutPhoneString"
+
 
 const props = defineProps(['modalName', 'label', 'feedbackData'])
 const modalStore = useModalStore()
@@ -86,14 +88,5 @@ function closeModal() {
 function setInputValues() {
   inputStore.input.feedbackDialog.name = props.feedbackData.name
   inputStore.input.feedbackDialog.phone = cutPhoneString(props.feedbackData.phone)
-}
-
-function cutPhoneString(str: string) {
-  if (str.startsWith('+7')) {
-    return str.substring(5)
-  } else if (str.startsWith('+998')) {
-    return str.substring(4)
-  }
-  return str
 }
 </script>

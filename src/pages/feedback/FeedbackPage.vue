@@ -26,7 +26,6 @@ const rowData: Ref<object> = ref({})
 feedbackStore.getFeedbackList()
 
 function onEdit(data: object) {
-  console.log(data);
   rowData.value = data
 }
 </script>

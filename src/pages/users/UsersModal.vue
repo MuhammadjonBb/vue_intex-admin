@@ -134,6 +134,7 @@ import { useModalStore } from 'src/stores/moduls/modal'
 import { useInputStore } from 'src/stores/moduls/input'
 import { useUsersStore } from 'src/stores/moduls/users'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
+import cutPhoneString from "src/helpers/cutPhoneString"
 
 const usersStore = useUsersStore()
 const inputStore = useInputStore()
@@ -200,5 +201,6 @@ function setInputValues() {
   inputStore.input.userDialog.name = props?.userData?.first_name
   inputStore.input.userDialog.surname = props?.userData?.last_name
   inputStore.input.userDialog.email = props?.userData?.email
+  inputStore.input.userDialog.phone = cutPhoneString(props?.userData?.phone)
 }
 </script>
