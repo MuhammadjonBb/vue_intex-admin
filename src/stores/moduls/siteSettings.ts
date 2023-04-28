@@ -51,13 +51,15 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
         Notify.create({
           message: 'Язык сайта успешно обновлен',
           color: 'positive',
-          position: 'top-right'
+          position: 'top-right',
+          group: false
         })
       }).catch(e => {
         Notify.create({
           message: 'Ошибка обновления языка сайта',
           color: 'negative',
-          position: 'top-right'
+          position: 'top-right',
+          group: false
         })
       })
     },
@@ -66,14 +68,16 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
         Notify.create({
           message: 'Язык по умолчанию успешно обновлен',
           color: 'positive',
-          position: 'top-right'
+          position: 'top-right',
+          group: false
         })
       })
         .catch(e => {
           Notify.create({
             message: 'Ошибка обновления языка по умолчанию',
             color: 'negative',
-            position: 'top-right'
+            position: 'top-right',
+            group: false
           })
         })
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line space-before-function-paren
-export default function getRightWord(number, words = ['товар', 'товара', 'товаров']) {
+export default function getRightWord(number: number, words = ['товар', 'товара', 'товаров']) {
   const expression = number % 100
   const secondExpression = number % 10
 
