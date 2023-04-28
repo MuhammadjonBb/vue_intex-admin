@@ -3,12 +3,6 @@ import { ref } from 'vue'
 
 export const useInputStore: any = defineStore('input', () => {
   const input = ref({
-    editSocialsDialog: {
-      facebook: '',
-      instagram: '',
-      twitter: '',
-      linkedin: '',
-    },
     ordersEdit: {
       name: '',
       address: '',
@@ -34,6 +28,7 @@ export const useInputStore: any = defineStore('input', () => {
       name: '',
       surname: '',
       birth: '',
+      email: '',
       phone: '',
       newPassword: '',
       confirmPassword: '',
@@ -53,7 +48,8 @@ export const useInputStore: any = defineStore('input', () => {
     },
     mainAuth: {
       password: '',
-      email: ''
+      email: '',
+      phone: '',
     },
     setPassword: {
       newPassword: '',

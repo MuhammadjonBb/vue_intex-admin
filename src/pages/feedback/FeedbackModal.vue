@@ -19,8 +19,8 @@
           <q-space />
           <q-btn @click="modalStore.closeModal()" v-close-popup color="indigo-10" flat label="Отменить"
             style="border-radius: 12px;" class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn @click="modalStore.closeModal()" v-close-popup color="white" flat label="Сохранить"
-            style="border-radius: 12px;" class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
+          <q-btn @click="save()" color="white" flat label="Сохранить" style="border-radius: 12px;"
+            class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </div>
       </q-card-section>
     </q-card>
@@ -32,7 +32,50 @@ import { Ref, ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
+import { useFeedbackStore } from 'src/stores/moduls/feedback'
+import { useInputStore } from 'src/stores/moduls/input'
+import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
+import { useQuasar } from 'quasar'
 
 const { modalName } = defineProps(['modalName', 'label'])
 const modalStore = useModalStore()
+const feedbackStore = useFeedbackStore()
+const inputStore = useInputStore()
+const $q = useQuasar()
+
+function save() {
+  const data = {
+    name: inputStore.input.feedbackDialog.name,
+    phone: getPrefix(inputStore.input.feedbackDialog.phone) + removeCharacters(inputStore.input.feedbackDialog.phone),
+  }
+
+  if (modalName === 'create') {
+    feedbackStore.createFeedback(data).then(() => {
+      cleanInputs()
+      modalStore.closeModal()
+      $q.notify({
+        message: 'Обратная связь успешно создана',
+        color: 'positive',
+        position: 'top-right',
+      })
+    })
+      .catch(() => {
+        $q.notify({
+          message: 'Ошибка создания обратной связи',
+          color: 'negative',
+          position: 'top-right',
+        })
+      })
+  } else if (modalName === 'edit') {
+    feedbackStore.editFeedback(data).then(() => {
+      cleanInputs()
+      modalStore.closeModal()
+    })
+  }
+}
+
+function cleanInputs() {
+  inputStore.input.feedbackDialog.name = ''
+  inputStore.input.feedbackDialog.phone = ''
+}
 </script>

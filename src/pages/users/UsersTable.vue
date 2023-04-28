@@ -205,7 +205,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit(props.row)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -240,10 +240,14 @@
 
 <script setup lang="ts">
 import beautifyDate from 'src/helpers/beautifyDate';
+import { useRouter } from 'vue-router';
 import { useModalStore } from 'src/stores/moduls/modal';
 import { ref } from 'vue'
 
+const emit = defineEmits(['onEdit'])
+
 defineProps(['data'])
+const router = useRouter()
 const allSelect = ref(false)
 const selected = ref([])
 const modalStore = useModalStore()
@@ -273,7 +277,8 @@ function getStatusClass(status: string) {
   }
 }
 
-function toEdit() {
+function toEdit(data: object) {
   modalStore.modal.users.edit = true
+  emit('onEdit', data)
 }
 </script>

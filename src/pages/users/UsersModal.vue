@@ -1,12 +1,12 @@
 <template>
   <!-- eslint-disable-next-line vue/no-mutating-props -->
-  <q-dialog persistent v-model="modalStore.modal.users[modalName]">
+  <q-dialog persistent v-model="modalStore.modal.users[props.modalName]">
     <q-card style="min-width: 730px;border-radius: 16px;" class="q-pa-md">
       <q-card-section class="row items-center">
-        <div class="text-h6 font-weight-bold">{{ label }}</div>
+        <div class="text-h6 font-weight-bold">{{ props.label }}</div>
         <q-space />
         <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
-          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="modalStore.closeModal" />
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="closeModal" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
@@ -34,11 +34,13 @@
           </q-uploader>
 
         </div>
-        <div class="row no-wrap" style="gap:20px;">
+        <div class="row no-wrap" style="gap:10px;">
           <DefaultInput :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" label="Имя"
             placeholder="Введите ваше имя" type="text" />
           <DefaultInput :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname" label="Фамилия"
             placeholder="Введите вашу фамилию" type="text" />
+          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
+            placeholder="Введите ваш email" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
@@ -46,17 +48,19 @@
           <DefaultInput :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth" label="Дата рождения"
             type="date" placeholder="" />
         </div>
-        <div class="row no-wrap" style="gap: 20px;">
+        <div class="row no-wrap q-mb-md" style="gap: 20px;">
           <label for="status" class="full-width">
             Статус
-            <q-select dropdown-icon="expand_more" id="status" class="q-mt-md q-px-md border-reset q-py-xs full-width"
-              dense borderless v-model="select.status" :options="statusArr" />
+            <q-select map-options emit-value dropdown-icon="expand_more" id="status"
+              class="q-mt-md q-px-md border-reset q-py-xs full-width" dense borderless v-model="select.status"
+              :options="statusArr" />
           </label>
 
           <label for="status" class="full-width">
             Роль Ползователя
-            <q-select dropdown-icon="expand_more" id="status" class="q-mt-md q-px-md border-reset q-py-xs full-width"
-              dense borderless v-model="select.role" :options="roleArr" />
+            <q-select map-options emit-value dropdown-icon="expand_more" id="status"
+              class="q-mt-md q-px-md border-reset q-py-xs full-width" dense borderless v-model="select.role"
+              :options="roleArr" />
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
@@ -67,10 +71,10 @@
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
-          <q-btn v-close-popup @click="modalStore.closeModal" color="indigo-10" flat label="Отменить"
-            style="border-radius: 12px;" class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn v-close-popup @click="modalStore.closeModal" color="white" flat label="Сохранить"
-            style="border-radius: 12px;" class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
+          <q-btn @click="closeModal" color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+            class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+          <q-btn @click="save" color="white" flat label="Сохранить" style="border-radius: 12px;"
+            class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -127,16 +131,74 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
+import { useInputStore } from 'src/stores/moduls/input'
+import { useUsersStore } from 'src/stores/moduls/users'
+import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 
+const usersStore = useUsersStore()
+const inputStore = useInputStore()
 const modalStore = useModalStore()
-const statusArr = ['Актив', 'Не актив', 'Удален']
-const roleArr = ['Админ', 'Супер Админ']
-const profileImg = ref()
 
-const { label, modalName } = defineProps(['label', 'modalName'])
-
+const statusArr = [
+  { label: 'Активный', value: 'registered' },
+  { label: 'Неактивный', value: 'not_registered' }
+]
+const roleArr = [
+  { label: 'Админ', value: 'user' },
+  { label: 'Супер админ', value: 'super_admin' },
+]
 const select = ref({
-  status: statusArr[0],
-  role: roleArr[0]
+  status: statusArr[0].value,
+  role: roleArr[0].value
 })
+
+const profileImg = ref()
+const props = defineProps(['label', 'modalName', 'userData'])
+
+watch(() => props.userData, () => {
+  setInputValues()
+})
+
+if (props.modalName === 'edit') {
+  inputStore.input.userDialog.name = props?.userData?.first_name
+}
+
+function save() {
+  const data = ref({
+    first_name: inputStore.input.userDialog.name,
+    last_name: inputStore.input.userDialog.surname,
+    password: inputStore.input.userDialog.newPassword,
+    phone: getPrefix(inputStore.input.userDialog.phone) + removeCharacters(inputStore.input.userDialog.phone),
+    birth_date: inputStore.input.userDialog.birth,
+    user_image: 'image',
+    email: inputStore.input.userDialog.email,
+    is_active: true,
+    gender: "male",
+    ...select.value,
+  })
+
+  if (props.modalName === 'create') {
+    usersStore.createUser(data.value).then(() => closeModal())
+  } else if (props.modalName === 'edit') {
+    const editObject = Object.assign(data.value, { id: props.userData.id })
+    usersStore.editUser(editObject)
+  }
+}
+
+function closeModal() {
+  modalStore.closeModal()
+  inputStore.input.userDialog.name = ''
+  inputStore.input.userDialog.surname = ''
+  inputStore.input.userDialog.phone = ''
+  inputStore.input.userDialog.email = ''
+  inputStore.input.userDialog.birth = ''
+  inputStore.input.userDialog.newPassword = ''
+  inputStore.input.userDialog.confirmPassword = ''
+}
+
+function setInputValues() {
+  inputStore.input.userDialog.name = props?.userData?.first_name
+  inputStore.input.userDialog.surname = props?.userData?.last_name
+  inputStore.input.userDialog.email = props?.userData?.email
+}
 </script>

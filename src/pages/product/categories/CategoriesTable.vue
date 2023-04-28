@@ -169,7 +169,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ data.pageInfo.total_counthow }} предметов
+          {{ data.pageInfo.total_count }} предметов
         </div>
 
         <q-space />

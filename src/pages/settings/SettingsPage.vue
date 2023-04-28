@@ -6,35 +6,35 @@
       <EditContactsDialog />
       <q-card flat style="border-radius: 12px;">
         <q-card-section>
-          <q-card-section class="row">
+          <q-card-section class="row" v-if="siteSettingsStore.siteInfo">
             <div class="column">
               <h2 class="text-h6">Языки сайта</h2>
 
               <q-list>
                 <q-item tag="label">
-                  <q-item-section class="" style="margin-right: 200px;">
+                  <q-item-section style="margin-right: 200px;">
                     <q-item-label>Pусский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="lang.ru.enabled" />
+                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_ru" />
                   </q-item-section>
                 </q-item>
 
                 <q-item tag="label">
-                  <q-item-section class="" style="margin-right: 200px;">
+                  <q-item-section style="margin-right: 200px;">
                     <q-item-label>Узбекский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="lang.uz.enabled" />
+                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_uz" />
                   </q-item-section>
                 </q-item>
 
                 <q-item tag="label">
-                  <q-item-section class="" style="margin-right: 200px;">
+                  <q-item-section style="margin-right: 200px;">
                     <q-item-label>Aнглийский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="lang.en.enabled" />
+                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_en" />
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -42,9 +42,9 @@
 
             <div class="column items-center justify-center" style="margin-top: 8px;">
               <h2 class="text-h6">Язык по умолчанию</h2>
-              <q-checkbox v-model="lang.ru.default" class="" style="margin-bottom: 16px;" />
-              <q-checkbox v-model="lang.uz.default" class="" style="margin-bottom: 16px;" />
-              <q-checkbox v-model="lang.en.default" class="" style="margin-bottom: 16px;" />
+              <q-checkbox v-model="defaultLang.ru" style="margin-bottom: 16px;" />
+              <q-checkbox v-model="defaultLang.uz" style="margin-bottom: 16px;" />
+              <q-checkbox v-model="defaultLang.en" style="margin-bottom: 16px;" />
             </div>
           </q-card-section>
           <q-separator />
@@ -93,27 +93,12 @@
               <q-btn icon="edit" flat color="primary" dense style="height: 35px;" @click="openDialog('socials')" />
             </div>
             <div class="column">
-              <q-list class="row">
-                <q-item style="width: 350px;" class="column q-mb-md">
-                  <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Instagram</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">intex-market</q-item-label>
-                </q-item>
-
-                <q-item style="width: 350px;" class="column q-mb-md">
-                  <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Facebook</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">intex-market</q-item-label>
-                </q-item>
-              </q-list>
-
-              <q-list class="row">
-                <q-item style="width: 350px;" class="column q-mb-md">
-                  <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Twitter</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">intex-market</q-item-label>
-                </q-item>
-
-                <q-item style="width: 350px;" class="column q-mb-md">
-                  <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Linkedin</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">intex-market</q-item-label>
+              <q-list class="socials-list">
+                <q-item v-if="siteSettingsStore.socialNetworks" style="width: 350px;" class="column q-mb-md"
+                  v-for="item in siteSettingsStore.socialNetworks" :key="item.id">
+                  <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">{{ item.name
+                  }}</q-item-label>
+                  <q-item-label caption style="font-size: 14px;"> {{ item.link }} </q-item-label>
                 </q-item>
               </q-list>
             </div>
@@ -123,49 +108,39 @@
     </q-page>
   </q-layout>
 </template>
-
+<style>
+.socials-list {
+  display: grid;
+  grid-template-columns: 350px 350px;
+  grid-auto-rows: 90px;
+}
+</style>
 <script setup lang="ts">
-import { Ref, onMounted, reactive, ref } from 'vue'
+import { Ref, onMounted, ref } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
 import { useModalStore } from 'src/stores/moduls/modal';
 import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
-interface ILang {
-  ru: {
-    enabled: boolean,
-    default: boolean
-  }
-  uz: {
-    enabled: boolean,
-    default: boolean
-  }
-  en: {
-    enabled: boolean,
-    default: boolean
-  }
-}
 const modalStore = useModalStore()
 const siteSettingsStore = useSiteSettingsStore()
-siteSettingsStore.getSiteInfo()
 
-const lang = reactive({
-  ru: {
-    enabled: siteSettingsStore?.siteInfo?.lang_ru,
-    default: false
-  },
-  en: {
-    enabled: siteSettingsStore?.siteInfo?.lang_en,
-    default: false
-  },
-  uz: {
-    enabled: siteSettingsStore?.siteInfo?.lang_uz,
-    default: true
-  }
+onMounted(() => {
+  siteSettingsStore.getSiteInfo()
+  siteSettingsStore.getSocialNetworks()
+  islangDefault(siteSettingsStore.default_lang)
 })
 
+const defaultLang: any = ref({
+  ru: false,
+  uz: false,
+  en: false,
+})
 
-// eslint-disable-next-line space-before-function-paren
+function islangDefault(key: string): void {
+  defaultLang.value[key] = true
+}
+
 function openDialog(dialog: string): void {
   if (dialog === 'contacts') {
     modalStore.modal.settings.contacts = true

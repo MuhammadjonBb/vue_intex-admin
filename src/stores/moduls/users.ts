@@ -1,8 +1,5 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
-import { useAuthStore } from './auth'
-
-const { token } = useAuthStore()
 
 export const useUsersStore = defineStore('users', {
   state: () => ({
@@ -17,6 +14,12 @@ export const useUsersStore = defineStore('users', {
         }).catch(e => {
           console.log(e)
         })
+    },
+    createUser(data: object) {
+      return api.post('users', { ...data })
+    },
+    editUser(data: object) {
+      return api.put('users', { data })
     }
   }
 })
