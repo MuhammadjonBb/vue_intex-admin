@@ -49,14 +49,14 @@ export default boot(({ app, router }) => {
         Notify.create({
           group: false,
           type: 'negative',
-          message: 'Пользователь не авторизован.',
+          message: 'Пользователь не авторизован',
           position: 'top-right',
         })
-      } else if (e.response.data.error.name === 'JsonWebTokenError') {
+      } else if (e.response.data.error.name === 'JsonWebTokenError' || e.response.data.error.name === 'TokenExpiredError') {
         Notify.create({
           group: false,
           type: 'negative',
-          message: 'Срок действия токена истек, выполните авторизацию заново.',
+          message: 'Срок действия токена истек, выполните авторизацию заново',
           position: 'top-right',
         })
       }
