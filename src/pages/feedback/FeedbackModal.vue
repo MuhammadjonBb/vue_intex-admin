@@ -1,11 +1,11 @@
 <template>
-  <q-dialog v-model="modalStore.modal.feedback[modalName]" persistent>
+  <q-dialog v-model="modalStore.modal.feedback[props.modalName]" persistent>
     <q-card style="min-width: 700px;border-radius: 16px;" class="q-pa-md">
       <q-card-section class="row items-center">
         <div class="text-h6 font-weight-bold">{{ label }} обратную связь</div>
         <q-space />
         <q-btn v-close-popup icon="close" text-color="primary" flat class="bg-grey-3"
-          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="modalStore.closeModal()" />
+          style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="closeModal()" />
       </q-card-section>
 
       <q-card-section class="q-pt-none column">
@@ -17,8 +17,8 @@
         </div>
         <div class="row q-mt-lg">
           <q-space />
-          <q-btn @click="modalStore.closeModal()" v-close-popup color="indigo-10" flat label="Отменить"
-            style="border-radius: 12px;" class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
+          <q-btn @click="closeModal()" v-close-popup color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+            class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
           <q-btn @click="save()" color="white" flat label="Сохранить" style="border-radius: 12px;"
             class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </div>
@@ -37,11 +37,15 @@ import { useInputStore } from 'src/stores/moduls/input'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import { useQuasar } from 'quasar'
 
-const { modalName } = defineProps(['modalName', 'label'])
+const props = defineProps(['modalName', 'label', 'feedbackData'])
 const modalStore = useModalStore()
 const feedbackStore = useFeedbackStore()
 const inputStore = useInputStore()
 const $q = useQuasar()
+
+watch(props, () => {
+  setInputValues()
+})
 
 function save() {
   const data = {
@@ -49,10 +53,10 @@ function save() {
     phone: getPrefix(inputStore.input.feedbackDialog.phone) + removeCharacters(inputStore.input.feedbackDialog.phone),
   }
 
-  if (modalName === 'create') {
+  if (props.modalName === 'create') {
     feedbackStore.createFeedback(data).then(() => {
-      cleanInputs()
-      modalStore.closeModal()
+      closeModal()
+
       $q.notify({
         message: 'Обратная связь успешно создана',
         color: 'positive',
@@ -66,16 +70,30 @@ function save() {
           position: 'top-right',
         })
       })
-  } else if (modalName === 'edit') {
+  } else if (props.modalName === 'edit') {
     feedbackStore.editFeedback(data).then(() => {
-      cleanInputs()
-      modalStore.closeModal()
+      closeModal()
     })
   }
 }
 
-function cleanInputs() {
+function closeModal() {
+  modalStore.closeModal()
   inputStore.input.feedbackDialog.name = ''
   inputStore.input.feedbackDialog.phone = ''
+}
+
+function setInputValues() {
+  inputStore.input.feedbackDialog.name = props.feedbackData.name
+  inputStore.input.feedbackDialog.phone = cutPhoneString(props.feedbackData.phone)
+}
+
+function cutPhoneString(str: string) {
+  if (str.startsWith('+7')) {
+    return str.substring(5)
+  } else if (str.startsWith('+998')) {
+    return str.substring(4)
+  }
+  return str
 }
 </script>

@@ -84,7 +84,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit(props.row)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -177,6 +177,7 @@ import { useModalStore } from 'src/stores/moduls/modal';
 import { Ref, ref } from 'vue'
 import beautifyDate from 'src/helpers/beautifyDate'
 
+const emit = defineEmits(['onEdit'])
 
 interface ISelected {
   date: [string, string]
@@ -202,8 +203,9 @@ function getPageNums(n: number): number[] {
   return numsArr
 }
 
-function toEdit() {
+function toEdit(data: object) {
   modalStore.modal.feedback.edit = true
+  emit('onEdit', data)
 }
 defineProps(['data'])
 </script>
