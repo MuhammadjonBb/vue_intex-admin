@@ -60,11 +60,17 @@ export const useInputStore: any = defineStore('input', () => {
       confirmPassword: '',
     },
     productCreate: {
-      name: '',
-      price: '',
-      discount: '',
+      name_uz: "",
+      name_ru: "",
+      name_en: "",
+      price: null,
+      count: null,
+      discount_price: null,
+      about_uz: "",
+      about_ru: "",
+      about_en: "",
     },
-  })
 
+  })
   return { input }
 })

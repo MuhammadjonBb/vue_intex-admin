@@ -14,7 +14,7 @@
 
   <!--      </q-card-section>-->
   <!--    </q-card>-->
-  <q-table v-model:selected="selected" :columns="columns" :rows="store.listData" dense row-key="id" selection="multiple"
+  <q-table v-model:selected="selected" :columns="store.columns" :rows="store.listData" dense row-key="id" selection="multiple"
     class="q-mt-sm bg-grey-2 list__tab" flat table-style="overflow:visible; margin-top:30px;"
     table-header-style="font-weight: 500;font-size: 14px; background-color:white; position: relative; top: -20px; margin-bottom:30px;  z-index: 1;"
     table-header-class="text-grey-7 q-pa-none">
@@ -56,12 +56,12 @@
         {{ props.row.price.toLocaleString('en-US') + ' сум' }}
       </q-td>
     </template>
-<!--    <template #body-cell-col="props">-->
+    <template #body-cell-count="props">
 
-<!--      <q-td class="bg-white" :props="props">-->
-<!--        {{ props.row.col }}-->
-<!--      </q-td>-->
-<!--    </template>-->
+      <q-td  style="background-color: white" :props="props">
+        {{ props.row.count }}
+      </q-td>
+    </template>
     <template #body-cell-category="props">
       <q-td class="bg-white" :props="props">
         {{ props.row.category_ru }}
@@ -141,8 +141,7 @@
   </q-table>
 </template>
 <script lang="ts" setup>
-import { ref, watch,onMounted } from 'vue'
-import { rows, columns } from 'src/randomDate/tableDate'
+import { ref, watch } from 'vue'
 import { useListStore } from "stores/moduls/products/list";
 
 const selected = ref([]),
@@ -155,14 +154,10 @@ function getPageNums(n: number) {
   }
   return numsArr
 }
-onMounted(() => {
-  store.getList()
-})
-store.setColRow(rows, columns)
 watch(selectAll, () => {
   if (selectAll.value) {
     selected.value.splice(0, selected.value.length)
-    rows.forEach(element => {
+    store.listData.forEach(element => {
       selected.value.push(element)
     })
   } else {

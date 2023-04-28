@@ -2,7 +2,8 @@
   <q-header class="header row justify-between bg-white fixed-top" style="padding-bottom: 0;">
     <div>
       <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
-        dense placeholder="Поиск">{{ selectValue }}
+        dense placeholder="Поиск">
+
         <template #prepend>
           <q-icon name="search" color="primary"></q-icon>
         </template>

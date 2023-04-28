@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import CategoriesTable from 'src/pages/product/categories/CategoriesTable.vue'
-import { useCategoriesStore } from 'src/stores/moduls/categories'
+import { useCategoriesStore } from 'stores/moduls/products/categories'
 
 const store = useCategoriesStore()
 
