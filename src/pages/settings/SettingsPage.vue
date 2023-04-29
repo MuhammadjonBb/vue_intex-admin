@@ -16,7 +16,7 @@
                     <q-item-label>Pусский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_ru" />
+                    <q-toggle v-model="langStatus.ru" @click="siteSettingsStore.siteLangUpdate('ru', langStatus.ru)" />
                   </q-item-section>
                 </q-item>
 
@@ -25,7 +25,7 @@
                     <q-item-label>Узбекский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_uz" />
+                    <q-toggle v-model="langStatus.uz" @click="siteSettingsStore.siteLangUpdate('uz', langStatus.uz)" />
                   </q-item-section>
                 </q-item>
 
@@ -34,7 +34,7 @@
                     <q-item-label>Aнглийский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="siteSettingsStore.siteInfo.lang_en" />
+                    <q-toggle v-model="langStatus.en" @click="siteSettingsStore.siteLangUpdate('en', langStatus.en)" />
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -42,9 +42,9 @@
 
             <div class="column items-center justify-center" style="margin-top: 8px;">
               <h2 class="text-h6">Язык по умолчанию</h2>
-              <q-checkbox v-model="defaultLang.ru" style="margin-bottom: 16px;" />
-              <q-checkbox v-model="defaultLang.uz" style="margin-bottom: 16px;" />
-              <q-checkbox v-model="defaultLang.en" style="margin-bottom: 16px;" />
+              <q-checkbox v-model="defaultLang.ru" style="margin-bottom: 16px;" @click="toggleLang(['uz', 'en'], 'ru')" />
+              <q-checkbox v-model="defaultLang.uz" style="margin-bottom: 16px;" @click="toggleLang(['ru', 'en'], 'uz')" />
+              <q-checkbox v-model="defaultLang.en" style="margin-bottom: 16px;" @click="toggleLang(['ru', 'uz'], 'en')" />
             </div>
           </q-card-section>
           <q-separator />
@@ -116,7 +116,7 @@
 }
 </style>
 <script setup lang="ts">
-import { Ref, onMounted, ref } from 'vue'
+import { Ref, onMounted, ref, watch } from 'vue'
 import EditSocialsDialog from 'src/pages/settings/EditSocialsDialog.vue'
 import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
 import { useModalStore } from 'src/stores/moduls/modal';
@@ -124,18 +124,34 @@ import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
 const modalStore = useModalStore()
 const siteSettingsStore = useSiteSettingsStore()
-
-onMounted(() => {
-  siteSettingsStore.getSiteInfo()
-  siteSettingsStore.getSocialNetworks()
-  islangDefault(siteSettingsStore.default_lang)
+const langStatus = ref({
+  ru: false,
+  uz: false,
+  en: false
 })
-
 const defaultLang: any = ref({
   ru: false,
   uz: false,
   en: false,
 })
+
+onMounted(() => {
+  siteSettingsStore.getSiteInfo().then(() => {
+    langStatus.value.ru = siteSettingsStore.siteInfo.lang_ru
+    langStatus.value.uz = siteSettingsStore.siteInfo.lang_uz
+    langStatus.value.en = siteSettingsStore.siteInfo.lang_en
+
+    islangDefault(siteSettingsStore.siteInfo.default_lang)
+  })
+
+  siteSettingsStore.getSocialNetworks()
+})
+
+function toggleLang([key1, key2]: [string, string], upadeLang: string): void {
+  siteSettingsStore.updateDefaultLang(upadeLang)
+  defaultLang.value[key1] = false
+  defaultLang.value[key2] = false
+}
 
 function islangDefault(key: string): void {
   defaultLang.value[key] = true

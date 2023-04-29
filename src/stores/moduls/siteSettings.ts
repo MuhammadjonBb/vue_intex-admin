@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
 import { useInputStore } from './input'
+import { Notify } from 'quasar'
 
 const inputStore = useInputStore()
 
@@ -12,7 +13,7 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
 
   actions: {
     getSiteInfo() {
-      api.get('sites')
+      return api.get('sites')
         .then(r => {
           this.siteInfo = r.data[0]
 
@@ -41,6 +42,46 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
         .catch(e => {
           console.log(e)
         })
+    },
+    siteLangUpdate(lang_name: string, status: boolean) {
+      return api.put('sites/siteLangUpdate', {
+        lang_name,
+        status
+      }).then(() => {
+        Notify.create({
+          message: 'Язык сайта успешно обновлен',
+          color: 'positive',
+          position: 'top-right',
+          group: false
+        })
+      }).catch(e => {
+        Notify.create({
+          message: 'Ошибка обновления языка сайта',
+          color: 'negative',
+          position: 'top-right',
+          group: false
+        })
+      })
+    },
+    updateDefaultLang(lang_name: string) {
+      return api.put('sites/defaultLang', { lang_name }).then(() => {
+        Notify.create({
+          message: 'Язык по умолчанию успешно обновлен',
+          color: 'positive',
+          position: 'top-right',
+          group: false
+        })
+      })
+        .catch(e => {
+          Notify.create({
+            message: 'Ошибка обновления языка по умолчанию',
+            color: 'negative',
+            position: 'top-right',
+            group: false
+          })
+        })
+
     }
-  }
+  },
 })
+

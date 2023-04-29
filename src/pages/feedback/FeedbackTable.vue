@@ -84,7 +84,7 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEdit(props.row)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -92,15 +92,8 @@
             </q-item>
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
-                  <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
-                  Дублировать
-                </q-btn>
-              </q-item-section>
-            </q-item>
-            <q-item v-close-popup>
-              <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                <q-btn @click="feedbackStore.deleteFeedback(props.row.id)" dense flat class="text-capitalize text-left"
+                  text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
                 </q-btn>
@@ -170,13 +163,14 @@
   </q-table>
 </template>
 
-<style></style>
-
 <script setup lang="ts">
 import { useModalStore } from 'src/stores/moduls/modal';
 import { Ref, ref } from 'vue'
 import beautifyDate from 'src/helpers/beautifyDate'
+import { useFeedbackStore } from 'src/stores/moduls/feedback';
 
+const emit = defineEmits(['onEdit'])
+defineProps(['data'])
 
 interface ISelected {
   date: [string, string]
@@ -184,6 +178,7 @@ interface ISelected {
   phone: string
   id: number
 }
+const feedbackStore = useFeedbackStore()
 const modalStore = useModalStore()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
@@ -202,8 +197,8 @@ function getPageNums(n: number): number[] {
   return numsArr
 }
 
-function toEdit() {
+function toEdit(data: object) {
   modalStore.modal.feedback.edit = true
+  emit('onEdit', data)
 }
-defineProps(['data'])
 </script>

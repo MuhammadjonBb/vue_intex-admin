@@ -239,7 +239,7 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import getRightWord from 'src/helpers/getRightWord'
+import getRightWord from 'src/helpers/getRightWord.js'
 import beautifyDate from 'src/helpers/beautifyDate'
 
 interface ISelected {

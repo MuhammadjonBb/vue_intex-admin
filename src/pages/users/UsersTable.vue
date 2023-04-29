@@ -221,7 +221,7 @@
             </q-item>
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="deleteUser(props.row.id)">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
                 </q-btn>
@@ -243,10 +243,12 @@ import beautifyDate from 'src/helpers/beautifyDate';
 import { useRouter } from 'vue-router';
 import { useModalStore } from 'src/stores/moduls/modal';
 import { ref } from 'vue'
+import { useUsersStore } from 'src/stores/moduls/users';
 
 const emit = defineEmits(['onEdit'])
 
 defineProps(['data'])
+const { deleteUser } = useUsersStore()
 const router = useRouter()
 const allSelect = ref(false)
 const selected = ref([])
