@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
+import { Notify } from 'quasar'
+
 
 export const useCategoriesStore = defineStore('categories', {
   state: () => ({
@@ -9,6 +11,24 @@ export const useCategoriesStore = defineStore('categories', {
   actions: {
     getCategories() {
       return api.get('categories').then(r => this.categories = r.data)
+    },
+    postCategory(data: object) {
+      return api.post('categories', data)
+    },
+    deleteCategory(id: number) {
+      return api.delete(`categories/${id}`).then(() => {
+        Notify.create({
+          type: 'positive',
+          position: 'top-right',
+          message: 'Категория успешно удалена',
+        })
+      }).catch(() => {
+        Notify.create({
+          type: 'negative',
+          position: 'top-right',
+          message: 'Не удалось удалить категорию',
+        })
+      })
     }
   }
 })

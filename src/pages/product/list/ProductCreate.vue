@@ -1,34 +1,32 @@
 <script lang="ts" setup>
-import {ref, computed, reactive, onMounted} from 'vue'
+import { ref, computed, reactive, onMounted } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
-import {useListStore} from "stores/moduls/products/list";
-import {api} from 'boot/axios'
-import {interceptors} from "axios";
+import { useListStore } from "stores/moduls/products/list";
+import { api } from 'boot/axios'
+import { interceptors } from "axios";
 
 const store = useListStore()
 const tab = ref('uz')
 const locales = [
-  {name: 'Pусский язык', code: 'ru-RU'},
-  {name: 'Узбекский язык', code: 'uz'},
-  {name: 'Engilish', code: 'en-US'}
+  { name: 'Pусский язык', code: 'ru-RU' },
+  { name: 'Узбекский язык', code: 'uz' },
+  { name: 'Engilish', code: 'en-US' }
 ]
 let attributeRender = reactive(<any>[])
-const attribute = ref(<any>[{}])
+const attribute = ref(<any>{})
 
-function attributeSelect(index:number) {
-  console.log(`attribute_${index}`,attribute[0]?.attribute_0,attribute.value[0]?.attribute_0,attribute.value[0])
+function attributeSelect(index: number) {
   // if (store.attribute_id.length <= 0) {
   //   store.attribute_id.push(attribute[`attribute_${index}`].id)
   // } else {
-  //
+
   //   const existingObj = attribute.find((obj: object) => obj.id === attribute[`attribute_${index}`].id);
-  //
+
   //   if (!existingObj) {
   //     store.attribute_id.push(attribute[`attribute_${index}`].id)
-  //     console.log( store.attribute_id)
+  //     console.log(store.attribute_id)
   //   }
   // }
-
 }
 function atributeUbdate() {
   if (attributeRender.length <= 0) {
@@ -69,7 +67,7 @@ function useCycle<T>(list: T[], index: number) {
   }
 }
 
-const {next} = useCycle(locales, 0)
+const { next } = useCycle(locales, 0)
 
 onMounted(() => {
   store.getAttributes()
@@ -83,7 +81,7 @@ onMounted(() => {
   <q-card class=" q-ma-md q-pa-lg card " flat>
     <div class=" text-center q-ml-md q-pt-md card__lang">
       <q-tabs v-model="tab" active-class="text-black" align="left" class="text-grey card__tabs" dense
-              indicator-color="blue">
+        indicator-color="blue">
         <q-tab name="ru" no-caps style="font-size: 12px">Pусский язык</q-tab>
         <q-tab name="uz" no-caps style="font-size: 12px">Узбекский язык</q-tab>
         <q-tab name="en" no-caps style="font-size: 12px">Engilish</q-tab>
@@ -92,14 +90,12 @@ onMounted(() => {
     <q-card-section class="q-py-none" horizontal>
       <q-card-section class="q-py-none q-mr-none card__section__one">
         <h6 class="card__title ">{{ $t('product.productCreate.title') }}</h6>
-        <default-input :input-data="{ component: 'productCreate', inputName: `name_${tab}` }"
-                       label="Название продукта"
-                       name="name"
-                       placeholder="Каркасный басейн Intex прямоуголь.." type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: `name_${tab}` }" label="Название продукта"
+          name="name" placeholder="Каркасный басейн Intex прямоуголь.." type="text" />
         <div class="flex justify-between items-center card__title ">
           <span class="text-weight-bold text-h6">Atribute</span>
-          <span class="text-weight-medium text-blue-4 text-subtitle1 cursor-pointer" @click="store.attributDialog=true">
-            <q-icon class="q-mr-sm" color="blue-4" name="add" size="20px"/>Добавить атрибуть
+          <span class="text-weight-medium text-blue-4 text-subtitle1 cursor-pointer" @click="store.attributDialog = true">
+            <q-icon class="q-mr-sm" color="blue-4" name="add" size="20px" />Добавить атрибуть
           </span>
         </div>
 
@@ -112,14 +108,14 @@ onMounted(() => {
                 </div>
 
                 <div class="col-auto">
-                  <q-btn color="grey-7" flat icon="close" round @click="store.attributDialog=false"/>
+                  <q-btn color="grey-7" flat icon="close" round @click="store.attributDialog = false" />
                 </div>
               </div>
             </q-card-section>
             <q-card-section class="q-pt-none">
               <div class="q-pb-sm">Тип атрибуты</div>
-              <q-select v-model="store.attribut" :options="store.attributes" outlined
-                        style="max-width: 300px" @update:model-value="atributeUbdate">
+              <q-select v-model="store.attribut" :options="store.attributes" outlined style="max-width: 300px"
+                @update:model-value="atributeUbdate">
                 <template v-slot:option="scope">
                   <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
                     <q-item-section>
@@ -138,26 +134,21 @@ onMounted(() => {
             </q-card-section>
             <q-card-actions align="right">
               <div class="row q-mt-md no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
-                <q-btn v-close-popup class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat label="Отменить"
-                       no-caps style="border-radius: 12px;"/>
-                <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Добавить"
-                       no-caps
-                       style="border-radius: 12px;" @click="store.postList()"/>
+                <q-btn v-close-popup class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat
+                  label="Отменить" no-caps style="border-radius: 12px;" />
+                <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Добавить" no-caps
+                  style="border-radius: 12px;" @click="store.postList()" />
               </div>
             </q-card-actions>
           </q-card>
         </q-dialog>
 
-        <default-input :input-data="{ component: 'productCreate', inputName: `price` }"
-                       label="Цена"
-                       name="prise" placeholder="0"
-                       type="text"/>
-        <default-input :input-data="{ component: 'productCreate', inputName: `price` }"
-                       label="Кол-во"
-                       name="count" placeholder="0"
-                       type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: `price` }" label="Цена" name="prise"
+          placeholder="0" type="text" />
+        <default-input :input-data="{ component: 'productCreate', inputName: `price` }" label="Кол-во" name="count"
+          placeholder="0" type="text" />
 
-<!--        <span class="text-weight-medium q-my-sm" style="display: block;">Категория</span>-->
+        <!--        <span class="text-weight-medium q-my-sm" style="display: block;">Категория</span>-->
 
         <!--        <q-select v-model="store.category"-->
         <!--                  label="Категория"-->
@@ -180,22 +171,15 @@ onMounted(() => {
         <!--          </template>-->
         <!--        </q-select>-->
 
-        <default-input :input-data="{ component: 'productCreate', inputName: 'discount_price',placeholder: 'Скидка' }"
-                       label="Скидка" name="discount_price" placeholder='Скидка'
-                       type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: 'discount_price', placeholder: 'Скидка' }"
+          label="Скидка" name="discount_price" placeholder='Скидка' type="text" />
       </q-card-section>
       <q-card-section class=" q-pb-none q-mt-md card__section__two">
-        <div v-for="(item, index) in attributeRender"
-             :key="index">
-          <p class="text-capitalize text-weight-medium q-my-sm">{{item[`attribute_${tab}`]}}{{attribute[0][`attribute_${index}`]}}</p>
-          <q-select
-            class="q-my-md"
-            outlined
-            dense
-            @update:model-value="attributeSelect(index)"
-            v-model="attribute[0][`attribute_${index}`]"
-            :label="item[`attribute_${tab}`]"
-            :options="item.sub_atributes">
+        <div v-for="(item, index) in attributeRender" :key="index">
+          <p class="text-capitalize text-weight-medium q-my-sm">
+            {{ item[`attribute_${tab}`] }}{{ attribute[`attribute_${index}`] }}</p>
+          <q-select v-model="attribute[`attribute_${index}`]" class="q-my-md" outlined dense
+            @update:model-value="attributeSelect(index)" :label="item[`attribute_${tab}`]" :options="item.sub_atributes">
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
                 <q-item-section>
@@ -215,30 +199,27 @@ onMounted(() => {
 
         <p class=" text-weight-bold">Описание</p>
         <q-editor v-model="store.about[`about_${tab}`]"
-                  :toolbar="[['bold', 'italic', 'strike', 'underline', 'left', 'center', 'right', 'link'],]"
-                  height="140px"
-                  max-height="140px"
-                  min-height="5rem"
-                  placeholder="Введите Описание продукта" style="border-radius: 10px;"/>
+          :toolbar="[['bold', 'italic', 'strike', 'underline', 'left', 'center', 'right', 'link'],]" height="140px"
+          max-height="140px" min-height="5rem" placeholder="Введите Описание продукта" style="border-radius: 10px;" />
         <p class="text-weight-bold title">Картинка</p>
         <div class="card__img">
           <div class="dropzone" @drop.prevent="handleDrop" @dragover.prevent>
             <div class="img__container">
-              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px"/>
+              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px" />
               <span class="q-mt-sm">Загрузите изображения продукта</span>
             </div>
           </div>
           <div class="row flex flex-left q-mb-sm">
             <div v-for="object in store.images" :key="object.link" class="flex flex-center q-mb-sm  card__uploud__img ">
-              <q-img :src="`${object.link}`" alt="img" class="q-ma-sm" fit="cover" height="100%" style="border-radius: 15px"
-                     width="100%">
+              <q-img :src="`${object.link}`" alt="img" class="q-ma-sm" fit="cover" height="100%"
+                style="border-radius: 15px" width="100%">
                 <div class="absolute-top icon__card">
                   <div class="icon__item">
-                    <q-img class="icon__upload" name="uploud" src="/src/assets/fi_upload-cloud.png"/>
+                    <q-img class="icon__upload" name="uploud" src="/src/assets/fi_upload-cloud.png" />
                   </div>
                   <div class="icon__item">
                     <q-img class="icon__upload" name="delete" src="/src/assets/trash.png"
-                           @click="store.images.splice(store.images.indexOf(object), 1)"/>
+                      @click="store.images.splice(store.images.indexOf(object), 1)" />
                   </div>
                 </div>
               </q-img>
@@ -249,19 +230,17 @@ onMounted(() => {
 
     </q-card-section>
     <div class="row q-mt-lg no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
-      <q-space/>
-      <q-btn class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat label="Отменить"
-             no-caps style="border-radius: 12px;"/>
-      <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Сохранить"
-             no-caps
-             style="border-radius: 12px;" @click="store.postList()"/>
+      <q-space />
+      <q-btn class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat label="Отменить" no-caps
+        style="border-radius: 12px;" />
+      <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Сохранить" no-caps
+        style="border-radius: 12px;" @click="store.postList()" />
     </div>
   </q-card>
 </template>
 
 
 <style lang="scss">
-
 .icon {
   &__card {
     width: 100%;
@@ -330,7 +309,7 @@ onMounted(() => {
     border-radius: 20px;
   }
 
-  .q-img__content > div {
+  .q-img__content>div {
     padding: 0;
     background: none;
   }

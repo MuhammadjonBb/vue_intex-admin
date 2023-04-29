@@ -10,7 +10,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="ruName" :inputData="{ component: 'categoriesAdd', inputName: 'ruName' }"
+                  <DefaultInput name="ruName" :inputData="{ component: 'categoriesForm', inputName: 'ruName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('ru')"
@@ -37,7 +37,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="enName" :inputData="{ component: 'categoriesAdd', inputName: 'enName' }"
+                  <DefaultInput name="enName" :inputData="{ component: 'categoriesForm', inputName: 'enName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('en')"
@@ -65,7 +65,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="uzName" :inputData="{ component: 'categoriesAdd', inputName: 'ruName' }"
+                  <DefaultInput name="uzName" :inputData="{ component: 'categoriesForm', inputName: 'uzName' }"
                     label="Название категорию" placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('uz')"
@@ -94,7 +94,7 @@
             <q-space />
             <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
               class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-            <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;"
+            <q-btn @click="save" color="white" flat label="Сохранить" style="border-radius: 12px;"
               class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
           </div>
         </q-card-section>
@@ -106,8 +106,19 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
+import { useCategoriesStore } from 'src/stores/moduls/products/categories'
+import { useInputStore } from 'src/stores/moduls/input';
+import { useQuasar } from 'quasar';
 
+interface ISubcategoriesArr {
+  ru: string[],
+  uz: string[],
+  en: string[]
+}
 
+const $q = useQuasar()
+const categoriesStore = useCategoriesStore()
+const inputStore = useInputStore()
 const subCategoriesArr: any = ref({
   ru: [],
   uz: [],
@@ -132,7 +143,61 @@ function setVisibleSubcategoryInput(lang: string) {
 }
 
 function setInvisibleSubcategoryInput(lang: string) {
-  isSubcategoryVisible.value[lang] = false
+  if (subCategoryInputValue.value.trim() === '') {
+    isSubcategoryVisible.value[lang] = false
+  }
+}
+
+function save() {
+  if (subCategoriesArr.value.ru.length === subCategoriesArr.value.uz.length && subCategoriesArr.value.ru.length === subCategoriesArr.value.en.length) {
+    let data = [
+      {
+        category_ru: inputStore.input.categoriesForm.ruName,
+        category_uz: inputStore.input.categoriesForm.uzName,
+        category_en: inputStore.input.categoriesForm.enName
+      },
+    ]
+    if (subCategoriesArr.value.ru.length > 0) {
+      data = [Object.assign(data[0], ...convertToObj(subCategoriesArr.value.ru))]
+    }
+    categoriesStore.postCategory(data).then(() => {
+      clearValues()
+
+      $q.notify({
+        message: 'Категория успешно сохранена',
+        color: 'positive'
+      })
+    })
+  } else {
+    $q.notify({
+      message: 'Количество значений в подкатегориях должно совпадать с количеством значений в других подкатегориях',
+      color: 'negative',
+      position: 'top-right'
+    })
+  }
+}
+
+function convertToObj(arr: ISubcategoriesArr) {
+  const result = []
+  for (let i = 0; i < arr.ru.length; i++) {
+    result.push({
+      category_ru: arr.ru[i],
+      category_uz: arr.uz[i],
+      category_en: arr.en[i]
+    })
+  }
+  return result
+}
+
+function clearValues() {
+  inputStore.input.categoriesForm.ruName = ''
+  inputStore.input.categoriesForm.uzName = ''
+  inputStore.input.categoriesForm.enName = ''
+  subCategoriesArr.value = {
+    ru: [],
+    uz: [],
+    en: []
+  }
 }
 </script>
 

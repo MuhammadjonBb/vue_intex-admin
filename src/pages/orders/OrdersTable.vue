@@ -167,14 +167,14 @@
                 </q-btn>
               </q-item-section>
             </q-item>
-            <q-item v-close-popup>
+            <!-- <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
                   <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
                   Дублировать
                 </q-btn>
               </q-item-section>
-            </q-item>
+            </q-item> -->
             <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">

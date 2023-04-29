@@ -8,13 +8,10 @@ export const useInputStore: any = defineStore('input', () => {
       address: '',
       phone: ''
     },
-    categoriesAdd: {
+    categoriesForm: {
       ruName: '',
-      ruSubName: '',
       enName: '',
-      enSubName: '',
       uzName: '',
-      uzSubName: '',
     },
     attributesAdd: {
       nameRu: '',

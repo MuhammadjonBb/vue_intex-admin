@@ -1,5 +1,5 @@
 <template>
-  <q-table dense table-class="q-mx-none" flat
+  <q-table dense table-class="q-mx-none" flat :pagination="{ rowsPerPage: 10 }"
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
@@ -96,9 +96,9 @@
     <!-- SUB_CATEGORIES -->
     <template #body-cell-subCategories="props">
       <q-td :props="props">
-        <q-chip v-if="props.row.ru[0]" v-for="(item, index) in props.row.ru" style="background-color: #9CDAFF;" square
-          text-color="dark" class="justify-center" removable v-model="subCategoriesArr[getIndexOfSubCategory(item)]"
-          icon-remove="close">
+        <q-chip v-if="props.row.ru" v-for="(item, index) in props.row.ru" :key="index" style="background-color: #9CDAFF;"
+          square text-color="dark" class="justify-center" removable
+          v-model="subCategoriesArr[getIndexOfSubCategory(item)]" icon-remove="close">
           {{ item }}
         </q-chip>
 
@@ -122,17 +122,18 @@
                 </q-btn>
               </q-item-section>
             </q-item>
-            <q-item v-close-popup>
+            <!-- <q-item v-close-popup>
               <q-item-section>
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
                   <q-icon name="content_copy" size="xs" color="primary" class="on-left" />
                   Дублировать
                 </q-btn>
               </q-item-section>
-            </q-item>
+            </q-item> -->
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
+                <q-btn @click="deleteCategory(props.row.id)" dense flat class="text-capitalize text-left"
+                  text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
                 </q-btn>
@@ -194,6 +195,8 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCategoriesStore } from 'src/stores/moduls/products/categories';
+
 
 interface ISelected {
   id: number
@@ -201,7 +204,7 @@ interface ISelected {
   amount: number
   subCategories: string[]
 }
-
+const { deleteCategory } = useCategoriesStore()
 const router = useRouter()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
