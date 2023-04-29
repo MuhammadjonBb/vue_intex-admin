@@ -9,6 +9,7 @@ export const useListStore = defineStore('categories', {
     attributes: [],
     attribut: null,
     attributDialog: false,
+    attribute_id: <any>[],
     about: {
       about_uz: "",
       about_ru: "",
@@ -125,7 +126,6 @@ export const useListStore = defineStore('categories', {
     },
     setImages(event: any) {
       const files = event.dataTransfer.files
-      console.log(files.length)
       for (let i = 0; i < files.length; i++) {
         if (this.images.length >= 4) return
         if (this.images.length === 0) {
