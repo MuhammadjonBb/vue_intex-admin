@@ -39,9 +39,13 @@ export const useInputStore: any = defineStore('input', () => {
     },
     editContactsDialog: {
       phone: '',
-      address: '',
-      schedule: '',
       email: '',
+      address_ru: '',
+      address_en: '',
+      address_uz: '',
+      work_uz: '',
+      work_ru: '',
+      work_en: '',
     },
     mainAuth: {
       password: '',

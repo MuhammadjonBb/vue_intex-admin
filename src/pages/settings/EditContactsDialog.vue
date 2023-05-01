@@ -8,24 +8,53 @@
           style="width: 32px;height: 32px; border-radius: 8px;" size="13px" @click="modalStore.closeModal" />
       </q-card-section>
 
-      <q-card-section class="q-pt-none column">
-        <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address' }" name="address" type="text"
-          label="Адрес" />
+      <q-card-section class="q-pt-none column text-primary">
+        <q-tabs v-model="langTab">
+          <q-tab name="uz" no-caps label="Узбекский" />
+          <q-tab name="ru" no-caps label="Русский" />
+          <q-tab name="en" no-caps label="Английский" />
+        </q-tabs>
+      </q-card-section>
 
+      <Transition name="slide-fade" mode="out-in">
+        <q-card-section class="q-pt-none column" v-if="langTab === 'uz'">
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_uz' }" name="address_uz"
+            type="text" label="Адрес" />
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_uz' }" name="work_uz" type="text"
+            label="График работы" />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none column" v-else-if="langTab === 'ru'">
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_ru' }" name="address_ru"
+            type="text" label="Адрес" />
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_ru' }" name="work_ru" type="text"
+            label="График работы" />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none column" v-else>
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_en' }" name="address_en"
+            type="text" label="Адрес" />
+          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_en' }" name="work_en" type="text"
+            label="График работы" />
+        </q-card-section>
+      </Transition>
+
+      <q-separator class="q-mb-lg q-mt-xs"></q-separator>
+
+      <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
           <phone-input :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
           <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'email' }" name="email" type="text"
             label="E-mail" />
         </div>
 
-        <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'schedule' }" name="schedule" type="text"
-          label="График работы" style="max-width: 50%;" />
+
         <div class="row q-mt-lg no-wrap" style="gap: 20px">
           <q-space />
           <q-btn @click="modalStore.closeModal" v-close-popup color="indigo-10" flat label="Отменить"
             style="border-radius: 12px;" class="q-py-sm full-width bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn @click="modalStore.closeModal" v-close-popup color="white" flat label="Сохранить"
-            style="border-radius: 12px;" class="q-py-sm full-width  q-px-xl bg-indigo-10" no-caps />
+          <q-btn @click="save" color="white" flat label="Сохранить" style="border-radius: 12px;"
+            class="q-py-sm full-width  q-px-xl bg-indigo-10" no-caps />
         </div>
       </q-card-section>
     </q-card>
@@ -36,12 +65,16 @@
 import { Ref, ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
-import { useModalStore } from 'src/stores/moduls/modal';
-import { useInputStore } from 'src/stores/moduls/input';
-import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings';
+import { useModalStore } from 'src/stores/moduls/modal'
+import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
 const siteSettingsStore = useSiteSettingsStore()
-const inputStore = useInputStore()
 const modalStore = useModalStore()
 
+const langTab = ref('uz')
+function save() {
+  siteSettingsStore.updateSiteInfo().then(() => { modalStore.closeModal() })
+}
 </script>
+
+<style></style>
