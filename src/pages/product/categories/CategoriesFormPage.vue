@@ -134,8 +134,10 @@ const isSubcategoryVisible: any = ref({
 const subCategoryInputValue = ref('')
 
 function addSubCategory(value: string, lang: string) {
-  subCategoriesArr.value[lang].push(value.trim())
-  subCategoryInputValue.value = ''
+  if (subCategoryInputValue.value.trim() !== '') {
+    subCategoriesArr.value[lang].push(value.trim())
+    subCategoryInputValue.value = ''
+  }
 }
 
 function setVisibleSubcategoryInput(lang: string) {
@@ -156,10 +158,11 @@ function save() {
         category_uz: inputStore.input.categoriesForm.uzName,
         category_en: inputStore.input.categoriesForm.enName
       },
+      ...convertToObj()
     ]
-    if (subCategoriesArr.value.ru.length > 0) {
-      data = [Object.assign(data[0], ...convertToObj(subCategoriesArr.value.ru))]
-    }
+    // if (subCategoriesArr.value.ru.length > 0) {
+    //   data = [Object.assign(data[0], ...convertToObj())]
+    // }
     categoriesStore.postCategory(data).then(() => {
       clearValues()
 
@@ -177,13 +180,13 @@ function save() {
   }
 }
 
-function convertToObj(arr: ISubcategoriesArr) {
+function convertToObj() {
   const result = []
-  for (let i = 0; i < arr.ru.length; i++) {
+  for (let i = 0; i < subCategoriesArr.value.ru.length; i++) {
     result.push({
-      category_ru: arr.ru[i],
-      category_uz: arr.uz[i],
-      category_en: arr.en[i]
+      category_ru: subCategoriesArr.value.ru[i],
+      category_uz: subCategoriesArr.value.uz[i],
+      category_en: subCategoriesArr.value.en[i]
     })
   }
   return result

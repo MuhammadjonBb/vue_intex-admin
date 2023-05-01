@@ -31,16 +31,32 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
           return this.socialNetworks = r.data
         })
         .catch(e => {
-          console.log(e)
+          Notify.create({
+            message: 'Ошибка получения социальных сетей',
+            color: 'negative',
+            position: 'top-right',
+            group: false
+          })
         })
     },
     deleteSocialNetwork(id: number) {
       return api.delete(`social-networks/${id}`)
         .then(r => {
+          Notify.create({
+            message: 'Социальная сеть успешно удалена',
+            color: 'positive',
+            position: 'top-right',
+            group: false
+          })
           this.getSocialNetworks()
         })
         .catch(e => {
-          console.log(e)
+          Notify.create({
+            message: 'Ошибка удаления социальной сети',
+            color: 'negative',
+            position: 'top-right',
+            group: false
+          })
         })
     },
     siteLangUpdate(lang_name: string, status: boolean) {
@@ -80,7 +96,46 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
             group: false
           })
         })
-
+    },
+    createSocialNetwork(data: object) {
+      return api.post('social-networks', data)
+        .then(r => {
+          Notify.create({
+            message: 'Социальная сеть успешно создана',
+            color: 'positive',
+            position: 'top-right',
+            group: false
+          })
+          this.getSocialNetworks()
+        })
+        .catch(e => {
+          Notify.create({
+            message: 'Ошибка создания социальной сети',
+            color: 'negative',
+            position: 'top-right',
+            group: false
+          })
+        })
+    },
+    updateSocialNetwork(data: any) {
+      return api.put('social-networks', data)
+        .then(r => {
+          Notify.create({
+            message: 'Социальная сеть успешно обновлена',
+            color: 'positive',
+            position: 'top-right',
+            group: false
+          })
+          this.getSocialNetworks()
+        })
+        .catch(e => {
+          Notify.create({
+            message: 'Ошибка обновления социальной сети',
+            color: 'negative',
+            position: 'top-right',
+            group: false
+          })
+        })
     }
   },
 })
