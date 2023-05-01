@@ -10,9 +10,9 @@
 
       <q-card-section class="q-pt-none column text-primary">
         <q-tabs v-model="langTab">
-          <q-tab name="uz" no-caps label="Узбекский" />
-          <q-tab name="ru" no-caps label="Русский" />
-          <q-tab name="en" no-caps label="Английский" />
+          <q-tab name="uz" no-caps label="Узбекский язык" />
+          <q-tab name="ru" no-caps label="Русский язык" />
+          <q-tab name="en" no-caps label="Английский язык" />
         </q-tabs>
       </q-card-section>
 

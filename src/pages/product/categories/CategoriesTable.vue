@@ -3,46 +3,46 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-      {
-        name: 'id',
-        label: 'ID',
-        field: 'id',
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'category',
-        label: 'Категория продукта',
-        field: row => row.category_ru,
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'amount',
-        label: 'Кол-во под категория',
-        field: row => !row.ru[0] ? 0 : row.ru.length,
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
-      },
-      {
-        name: 'subCategories',
-        label: 'Под категории',
-        field: row => row.ru,
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'actions',
-        label: '',
-        field: 'actions',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+        {
+          name: 'id',
+          label: 'ID',
+          field: 'id',
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'category',
+          label: 'Категория продукта',
+          field: row => row.category_ru,
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'amount',
+          label: 'Кол-во под категория',
+          field: row => !row.ru[0] ? 0 : row.ru.length,
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left',
+        },
+        {
+          name: 'subCategories',
+          label: 'Под категории',
+          field: row => row.ru,
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'actions',
+          label: '',
+          field: 'actions',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'right'
+        }
+      ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -97,8 +97,7 @@
     <template #body-cell-subCategories="props">
       <q-td :props="props">
         <q-chip v-if="props.row.ru" v-for="(item, index) in props.row.ru" :key="index" style="background-color: #9CDAFF;"
-          square text-color="dark" class="justify-center" removable
-          v-model="subCategoriesArr[getIndexOfSubCategory(item)]" icon-remove="close">
+          square text-color="dark" class="justify-center" icon-remove="close">
           {{ item }}
         </q-chip>
 
@@ -208,7 +207,6 @@ const { deleteCategory } = useCategoriesStore()
 const router = useRouter()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
-const subCategoriesArr: Ref<boolean[]> = ref([])
 const { data } = defineProps(['data'])
 
 // eslint-disable-next-line space-before-function-paren
@@ -228,10 +226,5 @@ function toEditPage() {
 // eslint-disable-next-line space-before-function-paren
 function clearSelections() {
   selected.value.splice(0)
-}
-
-function getIndexOfSubCategory(value: string): number {
-  const subCategories: string[] = data.result.map((el: any) => el.ru).flat(1);
-  return subCategories.indexOf(value)
 }
 </script>
