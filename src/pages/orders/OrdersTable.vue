@@ -3,73 +3,73 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-      {
-        name: 'id',
-        label: '№ Заказа',
-        field: 'order_number',
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'client',
-        label: 'Имя клиента',
-        field: 'first_name',
-        sortable: true,
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'phone',
-        label: 'Tелефон',
-        field: 'phone',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
-      },
-      {
-        name: 'address',
-        label: 'Адрес',
-        field: 'address',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'goods',
-        label: 'Товары',
-        field: 'goods',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left',
-        sortable: true,
-      },
-      {
-        name: 'total_price',
-        label: 'Обшая цена',
-        field: row => beautifyPrice(row.total_price),
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'date',
-        label: 'Время заказа',
-        field: 'created_at',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'left'
-      },
-      {
-        name: 'status',
-        label: 'Статус',
-        field: 'name_ru',
-        align: 'left',
-        headerStyle: 'background-color: #f2f2f2;',
-      },
-      {
-        name: 'action',
-        label: 'Action',
-        field: '',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+        {
+          name: 'id',
+          label: '№ Заказа',
+          field: 'order_number',
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'client',
+          label: 'Имя клиента',
+          field: 'first_name',
+          sortable: true,
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'phone',
+          label: 'Tелефон',
+          field: 'phone',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left',
+        },
+        {
+          name: 'address',
+          label: 'Адрес',
+          field: 'address',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'ids',
+          label: 'Товары',
+          field: 'ids',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left',
+          sortable: true,
+        },
+        {
+          name: 'total_price',
+          label: 'Обшая цена',
+          field: row => beautifyPrice(row.total_price),
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'date',
+          label: 'Время заказа',
+          field: 'created_at',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'left'
+        },
+        {
+          name: 'status',
+          label: 'Статус',
+          field: 'name_ru',
+          align: 'left',
+          headerStyle: 'background-color: #f2f2f2;',
+        },
+        {
+          name: 'action',
+          label: 'Action',
+          field: '',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'right'
+        }
+      ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -133,23 +133,15 @@
     <!-- STATUS -->
 
     <!-- PRODUCTS -->
-    <!-- <template #body-cell-goods="props">
-      <q-td :props="props">
-        <div :style="props.row.goods.length > 1 ? 'color: #109EF4;text-decoration: underline;  cursor: pointer;' : ''">
-          <div v-if="props.row.goods.length > 1">
-            {{ getRightWord(props.row.goods.length) }}
-            <q-tooltip :offset="[1, 1]" class="bg-dark">
-              <q-list>
-                <q-item dense v-for="(item, index) in props.row.goods" :key="index">
-                  <q-item-section dense>{{ item }}</q-item-section>
-                </q-item>
-              </q-list>
-            </q-tooltip>
+    <template #body-cell-ids="props">
+      <q-td :props="props" v-if="ordersStore.products">
+        <div style="color: #109EF4;text-decoration: underline; cursor: pointer;">
+          <div>
+            {{ getRightWord(props.row.count) }}{{ props.row.ids }}
           </div>
-          <div v-else>1 x {{ props.row.goods[0] }}</div>
         </div>
       </q-td>
-    </template> -->
+    </template>
     <!-- PRODUCTS -->
     <!-- BODY  -->
 
@@ -214,7 +206,7 @@
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
           {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ data.pageInfo.total_count }} предметов
+          {{ data.result.length }} предметов
         </div>
 
         <q-space />
@@ -241,6 +233,7 @@ import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord.js'
 import beautifyDate from 'src/helpers/beautifyDate'
+import { useOrdersStore } from 'src/stores/moduls/orders'
 
 interface ISelected {
   id: number
@@ -253,6 +246,7 @@ interface ISelected {
   phone: string
 }
 
+const ordersStore = useOrdersStore()
 const router = useRouter()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
@@ -295,5 +289,10 @@ function beautifyPrice(price: number) {
   const parts = formattedPrice.toString().split('.')
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   return parts.join('.')
+}
+
+function getProduct(id: any) {
+  const product = ordersStore.products.result.find((p: any) => p.id === id)
+  return product ? product.name_ru : ''
 }
 </script>

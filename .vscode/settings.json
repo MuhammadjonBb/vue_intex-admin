@@ -1,4 +1,5 @@
 {
+  "editor.hideCursorInOverviewRuler": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,
@@ -12,5 +13,6 @@
     "typescript",
     "vue"
   ],
+  "editor.minimap.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib"
 }

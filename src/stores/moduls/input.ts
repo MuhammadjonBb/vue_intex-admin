@@ -3,10 +3,12 @@ import { ref } from 'vue'
 
 export const useInputStore: any = defineStore('input', () => {
   const input = ref({
-    ordersEdit: {
-      name: '',
+    ordersForm: {
+      first_name: '',
       address: '',
-      phone: ''
+      phone: '',
+      last_name: '',
+      email: '',
     },
     categoriesForm: {
       ruName: '',
