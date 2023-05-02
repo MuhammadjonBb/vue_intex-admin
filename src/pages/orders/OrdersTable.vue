@@ -153,7 +153,8 @@
           <q-list style="min-width: 100px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8" @click="toEditPage">
+                <q-btn dense flat class="text-capitalize text-left" text-color="grey-8"
+                  @click="toEditPage(props.row.order_number)">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -262,8 +263,8 @@ function getPageNums(n: number): number[] {
 }
 
 // eslint-disable-next-line space-before-function-paren
-function toEditPage() {
-  router.push('/orders/edit')
+function toEditPage(id: number | string): void {
+  router.push('/orders/edit/' + id.toString().substring(1))
 }
 
 // eslint-disable-next-line space-before-function-paren
@@ -295,4 +296,5 @@ function getProduct(id: any) {
   const product = ordersStore.products.result.find((p: any) => p.id === id)
   return product ? product.name_ru : ''
 }
+
 </script>

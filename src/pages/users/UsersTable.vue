@@ -3,68 +3,61 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-      {
-        name: 'id',
-        field: 'id',
-        label: 'ID',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'name',
-        field: 'name',
-        label: 'Имя',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'role',
-        field: 'role',
-        label: 'Роль  ползователя',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'status',
-        field: 'status',
-        label: 'Статус',
-        align: 'left'
-      },
-      {
-        name: 'lastActiveDate',
-        field: 'lastActiveDate',
-        label: 'Последняя активность',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'phone',
-        field: 'phone',
-        label: 'Номер телефона',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'registerDate',
-        field: 'created_at',
-        label: 'Дата регистрация',
-        align: 'left'
-      },
-      {
-        name: 'birthDate',
-        field: 'birthDate',
-        label: 'Дата рождение',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        name: 'action',
-        label: 'Action',
-        field: '',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+        {
+          name: 'id',
+          field: 'id',
+          label: 'ID',
+          sortable: true,
+          align: 'left'
+        },
+        {
+          name: 'name',
+          field: 'name',
+          label: 'Имя',
+          sortable: true,
+          align: 'left'
+        },
+        {
+          name: 'role',
+          field: row => returnRole(row.role),
+          label: 'Роль  ползователя',
+          sortable: true,
+          align: 'left'
+        },
+        {
+          name: 'status',
+          field: 'status',
+          label: 'Статус',
+          align: 'left'
+        },
+        {
+          name: 'phone',
+          field: 'phone',
+          label: 'Номер телефона',
+          sortable: true,
+          align: 'left'
+        },
+        {
+          name: 'registerDate',
+          field: 'created_at',
+          label: 'Дата регистрация',
+          align: 'left'
+        },
+        {
+          name: 'birthDate',
+          field: 'birthDate',
+          label: 'Дата рождение',
+          sortable: true,
+          align: 'left'
+        },
+        {
+          name: 'action',
+          label: 'Action',
+          field: '',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'right'
+        }
+      ]">
 
     <!-- TOP-SELECT -->
     <template #top>
@@ -282,5 +275,15 @@ function getStatusClass(status: string) {
 function toEdit(data: object) {
   modalStore.modal.users.edit = true
   emit('onEdit', data)
+}
+
+function returnRole(str: string): string | void {
+  if (str === 'super_admin') {
+    return 'Супер Админ'
+  } else if (str === 'user') {
+    return 'Пользователь'
+  } else if (str === 'admin') {
+    return 'Админ'
+  }
 }
 </script>
