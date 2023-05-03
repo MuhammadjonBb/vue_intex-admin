@@ -2,7 +2,7 @@
   <label :for="name" class="font-weight-medium q-mb-md full-width" style="display: block;">
     {{ label }}
     <q-input :id="name" borderless v-model="inputStore.input[inputData.component][inputData.inputName]"
-      :placeholder="placeholder" class="q-mt-sm border-reset q-px-md" :type="type">
+      :placeholder="placeholder" :rules="rules" class="q-mt-sm border-reset q-px-md" :type="type">
       <template v-if="icon" #append>
         <q-icon :name="icon" color="primary" />
       </template>
@@ -14,5 +14,5 @@
 import { useInputStore } from 'stores/moduls/input';
 
 const inputStore = useInputStore()
-const props = defineProps(['inputData', 'label', 'placeholder', 'type', 'name', 'icon'])
+const props = defineProps(['inputData', 'label', 'placeholder', 'type', 'name', 'icon','rules'])
 </script>

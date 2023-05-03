@@ -14,7 +14,7 @@
 
   <!--      </q-card-section>-->
   <!--    </q-card>-->
-  <q-table v-model:selected="selected" :columns="store.columns" :rows="store.listData" dense row-key="id" selection="multiple"
+  <q-table v-model:selected="selected" :columns="columns" :rows="store.listData" dense row-key="id" selection="multiple"
     class="q-mt-sm bg-grey-2 list__tab" flat table-style="overflow:visible; margin-top:30px;"
     table-header-style="font-weight: 500;font-size: 14px; background-color:white; position: relative; top: -20px; margin-bottom:30px;  z-index: 1;"
     table-header-class="text-grey-7 q-pa-none">
@@ -80,7 +80,7 @@
           <q-list style="min-width: 150px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left " text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left " @click="store.updateList(data.row.id)" text-color="grey-8">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -146,7 +146,32 @@ import { useListStore } from "stores/moduls/products/list";
 
 const selected = ref([]),
       selectAll = ref(false),
-      store = useListStore();
+      store = useListStore(),
+      columns = [
+    { name: 'id', label: 'ID', field: (row:any) => row.id, align: 'left', icon: true, sortable: true },
+    {
+      name: 'name',
+      required: true,
+      label: 'Название товара',
+      field: (row:any) => row.name_ru,
+      style: 'max-width: 3000px',
+      align: 'left',
+      sortable: true,
+      icon: true
+    },
+    { name: 'price', align: 'left', label: 'Цена', field: (row:any) => row.price, icon: false },
+    {
+      name: 'discount',
+      label: 'Cо скидкой',
+      field: (row:any) => row.discount_price,
+      align: 'left',
+      icon: false
+    },
+    { name: 'count', label: 'Кол-во', field: 'count', align: 'left', icon: true, sortable: true },
+    { name: 'category', label: 'Категория', field: (row:any) => row.category_ru, align: 'left', icon: true, sortable: true },
+    { name: 'status', label: 'Статус', field: (row:any) => row.status_ru, align: 'left', icon: false },
+    { name: 'action', label: '', align: 'left', icon: false }
+  ];
 function getPageNums(n: number) {
   const numsArr: number[] = []
   for (let i = 1; i <= n; i++) {
