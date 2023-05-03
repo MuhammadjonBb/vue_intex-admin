@@ -113,6 +113,16 @@ export default {
       socials: 'Socials',
     }
   },
+  categories: {
+    title: 'Categories',
+    table: {
+      tableHead: {
+        categoryName: 'Category name',
+        subCategoryAmount: 'Subcategory amount',
+        subCategories: 'Subcategories',
+      }
+    }
+  },
   btn: {
     save: 'Save',
     add: 'Add',
@@ -139,7 +149,6 @@ export default {
     pages: 'pages',
     from: 'from',
   },
-  // Product create
 
   failed: 'Action failed',
   success: 'Action was successful',

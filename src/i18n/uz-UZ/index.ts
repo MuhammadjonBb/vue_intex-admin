@@ -95,6 +95,16 @@ export default {
       socials: 'Ijtimoiy tarmoqlar',
     }
   },
+  categories: {
+    title: 'Kategoriyalar',
+    table: {
+      tableHead: {
+        categoryName: 'Kategoriya nomi',
+        subCategoryAmount: 'Subkategoriyalar soni',
+        subCategories: 'Subkategoriyalar',
+      },
+    }
+  },
   btn: {
     save: 'Saqlash',
     add: 'Qo\'shish',

@@ -13,7 +13,7 @@
         },
         {
           name: 'category',
-          label: 'Категория продукта',
+          label: `${$t('categories.table.tableHead.categoryName')}`,
           field: row => row.category_ru,
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -21,7 +21,7 @@
         },
         {
           name: 'amount',
-          label: 'Кол-во под категория',
+          label: `${$t('categories.table.tableHead.subCategoryAmount')}`,
           field: row => !row.ru[0] ? 0 : row.ru.length,
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -29,7 +29,7 @@
         },
         {
           name: 'subCategories',
-          label: 'Под категории',
+          label: `${$t('categories.table.tableHead.subCategories')}`,
           field: row => row.ru,
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',

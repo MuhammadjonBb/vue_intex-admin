@@ -84,12 +84,12 @@ function isChildPage(path: string): boolean {
 }
 
 function returnPageName(pagePath: string): string | void {
-  if (pagePath.includes('categories')) return 'Категории'
+  if (pagePath.includes('categories')) return t('categories.title')
   else if (pagePath.includes('attributes')) return 'Атрибуты'
-  else if (pagePath.includes('orders')) return 'Заказы'
-  else if (pagePath.includes('users')) return 'Пользователи'
-  else if (pagePath.includes('settings')) return 'Настройки сайта'
-  else if (pagePath.includes('feedback')) return 'Обратная связь'
+  else if (pagePath.includes('orders')) return t('orders.title')
+  else if (pagePath.includes('users')) return t('users.title')
+  else if (pagePath.includes('settings')) return t('siteSettings.title')
+  else if (pagePath.includes('feedback')) return t('consultations.title')
   if (pagePath.includes('product')) return 'Продукты'
 }
 

@@ -95,6 +95,16 @@ export default {
       socials: 'Социальные сети',
     }
   },
+  categories: {
+    title: 'Категории',
+    table: {
+      tableHead: {
+        categoryName: 'Название категории',
+        subCategoryAmount: 'Количество подкатегорий',
+        subCategories: 'Подкатегории',
+      }
+    }
+  },
   btn: {
     save: 'Сохранить',
     cancel: 'Отменить',
