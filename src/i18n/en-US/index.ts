@@ -149,6 +149,13 @@ export default {
     pages: 'pages',
     from: 'from',
   },
+  routes: {
+    addCategory: 'Add category',
+    addProduct: 'Add product',
+    addAttribute: 'Add attribute',
+    addOrder: 'Add order',
+    editOrder: 'Edit order',
+  },
 
   failed: 'Action failed',
   success: 'Action was successful',

@@ -131,6 +131,13 @@ export default {
     pages: 'страниц',
     from: 'из'
   },
+  routes: {
+    addCategory: 'Добавить категорию',
+    addProduct: 'Добавить продукт',
+    addAttribute: 'Добавить атрибут',
+    addOrder: 'Добавить заказ',
+    editOrder: 'Изменить заказ',
+  },
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',
   cancel: 'Действие отменено',

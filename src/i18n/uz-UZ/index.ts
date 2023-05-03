@@ -131,6 +131,13 @@ export default {
     pages: 'sahifalar',
     from: 'dan',
   },
+  routes: {
+    addCategory: 'Kategoriya qo\'shish',
+    addProduct: 'Maxsulot qo\'shish',
+    addOrder: 'Buyurtma qo\'shish',
+    addAttribute: 'Atribut qo\'shish',
+    editOrder: 'Buyurtmani o\'zgartirish',
+  },
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',
   cancel: 'Действие отменено',
