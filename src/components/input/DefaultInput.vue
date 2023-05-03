@@ -1,8 +1,9 @@
 <template>
   <label :for="name" class="font-weight-medium q-mb-md full-width" style="display: block;">
     {{ label }}
-    <q-input :id="name" borderless v-model="inputStore.input[inputData.component][inputData.inputName]"
-      :placeholder="placeholder" :rules="rules" class="q-mt-sm border-reset q-px-md" :type="type">
+    <q-input :rules="[val => !!val || 'Это обязательное поле!']" :id="name" borderless
+      v-model="inputStore.input[inputData.component][inputData.inputName]" :placeholder="placeholder"
+      class="q-mt-sm i-border q-px-md" :type="type" style="position: relative;">
       <template v-if="icon" #append>
         <q-icon :name="icon" color="primary" />
       </template>

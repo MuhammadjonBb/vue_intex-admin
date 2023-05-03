@@ -3,10 +3,12 @@ import { ref } from 'vue'
 
 export const useInputStore: any = defineStore('input', () => {
   const input = ref({
-    ordersEdit: {
-      name: '',
+    ordersForm: {
+      first_name: '',
       address: '',
-      phone: ''
+      phone: '',
+      last_name: '',
+      email: '',
     },
     categoriesForm: {
       ruName: '',
@@ -39,9 +41,13 @@ export const useInputStore: any = defineStore('input', () => {
     },
     editContactsDialog: {
       phone: '',
-      address: '',
-      schedule: '',
       email: '',
+      address_ru: '',
+      address_en: '',
+      address_uz: '',
+      work_uz: '',
+      work_ru: '',
+      work_en: '',
     },
     mainAuth: {
       password: '',

@@ -17,10 +17,14 @@ export const useUsersStore = defineStore('users', {
         })
     },
     createUser(data: object) {
-      return api.post('users', { ...data })
+      return api.post('users', { ...data }).then(() => {
+        this.getUsers()
+      })
     },
     editUser(data: object) {
-      return api.put('users', { data })
+      return api.put('users', { data }).then(() => {
+        this.getUsers()
+      })
     },
     deleteUser(id: number) {
       return api.delete(`users/${id}`).then(() => {
@@ -30,6 +34,7 @@ export const useUsersStore = defineStore('users', {
           position: 'top-right',
           group: false
         })
+        this.getUsers()
       }).catch(e => {
         Notify.create({
           message: 'Ошибка при удалении пользователя',

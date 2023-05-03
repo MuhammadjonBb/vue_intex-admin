@@ -26,10 +26,14 @@ export const useFeedbackStore = defineStore('feedback', {
         })
     },
     createFeedback(data: IFeedbackCreate) {
-      return api.post('consultations', data)
+      return api.post('consultations', data).then(() => {
+        this.getFeedbackList()
+      })
     },
     editFeedback(data: any) {
-      return api.put(`consultations/${data.id}`, data)
+      return api.put(`consultations/${data.id}`, data).then(() => {
+        this.getFeedbackList()
+      })
     },
     deleteFeedback(id: number) {
       console.log(id);
@@ -41,6 +45,7 @@ export const useFeedbackStore = defineStore('feedback', {
           position: 'top-right',
           group: false
         })
+        this.getFeedbackList()
       }).catch(e => {
         Notify.create({
           color: 'negative',

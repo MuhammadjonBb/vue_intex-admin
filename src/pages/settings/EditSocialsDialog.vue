@@ -21,18 +21,32 @@
               style="align-self: start; font-size: 14px; margin-top: -10px;" class="" color="negative" />
           </q-item>
 
+          <q-item class="column q-pa-none q-mt-lg" v-for="(item, index) in createdNetworks.items.length" :key="index">
+            <label style="width: 15%;" class="column full-width q-mb-md">
+              Тип социальный сеть
+              <q-select dropdown-icon="expand_more" class="q-mt-sm q-px-md border-reset q-py-xs" dense borderless
+                v-model="createdNetworks.items[index].name" :options="createdNetworks.options" />
+            </label>
+
+            <label class="font-weight-medium q-mb-md full-width" style="display: block;">
+              Линк
+              <q-input placeholder="Введите ссылку на социальную сеть" borderless
+                v-model="createdNetworks.items[index].link" class="q-mt-sm border-reset q-px-md" />
+            </label>
+          </q-item>
+
 
         </q-list>
         <q-separator class="q-mt-lg" />
 
         <q-btn flat icon="add" label="Добавить социальную сеть" no-caps style="align-self: start; font-size: 14px;"
-          class="q-mt-lg" color="primary" @click="createSocialNetwork" />
+          class="q-mt-lg" color="primary" @click="createNetwork" />
         <div class="row q-mt-lg">
           <q-space />
           <q-btn @click="modalStore.closeModal()" v-close-popup color="indigo-10" flat label="Отменить"
             style="border-radius: 12px;" class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn @click="modalStore.closeModal()" v-close-popup color="white" flat label="Сохранить"
-            style="border-radius: 12px;" class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
+          <q-btn @click="save()" v-close-popup color="white" flat label="Сохранить" style="border-radius: 12px;"
+            class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </div>
       </q-card-section>
     </q-card>
@@ -42,36 +56,43 @@
 <script setup lang="ts">
 import { Ref, onMounted, ref, watch, } from 'vue'
 import { useModalStore } from 'src/stores/moduls/modal'
-import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings';
-
+import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
 const siteSettingsStore = useSiteSettingsStore()
 const modalStore = useModalStore()
 const socialList: any = ref([])
+const createdNetworks: any = ref({
+  amount: 0,
+  items: [],
+  options: ['Twitter', 'Instagram', 'Facebook', 'LinkedIn'],
+  inputValue: ''
+})
 
-
-function createSocialNetwork() {
-  socialList.value.push({
-    id: getSumOfIds() + 1,
-    link: '',
+function createNetwork() {
+  createdNetworks.value.items.push({
     name: '',
+    link: ''
   })
 }
 
-function getSumOfIds() {
-  let sum = 0
-  for (let i = 0; i < socialList.value.length; i++) {
-    sum += socialList.value[i].id
+watch(() => siteSettingsStore.socialNetworks, () => {
+  socialList.value = JSON.parse(JSON.stringify(siteSettingsStore.socialNetworks))
+})
+
+function save() {
+  socialList.value.forEach((el: any) => {
+    if (el?.link !== siteSettingsStore.socialNetworks.find((item: any) => item.id === el.id)?.link) {
+      siteSettingsStore.updateSocialNetwork([el])
+    }
+  });
+
+  if (createdNetworks.value.items.length > 0) {
+    createdNetworks.value.items.forEach((el: any) => {
+      siteSettingsStore.createSocialNetwork(el).then(() => {
+        createdNetworks.value.items = []
+      })
+    })
   }
-  return sum
 }
-
-
-watch(
-  () => siteSettingsStore.socialNetworks,
-  (newSocialList) => {
-    socialList.value = newSocialList
-  }
-)
 
 </script>

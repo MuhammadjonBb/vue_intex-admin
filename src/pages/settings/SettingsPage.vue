@@ -16,7 +16,8 @@
                     <q-item-label>Pусский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="langStatus.ru" @click="siteSettingsStore.siteLangUpdate('ru', langStatus.ru)" />
+                    <q-toggle v-model="siteSettingsStore.langStatus.lang_ru"
+                      @click="siteSettingsStore.siteLangUpdate('ru', siteSettingsStore.langStatus.lang_ru)" />
                   </q-item-section>
                 </q-item>
 
@@ -25,7 +26,8 @@
                     <q-item-label>Узбекский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="langStatus.uz" @click="siteSettingsStore.siteLangUpdate('uz', langStatus.uz)" />
+                    <q-toggle v-model="siteSettingsStore.langStatus.lang_uz"
+                      @click="siteSettingsStore.siteLangUpdate('uz', siteSettingsStore.langStatus.lang_uz)" />
                   </q-item-section>
                 </q-item>
 
@@ -34,7 +36,8 @@
                     <q-item-label>Aнглийский язык</q-item-label>
                   </q-item-section>
                   <q-item-section avatar>
-                    <q-toggle v-model="langStatus.en" @click="siteSettingsStore.siteLangUpdate('en', langStatus.en)" />
+                    <q-toggle v-model="siteSettingsStore.langStatus.lang_en"
+                      @click="siteSettingsStore.siteLangUpdate('en', siteSettingsStore.langStatus.lang_en)" />
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -73,7 +76,7 @@
                 <q-item style="width: 350px;" class="column q-mb-md">
                   <q-item-label style="font-size: 16px;" class="q-mb-sm text-primary text-bold">Номер
                     телефона</q-item-label>
-                  <q-item-label caption style="font-size: 14px;">+998 {{ siteSettingsStore.siteInfo.phone
+                  <q-item-label caption style="font-size: 14px;"> {{ siteSettingsStore.siteInfo.phone
                   }}</q-item-label>
                 </q-item>
 
@@ -124,11 +127,6 @@ import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 
 const modalStore = useModalStore()
 const siteSettingsStore = useSiteSettingsStore()
-const langStatus = ref({
-  ru: false,
-  uz: false,
-  en: false
-})
 const defaultLang: any = ref({
   ru: false,
   uz: false,
@@ -137,9 +135,9 @@ const defaultLang: any = ref({
 
 onMounted(() => {
   siteSettingsStore.getSiteInfo().then(() => {
-    langStatus.value.ru = siteSettingsStore.siteInfo.lang_ru
-    langStatus.value.uz = siteSettingsStore.siteInfo.lang_uz
-    langStatus.value.en = siteSettingsStore.siteInfo.lang_en
+    siteSettingsStore.langStatus.lang_ru = siteSettingsStore.siteInfo.lang_ru
+    siteSettingsStore.langStatus.lang_uz = siteSettingsStore.siteInfo.lang_uz
+    siteSettingsStore.langStatus.lang_en = siteSettingsStore.siteInfo.lang_en
 
     islangDefault(siteSettingsStore.siteInfo.default_lang)
   })

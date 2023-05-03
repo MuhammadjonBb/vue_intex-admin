@@ -10,11 +10,16 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import OrdersTable from 'src/pages/orders/OrdersTable.vue'
 import SearchFilterCreatePanel from 'src/components/SearchFilterCreatePanel.vue'
 import { useOrdersStore } from 'src/stores/moduls/orders'
 
 const ordersStore = useOrdersStore()
 
-ordersStore.getOrders()
+onMounted(() => {
+  ordersStore.getProducts()
+  ordersStore.getOrders()
+})
+
 </script>

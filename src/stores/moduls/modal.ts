@@ -22,6 +22,8 @@ export const useModalStore: any = defineStore('modal', () => {
     modal.value.feedback.edit = false
     modal.value.users.create = false
     modal.value.users.edit = false
+    modal.value.settings.contacts = false
+    modal.value.settings.socials = false
   }
 
   return { modal, closeModal }

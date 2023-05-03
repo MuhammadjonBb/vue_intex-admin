@@ -13,10 +13,13 @@ export const useCategoriesStore = defineStore('categories', {
       return api.get('categories').then(r => this.categories = r.data)
     },
     postCategory(data: object) {
-      return api.post('categories', data)
+      return api.post('categories', data).then(() => {
+        this.getCategories()
+      })
     },
     deleteCategory(id: number) {
       return api.delete(`categories/${id}`).then(() => {
+        this.getCategories()
         Notify.create({
           type: 'positive',
           position: 'top-right',

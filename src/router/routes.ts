@@ -38,7 +38,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/orders/OrdersPage.vue') },
-      { path: '/orders/edit', component: () => import('src/pages/orders/OrdersFormPage.vue') },
+      { path: '/orders/edit/:id', component: () => import('src/pages/orders/OrdersFormPage.vue') },
       { path: '/orders/create', component: () => import('src/pages/orders/OrdersFormPage.vue') }
 
     ]
