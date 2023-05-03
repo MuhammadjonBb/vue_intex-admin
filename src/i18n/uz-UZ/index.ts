@@ -12,7 +12,7 @@ export default {
       products: 'Maxsulotlar',
       orders: 'Buyurtmalar',
       users: 'Foydalanuvchilar',
-      siteSettings: 'Ma\'lumotlar',
+      siteSettings: 'Sayt sozlamalari',
       exit: 'Chiqish',
       productList: 'Maxsulotlar ro\'yxati',
       attributes: 'Atributlar',
@@ -78,6 +78,23 @@ export default {
       }
     }
   },
+  siteSettings: {
+    title: 'Sayt sozlamalari',
+    address: 'Manzil',
+    phone: 'Telefon raqami',
+    schedule: 'Ish jadvali',
+    langs: {
+      uz: 'O\'zbekcha',
+      ru: 'Ruscha',
+      en: 'Inglizcha',
+    },
+    subTitles: {
+      defaultLang: 'Standart tili',
+      siteLangs: 'Sayt tillari',
+      contactInfo: 'Kontaktlar ma\'lumoti',
+      socials: 'Ijtimoiy tarmoqlar',
+    }
+  },
   btn: {
     save: 'Saqlash',
     add: 'Qo\'shish',
@@ -96,6 +113,13 @@ export default {
   password: {
     new: 'Yangi parolni kiriting',
     confirm: 'Yangi parolni tasdiqlang',
+  },
+  table: {
+    choose: 'Tanlangan',
+    elmPerPage: 'Har bir sahifadagi elementlar',
+    items: 'buyumlar',
+    pages: 'sahifalar',
+    from: 'dan',
   },
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',

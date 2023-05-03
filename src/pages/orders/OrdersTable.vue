@@ -75,7 +75,7 @@
     <template #top>
       <q-tr class="item-center">
         <q-checkbox v-model:model-value="allSelect" />
-        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
+        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, {{ $t('table.choose') }}</span>
         <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />
       </q-tr>
     </template>
@@ -200,14 +200,14 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
             :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.elmPerPage') }}</span>
         </div>
 
         <div class="text-grey-8" style="font-size: 15px;">
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
-          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ data.result.length }} предметов
+          {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
+          {{ data.result.length }} {{ $t('table.items') }}
         </div>
 
         <q-space />
@@ -216,7 +216,8 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
             :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.from') }} {{ scope.pagesNumber }}
+            {{ $t('table.pages') }}</span>
         </div>
 
         <div class="row items-center">

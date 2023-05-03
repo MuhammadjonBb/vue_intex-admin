@@ -78,6 +78,23 @@ export default {
       }
     }
   },
+  siteSettings: {
+    title: 'Настройки сайта',
+    address: 'Адрес',
+    phone: 'Телефон',
+    schedule: 'График работы',
+    langs: {
+      ru: 'Русский язык',
+      en: 'Английский язык',
+      uz: 'Узбекский язык',
+    },
+    subTitles: {
+      defaultLang: 'Язык по умолчанию',
+      siteLangs: 'Языки сайта',
+      contactInfo: 'Контактная информация',
+      socials: 'Социальные сети',
+    }
+  },
   btn: {
     save: 'Сохранить',
     cancel: 'Отменить',
@@ -96,6 +113,13 @@ export default {
   password: {
     new: 'Введите новый пароль',
     confirm: 'Подтвердите новый пароль',
+  },
+  table: {
+    choose: 'Выбрано',
+    elmPerPage: 'Элементы на каждой странице',
+    items: 'предметов',
+    pages: 'страниц',
+    from: 'из'
   },
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',

@@ -58,7 +58,7 @@
     </template>
     <template #body-cell-count="props">
 
-      <q-td  style="background-color: white" :props="props">
+      <q-td style="background-color: white" :props="props">
         {{ props.row.count }}
       </q-td>
     </template>
@@ -80,7 +80,8 @@
           <q-list style="min-width: 150px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left " @click="store.updateList(data.row.id)" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left " @click="store.updateList(data.row.id)"
+                  text-color="grey-8">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
@@ -111,30 +112,31 @@
 
         <div class="row items-center q-mr-md">
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
-                    :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-                    style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
+            :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.elmPerPage') }}</span>
         </div>
 
         <div class="text-grey-8" style="font-size: 15px;">
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
-          scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
-          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} предметов
+            scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
+          {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
+          {{ scope.pagesNumber * scope.pagination.rowsPerPage }} {{ $t('table.items') }}
         </div>
 
         <q-space />
 
         <div class="row items-center">
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
-                    :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
-                    style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
+            :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
+            style="border-radius: 12px;" />
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.from') }} {{ scope.pagesNumber }}
+            {{ $t('table.pages') }}</span>
         </div>
 
         <div class="row items-center">
           <q-pagination dense v-model="scope.pagination.page" :min="1" no-number :max="scope.pagesNumber" direction-links
-                        color="grey" />
+            color="grey" />
         </div>
       </div>
     </template>
@@ -145,31 +147,31 @@ import { ref, watch } from 'vue'
 import { useListStore } from "stores/moduls/products/list";
 
 const selected = ref([]),
-      selectAll = ref(false),
-      store = useListStore(),
-      columns = [
-    { name: 'id', label: 'ID', field: (row:any) => row.id, align: 'left', icon: true, sortable: true },
+  selectAll = ref(false),
+  store = useListStore(),
+  columns = [
+    { name: 'id', label: 'ID', field: (row: any) => row.id, align: 'left', icon: true, sortable: true },
     {
       name: 'name',
       required: true,
       label: 'Название товара',
-      field: (row:any) => row.name_ru,
+      field: (row: any) => row.name_ru,
       style: 'max-width: 3000px',
       align: 'left',
       sortable: true,
       icon: true
     },
-    { name: 'price', align: 'left', label: 'Цена', field: (row:any) => row.price, icon: false },
+    { name: 'price', align: 'left', label: 'Цена', field: (row: any) => row.price, icon: false },
     {
       name: 'discount',
       label: 'Cо скидкой',
-      field: (row:any) => row.discount_price,
+      field: (row: any) => row.discount_price,
       align: 'left',
       icon: false
     },
     { name: 'count', label: 'Кол-во', field: 'count', align: 'left', icon: true, sortable: true },
-    { name: 'category', label: 'Категория', field: (row:any) => row.category_ru, align: 'left', icon: true, sortable: true },
-    { name: 'status', label: 'Статус', field: (row:any) => row.status_ru, align: 'left', icon: false },
+    { name: 'category', label: 'Категория', field: (row: any) => row.category_ru, align: 'left', icon: true, sortable: true },
+    { name: 'status', label: 'Статус', field: (row: any) => row.status_ru, align: 'left', icon: false },
     { name: 'action', label: '', align: 'left', icon: false }
   ];
 function getPageNums(n: number) {

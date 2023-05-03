@@ -96,6 +96,23 @@ export default {
       }
     }
   },
+  siteSettings: {
+    title: 'Site settings',
+    address: 'Address',
+    phone: 'Phone',
+    schedule: 'Work schedule',
+    langs: {
+      ru: 'Russian',
+      uz: 'Uzbek',
+      en: 'English',
+    },
+    subTitles: {
+      defaultLang: 'Default language',
+      siteLangs: 'Site languages',
+      contactIno: 'Contact information',
+      socials: 'Socials',
+    }
+  },
   btn: {
     save: 'Save',
     add: 'Add',
@@ -114,6 +131,13 @@ export default {
   password: {
     new: 'Type new password',
     confirm: 'Confirm new password',
+  },
+  table: {
+    choose: 'Chose',
+    elmPerPage: 'Elements per page',
+    items: 'items',
+    pages: 'pages',
+    from: 'from',
   },
   // Product create
 
