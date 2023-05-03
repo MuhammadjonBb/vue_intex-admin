@@ -3,41 +3,41 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-      {
-        name: 'id',
-        field: 'id',
-        label: 'ID',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'name',
-        field: 'name',
-        label: 'Имя',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'phone',
-        field: 'phone',
-        label: 'Номер телефона',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'date',
-        field: 'date',
-        label: 'Время заяавки',
-        align: 'left',
-      },
-      {
-        name: 'action',
-        label: 'Action',
-        field: '',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+        {
+          name: 'id',
+          field: 'id',
+          label: 'ID',
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'name',
+          field: 'name',
+          label: `${$t('consultations.table.tableHead.name')}`,
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'phone',
+          field: 'phone',
+          label: `${$t('consultations.table.tableHead.phone')}`,
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'date',
+          field: 'date',
+          label: `${$t('consultations.table.tableHead.apllicationTime')}`,
+          align: 'left',
+        },
+        {
+          name: 'action',
+          label: 'Action',
+          field: '',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'right'
+        }
+      ]">
     <!-- TOP-SELECT -->
     <template #top>
       <q-tr class="item-center">

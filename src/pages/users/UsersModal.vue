@@ -15,12 +15,12 @@
 
             <template #header="scope">
               <div class="bg-white column" style="justify-content: center;">
-                <span class="q-mb-md text-dark">Загрузите аватар</span>
+                <span class="q-mb-md text-dark">{{ $t('users.modal.loadAvatar') }}</span>
                 <q-btn v-model="profileImg" type="a" @click="scope.pickFiles" flat no-caps text-color="blue-12"
                   style="background: rgba(55, 125, 255, 0.1); border-radius: 12px;">
                   <q-uploader-add-trigger />
                   <q-icon name="add_photo_alternate" class="q-mr-sm" />
-                  Загрузить фото
+                  {{ $t('users.modal.loadPhoto') }}
                 </q-btn>
               </div>
             </template>
@@ -36,49 +36,49 @@
         </div>
         <div class="row no-wrap" style="gap:10px;">
           <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
-            :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" label="Имя"
-            placeholder="Введите ваше имя" type="text" />
+            :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" :label="$t('users.modal.inputs.name')"
+            :placeholder="$t('placeholder.name')" type="text" />
           <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
-            :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname" label="Фамилия"
-            placeholder="Введите вашу фамилию" type="text" />
+            :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname"
+            :label="$t('users.modal.inputs.surname')" :placeholder="$t('placeholder.surname')" type="text" />
           <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
             :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
-            placeholder="Введите ваш email" type="text" />
+            :placeholder="$t('placeholder.email')" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
           <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']"
             :inputData="{ component: 'userDialog', inputName: 'phone' }" />
           <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
-            :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth" label="Дата рождения" type="date"
-            placeholder="" />
+            :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth"
+            :label="$t('users.modal.inputs.birthday')" type="date" placeholder="" />
         </div>
         <div class="row no-wrap q-mb-md" style="gap: 20px;">
           <label for="status" class="full-width">
-            Статус
+            {{ $t('users.modal.inputs.status') }}
             <q-select map-options emit-value dropdown-icon="expand_more" id="status"
               class="q-mt-md q-px-md border-reset q-py-xs full-width" dense borderless v-model="select.status"
               :options="statusArr" />
           </label>
 
           <label for="status" class="full-width">
-            Роль Ползователя
+            {{ $t('users.modal.inputs.role') }}
             <q-select map-options emit-value dropdown-icon="expand_more" id="status"
               class="q-mt-md q-px-md border-reset q-py-xs full-width" dense borderless v-model="select.role"
               :options="roleArr" />
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
-          <password-input class="full-width" label="Введите новый пароль"
+          <password-input class="full-width" :label="$t('password.new')"
             :inputData="{ component: 'userDialog', inputName: 'newPassword' }" />
-          <password-input class="full-width" label="Потвердите новый пароль"
+          <password-input class="full-width" :label="$t('password.confirm')"
             :inputData="{ component: 'userDialog', inputName: 'confirmPassword' }" />
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
-          <q-btn @click="closeModal" color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+          <q-btn @click="closeModal" color="indigo-10" flat :label="$t('btn.cancel')" style="border-radius: 12px;"
             class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-          <q-btn @click="save" color="white" flat label="Сохранить" style="border-radius: 12px;"
+          <q-btn @click="save" color="white" flat :label="$t('btn.save')" style="border-radius: 12px;"
             class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
         </q-card-actions>
       </q-card-section>

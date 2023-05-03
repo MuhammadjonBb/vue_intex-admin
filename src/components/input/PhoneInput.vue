@@ -1,6 +1,6 @@
 <template>
   <label for="tel" class="font-weight-medium full-width q-mb-md " style="display: block;">
-    Номер телефона
+    {{ $t('phoneInput.name') }}
     <q-input :rules="rules" v-model="inputStore.input[inputData.component][inputData.inputName]" id="tel" borderless
       :class="rules?.length ? 'i-border' : 'border-reset'" class="q-mt-sm q-px-md" type="tel" style="position: relative;"
       :mask="returnMask()" fill-mask>

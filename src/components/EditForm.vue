@@ -6,7 +6,8 @@
           :inputData="{ component: 'ordersForm', inputName: 'first_name' }" class="full-width" />
         <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="surname" label="Фамилия"
           :inputData="{ component: 'ordersForm', inputName: 'last_name' }" class="full-width" />
-        <PhoneInput class="full-width" :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
+        <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']" class="full-width"
+          :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
         <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="email" label="Email"
           :inputData="{ component: 'ordersForm', inputName: 'email' }" class="full-width" />
       </div>

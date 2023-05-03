@@ -5,7 +5,7 @@
     selection="multiple" :columns="[
         {
           name: 'id',
-          label: '№ Заказа',
+          label: `${$t('orders.table.tableHead.orderNum')}`,
           field: 'order_number',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -13,7 +13,7 @@
         },
         {
           name: 'client',
-          label: 'Имя клиента',
+          label: `${$t('orders.table.tableHead.clientName')}`,
           field: 'first_name',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -21,43 +21,43 @@
         },
         {
           name: 'phone',
-          label: 'Tелефон',
+          label: `${$t('orders.table.tableHead.phone')}`,
           field: 'phone',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left',
         },
         {
           name: 'address',
-          label: 'Адрес',
+          label: `${$t('orders.table.tableHead.address')}`,
           field: 'address',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'ids',
-          label: 'Товары',
-          field: 'ids',
+          label: `${$t('orders.table.tableHead.products')}`,
+          field: 'count',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left',
           sortable: true,
         },
         {
           name: 'total_price',
-          label: 'Обшая цена',
+          label: `${$t('orders.table.tableHead.cost')}`,
           field: row => beautifyPrice(row.total_price),
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'date',
-          label: 'Время заказа',
+          label: `${$t('orders.table.tableHead.orderTime')}`,
           field: 'created_at',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'status',
-          label: 'Статус',
+          label: `${$t('orders.table.tableHead.status')}`,
           field: 'name_ru',
           align: 'left',
           headerStyle: 'background-color: #f2f2f2;',
@@ -126,7 +126,7 @@
     <template #body-cell-status="props">
       <q-td :props="props">
         <q-chip square :color="getStatusClass(props.row.name_ru)" class="full-width justify-center">
-          {{ props.row.name_ru }}
+          {{ props.row[`name_${getLocale()}`] }}
         </q-chip>
       </q-td>
     </template>
@@ -235,6 +235,13 @@ import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord.js'
 import beautifyDate from 'src/helpers/beautifyDate'
 import { useOrdersStore } from 'src/stores/moduls/orders'
+import { useI18n } from 'vue-i18n'
+
+
+function getLocale() {
+  const { locale } = useI18n()
+  return locale.value.slice(0, -3)
+}
 
 interface ISelected {
   id: number

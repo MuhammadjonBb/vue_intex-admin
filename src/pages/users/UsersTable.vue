@@ -13,40 +13,40 @@
         {
           name: 'name',
           field: 'name',
-          label: 'Имя',
+          label: `${$t('users.table.tableHead.name')}`,
           sortable: true,
           align: 'left'
         },
         {
           name: 'role',
           field: row => returnRole(row.role),
-          label: 'Роль  ползователя',
+          label: `${$t('users.table.tableHead.role')}`,
           sortable: true,
           align: 'left'
         },
         {
           name: 'status',
           field: 'status',
-          label: 'Статус',
+          label: `${$t('users.table.tableHead.status')}`,
           align: 'left'
         },
         {
           name: 'phone',
           field: 'phone',
-          label: 'Номер телефона',
+          label: `${$t('users.table.tableHead.phone')}`,
           sortable: true,
           align: 'left'
         },
         {
           name: 'registerDate',
           field: 'created_at',
-          label: 'Дата регистрация',
+          label: `${$t('users.table.tableHead.registerDate')}`,
           align: 'left'
         },
         {
           name: 'birthDate',
           field: 'birthDate',
-          label: 'Дата рождение',
+          label: `${$t('users.table.tableHead.birthday')}`,
           sortable: true,
           align: 'left'
         },
