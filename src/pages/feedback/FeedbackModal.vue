@@ -10,10 +10,12 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <DefaultInput :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
-            placeholder="Введите ваше имя" type="text" label="Имя" />
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name" placeholder="Введите ваше имя"
+            type="text" label="Имя" />
 
-          <phone-input :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
+          <phone-input :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
         </div>
         <div class="row q-mt-lg">
           <q-space />

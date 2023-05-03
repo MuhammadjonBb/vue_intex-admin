@@ -18,23 +18,29 @@
 
       <Transition name="slide-fade" mode="out-in">
         <q-card-section class="q-pt-none column" v-if="langTab === 'uz'">
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_uz' }" name="address_uz"
-            type="text" label="Адрес" />
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_uz' }" name="work_uz" type="text"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'address_uz' }" name="address_uz" type="text"
+            label="Адрес" />
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'work_uz' }" name="work_uz" type="text"
             label="График работы" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else-if="langTab === 'ru'">
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_ru' }" name="address_ru"
-            type="text" label="Адрес" />
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_ru' }" name="work_ru" type="text"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'address_ru' }" name="address_ru" type="text"
+            label="Адрес" />
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'work_ru' }" name="work_ru" type="text"
             label="График работы" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else>
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'address_en' }" name="address_en"
-            type="text" label="Адрес" />
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'work_en' }" name="work_en" type="text"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'address_en' }" name="address_en" type="text"
+            label="Адрес" />
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'work_en' }" name="work_en" type="text"
             label="График работы" />
         </q-card-section>
       </Transition>
@@ -43,7 +49,8 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <phone-input :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
+          <phone-input :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
           <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'email' }" name="email" type="text"
             label="E-mail" />
         </div>

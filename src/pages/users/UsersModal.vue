@@ -35,18 +35,23 @@
 
         </div>
         <div class="row no-wrap" style="gap:10px;">
-          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" label="Имя"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" label="Имя"
             placeholder="Введите ваше имя" type="text" />
-          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname" label="Фамилия"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname" label="Фамилия"
             placeholder="Введите вашу фамилию" type="text" />
-          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
             placeholder="Введите ваш email" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <PhoneInput :inputData="{ component: 'userDialog', inputName: 'phone' }" />
-          <DefaultInput :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth" label="Дата рождения"
-            type="date" placeholder="" />
+          <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'userDialog', inputName: 'phone' }" />
+          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+            :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth" label="Дата рождения" type="date"
+            placeholder="" />
         </div>
         <div class="row no-wrap q-mb-md" style="gap: 20px;">
           <label for="status" class="full-width">

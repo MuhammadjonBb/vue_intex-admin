@@ -1,9 +1,11 @@
 <template>
   <div class="auth">
     <h1 class="modal__title">Авторизоваться</h1>
-    <DefaultInput name="name" :inputData="{ component: 'mainAuth', inputName: 'email' }" label="Email"
-      placeholder="Введите ваш email" type="text" />
-    <PhoneInput :input-data="{ component: 'mainAuth', inputName: 'phone' }"></PhoneInput>
+    <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name"
+      :inputData="{ component: 'mainAuth', inputName: 'email' }" label="Email" placeholder="Введите ваш email"
+      type="text" />
+    <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+      :input-data="{ component: 'mainAuth', inputName: 'phone' }"></PhoneInput>
     <password-input label="Введите пароль" :inputData="{ component: 'mainAuth', inputName: 'password' }" />
 
     <div class="row" style="justify-content: space-between;">

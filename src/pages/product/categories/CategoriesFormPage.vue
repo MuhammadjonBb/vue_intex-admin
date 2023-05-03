@@ -10,8 +10,9 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="ruName" :inputData="{ component: 'categoriesForm', inputName: 'ruName' }"
-                    label="Название категорию" placeholder="Введите название категорию" />
+                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="ruName"
+                    :inputData="{ component: 'categoriesForm', inputName: 'ruName' }" label="Название категорию"
+                    placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('ru')"
                     @mouseleave="setInvisibleSubcategoryInput('ru')">
@@ -37,8 +38,9 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="enName" :inputData="{ component: 'categoriesForm', inputName: 'enName' }"
-                    label="Название категорию" placeholder="Введите название категорию" />
+                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="enName"
+                    :inputData="{ component: 'categoriesForm', inputName: 'enName' }" label="Название категорию"
+                    placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('en')"
                     @mouseleave="setInvisibleSubcategoryInput('en')">
@@ -65,8 +67,9 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput name="uzName" :inputData="{ component: 'categoriesForm', inputName: 'uzName' }"
-                    label="Название категорию" placeholder="Введите название категорию" />
+                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="uzName"
+                    :inputData="{ component: 'categoriesForm', inputName: 'uzName' }" label="Название категорию"
+                    placeholder="Введите название категорию" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('uz')"
                     @mouseleave="setInvisibleSubcategoryInput('uz')">
