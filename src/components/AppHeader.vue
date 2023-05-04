@@ -2,7 +2,7 @@
   <q-header class="header row justify-between bg-white fixed-top" style="padding-bottom: 0;">
     <div>
       <q-input borderless v-model="searchValue" class="bg-grey-2 q-px-md items-center column" style="border-radius: 12px;"
-        dense placeholder="Поиск">
+        dense :placeholder="$t('search')">
 
         <template #prepend>
           <q-icon name="search" color="primary"></q-icon>
@@ -12,21 +12,21 @@
     <div>
       <q-list class="row">
         <q-item class="items-center" dense>
-          <q-select dropdown-icon="expand_more" borderless class="bg-grey-2 q-px-md q-pb-xs" style="border-radius: 12px;"
-            v-model="selectValue" :options="options" dense>
+          <q-select emit-value map-options dropdown-icon="expand_more" borderless class="bg-grey-2 q-px-md q-pb-xs"
+            style="border-radius: 12px;" v-model="selectValue" :options="options" dense>
 
             <template #option="scope">
               <q-item class="row" v-bind="scope.itemProps">
                 <q-item-section class="no-wrap items-center" style="flex-direction: row;">
                   <img :src="`/src/assets/lang/${(scope.index)}-lang.png`" alt="язык" style="width: 28px; height: 20px;"
                     class="q-mr-sm">
-                  <span>{{ scope.opt }}</span>
+                  <span>{{ scope.opt.label }}</span>
                 </q-item-section>
               </q-item>
             </template>
 
             <template v-slot:prepend>
-              <img :src="`/src/assets/lang/${options.indexOf(selectValue)}-lang.png`" alt="язык"
+              <img :src="`/src/assets/lang/${options.findIndex((v: any) => v.value === selectValue)}-lang.png`" alt="язык"
                 style="width: 28px;height: 20px;" class="q-mr-xs">
             </template>
           </q-select>
@@ -65,10 +65,20 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 const { t, locale } = useI18n()
-
 const route = useRoute()
-const options: string[] = ['ru-RU', 'en-US', 'uz-UZ']
-const selectValue: Ref<string> = ref(options[0])
+const options = [{
+  label: 'RU',
+  value: 'ru-RU'
+},
+{
+  label: 'EN',
+  value: 'en-US'
+},
+{
+  label: 'UZ',
+  value: 'uz-UZ'
+}]
+const selectValue = ref(options[0].value)
 const searchValue: Ref<string> = ref('')
 
 watch(selectValue, (newVal) => {

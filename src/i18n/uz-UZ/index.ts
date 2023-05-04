@@ -202,6 +202,7 @@ export default {
       }
     }
   },
+  search: 'Qidirish',
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',
   cancel: 'Действие отменено',

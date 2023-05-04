@@ -217,7 +217,7 @@ export default {
       }
     }
   },
-
+  search: 'Search',
   failed: 'Action failed',
   success: 'Action was successful',
   cancel: 'Action was cancelled',
