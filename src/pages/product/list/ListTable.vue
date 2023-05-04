@@ -41,7 +41,9 @@
     </template>
     <template #body-cell-name="props">
       <q-td class="bg-white" :props="props">
-        {{ props.row.name_ru }}
+        <q-img style="border: 1px solid grey; border-radius: 5px" fit="scale-down" width="60px" height="30px" :src="`https://intex-shop-production.up.railway.app/${props.row.image[1]}`" class="q-mr-sm" />
+
+        {{ props.row.name_ru.slice(0,15)+'...' }}
       </q-td>
     </template>
     <template #body-cell-status="data">
@@ -80,7 +82,7 @@
           <q-list style="min-width: 150px">
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left " @click="store.updateList(data.row.id)" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left " :to="{path:`update/${data.row.id}`}" @click="store.getListId(data.row.id)" text-color="grey-8">
                   <q-icon size="xs" name="edit" color="positive" class="on-left" />
                   Изменить
                 </q-btn>
