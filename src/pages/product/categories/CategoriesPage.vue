@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">Категории</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $t('categories.title') }}</h1>
 
       <SearchFilterCreatePanel :dynamicRoute="'categories/add'" :isModal="false" />
 

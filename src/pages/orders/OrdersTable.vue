@@ -5,7 +5,7 @@
     selection="multiple" :columns="[
         {
           name: 'id',
-          label: '№ Заказа',
+          label: `${$t('orders.table.tableHead.orderNum')}`,
           field: 'order_number',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -13,7 +13,7 @@
         },
         {
           name: 'client',
-          label: 'Имя клиента',
+          label: `${$t('orders.table.tableHead.clientName')}`,
           field: 'first_name',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
@@ -21,43 +21,43 @@
         },
         {
           name: 'phone',
-          label: 'Tелефон',
+          label: `${$t('orders.table.tableHead.phone')}`,
           field: 'phone',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left',
         },
         {
           name: 'address',
-          label: 'Адрес',
+          label: `${$t('orders.table.tableHead.address')}`,
           field: 'address',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'ids',
-          label: 'Товары',
-          field: 'ids',
+          label: `${$t('orders.table.tableHead.products')}`,
+          field: 'count',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left',
           sortable: true,
         },
         {
           name: 'total_price',
-          label: 'Обшая цена',
+          label: `${$t('orders.table.tableHead.cost')}`,
           field: row => beautifyPrice(row.total_price),
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'date',
-          label: 'Время заказа',
+          label: `${$t('orders.table.tableHead.orderTime')}`,
           field: 'created_at',
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
           name: 'status',
-          label: 'Статус',
+          label: `${$t('orders.table.tableHead.status')}`,
           field: 'name_ru',
           align: 'left',
           headerStyle: 'background-color: #f2f2f2;',
@@ -75,7 +75,7 @@
     <template #top>
       <q-tr class="item-center">
         <q-checkbox v-model:model-value="allSelect" />
-        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
+        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, {{ $t('table.choose') }}</span>
         <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />
       </q-tr>
     </template>
@@ -126,7 +126,7 @@
     <template #body-cell-status="props">
       <q-td :props="props">
         <q-chip square :color="getStatusClass(props.row.name_ru)" class="full-width justify-center">
-          {{ props.row.name_ru }}
+          {{ props.row[`name_${getLocale()}`] }}
         </q-chip>
       </q-td>
     </template>
@@ -200,14 +200,14 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
             :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.elmPerPage') }}</span>
         </div>
 
         <div class="text-grey-8" style="font-size: 15px;">
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
-          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ data.result.length }} предметов
+          {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
+          {{ data.result.length }} {{ $t('table.items') }}
         </div>
 
         <q-space />
@@ -216,7 +216,8 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
             :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.from') }} {{ scope.pagesNumber }}
+            {{ $t('table.pages') }}</span>
         </div>
 
         <div class="row items-center">
@@ -235,6 +236,13 @@ import { useRouter } from 'vue-router'
 import getRightWord from 'src/helpers/getRightWord.js'
 import beautifyDate from 'src/helpers/beautifyDate'
 import { useOrdersStore } from 'src/stores/moduls/orders'
+import { useI18n } from 'vue-i18n'
+
+
+function getLocale() {
+  const { locale } = useI18n()
+  return locale.value.slice(0, -3)
+}
 
 interface ISelected {
   id: number

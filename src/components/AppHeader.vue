@@ -84,21 +84,21 @@ function isChildPage(path: string): boolean {
 }
 
 function returnPageName(pagePath: string): string | void {
-  if (pagePath.includes('categories')) return 'Категории'
+  if (pagePath.includes('categories')) return t('categories.title')
   else if (pagePath.includes('attributes')) return 'Атрибуты'
-  else if (pagePath.includes('orders')) return 'Заказы'
-  else if (pagePath.includes('users')) return 'Пользователи'
-  else if (pagePath.includes('settings')) return 'Настройки сайта'
-  else if (pagePath.includes('feedback')) return 'Обратная связь'
+  else if (pagePath.includes('orders')) return t('orders.title')
+  else if (pagePath.includes('users')) return t('users.title')
+  else if (pagePath.includes('settings')) return t('siteSettings.title')
+  else if (pagePath.includes('feedback')) return t('consultations.title')
   if (pagePath.includes('product')) return 'Продукты'
 }
 
 function returnPageChild(pagePath: string): string | void {
-  if (pagePath.includes('categories/add')) return 'Добавить категорию'
-  else if (pagePath.includes('attributes/create')) return 'Добавить атрибут'
-  else if (pagePath.includes('orders/edit')) return '#' + (route.params.id) || 'Изменить заказ'
-  else if (pagePath.includes('orders/create')) return 'Добавить заказ'
-  else if (pagePath.includes('product/create')) return 'Добавить продукт'
+  if (pagePath.includes('categories/add')) return t('routes.addCategory')
+  else if (pagePath.includes('attributes/create')) return t('routes.addAttribute')
+  else if (pagePath.includes('orders/edit')) return '#' + (route.params.id) || t('routes.editOrder')
+  else if (pagePath.includes('orders/create')) return t('routes.addOrder')
+  else if (pagePath.includes('product/create')) return t('routes.addProduct')
 }
 </script>
 

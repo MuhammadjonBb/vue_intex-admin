@@ -2,7 +2,7 @@
   <aside class="aside column">
     <img src="/src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
     <q-list>
-      <q-expansion-item expand-icon-class="text-primary" label="Продукты" icon="summarize"
+      <q-expansion-item expand-icon-class="text-primary" :label="`${$t('aside.items.products')}`" icon="summarize"
         header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium"
         :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`" default-opened>
         <q-list>
@@ -16,7 +16,7 @@
                 :class="isPageActive(['product/list', 'product/create'], false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/list"
                 :class="isPageActive(['product/list', 'product/create'], true)">
-                Список продуктов
+                {{ $t('aside.items.productList') }}
               </router-link>
             </q-item-section>
           </q-item>
@@ -28,7 +28,7 @@
                 :class="isPageActive(['product/categories'], false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/categories"
                 :class="isPageActive(['product/categories'], true)">
-                Категории
+                {{ $t('aside.items.categories') }}
               </router-link>
             </q-item-section>
           </q-item>
@@ -40,7 +40,7 @@
                 :class="isPageActive(['product/attributes'], false, true)" />
               <router-link class="text-weight-medium aside__products-link" to="/product/attributes"
                 :class="isPageActive(['product/attributes'], true)">
-                Атрибуты
+                {{ $t('aside.items.attributes') }}
               </router-link>
             </q-item-section>
           </q-item>
@@ -53,7 +53,7 @@
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="email" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/orders/">
-            Заказы
+            {{ $t('aside.items.orders') }}
           </router-link>
         </q-item-section>
       </q-item>
@@ -63,7 +63,7 @@
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="phone" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/feedback/">
-            Обратная связь
+            {{ $t('aside.items.feedback') }}
           </router-link>
         </q-item-section>
       </q-item>
@@ -73,7 +73,7 @@
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="account_circle" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
-            Пользователи
+            {{ $t('aside.items.users') }}
           </router-link>
         </q-item-section>
       </q-item>
@@ -83,7 +83,7 @@
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="settings" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/settings/">
-            Настройки сайта
+            {{ $t('aside.items.siteSettings') }}
           </router-link>
         </q-item-section>
       </q-item>
@@ -93,7 +93,7 @@
         <q-item-section class="items-center items-row-start">
           <q-icon color="primary" name="logout" size="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/exit/">
-            Выйти
+            {{ $t('aside.items.exit') }}
           </router-link>
         </q-item-section>
       </q-item>

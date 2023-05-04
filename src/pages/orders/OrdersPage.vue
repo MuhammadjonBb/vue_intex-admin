@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">Заказы</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $t('orders.title') }}</h1>
       <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="'create'" :is-modal="false" />
 
       <OrdersTable v-if="ordersStore.orders" :data="ordersStore.orders" />

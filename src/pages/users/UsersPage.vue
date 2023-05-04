@@ -1,12 +1,12 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">Пользователи</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $t('users.title') }}</h1>
       <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="{ component: 'users', modalName: 'create' }"
         :is-modal="true" />
       <UsersTable :data="usersStore.users" v-if="usersStore.users" @on-edit="onEdit" />
-      <UserModal label="Добавить пользователя" :modal-name="'create'" :user-data="editData" />
-      <UserModal label="Изменить" :modal-name="'edit'" :user-data="editData" />
+      <UserModal :label="$t('users.modal.addTitle')" :modal-name="'create'" :user-data="editData" />
+      <UserModal :label="$t('users.modal.editTitle')" :modal-name="'edit'" :user-data="editData" />
     </q-page>
   </q-layout>
 </template>

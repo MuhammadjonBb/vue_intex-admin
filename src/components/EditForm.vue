@@ -2,16 +2,17 @@
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;" v-if="ordersStore.products">
     <div class="column no-wrap q-mb-md" style="gap:20px;">
       <div class="row no-wrap" style="gap: 20px;">
-        <DefaultInput name="name" label="Имя" :inputData="{ component: 'ordersForm', inputName: 'first_name' }"
-          class="full-width" />
-        <DefaultInput name="surname" label="Фамилия" :inputData="{ component: 'ordersForm', inputName: 'last_name' }"
-          class="full-width" />
-        <PhoneInput class="full-width" :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
-        <DefaultInput name="email" label="Email" :inputData="{ component: 'ordersForm', inputName: 'email' }"
-          class="full-width" />
+        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name" label="Имя"
+          :inputData="{ component: 'ordersForm', inputName: 'first_name' }" class="full-width" />
+        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="surname" label="Фамилия"
+          :inputData="{ component: 'ordersForm', inputName: 'last_name' }" class="full-width" />
+        <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']" class="full-width"
+          :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
+        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="email" label="Email"
+          :inputData="{ component: 'ordersForm', inputName: 'email' }" class="full-width" />
       </div>
 
-      <DefaultInput name="address" icon="location_on" label="Адрес"
+      <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="address" icon="location_on" label="Адрес"
         :inputData="{ component: 'ordersForm', inputName: 'address' }" />
     </div>
     <!-- ==================== -->

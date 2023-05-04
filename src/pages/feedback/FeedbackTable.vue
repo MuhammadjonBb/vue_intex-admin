@@ -3,46 +3,46 @@
     table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
     table-header-class="text-grey-7 q-pa-none" :rows="data.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
-      {
-        name: 'id',
-        field: 'id',
-        label: 'ID',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'name',
-        field: 'name',
-        label: 'Имя',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'phone',
-        field: 'phone',
-        label: 'Номер телефона',
-        sortable: true,
-        align: 'left',
-      },
-      {
-        name: 'date',
-        field: 'date',
-        label: 'Время заяавки',
-        align: 'left',
-      },
-      {
-        name: 'action',
-        label: 'Action',
-        field: '',
-        headerStyle: 'background-color: #f2f2f2;',
-        align: 'right'
-      }
-    ]">
+        {
+          name: 'id',
+          field: 'id',
+          label: 'ID',
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'name',
+          field: 'name',
+          label: `${$t('consultations.table.tableHead.name')}`,
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'phone',
+          field: 'phone',
+          label: `${$t('consultations.table.tableHead.phone')}`,
+          sortable: true,
+          align: 'left',
+        },
+        {
+          name: 'date',
+          field: 'date',
+          label: `${$t('consultations.table.tableHead.apllicationTime')}`,
+          align: 'left',
+        },
+        {
+          name: 'action',
+          label: 'Action',
+          field: '',
+          headerStyle: 'background-color: #f2f2f2;',
+          align: 'right'
+        }
+      ]">
     <!-- TOP-SELECT -->
     <template #top>
       <q-tr class="item-center">
         <q-checkbox v-model:model-value="allSelect" />
-        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, выбрано</span>
+        <span class="text-grey-5" style="font-weight: 500;">{{ selected.length }}, {{ $t('table.choose') }}</span>
         <q-btn text-color="grey-5" icon="delete" flat round @click="clearSelections" />
       </q-tr>
     </template>
@@ -134,14 +134,14 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.rowsPerPage"
             :options="[5, 10, 20, 50]" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Элементы на каждой странице</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.elmPerPage') }}</span>
         </div>
 
         <div class="text-grey-8" style="font-size: 15px;">
           {{ scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage == 0 ? 1 :
             scope.pagination.rowsPerPage * scope.pagination.page - scope.pagination.rowsPerPage }} -
-          {{ scope.pagination.rowsPerPage * scope.pagination.page }} из
-          {{ data.pageInfo.total_count }} предметов
+          {{ scope.pagination.rowsPerPage * scope.pagination.page }} {{ $t('table.from') }}
+          {{ data.pageInfo.total_count }} {{ $t('table.items') }}
         </div>
 
         <q-space />
@@ -150,7 +150,8 @@
           <q-select dropdown-icon="expand_more" borderless dense v-model="scope.pagination.page"
             :options="getPageNums(scope.pagesNumber)" emit-value class="q-mr-sm q-pl-md q-pr-sm bg-grey-3"
             style="border-radius: 12px;" />
-          <span class="text-grey-7" style="font-size: 15px;"> Из {{ scope.pagesNumber }} страниц</span>
+          <span class="text-grey-7" style="font-size: 15px;"> {{ $t('table.from') }} {{ scope.pagesNumber }}
+            {{ $t('table.pages') }}</span>
         </div>
 
         <div class="row items-center">

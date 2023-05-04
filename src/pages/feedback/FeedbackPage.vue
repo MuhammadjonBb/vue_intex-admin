@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">Обратная связь</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $t('consultations.title') }}</h1>
 
       <SearchFilterCreatePanel class="q-mb-md" :dynamic-route="{ component: 'feedback', modalName: 'create' }"
         :isModal="true" />
