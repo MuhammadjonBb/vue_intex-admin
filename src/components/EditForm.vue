@@ -69,7 +69,7 @@
       <q-space />
       <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
         class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-      <q-btn @click="ordersStore.createOrder()" color="white" flat label="Сохранить" style="border-radius: 12px;"
+      <q-btn @click="createOrder()" color="white" flat label="Сохранить" style="border-radius: 12px;"
         class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
     </div>
   </q-form>
@@ -81,8 +81,11 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useOrdersStore } from 'src/stores/moduls/orders';
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { Notify } from 'quasar';
 import { useInputStore } from 'src/stores/moduls/input';
 
+const { t } = useI18n()
 const inputStore = useInputStore()
 const route = useRoute()
 const ordersStore = useOrdersStore()
@@ -99,6 +102,24 @@ if (route.params.id && ordersStore.orders) {
 }
 function getOrder(id: any) {
   return ordersStore.orders.result.find((item: any) => item.order_number === `#${id}`)
+}
+
+function createOrder() {
+  ordersStore.createOrder().then(() => {
+    Notify.create({
+      color: 'positive',
+      textColor: 'white',
+      message: t('notification.orders.created'),
+      position: 'top-right',
+    })
+  }).catch(() => {
+    Notify.create({
+      color: 'negative',
+      textColor: 'white',
+      message: t('notification.orders.createError'),
+      position: 'top-right',
+    })
+  })
 }
 </script>
 

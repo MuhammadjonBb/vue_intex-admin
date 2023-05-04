@@ -68,8 +68,8 @@ const { t, locale } = useI18n()
 
 const route = useRoute()
 const options: string[] = ['ru-RU', 'en-US', 'uz-UZ']
-const searchValue: Ref<string> = ref('')
 const selectValue: Ref<string> = ref(options[0])
+const searchValue: Ref<string> = ref('')
 
 watch(selectValue, (newVal) => {
   locale.value = newVal
@@ -85,12 +85,12 @@ function isChildPage(path: string): boolean {
 
 function returnPageName(pagePath: string): string | void {
   if (pagePath.includes('categories')) return t('categories.title')
-  else if (pagePath.includes('attributes')) return 'Атрибуты'
+  else if (pagePath.includes('attributes')) return t('aside.items.attributes')
   else if (pagePath.includes('orders')) return t('orders.title')
   else if (pagePath.includes('users')) return t('users.title')
   else if (pagePath.includes('settings')) return t('siteSettings.title')
   else if (pagePath.includes('feedback')) return t('consultations.title')
-  if (pagePath.includes('product')) return 'Продукты'
+  if (pagePath.includes('product')) return t('aside.items.products')
 }
 
 function returnPageChild(pagePath: string): string | void {

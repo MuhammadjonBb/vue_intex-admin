@@ -112,6 +112,8 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import { useCategoriesStore } from 'src/stores/moduls/products/categories'
 import { useInputStore } from 'src/stores/moduls/input';
 import { useQuasar } from 'quasar';
+import { useI18n } from 'vue-i18n';
+
 
 interface ISubcategoriesArr {
   ru: string[],
@@ -119,6 +121,7 @@ interface ISubcategoriesArr {
   en: string[]
 }
 
+const { t } = useI18n()
 const $q = useQuasar()
 const categoriesStore = useCategoriesStore()
 const inputStore = useInputStore()
@@ -170,13 +173,13 @@ function save() {
       clearValues()
 
       $q.notify({
-        message: 'Категория успешно сохранена',
+        message: t('notification.categories.created'),
         color: 'positive'
       })
     })
   } else {
     $q.notify({
-      message: 'Количество значений в подкатегориях должно совпадать с количеством значений в других подкатегориях',
+      message: t('notification.categories.equalError'),
       color: 'negative',
       position: 'top-right'
     })

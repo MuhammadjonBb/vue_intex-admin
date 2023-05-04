@@ -304,5 +304,4 @@ function getProduct(id: any) {
   const product = ordersStore.products.result.find((p: any) => p.id === id)
   return product ? product.name_ru : ''
 }
-
 </script>

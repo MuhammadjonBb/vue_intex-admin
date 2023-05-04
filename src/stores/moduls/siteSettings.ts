@@ -42,134 +42,38 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
         ...this.langStatus
       }
       data.phone = getPrefix(data.phone) + removeCharacters(data.phone)
-      return api.put('sites', data).then(r => {
-        Notify.create({
-          message: 'Информация сайта успешно обновлена',
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
-        this.getSiteInfo()
-      }).catch(e => {
-        Notify.create({
-          message: 'Ошибка обновления информации сайта',
-          color: 'negative',
-          position: 'top-right',
-          group: false
-        })
-      })
+      return api.put('sites', data)
     },
     getSocialNetworks() {
       return api.get('social-networks')
         .then(r => {
           return this.socialNetworks = r.data
         })
-        .catch(e => {
-          Notify.create({
-            message: 'Ошибка получения социальных сетей',
-            color: 'negative',
-            position: 'top-right',
-            group: false
-          })
-        })
     },
     deleteSocialNetwork(id: number) {
       return api.delete(`social-networks/${id}`)
         .then(r => {
-          Notify.create({
-            message: 'Социальная сеть успешно удалена',
-            color: 'positive',
-            position: 'top-right',
-            group: false
-          })
           this.getSocialNetworks()
-        })
-        .catch(e => {
-          Notify.create({
-            message: 'Ошибка удаления социальной сети',
-            color: 'negative',
-            position: 'top-right',
-            group: false
-          })
         })
     },
     siteLangUpdate(lang_name: string, status: boolean) {
       return api.put('sites/siteLangUpdate', {
         lang_name,
         status
-      }).then(() => {
-        Notify.create({
-          message: 'Язык сайта успешно обновлен',
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
-      }).catch(e => {
-        Notify.create({
-          message: 'Ошибка обновления языка сайта',
-          color: 'negative',
-          position: 'top-right',
-          group: false
-        })
       })
     },
     updateDefaultLang(lang_name: string) {
-      return api.put('sites/defaultLang', { lang_name }).then(() => {
-        Notify.create({
-          message: 'Язык по умолчанию успешно обновлен',
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
-      })
-        .catch(e => {
-          Notify.create({
-            message: 'Ошибка обновления языка по умолчанию',
-            color: 'negative',
-            position: 'top-right',
-            group: false
-          })
-        })
+      return api.put('sites/defaultLang', { lang_name })
     },
     createSocialNetwork(data: object) {
-      return api.post('social-networks', data)
-        .then(r => {
-          Notify.create({
-            message: 'Социальная сеть успешно создана',
-            color: 'positive',
-            position: 'top-right',
-            group: false
-          })
-          this.getSocialNetworks()
-        })
-        .catch(e => {
-          Notify.create({
-            message: 'Ошибка создания социальной сети',
-            color: 'negative',
-            position: 'top-right',
-            group: false
-          })
-        })
+      return api.post('social-networks', data).then(r => {
+        this.getSocialNetworks()
+      })
     },
     updateSocialNetwork(data: any) {
-      return api.put('social-networks', data)
-        .then(r => {
-          Notify.create({
-            message: 'Социальная сеть успешно обновлена',
-            color: 'positive',
-            position: 'top-right',
-            group: false
-          })
-          this.getSocialNetworks()
-        })
-        .catch(e => {
-          Notify.create({
-            message: 'Ошибка обновления социальной сети',
-            color: 'negative',
-            position: 'top-right',
-            group: false
-          })
-        })
+      return api.put('social-networks', data).then(r => {
+        this.getSocialNetworks()
+      })
     }
   },
 })

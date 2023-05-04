@@ -25,8 +25,9 @@ import { ref, Ref, defineEmits } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
+import { useI18n } from 'vue-i18n'
 
-
+const { t } = useI18n()
 const router = useRouter()
 const $q = useQuasar()
 const inputStore = useInputStore()
@@ -40,7 +41,7 @@ function login() {
     $q.notify({
       group: false,
       type: 'positive',
-      message: 'Вы успешно авторизовались',
+      message: t('notification.user.authorized'),
       position: 'top-right',
     })
     router.push('/')
@@ -50,7 +51,7 @@ function login() {
     $q.notify({
       group: false,
       type: 'negative',
-      message: 'Ошибка авторизации',
+      message: t('notification.user.authErr'),
       position: 'top-right',
     })
   })

@@ -1,6 +1,3 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   // Product list page
   product: {
@@ -109,8 +106,26 @@ export default {
     subTitles: {
       defaultLang: 'Default language',
       siteLangs: 'Site languages',
-      contactIno: 'Contact information',
+      contactInfo: 'Contact information',
       socials: 'Socials',
+    },
+    modal: {
+      title: 'Edit information',
+      contacts: {
+        address: 'Address',
+        schedule: 'Work schedule',
+        lang: {
+          uz: 'Uzbek language',
+          ru: 'Russian language',
+          en: 'English language',
+        }
+      },
+      socials: {
+        add: 'Add social network',
+        delete: 'Delete social network',
+        type: 'Type of social network',
+        link: 'Link',
+      }
     }
   },
   categories: {
@@ -155,6 +170,52 @@ export default {
     addAttribute: 'Add attribute',
     addOrder: 'Add order',
     editOrder: 'Edit order',
+  },
+  notification: {
+    user: {
+      userNotAuthorized: 'User is not authorized',
+      tokenExpired: 'Token expired, please login again',
+      authorized: 'You are authorized successfully',
+      authErr: 'Authorization error',
+    },
+    consultation: {
+      created: 'Consultation was created successfully',
+      createError: 'Error on creating consultation',
+      deleted: 'Consultation was deleted successfully',
+      deleteError: 'Error on deleting consultation',
+    },
+    categories: {
+      created: 'Category was created successfully',
+      createError: 'Error on creating category',
+      equalError: 'The number of values in subcategories must match the number of values in other subcategories'
+    },
+    orders: {
+      created: 'Order was created successfully',
+      createError: 'Error on creating order',
+    },
+    siteSettings: {
+      siteInfo: {
+        updated: 'Site information was updated successfully',
+        updateError: 'Error on updating site information',
+      },
+      socials: {
+        getError: 'Error on getting socials',
+        deleted: 'Social network was deleted successfully',
+        deleteError: 'Error on deleting social network',
+        created: 'Social network was created successfully',
+        createError: 'Error on creating social network',
+        updated: 'Social network was updated successfully',
+        updateError: 'Error on updating social network',
+      },
+      siteLang: {
+        updated: 'Site language was updated successfully',
+        updateError: 'Error on updating site language',
+      },
+      defaultLang: {
+        updated: 'Default language was updated successfully',
+        updateError: 'Error on updating default language',
+      }
+    }
   },
 
   failed: 'Action failed',

@@ -93,6 +93,24 @@ export default {
       siteLangs: 'Sayt tillari',
       contactInfo: 'Kontaktlar ma\'lumoti',
       socials: 'Ijtimoiy tarmoqlar',
+    },
+    modal: {
+      title: 'Edit information',
+      socials: {
+        add: 'Ijtimoiy tarmoq qo\'shish',
+        delete: 'Ijtimoiy tarmoqni o\'chirish',
+        type: 'Ijtimoiy tarmoq turi',
+        link: 'Havola',
+      },
+      contacts: {
+        address: 'Manzil',
+        schedule: 'Ish jadvali',
+        lang: {
+          uz: 'O\'zbek tili',
+          ru: 'Rus tili',
+          en: 'Ingliz tili',
+        }
+      }
     }
   },
   categories: {
@@ -137,6 +155,52 @@ export default {
     addOrder: 'Buyurtma qo\'shish',
     addAttribute: 'Atribut qo\'shish',
     editOrder: 'Buyurtmani o\'zgartirish',
+  },
+  notification: {
+    user: {
+      userNotAuthorized: 'Foydalanuvchi ro\'yxatdan o\'tmagan',
+      tokenExpired: 'Token vaqti tugadi, ro\'yxatdan qaytadan o\'ting',
+      authorized: 'Siz ro\'yxatdan o\'tdingiz',
+      authErr: 'Ro\'yxatdan o\'tishda xatolik',
+    },
+    consultation: {
+      created: 'Qayta aloqa qo\'shildi',
+      createError: 'Qayta aloqa qo\'shishda xatolik',
+      deleted: 'Qayta aloqa o\'chirildi',
+      deleteError: 'Qayta aloqa o\'chirishda xatolik',
+    },
+    categories: {
+      created: 'Kategoriya qo\'shildi',
+      createError: 'Kategoriya qo\'shishda xatolik',
+      equalError: 'Pastki kategorialardagi qiymatlar soni boshqa kichik kategorialardagi qiymatlar soniga mos kelishi kerak'
+    },
+    orders: {
+      created: 'Buyurtma qo\'shildi',
+      createError: 'Buyurtma qo\'shishda xatolik',
+    },
+    siteSettings: {
+      siteInfo: {
+        updated: 'Sayt sozlamalari o\'zgartirildi',
+        updateError: 'Sayt sozlamalari o\'zgartirishda xatolik',
+      },
+      socials: {
+        getError: 'Ijtimoiy tarmoqlar yuklashda xatolik',
+        deleted: 'Ijtimoiy tarmoq o\'chirildi',
+        deleteError: 'Ijtimoiy tarmoq o\'chirishda xatolik',
+        created: 'Ijtimoiy tarmoq qo\'shildi',
+        createError: 'Ijtimoiy tarmoq qo\'shishda xatolik',
+        updated: 'Ijtimoiy tarmoq o\'zgartirildi',
+        updateError: 'Ijtimoiy tarmoq o\'zgartirishda xatolik',
+      },
+      siteLang: {
+        updated: 'Sayt tili o\'zgartirildi',
+        updateError: 'Sayt tilini o\'zgartirishda xatolik',
+      },
+      defaultLang: {
+        updated: 'Standart til o\'zgartirildi',
+        updateError: 'Standart tilini o\'zgartirishda xatolik',
+      }
+    }
   },
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',
