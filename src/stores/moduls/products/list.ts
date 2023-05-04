@@ -1,75 +1,127 @@
 import {defineStore} from 'pinia'
 import {api} from 'src/boot/axios'
 import {useInputStore} from "stores/moduls/input";
-
-const inputStore = useInputStore()
 import {Notify} from 'quasar'
+const inputStore = useInputStore()
+
+
 
 export const useListStore = defineStore('categories', {
   state: () => ({
     listData: [],
     attributes: [],
-    attribut: null,
+    attribut:<any> null,
     attributDialog: false,
     attribute_id: <any>[],
     attribute: <any>{},
     categories: [],
-    category: null,
+    category:<any> null,
     statuses: <any>[],
-    status: null,
-    country_id: <number>0,
-    about: {
-      about_uz: "",
-      about_ru: "",
-      about_en: "",
-    },
+    status:<any> null,
+    country_id: <any>0,
+    about: { about_uz: "", about_ru: "", about_en: "" },
     images: <any>[],
     count: 0,
     key: '',
-    imgLink: [],
-    imgLink2: [],
+    responseType: '',
   }),
   actions: {
-    async postList() {
-      console.log('success', {
-        name_ru: inputStore.input.productCreate.name_ru,
-        name_uz: inputStore.input.productCreate.name_uz,
-        name_en: inputStore.input.productCreate.name_en,
-        price: inputStore.input.productCreate.price,
-        discount_price: inputStore.input.productCreate.discount_price,
-        about_uz: this.about.about_uz,
-        about_ru: this.about.about_ru,
-        about_en: this.about.about_en,
-        image: this.images,
-        category_id: this.category?.id,
-        country_id: 0,
-        status_id: this.status?.id,
-        manufacturer_id: 0,
-        attribute_id: this.attribute_id,
-      })
-      await api.post('products',
-        {
-          name_ru: inputStore.input.productCreate.name_ru,
-          name_uz: inputStore.input.productCreate.name_uz,
-          name_en: inputStore.input.productCreate.name_en,
-          price: inputStore.input.productCreate.price,
-          count: inputStore.input.productCreate.count,
-          discount_price: inputStore.input.productCreate.discount_price,
-          about_uz: this.about.about_uz,
-          about_ru: this.about.about_ru,
-          about_en: this.about.about_en,
-          image: this.images,
-          category_id: this.category?.id,
-          country_id: this.country_id,
-          status_id: this.status?.id,
-          manufacturer_id: 0,
-          attribute_id: this.attribute_id
-        }
-      ).then(r => {
-        console.log('success post')
-      }).catch((err) => {
-        console.log(err, 'err post')
-      })
+    async postList(path: any) {
+
+      console.log(path, inputStore.input.productCreate.inputRef)
+      // if (path.split('/')[2] === 'create'){
+      //   console.log({
+      //     name_ru: inputStore.input.productCreate.name_ru,
+      //     name_uz: inputStore.input.productCreate.name_uz,
+      //     name_en: inputStore.input.productCreate.name_en,
+      //     price: inputStore.input.productCreate.price,
+      //     count: inputStore.input.productCreate.count,
+      //     discount_price: inputStore.input.productCreate.discount_price,
+      //     about_uz: this.about.about_uz,
+      //     about_ru: this.about.about_ru,
+      //     about_en: this.about.about_en,
+      //     image: this.images,
+      //     category_id: this.category?.id,
+      //     country_id: this.country_id,
+      //     status_id: this.status?.id,
+      //     manufacturer_id: 0,
+      //     attribute_id: this.attribute_id
+      //   })
+      // await api.post('products',
+      //   {
+      //     name_ru: inputStore.input.productCreate.name_ru,
+      //     name_uz: inputStore.input.productCreate.name_uz,
+      //     name_en: inputStore.input.productCreate.name_en,
+      //     price: inputStore.input.productCreate.price,
+      //     count: inputStore.input.productCreate.count,
+      //     discount_price: inputStore.input.productCreate.discount_price,
+      //     about_uz: this.about.about_uz,
+      //     about_ru: this.about.about_ru,
+      //     about_en: this.about.about_en,
+      //     image: this.images,
+      //     category_id: this.category?.id,
+      //     country_id: this.country_id,
+      //     status_id: this.status?.id,
+      //     manufacturer_id: 0,
+      //     attribute_id: this.attribute_id
+      //   }
+      // ).catch(err => {console.log(err, 'err post')})
+      // } else {
+      //   console.log(
+      //     {
+      //         id: path.split('/')[3],
+      //         name_ru: inputStore.input.productCreate.name_ru,
+      //         name_uz: inputStore.input.productCreate.name_uz,
+      //         name_en: inputStore.input.productCreate.name_en,
+      //         price: inputStore.input.productCreate.price,
+      //         count: inputStore.input.productCreate.count,
+      //         discount_price: inputStore.input.productCreate.discount_price,
+      //         about_uz: this.about.about_uz,
+      //         about_ru: this.about.about_ru,
+      //         about_en: this.about.about_en,
+      //         image: this.images,
+      //         category_id: this.category?.id,
+      //         country_id: this.country_id,
+      //         status_id: this.status?.id,
+      //         manufacturer_id: 0,
+      //         attribute_id: [0]
+      //       },'post'
+      //   )
+      //   await api.put('products',
+      //     {
+      //       id: path.split('/')[3],
+      //       name_ru: inputStore.input.productCreate.name_ru,
+      //       name_uz: inputStore.input.productCreate.name_uz,
+      //       name_en: inputStore.input.productCreate.name_en,
+      //       price: inputStore.input.productCreate.price,
+      //       count: inputStore.input.productCreate.count,
+      //       discount_price: inputStore.input.productCreate.discount_price,
+      //       about_uz: this.about.about_uz,
+      //       about_ru: this.about.about_ru,
+      //       about_en: this.about.about_en,
+      //       image: this.images,
+      //       category_id: this.category?.id,
+      //       country_id: this.country_id,
+      //       status_id: this.status?.id,
+      //       manufacturer_id: 0,
+      //       attribute_id: this.attribute_id
+      //     }
+      //   ).catch(err => {console.log(err, 'err post')})
+      // }
+      inputStore.input.productCreate.name_ru = ''
+      inputStore.input.productCreate.name_uz = ''
+      inputStore.input.productCreate.name_en = ''
+      inputStore.input.productCreate.price = null
+      inputStore.input.productCreate.count = null
+      inputStore.input.productCreate.discount_price = null
+      this.about.about_uz = ''
+      this.about.about_ru = ''
+      this.about.about_en = ''
+      this.images = []
+      this.category.id = null
+      this.country_id = null
+      this.status.id = null
+      this.attribute_id = [0]
     },
     notify(message: string, color: string, timeout: number) {
       Notify.create({
@@ -87,8 +139,28 @@ export const useListStore = defineStore('categories', {
       })
     },
 
-    async updateList(id: number) {
-      console.log( id , 'Id update')
+    async getListId(id: number) {
+      console.log(id)
+      await api.get(`products/getOne/${id}`).then(r => {
+        const response = r.data[0]
+        console.log( response, 'getListId')
+        inputStore.input.productCreate.name_ru = response.name_ru
+        inputStore.input.productCreate.name_uz = response.name_uz
+        inputStore.input.productCreate.name_en = response.name_en
+        inputStore.input.productCreate.price = response.price
+        inputStore.input.productCreate.count = response.count
+        inputStore.input.productCreate.discount_price = response.discount_price
+        this.about.about_uz = response.about_uz
+        this.about.about_ru = response.about_ru
+        this.about.about_en = response.about_en
+        this.images = response.image
+        this.category.id = response.category_id
+        this.country_id = response.country_id
+        this.status.id = response.status_id
+        this.attribute_id = [0]
+      }).catch((err) => {
+        console.log(err, 'put err')
+      })
     },
 
     async getCategories() {
@@ -101,16 +173,13 @@ export const useListStore = defineStore('categories', {
     async getStatus() {
       await api.get('status-products').then(r => {
         this.statuses = r.data
-        console.log(this.statuses, 'statuses', r)
       }).catch((err) => {
         console.log(err, 'err')
       })
     },
     async getAttributes() {
-      console.log('attributes')
       await api.get('attributes/attributes').then(r => {
         this.attributes = r.data
-        console.log(this.attributes, 'attributes2222')
       }).catch((err) => {
         console.log(err, 'err')
       })
@@ -118,7 +187,6 @@ export const useListStore = defineStore('categories', {
     async getImg() {
       await api.get('media').then(r => {
         this.images = r.data
-        console.log(r, 'this.imgLink')
       })
     },
     async setImages(event: any) {

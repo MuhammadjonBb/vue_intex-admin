@@ -7,7 +7,8 @@ const routes: RouteRecordRaw[] = [
     redirect: '/product/list',
     children: [
       { path: 'product/list', component: () => import('pages/product/list/ProductList.vue') },
-      { path: 'product/create', component: () => import('pages/product/list/ProductCreate.vue') }
+      { path: 'product/create', component: () => import('pages/product/list/ProductCreate.vue') },
+      { path: 'product/update/:id', component: () => import('pages/product/list/ProductCreate.vue') }
     ]
   },
   {
