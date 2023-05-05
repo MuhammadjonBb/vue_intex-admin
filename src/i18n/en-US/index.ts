@@ -203,6 +203,14 @@ export default {
       authorized: 'You are authorized successfully',
       authErr: 'Authorization error',
     },
+    users: {
+      created: 'User was created successfully',
+      createError: 'Error on creating user',
+      deleted: 'User was deleted successfully',
+      deleteError: 'Error on deleting user',
+      edited: 'User was edited successfully',
+      editError: 'Error on editing user',
+    },
     consultation: {
       created: 'Consultation was created successfully',
       createError: 'Error on creating consultation',

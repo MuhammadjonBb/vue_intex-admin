@@ -63,11 +63,10 @@
 <script setup lang="ts">
 import UserDialog from 'src/pages/users/UsersModal.vue'
 import { onMounted, ref } from 'vue'
-import { useModalStore } from 'src/stores/moduls/modal';
-import { useUsersStore } from 'src/stores/moduls/users';
-import { useRoute } from 'vue-router';
-import beautifyDate from 'src/helpers/beautifyDate';
-
+import { useModalStore } from 'src/stores/moduls/modal'
+import { useUsersStore } from 'src/stores/moduls/users'
+import { useRoute } from 'vue-router'
+import beautifyDate from 'src/helpers/beautifyDate'
 
 const route = useRoute()
 const user = ref(null)

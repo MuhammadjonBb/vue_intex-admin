@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
-import { Notify } from 'quasar'
 
 export const useUsersStore = defineStore('users', {
   state: () => ({
@@ -12,8 +11,6 @@ export const useUsersStore = defineStore('users', {
       api.get('users?current_page=1')
         .then(r => {
           this.users = r.data
-        }).catch(e => {
-          console.log(e)
         })
     },
     createUser(data: object) {
@@ -28,20 +25,7 @@ export const useUsersStore = defineStore('users', {
     },
     deleteUser(id: number) {
       return api.delete(`users/${id}`).then(() => {
-        Notify.create({
-          message: 'Пользователь успешно удален',
-          color: 'positive',
-          position: 'top-right',
-          group: false
-        })
         this.getUsers()
-      }).catch(e => {
-        Notify.create({
-          message: 'Ошибка при удалении пользователя',
-          color: 'negative',
-          position: 'top-right',
-          group: false
-        })
       })
     }
   }

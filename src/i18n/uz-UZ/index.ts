@@ -188,6 +188,14 @@ export default {
       authorized: 'Siz ro\'yxatdan o\'tdingiz',
       authErr: 'Ro\'yxatdan o\'tishda xatolik',
     },
+    users: {
+      created: 'Foydalanuvchi qo\'shildi',
+      createError: 'Foydalanuvchi qo\'shishda xatolik',
+      deleted: 'Foydalanuvchi o\'chirildi',
+      deleteError: 'Foydalanuvchi o\'chirishda xatolik',
+      edited: 'Foydalanuvchi o\'zgartirildi',
+      editError: 'Foydalanuvchi o\'zgartirishda xatolik',
+    },
     consultation: {
       created: 'Qayta aloqa qo\'shildi',
       createError: 'Qayta aloqa qo\'shishda xatolik',

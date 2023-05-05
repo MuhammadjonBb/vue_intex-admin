@@ -142,10 +142,13 @@ import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
 import { useInputStore } from 'src/stores/moduls/input'
+import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n'
 import { useUsersStore } from 'src/stores/moduls/users'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import cutPhoneString from "src/helpers/cutPhoneString"
 
+const { t } = useI18n()
 const usersStore = useUsersStore()
 const inputStore = useInputStore()
 const modalStore = useModalStore()
@@ -189,10 +192,43 @@ function save() {
   })
 
   if (props.modalName === 'create') {
-    usersStore.createUser(data.value).then(() => closeModal())
+    usersStore.createUser(data.value).then(() => {
+      closeModal()
+      Notify.create({
+        color: 'positive',
+        textColor: 'white',
+        icon: 'done',
+        message: t('notification.users.created'),
+        position: 'top-right',
+      })
+    }).catch(() => {
+      Notify.create({
+        color: 'negative',
+        textColor: 'white',
+        icon: 'warning',
+        position: 'top-right',
+        message: t('notification.users.createError'),
+      })
+    })
   } else if (props.modalName === 'edit') {
-    const editObject = Object.assign(data.value, { id: props.userData.id })
-    usersStore.editUser(editObject)
+    const editObject = Object.assign(data.value, { id: Number(props.userData.id) })
+    usersStore.editUser(editObject).then(() => {
+      Notify.create({
+        color: 'positive',
+        textColor: 'white',
+        icon: 'done',
+        message: t('notification.users.edited'),
+        position: 'top-right',
+      })
+    }).catch(() => {
+      Notify.create({
+        color: 'negative',
+        textColor: 'white',
+        icon: 'warning',
+        message: t('notification.users.editError'),
+        position: 'top-right',
+      })
+    })
   }
 }
 
