@@ -9,14 +9,15 @@
         </q-card-section>
         <q-card-section class="full-width">
           <div class="row items-center">
-            <h3 class="text-h6">Информация</h3>
+            <h3 class="text-h6">{{ $t('users.info') }}</h3>
             <q-space />
-            <q-btn flat class="bg-white" color="primary" label="Изменить" no-caps @click="onEditClick" />
+            <q-btn flat class="bg-white" color="primary" :label="$t('btn.edit')" no-caps @click="onEditClick" />
           </div>
           <div class="column q-pa-md" style="border: 1px solid #f2f2f2; border-radius: 10px;">
             <q-list class="row">
               <q-item style="width: 350px;" class="column q-mb-md">
-                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">Номер телефона</q-item-label>
+                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('phoneInput.name')
+                }}</q-item-label>
                 <q-item-label class="q-pl-md q-pt-md">(90) 123 45 67</q-item-label>
               </q-item>
 
@@ -28,23 +29,27 @@
 
             <q-list class="row">
               <q-item style="width: 350px;" class="column q-mb-md">
-                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">Дата рождение</q-item-label>
+                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('users.table.tableHead.birthday')
+                }}</q-item-label>
                 <q-item-label class="q-pl-md q-pt-md">28.09.2002 </q-item-label>
               </q-item>
 
               <q-item style="width: 350px;" class="column q-mb-md">
-                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">Дата регистрации</q-item-label>
+                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{
+                  $t('users.table.tableHead.registerDate') }}</q-item-label>
                 <q-item-label class="q-pl-md q-pt-md">28.09.2002</q-item-label>
               </q-item>
             </q-list>
             <q-list class="row">
               <q-item style="width: 350px;" class="column q-mb-md">
-                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">Статус</q-item-label>
+                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('users.table.tableHead.status')
+                }}</q-item-label>
                 <q-item-label class="q-pl-md q-pt-md">Актив</q-item-label>
               </q-item>
 
               <q-item style="width: 350px;" class="column q-mb-md">
-                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">Роль Ползователя</q-item-label>
+                <q-item-label style="font-size: 16px;" class="q-mb-sm text-medium">{{ $t('users.table.tableHead.role')
+                }}</q-item-label>
                 <q-item-label class="q-pl-md q-pt-md">Админ</q-item-label>
               </q-item>
             </q-list>

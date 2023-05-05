@@ -11,7 +11,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="ruName"
+                  <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="ruName"
                     :inputData="{ component: 'categoriesForm', inputName: 'ruName' }"
                     :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />
@@ -41,7 +41,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="enName"
+                  <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="enName"
                     :inputData="{ component: 'categoriesForm', inputName: 'enName' }"
                     :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />
@@ -72,7 +72,7 @@
               header-style="color: #2B3D90" header-class="text-bold text-h6 item-no-hover" default-opened>
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
-                  <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="uzName"
+                  <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="uzName"
                     :inputData="{ component: 'categoriesForm', inputName: 'uzName' }"
                     :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />

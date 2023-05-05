@@ -11,11 +11,11 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
             :placeholder="$t('placeholder.name')" type="text" :label="$t('consultations.modal.inputs.name')" />
 
-          <phone-input :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
         </div>
         <div class="row q-mt-lg">

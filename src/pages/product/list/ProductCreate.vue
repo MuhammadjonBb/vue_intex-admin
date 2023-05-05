@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import {ref, computed, reactive, onMounted, watch} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
+import { ref, computed, reactive, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import DefaultInput from 'components/input/DefaultInput.vue'
-import {useListStore} from "stores/moduls/products/list";
-import {api} from 'boot/axios'
+import { useListStore } from "stores/moduls/products/list";
+import { api } from 'boot/axios'
 
 const store = useListStore()
 const route = <any>useRoute()
 const router = useRouter()
 const tab = ref('uz')
 const locales = [
-  {name: 'Pусский язык', code: 'ru-RU'},
-  {name: 'Узбекский язык', code: 'uz'},
-  {name: 'Engilish', code: 'en-US'}
+  { name: 'Pусский язык', code: 'ru-RU' },
+  { name: 'Узбекский язык', code: 'uz' },
+  { name: 'Engilish', code: 'en-US' }
 ]
 let attributeRender = reactive<any>([])
 
@@ -42,10 +42,10 @@ async function deleteImg(img: any) {
 async function atributeUbdate() {
   if (attributeRender.length <= 0) {
 
-      attributeRender.push(store.attribut)
-      await api.get(`attributes/${store.attribut.id}`).then((res: any) => {
-        attributeRender[0].sub_atributes = res.data
-      })
+    attributeRender.push(store.attribut)
+    await api.get(`attributes/${store.attribut.id}`).then((res: any) => {
+      attributeRender[0].sub_atributes = res.data
+    })
   } else {
 
     const existingObj = attributeRender.find((obj: any) => obj.id === store.attribut.id);
@@ -78,7 +78,7 @@ function useCycle<T>(list: T[], index: number) {
   }
 }
 
-const {next} = useCycle(locales, 0)
+const { next } = useCycle(locales, 0)
 
 onMounted(() => {
   store.getAttributes()
@@ -94,7 +94,7 @@ onMounted(() => {
   <q-card class=" q-ma-md q-pa-lg card " flat>
     <div class=" text-center q-ml-md q-pt-md card__lang">
       <q-tabs v-model="tab" active-class="text-black" align="left" class="text-grey card__tabs" dense
-              indicator-color="blue">
+        indicator-color="blue">
         <q-tab name="ru" no-caps style="font-size: 12px">Pусский язык</q-tab>
         <q-tab name="uz" no-caps style="font-size: 12px">Узбекский язык</q-tab>
         <q-tab name="en" no-caps style="font-size: 12px">Engilish</q-tab>
@@ -103,14 +103,13 @@ onMounted(() => {
     <q-card-section class="q-py-none" horizontal>
       <q-card-section class="q-py-none q-mr-none card__section__one">
         <h6 class="card__title ">{{ $t('product.productCreate.title') }}</h6>
-        <default-input :input-data="{ component: 'productCreate', inputName: `name_${tab}` }" :rules="[val => !!val || 'Обязательное поле']"
-                       label="Название продукта" name="name" placeholder="Каркасный басейн Intex прямоуголь.."
-                       type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: `name_${tab}` }"
+          :rules="[val => !!val || $t('validation.required')]" label="Название продукта" name="name"
+          placeholder="Каркасный басейн Intex прямоуголь.." type="text" />
         <div class="flex justify-between items-center card__title " v-if="route.path.split('/')[2] === 'create'">
           <span class="text-weight-bold text-h6">Atribute</span>
-          <span class="text-weight-medium text-blue-4 text-subtitle1 cursor-pointer"
-                @click="store.attributDialog = true">
-            <q-icon class="q-mr-sm" color="blue-4" name="add" size="20px"/>Добавить атрибуть
+          <span class="text-weight-medium text-blue-4 text-subtitle1 cursor-pointer" @click="store.attributDialog = true">
+            <q-icon class="q-mr-sm" color="blue-4" name="add" size="20px" />Добавить атрибуть
           </span>
         </div>
 
@@ -123,14 +122,15 @@ onMounted(() => {
                 </div>
 
                 <div class="col-auto">
-                  <q-btn color="grey-7" flat icon="close" round @click="store.attributDialog = false"/>
+                  <q-btn color="grey-7" flat icon="close" round @click="store.attributDialog = false" />
                 </div>
               </div>
             </q-card-section>
             <q-card-section class="q-pt-none">
               <div class="q-pb-sm">Тип атрибуты</div>
-              <q-select v-model="store.attribut" :options="store.attributes" :rules="[val => !!val || 'Обязательное поле']" dense outlined
-                        style="max-width: 300px" @update:model-value="atributeUbdate">
+              <q-select v-model="store.attribut" :options="store.attributes"
+                :rules="[val => !!val || $t('validation.required')]" dense outlined style="max-width: 300px"
+                @update:model-value="atributeUbdate">
                 <template v-slot:option="scope">
                   <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
                     <q-item-section>
@@ -150,34 +150,29 @@ onMounted(() => {
             <q-card-actions align="right">
               <div class="row q-mt-md no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
                 <q-btn v-close-popup class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat
-                       label="Отменить" no-caps style="border-radius: 12px;"/>
+                  label="Отменить" no-caps style="border-radius: 12px;" />
                 <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Добавить" no-caps
-                       style="border-radius: 12px;" @click="store.postList(route.path.slice(0,15))"/>
+                  style="border-radius: 12px;" @click="store.postList(route.path.slice(0, 15))" />
               </div>
             </q-card-actions>
           </q-card>
         </q-dialog>
 
-        <default-input :input-data="{ component: 'productCreate', inputName: `price` }"
-                       :label="'Цена'" :placeholder="0" :rules="[val => !!val || 'Обязательное поле', val => /^\d+$/.test(val) || 'Input must contain only numeric characters']" name="prise"
-                       type="text"/>
+        <default-input :input-data="{ component: 'productCreate', inputName: `price` }" :label="'Цена'" :placeholder="0"
+          :rules="[val => !!val || $t('validation.required'), val => /^\d+$/.test(val) || 'Input must contain only numeric characters']"
+          name="prise" type="text" />
         <default-input :input-data="{ component: 'productCreate', inputName: 'discount_price', placeholder: 'Скидка' }"
-                       :placeholder='"Скидка"' :rules="[val => /^\d+$/.test(val) || 'Input must contain only numeric characters']" label="Скидка" name="discount_price"
-                       type="text"
-        />
-        <default-input :input-data="{ component: 'productCreate', inputName: `count` }"
-                       :placeholder="0" :rules="[val => !!val || 'Обязательное поле', val => !!val || 'Can not be emty', val => /^\d+$/.test(val) || 'Input must contain only numeric characters']" label="Кол-во" name="count"
-                       type="text"/>
+          :placeholder='"Скидка"' :rules="[val => /^\d+$/.test(val) || 'Input must contain only numeric characters']"
+          label="Скидка" name="discount_price" type="text" />
+        <default-input :input-data="{ component: 'productCreate', inputName: `count` }" :placeholder="0"
+          :rules="[val => !!val || $t('validation.required'), val => !!val || 'Can not be emty', val => /^\d+$/.test(val) || 'Input must contain only numeric characters']"
+          label="Кол-во" name="count" type="text" />
 
         <span class="text-weight-medium q-my-sm" style="display: block;">Категория</span>
 
-        <q-select v-model="store.category"
-                  :options="store.categories"
-                  :rules="[val => !!val || 'Обязательное поле', val => !!val || 'Обязательное поле']"
-                  behavior="menu" class="input"
-                  dense label="Категория" menu-anchor="top start"
-                  outlined
-        >
+        <q-select v-model="store.category" :options="store.categories"
+          :rules="[val => !!val || $t('validation.required'), val => !!val || $t('validation.required')]" behavior="menu"
+          class="input" dense label="Категория" menu-anchor="top start" outlined>
           <template v-slot:option="scope">
             <q-item dense v-bind="scope.itemProps" v-on="scope.itemEvents">
               <q-item-section>
@@ -196,13 +191,8 @@ onMounted(() => {
 
       </q-card-section>
       <q-card-section class=" q-pb-none q-mt-md card__section__two">
-        <q-select v-model="store.status"
-                  :options="store.statuses"
-                  :rules="[val => !!val || 'Обязательное поле']"
-                  behavior="menu" class="input q-px-md"
-                  dense label="Status" menu-anchor="top start"
-                  outlined
-        >
+        <q-select v-model="store.status" :options="store.statuses" :rules="[val => !!val || $t('validation.required')]"
+          behavior="menu" class="input q-px-md" dense label="Status" menu-anchor="top start" outlined>
           <template v-slot:option="scope">
             <q-item dense v-bind="scope.itemProps" v-on="scope.itemEvents">
               <q-item-section>
@@ -221,12 +211,8 @@ onMounted(() => {
         <div v-for="(item, index) in attributeRender" :key="index" v-if="route.path.split('/')[2] === 'create'">
           <p class="text-capitalize text-weight-medium q-my-sm">
             {{ item[`attribute_${tab}`] }}</p>
-          <q-select
-            v-model="store.attribute[`attribute_${index}`]"
-            :label="item[`attribute_${tab}`]"
-            :options="item.sub_atributes"
-            :rules="[val => !!val || 'Field is requiredss']" class="q-my-md" dense
-            outlined
+          <q-select v-model="store.attribute[`attribute_${index}`]" :label="item[`attribute_${tab}`]"
+            :options="item.sub_atributes" :rules="[val => !!val || 'Field is requiredss']" class="q-my-md" dense outlined
             @update:model-value="attributeSelect(index)">
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
@@ -247,33 +233,26 @@ onMounted(() => {
 
         <p class=" text-weight-bold">Описание</p>
         <q-editor v-model="store.about[`about_${tab}`]"
-                  :toolbar="[['bold', 'italic', 'strike', 'underline', 'left', 'center', 'right', 'link'],]"
-                  height="140px"
-                  max-height="140px" min-height="5rem" placeholder="Введите Описание продукта"
-                  style="border-radius: 10px;"
-        />
+          :toolbar="[['bold', 'italic', 'strike', 'underline', 'left', 'center', 'right', 'link'],]" height="140px"
+          max-height="140px" min-height="5rem" placeholder="Введите Описание продукта" style="border-radius: 10px;" />
         <p class="text-weight-bold title">Картинка</p>
         <div class="card__img">
           <div class="dropzone" @drop.prevent="handleDrop" @dragover.prevent>
             <div class="img__container" style="z-index: -1">
-              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px"/>
+              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px" />
               <span class="q-mt-sm">Загрузите изображения продукта</span>
             </div>
           </div>
           <div class="row flex flex-left q-mb-sm ">
             <div v-for="link in store.images" :key="link" class="flex flex-center q-mb-sm  card__uploud__img ">
               <q-img :src="`https://intex-shop-production.up.railway.app/${link}`" alt="img" class="q-ma-sm" fit="cover"
-                     height="100%"
-                     style="border-radius: 15px" width="100%">
+                height="100%" style="border-radius: 15px" width="100%">
                 <div class="absolute-top icon__card">
                   <div class="icon__item">
-                    <q-img class="icon__upload" name="uploud" src="/src/assets/fi_upload-cloud.png"/>
+                    <q-img class="icon__upload" name="uploud" src="/src/assets/fi_upload-cloud.png" />
                   </div>
                   <div class="icon__item">
-                    <q-img class="icon__upload"
-                           name="delete"
-                           src="/src/assets/trash.png"
-                           @click="deleteImg(link)"/>
+                    <q-img class="icon__upload" name="delete" src="/src/assets/trash.png" @click="deleteImg(link)" />
                   </div>
                 </div>
               </q-img>
@@ -284,11 +263,11 @@ onMounted(() => {
 
     </q-card-section>
     <div class="row q-mt-lg no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
-      <q-space/>
+      <q-space />
       <q-btn class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" color="indigo-10" flat label="Отменить" no-caps
-             style="border-radius: 12px;"/>
+        style="border-radius: 12px;" />
       <q-btn class="full-width q-py-sm  q-px-xl bg-indigo-10" color="white" flat label="Сохранить" no-caps
-             style="border-radius: 12px;" @click="store.postList(route.path)"/>
+        style="border-radius: 12px;" @click="store.postList(route.path)" />
     </div>
   </q-card>
 </template>
@@ -363,7 +342,7 @@ onMounted(() => {
     border-radius: 20px;
   }
 
-  .q-img__content > div {
+  .q-img__content>div {
     padding: 0;
     background: none;
   }

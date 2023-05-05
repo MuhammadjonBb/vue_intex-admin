@@ -67,6 +67,7 @@ export default {
   },
   users: {
     title: 'Пользователи',
+    info: 'Информация о пользователе',
     table: {
       tableHead: {
         name: 'Имя',
@@ -237,6 +238,9 @@ export default {
       byPrice: 'По цене',
       byIncrease: 'По возрастанию',
     }
+  },
+  validation: {
+    required: 'Это обязательное поле',
   },
   search: 'Поиск',
   failed: 'Действие не выполнено',

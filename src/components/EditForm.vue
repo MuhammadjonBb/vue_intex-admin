@@ -2,18 +2,19 @@
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;" v-if="ordersStore.products">
     <div class="column no-wrap q-mb-md" style="gap:20px;">
       <div class="row no-wrap" style="gap: 20px;">
-        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name" :label="$t('orders.form.inputs.name')"
-          :inputData="{ component: 'ordersForm', inputName: 'first_name' }" class="full-width" />
-        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="surname"
+        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="name"
+          :label="$t('orders.form.inputs.name')" :inputData="{ component: 'ordersForm', inputName: 'first_name' }"
+          class="full-width" />
+        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="surname"
           :label="$t('orders.form.inputs.surname')" :inputData="{ component: 'ordersForm', inputName: 'last_name' }"
           class="full-width" />
-        <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']" class="full-width"
+        <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]" class="full-width"
           :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
-        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="email" label="Email"
+        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="email" label="Email"
           :inputData="{ component: 'ordersForm', inputName: 'email' }" class="full-width" />
       </div>
 
-      <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="address" icon="location_on"
+      <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="address" icon="location_on"
         :label="$t('orders.form.inputs.address')" :inputData="{ component: 'ordersForm', inputName: 'address' }" />
     </div>
     <!-- ==================== -->

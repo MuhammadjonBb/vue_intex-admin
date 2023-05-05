@@ -18,28 +18,28 @@
 
       <Transition name="slide-fade" mode="out-in">
         <q-card-section class="q-pt-none column" v-if="langTab === 'uz'">
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'address_uz' }" name="address_uz" type="text"
             :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'work_uz' }" name="work_uz" type="text"
             :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else-if="langTab === 'ru'">
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'address_ru' }" name="address_ru" type="text"
             :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'work_ru' }" name="work_ru" type="text"
             :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else>
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'address_en' }" name="address_en" type="text"
             :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'work_en' }" name="work_en" type="text"
             :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
@@ -49,7 +49,7 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <phone-input :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
           <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'email' }" name="email" type="text"
             label="E-mail" />

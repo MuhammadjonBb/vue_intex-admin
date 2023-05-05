@@ -82,6 +82,7 @@ export default {
   },
   users: {
     title: 'Users',
+    info: 'User information',
     table: {
       tableHead: {
         name: 'Name',
@@ -251,6 +252,9 @@ export default {
       byPrice: 'By price',
       byIncrease: 'By increase',
     }
+  },
+  validation: {
+    required: 'This field is required',
   },
   search: 'Search',
   failed: 'Action failed',

@@ -67,6 +67,7 @@ export default {
   },
   users: {
     title: 'Foydalanuvchilar',
+    info: 'Foydalanuvchi ma\'lumoti',
     table: {
       tableHead: {
         name: 'Ismi',
@@ -236,6 +237,9 @@ export default {
       byPrice: 'Narxi bo\'yicha',
       byIncrease: 'Qiymati bo\'yicha',
     }
+  },
+  validation: {
+    required: 'Ushbu qator to\'ldirilishi shart',
   },
   search: 'Qidirish',
   failed: 'Действие не выполнено',
