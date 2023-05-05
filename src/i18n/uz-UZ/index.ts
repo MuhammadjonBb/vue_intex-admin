@@ -202,6 +202,17 @@ export default {
       }
     }
   },
+  filterPanel: {
+    filter: 'Filtr',
+    sort: 'Tartiblash',
+    add: 'Qo\'shish',
+    search: 'Qidirish',
+    filterOptions: {
+      byName: 'Ismi bo\'yicha',
+      byPrice: 'Narxi bo\'yicha',
+      byIncrease: 'Qiymati bo\'yicha',
+    }
+  },
   search: 'Qidirish',
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',

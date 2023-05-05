@@ -203,6 +203,17 @@ export default {
     }
 
   },
+  filterPanel: {
+    filter: 'Фильтр',
+    sort: 'Сортировка',
+    add: 'Добавить',
+    search: 'Поиск',
+    filterOptions: {
+      byName: 'По названию',
+      byPrice: 'По цене',
+      byIncrease: 'По возрастанию',
+    }
+  },
   search: 'Поиск',
   failed: 'Действие не выполнено',
   success: 'Действие выполнено успешно',

@@ -217,6 +217,17 @@ export default {
       }
     }
   },
+  filterPanel: {
+    filter: 'Filter',
+    sort: 'Sorting',
+    add: 'Add',
+    search: 'Search',
+    filterOptions: {
+      byName: 'By name',
+      byPrice: 'By price',
+      byIncrease: 'By increase',
+    }
+  },
   search: 'Search',
   failed: 'Action failed',
   success: 'Action was successful',

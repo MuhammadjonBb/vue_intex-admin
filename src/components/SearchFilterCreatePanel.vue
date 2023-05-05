@@ -5,9 +5,9 @@
         <q-btn flat size="10px" class="bg-blue flex justify-center items-center q-mr-md q-pa-sm btn q-pr-md"
           color="white">
           <img src="/src/assets/filter.svg" alt="filter_icon" sizes="10px" class="q-mr-sm">
-          Фильтр
+          {{ $t('filterPanel.filter') }}
         </q-btn>
-        <q-input dense v-model="search" borderless class="search-input q-px-md" placeholder="Поиск товара ">
+        <q-input dense v-model="search" borderless class="search-input q-px-md" :placeholder="$t('search')">
           <template #prepend>
             <q-icon name="search" color="primary"></q-icon>
           </template>
@@ -15,13 +15,24 @@
       </q-card-section>
       <q-space />
       <div class="flex items-center">
-        <span class="text-weight-bold q-mr-sm">Сортировка </span>
+        <span class="text-weight-bold q-mr-sm">{{ $t('filterPanel.sort') }} </span>
 
         <q-select dropdown-icon="expand_more" borderless class="bg-grey-1 q-px-md q-pb-xs" style="border-radius: 12px;"
           v-model="model" :options="options" dense>
+          <template #selected>
+            <span>{{ $t(model) }}</span>
+          </template>
+
+          <template #option="scope">
+            <q-item @click="scope.toggleOption(scope.opt)" clickable>
+              <q-item-section>
+                {{ $t(scope.opt) }}
+              </q-item-section>
+            </q-item>
+          </template>
         </q-select>
       </div>
-      <q-btn icon="add" size="sm" label="Добавить" color="blue" class="q-ml-md"
+      <q-btn icon="add" size="sm" :label="$t('filterPanel.add')" color="blue" class="q-ml-md"
         @click="onAddBtn(dynamicRoute, isModal)" />
     </q-card-section>
   </q-card>
@@ -34,8 +45,8 @@ import { useModalStore } from 'src/stores/moduls/modal'
 
 const { dynamicRoute, isModal } = defineProps(['dynamicRoute', 'isModal'])
 const router = useRouter()
-const options = ['По названию', 'По цене', 'По возрастанию']
-const model = ref('По названию')
+const options = ['filterPanel.filterOptions.byName', 'filterPanel.filterOptions.byPrice', 'filterPanel.filterOptions.byIncrease']
+const model = ref(options[0])
 const search = ref('')
 const modalStore = useModalStore()
 
