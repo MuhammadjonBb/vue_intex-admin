@@ -20,17 +20,6 @@ export const useCategoriesStore = defineStore('categories', {
     deleteCategory(id: number) {
       return api.delete(`categories/${id}`).then(() => {
         this.getCategories()
-        Notify.create({
-          type: 'positive',
-          position: 'top-right',
-          message: 'Категория успешно удалена',
-        })
-      }).catch(() => {
-        Notify.create({
-          type: 'negative',
-          position: 'top-right',
-          message: 'Не удалось удалить категорию',
-        })
       })
     }
   }

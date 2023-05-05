@@ -45,14 +45,14 @@ export default boot(({ app, router }) => {
         Notify.create({
           group: false,
           type: 'negative',
-          // message: t('notification.user.userNotAuthorized'),
+          message: 'User is not authorized',
           position: 'top-right',
         })
       } else if (e.response.data.error.name === 'JsonWebTokenError' || e.response.data.error.name === 'TokenExpiredError') {
         Notify.create({
           group: false,
           type: 'negative',
-          // message: t('notification.user.tokenExpired'),
+          message: 'Token expired, please login again',
           position: 'top-right',
         })
       }

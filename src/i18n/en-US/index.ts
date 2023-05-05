@@ -212,7 +212,9 @@ export default {
     categories: {
       created: 'Category was created successfully',
       createError: 'Error on creating category',
-      equalError: 'The number of values in subcategories must match the number of values in other subcategories'
+      equalError: 'The number of values in subcategories must match the number of values in other subcategories',
+      deleted: 'Category was deleted successfully',
+      deleteError: 'Error on deleting category',
     },
     orders: {
       created: 'Order was created successfully',

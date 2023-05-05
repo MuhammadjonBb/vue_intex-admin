@@ -179,7 +179,7 @@
     <!-- BODY -->
     <template #body-cell-name="props">
       <q-td :props="props">
-        <div class="row items-center" @click="$router.push('/users/about')" style="cursor: pointer;">
+        <div class="row items-center" @click="$router.push('/users/about/' + props.row.id)" style="cursor: pointer;">
           <q-avatar v-if="props.row.user_image">
             <q-img :src="props.row.user_image" size="24px"></q-img>
           </q-avatar>

@@ -195,6 +195,8 @@ export default {
       deleteError: 'Qayta aloqa o\'chirishda xatolik',
     },
     categories: {
+      deleted: 'Kategoriya o\'chirildi',
+      deleteError: 'Kategoriya o\'chirishda xatolik',
       created: 'Kategoriya qo\'shildi',
       createError: 'Kategoriya qo\'shishda xatolik',
       equalError: 'Pastki kategorialardagi qiymatlar soni boshqa kichik kategorialardagi qiymatlar soniga mos kelishi kerak'

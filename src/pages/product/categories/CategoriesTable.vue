@@ -196,6 +196,8 @@
 import { ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCategoriesStore } from 'src/stores/moduls/products/categories';
+import { Notify } from 'quasar';
+import { useI18n } from 'vue-i18n';
 
 
 interface ISelected {
@@ -204,7 +206,8 @@ interface ISelected {
   amount: number
   subCategories: string[]
 }
-const { deleteCategory } = useCategoriesStore()
+const categoriesStore = useCategoriesStore()
+const { t } = useI18n()
 const router = useRouter()
 const selected: Ref<ISelected[]> = ref([])
 const allSelect: Ref<boolean> = ref(false)
@@ -227,5 +230,21 @@ function toEditPage() {
 // eslint-disable-next-line space-before-function-paren
 function clearSelections() {
   selected.value.splice(0)
+}
+
+function deleteCategory(id: number) {
+  categoriesStore.deleteCategory(id).then(() => {
+    Notify.create({
+      type: 'positive',
+      position: 'top-right',
+      message: t('notification.categories.deleted'),
+    })
+  }).catch(() => {
+    Notify.create({
+      type: 'negative',
+      position: 'top-right',
+      message: t('notification.categories.deleteError'),
+    })
+  })
 }
 </script>
