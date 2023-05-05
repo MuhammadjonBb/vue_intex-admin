@@ -32,6 +32,20 @@ export default {
         orderTime: 'Время заказа',
         status: 'Статус',
       }
+    },
+    form: {
+      addTitle: 'Добавить заказ',
+      editTitle: 'Изменить заказ',
+      addProducts: 'Добавить продукты',
+      inputs: {
+        name: 'Имя',
+        surname: 'Фамилия',
+        address: 'Адрес',
+        phone: 'Телефон',
+        products: 'Продукты',
+        status: 'Статус',
+        amount: 'Количество',
+      }
     }
   },
   consultations: {
@@ -120,6 +134,16 @@ export default {
         categoryName: 'Название категории',
         subCategoryAmount: 'Количество подкатегорий',
         subCategories: 'Подкатегории',
+      }
+    },
+    form: {
+      addTitle: 'Добавить категорию',
+      editTitle: 'Изменить категорию',
+      inputs: {
+        categoryName: 'Название категории',
+        subCategory: 'Название подкатегории',
+        typeName: 'Введите название категории',
+        typeSubCategory: 'Введите название подкатегории',
       }
     }
   },

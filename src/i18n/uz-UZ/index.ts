@@ -32,6 +32,20 @@ export default {
         orderTime: 'Buyurtma vaqti',
         status: 'Status',
       }
+    },
+    form: {
+      addTitle: 'Qo\'shish',
+      editTitle: 'Qo\'shish',
+      addProducts: 'Produkt qo\'shish',
+      inputs: {
+        name: 'Ismi',
+        surname: 'Familiya',
+        address: 'Manzil',
+        phone: 'Telefon raqami',
+        products: 'Maxsulotlar',
+        status: 'Status',
+        amount: 'Soni',
+      }
     }
   },
   consultations: {
@@ -95,7 +109,7 @@ export default {
       socials: 'Ijtimoiy tarmoqlar',
     },
     modal: {
-      title: 'Edit information',
+      title: 'Ma\'lumotlarni o\'zgartirish',
       socials: {
         add: 'Ijtimoiy tarmoq qo\'shish',
         delete: 'Ijtimoiy tarmoqni o\'chirish',
@@ -121,6 +135,16 @@ export default {
         subCategoryAmount: 'Subkategoriyalar soni',
         subCategories: 'Subkategoriyalar',
       },
+    },
+    form: {
+      addTitle: 'Kategoriya qo\'shish',
+      editTitle: 'Kategoriyani o\'zgartirish',
+      inputs: {
+        categoryName: 'Kategoriya nomi',
+        subCategory: 'Subkategoriyalar nomi',
+        typeName: 'Kategoriya nomini kiriting',
+        typeSubCategory: 'Subkategoriya nomini kiriting',
+      }
     }
   },
   btn: {

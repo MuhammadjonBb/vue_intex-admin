@@ -47,6 +47,20 @@ export default {
         orderTime: 'Order time',
         status: 'Status',
       }
+    },
+    form: {
+      addTitle: 'Add order',
+      editTitle: 'Edit order',
+      addProducts: 'Add products',
+      inputs: {
+        name: 'Name',
+        surname: 'Surname',
+        phone: 'Phone',
+        address: 'Address',
+        products: 'Products',
+        amount: 'Amount',
+        status: 'Status',
+      }
     }
   },
   consultations: {
@@ -135,6 +149,16 @@ export default {
         categoryName: 'Category name',
         subCategoryAmount: 'Subcategory amount',
         subCategories: 'Subcategories',
+      }
+    },
+    form: {
+      addTitle: 'Add category',
+      editTitle: 'Edit category',
+      inputs: {
+        categoryName: 'Category name',
+        subCategory: 'Subcategory name',
+        typeName: 'Type category name',
+        typeSubCategory: 'Type subcategory name',
       }
     }
   },

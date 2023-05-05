@@ -2,48 +2,49 @@
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;" v-if="ordersStore.products">
     <div class="column no-wrap q-mb-md" style="gap:20px;">
       <div class="row no-wrap" style="gap: 20px;">
-        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name" label="Имя"
+        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name" :label="$t('orders.form.inputs.name')"
           :inputData="{ component: 'ordersForm', inputName: 'first_name' }" class="full-width" />
-        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="surname" label="Фамилия"
-          :inputData="{ component: 'ordersForm', inputName: 'last_name' }" class="full-width" />
+        <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="surname"
+          :label="$t('orders.form.inputs.surname')" :inputData="{ component: 'ordersForm', inputName: 'last_name' }"
+          class="full-width" />
         <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']" class="full-width"
           :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
         <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="email" label="Email"
           :inputData="{ component: 'ordersForm', inputName: 'email' }" class="full-width" />
       </div>
 
-      <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="address" icon="location_on" label="Адрес"
-        :inputData="{ component: 'ordersForm', inputName: 'address' }" />
+      <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="address" icon="location_on"
+        :label="$t('orders.form.inputs.address')" :inputData="{ component: 'ordersForm', inputName: 'address' }" />
     </div>
     <!-- ==================== -->
     <div class="column no-wrap q-mb-lg">
       <div class="row">
-        <span> Товары</span>
+        <span> {{ $t('orders.form.inputs.products') }}</span>
         <q-space />
-        <span style="margin-right: 130px;">Кол-во</span>
+        <span style="margin-right: 5%">{{ $t('orders.form.inputs.amount') }}</span>
       </div>
 
       <div class="row no-wrap q-mt-md" style="gap: 20px;" v-for="(item, index) in ordersStore.selectedProducts"
         :key="index">
-        <label style="width: 85%;" class="column">
+        <label style="width: 90%;" class="column">
           <q-select dropdown-icon="expand_more" class="q-px-md border-reset q-py-xs" dense borderless
             v-model="ordersStore.selectedProducts[index]" :options="ordersStore.mappedProducts" />
         </label>
 
-        <label style="width: 15" class="column">
-          <q-input dense borderless class="q-py-xs q-px-md border-reset"
+        <label class="column" style="width: 10%">
+          <q-input dense borderless class="q-py-xs q-px-md border-reset full-wdith" type="number"
             v-model="ordersStore.selectedProducts[index].amount" />
           <!-- <q-select dropdown-icon="expand_more" class="q-mt-md q-px-md border-reset q-py-xs" dense borderless
             v-model="ordersStore.selectedProducts[ordersStore.selectedProducts.length - 1].amount" :options="amount" /> -->
         </label>
       </div>
-      <q-btn flat icon="add" @click="ordersStore.addProduct()" label="Добавить товары" no-caps
+      <q-btn flat icon="add" @click="ordersStore.addProduct()" :label="$t('orders.form.addProducts')" no-caps
         style="align-self: start; font-size: 14px;" class="q-mt-md" color="primary" />
     </div>
     <!-- ==================== -->
     <div class="row no-wrap" style="gap: 20px; justify-content: space-between;">
       <label style="width: 100%;">
-        Статус
+        {{ $t('orders.form.inputs.status') }}
         <q-select map-options dropdown-icon="expand_more" dense color="primary"
           class="q-py-xs q-px-md q-mt-sm border-reset" borderless v-model="ordersStore.statusValalue"
           :options="ordersStore.statusOptions"></q-select>
@@ -67,9 +68,9 @@
     <!-- ==================== -->
     <div class="row q-mt-lg">
       <q-space />
-      <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+      <q-btn color="indigo-10" flat :label="$t('btn.cancel')" style="border-radius: 12px;"
         class="q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-      <q-btn @click="createOrder()" color="white" flat label="Сохранить" style="border-radius: 12px;"
+      <q-btn @click="createOrder()" color="white" flat :label="$t('btn.save')" style="border-radius: 12px;"
         class="q-py-sm  q-px-xl bg-indigo-10" no-caps />
     </div>
   </q-form>

@@ -1,7 +1,8 @@
 <template>
   <q-layout>
     <q-page class="q-pa-md main__container">
-      <h1 class="text-h5 text-weight-bold">{{ $route.path.includes('add') ? 'Добавить' : 'Изменить' }} категорию</h1>
+      <h1 class="text-h5 text-weight-bold">{{ $route.path.includes('add') ? $t('categories.form.addTitle') :
+        $t('categories.form.editTitle') }}</h1>
 
       <q-card flat>
         <q-card-section>
@@ -11,12 +12,13 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="ruName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'ruName' }" label="Название категорию"
-                    placeholder="Введите название категорию" />
+                    :inputData="{ component: 'categoriesForm', inputName: 'ruName' }"
+                    :label="$t('categories.form.inputs.categoryName')"
+                    :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('ru')"
                     @mouseleave="setInvisibleSubcategoryInput('ru')">
-                    Под категория
+                    {{ $t('categories.form.inputs.subCategory') }}
                     <div class="full-width q-px-sm subcategory-wrapper">
 
                       <q-chip v-for="(item, index) in subCategoriesArr.ru" :key="index"
@@ -26,8 +28,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.ru" placeholder="Введите название под категории" borderless
-                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                      <q-input v-show="isSubcategoryVisible.ru"
+                        :placeholder="$t('categories.form.inputs.typeSubCategory')" borderless dense
+                        style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
                         v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'ru')" />
                     </div>
                   </div>
@@ -39,12 +42,13 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="enName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'enName' }" label="Название категорию"
-                    placeholder="Введите название категорию" />
+                    :inputData="{ component: 'categoriesForm', inputName: 'enName' }"
+                    :label="$t('categories.form.inputs.categoryName')"
+                    :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('en')"
                     @mouseleave="setInvisibleSubcategoryInput('en')">
-                    Под категория
+                    {{ $t('categories.form.inputs.subCategory') }}
                     <div class="full-width q-px-sm subcategory-wrapper">
 
                       <q-chip v-for="(item, index) in subCategoriesArr.en" :key="index"
@@ -54,8 +58,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.en" placeholder="Введите название под категории" borderless
-                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                      <q-input v-show="isSubcategoryVisible.en"
+                        :placeholder="$t('categories.form.inputs.typeSubCategory')" borderless dense
+                        style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
                         v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'en')" />
                     </div>
 
@@ -68,12 +73,13 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="uzName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'uzName' }" label="Название категорию"
-                    placeholder="Введите название категорию" />
+                    :inputData="{ component: 'categoriesForm', inputName: 'uzName' }"
+                    :label="$t('categories.form.inputs.categoryName')"
+                    :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('uz')"
                     @mouseleave="setInvisibleSubcategoryInput('uz')">
-                    Под категория
+                    {{ $t('categories.form.inputs.subCategory') }}
                     <div class="full-width q-px-sm subcategory-wrapper">
 
                       <q-chip v-for="(item, index) in subCategoriesArr.uz" :key="index"
@@ -83,8 +89,9 @@
                         {{ item }}
                       </q-chip>
 
-                      <q-input v-show="isSubcategoryVisible.uz" placeholder="Введите название под категории" borderless
-                        dense style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
+                      <q-input v-show="isSubcategoryVisible.uz"
+                        :placeholder="$t('categories.form.inputs.typeSubCategory')" borderless dense
+                        style="padding-top: 2px;" class="q-mt-xs subcategory-input full-width"
                         v-model="subCategoryInputValue" @keydown.enter="addSubCategory(subCategoryInputValue, 'uz')" />
                     </div>
                   </div>
@@ -95,9 +102,9 @@
           </q-list>
           <div class="row q-mt-lg no-wrap  q-mx-auto" style="width: 60%;gap: 20px;">
             <q-space />
-            <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+            <q-btn color="indigo-10" flat :label="$t('btn.cancel')" style="border-radius: 12px;"
               class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-            <q-btn @click="save" color="white" flat label="Сохранить" style="border-radius: 12px;"
+            <q-btn @click="save" color="white" flat :label="$t('btn.save')" style="border-radius: 12px;"
               class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
           </div>
         </q-card-section>
