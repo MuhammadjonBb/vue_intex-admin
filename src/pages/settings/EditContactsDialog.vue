@@ -18,30 +18,24 @@
 
       <Transition name="slide-fade" mode="out-in">
         <q-card-section class="q-pt-none column" v-if="langTab === 'uz'">
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'address_uz' }" name="address_uz" type="text"
-            :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'work_uz' }" name="work_uz" type="text"
-            :label="$t('siteSettings.modal.contacts.schedule')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.address_uz"
+            name="address_uz" type="text" :label="$t('siteSettings.modal.contacts.address')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.work_uz" name="work_uz"
+            type="text" :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else-if="langTab === 'ru'">
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'address_ru' }" name="address_ru" type="text"
-            :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'work_ru' }" name="work_ru" type="text"
-            :label="$t('siteSettings.modal.contacts.schedule')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.address_ru"
+            name="address_ru" type="text" :label="$t('siteSettings.modal.contacts.address')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.work_ru" name="work_ru"
+            type="text" :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
 
         <q-card-section class="q-pt-none column" v-else>
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'address_en' }" name="address_en" type="text"
-            :label="$t('siteSettings.modal.contacts.address')" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'work_en' }" name="work_en" type="text"
-            :label="$t('siteSettings.modal.contacts.schedule')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.address_en"
+            name="address_en" type="text" :label="$t('siteSettings.modal.contacts.address')" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.work_en" name="work_en"
+            type="text" :label="$t('siteSettings.modal.contacts.schedule')" />
         </q-card-section>
       </Transition>
 
@@ -49,10 +43,9 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'editContactsDialog', inputName: 'phone' }" class="fullwdith" />
-          <DefaultInput :inputData="{ component: 'editContactsDialog', inputName: 'email' }" name="email" type="text"
-            label="E-mail" />
+          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.phone"
+            class="fullwdith" />
+          <DefaultInput v-model:text="form.email" name="email" type="text" label="E-mail" />
         </div>
 
 
@@ -69,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref, watch } from 'vue'
+import { Ref, onMounted, ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
@@ -80,10 +73,19 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const siteSettingsStore = useSiteSettingsStore()
 const modalStore = useModalStore()
-
+const form = ref({
+  address_uz: '',
+  work_uz: '',
+  address_ru: '',
+  work_ru: '',
+  address_en: '',
+  work_en: '',
+  phone: '',
+  email: ''
+})
 const langTab = ref('uz')
 function save() {
-  siteSettingsStore.updateSiteInfo().then(() => {
+  siteSettingsStore.updateSiteInfo(form.value).then(() => {
     modalStore.closeModal()
     Notify.create({
       message: t('notification.siteSettings.siteInfo.updated'),
@@ -100,6 +102,12 @@ function save() {
     })
   })
 }
+
+onMounted(() => {
+  siteSettingsStore.getSiteInfo().then(() => {
+    form.value = siteSettingsStore.siteInfo
+  })
+})
 </script>
 
 <style></style>

@@ -22,26 +22,17 @@ export const useSiteSettingsStore: any = defineStore('siteSettings', {
       return api.get('sites')
         .then(r => {
           this.siteInfo = r.data[0]
-
-          inputStore.input.editContactsDialog.work_ru = this.siteInfo.work_ru
-          inputStore.input.editContactsDialog.address_ru = this.siteInfo.address_ru
-          inputStore.input.editContactsDialog.work_uz = this.siteInfo.work_uz
-          inputStore.input.editContactsDialog.address_uz = this.siteInfo.address_uz
-          inputStore.input.editContactsDialog.work_en = this.siteInfo.work_en
-          inputStore.input.editContactsDialog.address_en = this.siteInfo.address_en
-          inputStore.input.editContactsDialog.phone = this.siteInfo.phone
-          inputStore.input.editContactsDialog.email = this.siteInfo.email
         }).catch(e => {
           console.log(e)
         })
     },
-    updateSiteInfo() {
+    updateSiteInfo(formData) {
       const data = {
         id: 1,
-        ...inputStore.input.editContactsDialog,
+        ...formData,
         ...this.langStatus
       }
-      data.phone = getPrefix(data.phone) + removeCharacters(data.phone)
+      data.phone = removeCharacters(data.phone)
       return api.put('sites', data)
     },
     getSocialNetworks() {

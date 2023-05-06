@@ -40,22 +40,17 @@
 
         </div>
         <div class="row no-wrap" style="gap:10px;">
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" :label="$t('users.modal.inputs.name')"
-            :placeholder="$t('placeholder.name')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.name" name="name"
+            :label="$t('users.modal.inputs.name')" :placeholder="$t('placeholder.name')" type="text" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.surname" name="surname"
             :label="$t('users.modal.inputs.surname')" :placeholder="$t('placeholder.surname')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
-            :placeholder="$t('placeholder.email')" type="text" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.email" name="email"
+            label="Email" :placeholder="$t('placeholder.email')" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'userDialog', inputName: 'phone' }" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth"
+          <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.phone" />
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.birth" name="birth"
             :label="$t('users.modal.inputs.birthday')" type="date" placeholder="" />
         </div>
         <div class="row no-wrap q-mb-md" style="gap: 20px;">
@@ -91,50 +86,6 @@
   </q-dialog>
 </template>
 
-<style lang="scss">
-.q-uploader {
-  display: flex;
-  width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  flex-direction: row-reverse !important;
-  gap: 20px;
-}
-
-.q-uploader__header {
-  display: flex;
-  width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  background-color: white;
-}
-
-.q-uploader__list {
-  width: 210px !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding: 0;
-  display: flex;
-  width: 397px;
-  height: 160px;
-  align-self: stretch;
-}
-
-.upload-preview {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  left: 30%;
-  top: 25%;
-}
-
-.upload-img {
-  height: 100%;
-  border-radius: 12px;
-  width: 100%;
-  border-radius: 12px;
-}
-</style>
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import DefaultInput from 'src/components/input/DefaultInput.vue'
@@ -152,6 +103,16 @@ const { t } = useI18n()
 const usersStore = useUsersStore()
 const inputStore = useInputStore()
 const modalStore = useModalStore()
+
+const form = ref({
+  name: '',
+  surname: '',
+  email: '',
+  phone: '',
+  birth: '',
+  newPassword: '',
+  confirmPassword: ''
+})
 
 const statusArr = [
   { label: 'Активный', value: 'registered' },
@@ -174,18 +135,18 @@ watch(() => props.userData, () => {
 })
 
 if (props.modalName === 'edit') {
-  inputStore.input.userDialog.name = props?.userData?.first_name
+  form.value.name = props?.userData?.first_name
 }
 
 function save() {
   const data = ref({
-    first_name: inputStore.input.userDialog.name,
-    last_name: inputStore.input.userDialog.surname,
-    password: inputStore.input.userDialog.newPassword,
-    phone: getPrefix(inputStore.input.userDialog.phone) + removeCharacters(inputStore.input.userDialog.phone),
-    birth_date: inputStore.input.userDialog.birth,
+    first_name: form.value.name,
+    last_name: form.value.surname,
+    password: form.value.newPassword,
+    phone: getPrefix(form.value.phone) + removeCharacters(form.value.phone),
+    birth_date: form.value.birth,
     user_image: 'image',
-    email: inputStore.input.userDialog.email,
+    email: form.value.email,
     is_active: true,
     gender: "male",
     ...select.value,
@@ -234,19 +195,64 @@ function save() {
 
 function closeModal() {
   modalStore.closeModal()
-  inputStore.input.userDialog.name = ''
-  inputStore.input.userDialog.surname = ''
-  inputStore.input.userDialog.phone = ''
-  inputStore.input.userDialog.email = ''
-  inputStore.input.userDialog.birth = ''
-  inputStore.input.userDialog.newPassword = ''
-  inputStore.input.userDialog.confirmPassword = ''
+  form.value.name = ''
+  form.value.surname = ''
+  form.value.phone = ''
+  form.value.email = ''
+  form.value.birth = ''
+  form.value.newPassword = ''
+  form.value.confirmPassword = ''
 }
 
 function setInputValues() {
-  inputStore.input.userDialog.name = props?.userData?.first_name
-  inputStore.input.userDialog.surname = props?.userData?.last_name
-  inputStore.input.userDialog.email = props?.userData?.email
-  inputStore.input.userDialog.phone = cutPhoneString(props?.userData?.phone)
+  form.value.name = props?.userData?.first_name
+  form.value.surname = props?.userData?.last_name
+  form.value.email = props?.userData?.email
+  form.value.phone = cutPhoneString(props?.userData?.phone)
 }
 </script>
+
+<style lang="scss">
+.q-uploader {
+  display: flex;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  flex-direction: row-reverse !important;
+  gap: 20px;
+}
+
+.q-uploader__header {
+  display: flex;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background-color: white;
+}
+
+.q-uploader__list {
+  width: 210px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0;
+  display: flex;
+  width: 397px;
+  height: 160px;
+  align-self: stretch;
+}
+
+.upload-preview {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 30%;
+  top: 25%;
+}
+
+.upload-img {
+  height: 100%;
+  border-radius: 12px;
+  width: 100%;
+  border-radius: 12px;
+}
+</style>

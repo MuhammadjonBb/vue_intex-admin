@@ -8,15 +8,12 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('token') || '',
   }),
-  getters: {
-
-  },
   actions: {
-    login() {
+    login(data: any) {
       return api.post('auth/admin/login', {
-        email: inputStore.input.mainAuth.email,
-        phone: getPrefix(inputStore.input.mainAuth.phone) + removeCharacters(inputStore.input.mainAuth.phone),
-        password: inputStore.input.mainAuth.password
+        email: data.email,
+        phone: getPrefix(data.phone) + removeCharacters(data.phone),
+        password: data.password
       }).then(r => {
         this.token = r.data.token
         localStorage.setItem('token', r.data.token)

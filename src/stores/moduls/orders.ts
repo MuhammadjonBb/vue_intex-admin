@@ -41,16 +41,16 @@ export const useOrdersStore: any = defineStore('orders', {
           console.log(e)
         })
     },
-    createOrder() {
+    createOrder(userData: any) {
       const data = {
         user: {
-          first_name: inputStore.input.ordersForm.first_name,
-          last_name: inputStore.input.ordersForm.last_name,
-          email: inputStore.input.ordersForm.email,
-          phone: inputStore.input.ordersForm.phone,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          phone: userData.phone,
         },
         order: [
-          ...this.mapSelectedProducts()
+          ...this.mapSelectedProducts(userData.address)
         ]
       }
       return api.post('orders', data)
@@ -84,11 +84,11 @@ export const useOrdersStore: any = defineStore('orders', {
         cost: 0
       })
     },
-    mapSelectedProducts() {
+    mapSelectedProducts(address: string) {
       const orders: any[] = []
       this.selectedProducts.map(p => {
         orders.push({
-          address: inputStore.input.ordersForm.address,
+          address,
           count: p.amount,
           product_id: p.id,
           status_id: this.statusValue.id,

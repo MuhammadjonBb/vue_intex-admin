@@ -12,8 +12,7 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="ruName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'ruName' }"
-                    :label="$t('categories.form.inputs.categoryName')"
+                    v-model:text="categoryName.ru" :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('ru')"
@@ -42,8 +41,7 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="enName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'enName' }"
-                    :label="$t('categories.form.inputs.categoryName')"
+                    v-model:text="categoryName.en" :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('en')"
@@ -73,8 +71,7 @@
               <q-card>
                 <q-card-section class="row no-wrap" style="gap: 20px;">
                   <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="uzName"
-                    :inputData="{ component: 'categoriesForm', inputName: 'uzName' }"
-                    :label="$t('categories.form.inputs.categoryName')"
+                    v-model:text="categoryName.uz" :label="$t('categories.form.inputs.categoryName')"
                     :placeholder="$t('categories.form.inputs.typeName')" />
 
                   <div style="min-width: 65%;" @mouseover="setVisibleSubcategoryInput('uz')"
@@ -117,21 +114,12 @@
 import { Ref, ref } from 'vue';
 import DefaultInput from 'src/components/input/DefaultInput.vue'
 import { useCategoriesStore } from 'src/stores/moduls/products/categories'
-import { useInputStore } from 'src/stores/moduls/input';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
-
-
-interface ISubcategoriesArr {
-  ru: string[],
-  uz: string[],
-  en: string[]
-}
 
 const { t } = useI18n()
 const $q = useQuasar()
 const categoriesStore = useCategoriesStore()
-const inputStore = useInputStore()
 const subCategoriesArr: any = ref({
   ru: [],
   uz: [],
@@ -145,6 +133,12 @@ const isSubcategoryVisible: any = ref({
 })
 
 const subCategoryInputValue = ref('')
+
+const categoryName = ref({
+  ru: '',
+  uz: '',
+  en: ''
+})
 
 function addSubCategory(value: string, lang: string) {
   if (subCategoryInputValue.value.trim() !== '') {
@@ -167,9 +161,9 @@ function save() {
   if (subCategoriesArr.value.ru.length === subCategoriesArr.value.uz.length && subCategoriesArr.value.ru.length === subCategoriesArr.value.en.length) {
     let data = [
       {
-        category_ru: inputStore.input.categoriesForm.ruName,
-        category_uz: inputStore.input.categoriesForm.uzName,
-        category_en: inputStore.input.categoriesForm.enName
+        category_ru: categoryName.value.ru,
+        category_uz: categoryName.value.uz,
+        category_en: categoryName.value.en
       },
       ...convertToObj()
     ]
@@ -206,9 +200,9 @@ function convertToObj() {
 }
 
 function clearValues() {
-  inputStore.input.categoriesForm.ruName = ''
-  inputStore.input.categoriesForm.uzName = ''
-  inputStore.input.categoriesForm.enName = ''
+  categoryName.value.ru = ''
+  categoryName.value.uz = ''
+  categoryName.value.en = ''
   subCategoriesArr.value = {
     ru: [],
     uz: [],

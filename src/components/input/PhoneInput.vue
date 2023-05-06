@@ -1,9 +1,9 @@
 <template>
   <label for="tel" class="font-weight-medium full-width q-mb-md " style="display: block;">
     {{ $t('phoneInput.name') }}
-    <q-input :rules="rules" v-model="inputStore.input[inputData.component][inputData.inputName]" id="tel" borderless
-      :class="rules?.length ? 'i-border' : 'border-reset'" class="q-mt-sm q-px-md" type="tel" style="position: relative;"
-      :mask="returnMask()" fill-mask>
+    <q-input :rules="rules" :model-value="text" @update:model-value="(value) => emit('update:text', value)" id="tel"
+      borderless :class="rules?.length ? 'i-border' : 'border-reset'" class="q-mt-sm q-px-md" type="tel"
+      style="position: relative;" :mask="returnMask()" fill-mask>
       <template #prepend>
         <div class="q-mr-xs">
           <q-img class="country-img" v-if="phoneCountry === '+998'" src="/src/assets/lang/2-lang.png" width="22px"
@@ -20,14 +20,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useInputStore } from 'stores/moduls/input';
-
-const inputStore = useInputStore()
 
 const phoneCountries = ['+998', '+7']
 const phoneCountry = ref(phoneCountries[0])
+defineProps(['text', 'rules'])
+const emit = defineEmits(['update:text']);
 
-defineProps(['inputData', 'rules'])
 
 function returnMask() {
   if (phoneCountry.value === '+998') {

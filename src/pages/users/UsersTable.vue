@@ -238,11 +238,15 @@ import { useRouter } from 'vue-router';
 import { useModalStore } from 'src/stores/moduls/modal';
 import { ref } from 'vue'
 import { useUsersStore } from 'src/stores/moduls/users';
+import { Notify } from 'quasar';
+import { useI18n } from 'vue-i18n';
+
 
 const emit = defineEmits(['onEdit'])
 
 defineProps(['data'])
-const { deleteUser } = useUsersStore()
+const { t } = useI18n()
+const usersStore = useUsersStore()
 const router = useRouter()
 const allSelect = ref(false)
 const selected = ref([])
@@ -276,6 +280,22 @@ function getStatusClass(status: string) {
 function toEdit(data: object) {
   modalStore.modal.users.edit = true
   emit('onEdit', data)
+}
+
+function deleteUser(id: number) {
+  usersStore.deleteUser(id).then(() => {
+    Notify.create({
+      type: 'positive',
+      message: t('notification.users.deleted'),
+      position: 'top-right'
+    })
+  }).catch(() => {
+    Notify.create({
+      type: 'negative',
+      message: t('notification.users.deleteError'),
+      position: 'top-right'
+    })
+  })
 }
 
 function returnRole(str: string): string | void {

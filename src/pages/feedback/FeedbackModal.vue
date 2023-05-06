@@ -11,12 +11,14 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
+          <!-- <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
-            :placeholder="$t('placeholder.name')" type="text" :label="$t('consultations.modal.inputs.name')" />
+            :placeholder="$t('placeholder.name')" type="text" :label="$t('consultations.modal.inputs.name')" /> -->
+          <DefaultInput v-model:text="inputName" :rules="[required]" name="name" :placeholder="$t('placeholder.name')"
+            :label="$t('consultations.modal.inputs.name')">
+          </DefaultInput>
 
-          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
+          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="inputPhone" />
         </div>
         <div class="row q-mt-lg">
           <q-space />
@@ -36,19 +38,23 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
 import { useFeedbackStore } from 'src/stores/moduls/feedback'
-import { useInputStore } from 'src/stores/moduls/input'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import { useQuasar } from 'quasar'
 import { useI18n } from 'vue-i18n'
 import cutPhoneString from "src/helpers/cutPhoneString"
 
+const inputName = ref('')
+const inputPhone = ref('')
 
 const props = defineProps(['modalName', 'label', 'feedbackData'])
 const { t } = useI18n()
 const modalStore = useModalStore()
 const feedbackStore = useFeedbackStore()
-const inputStore = useInputStore()
 const $q = useQuasar()
+
+function required(v: string | number) {
+  return !!v || t('validation.required')
+}
 
 watch(props, () => {
   setInputValues()
@@ -56,8 +62,8 @@ watch(props, () => {
 
 function save() {
   const data = {
-    name: inputStore.input.feedbackDialog.name,
-    phone: getPrefix(inputStore.input.feedbackDialog.phone) + removeCharacters(inputStore.input.feedbackDialog.phone),
+    name: inputName.value,
+    phone: getPrefix(inputPhone.value) + removeCharacters(inputPhone.value),
   }
 
   if (props.modalName === 'create') {
@@ -86,12 +92,12 @@ function save() {
 
 function closeModal() {
   modalStore.closeModal()
-  inputStore.input.feedbackDialog.name = ''
-  inputStore.input.feedbackDialog.phone = ''
+  inputName.value = ''
+  inputPhone.value = ''
 }
 
 function setInputValues() {
-  inputStore.input.feedbackDialog.name = props.feedbackData.name
-  inputStore.input.feedbackDialog.phone = cutPhoneString(props.feedbackData.phone)
+  inputName.value = props.feedbackData.name
+  inputPhone.value = cutPhoneString(props.feedbackData.phone)
 }
 </script>

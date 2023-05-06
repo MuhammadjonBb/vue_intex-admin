@@ -3,19 +3,17 @@
     <div class="column no-wrap q-mb-md" style="gap:20px;">
       <div class="row no-wrap" style="gap: 20px;">
         <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="name"
-          :label="$t('orders.form.inputs.name')" :inputData="{ component: 'ordersForm', inputName: 'first_name' }"
-          class="full-width" />
+          :label="$t('orders.form.inputs.name')" v-model:text="form.first_name" class="full-width" />
         <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="surname"
-          :label="$t('orders.form.inputs.surname')" :inputData="{ component: 'ordersForm', inputName: 'last_name' }"
-          class="full-width" />
+          :label="$t('orders.form.inputs.surname')" v-model:text="form.last_name" class="full-width" />
         <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]" class="full-width"
-          :inputData="{ component: 'ordersForm', inputName: 'phone' }" />
+          v-model:text="form.phone" />
         <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="email" label="Email"
-          :inputData="{ component: 'ordersForm', inputName: 'email' }" class="full-width" />
+          v-model:text="form.email" class="full-width" />
       </div>
 
       <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="address" icon="location_on"
-        :label="$t('orders.form.inputs.address')" :inputData="{ component: 'ordersForm', inputName: 'address' }" />
+        :label="$t('orders.form.inputs.address')" v-model:text="form.address" />
     </div>
     <!-- ==================== -->
     <div class="column no-wrap q-mb-lg">
@@ -92,6 +90,14 @@ const inputStore = useInputStore()
 const route = useRoute()
 const ordersStore = useOrdersStore()
 
+const form = ref({
+  first_name: '',
+  last_name: '',
+  address: '',
+  phone: '',
+  email: '',
+})
+
 onMounted(() => {
   if (!ordersStore.products) {
     ordersStore.getProducts()
@@ -107,7 +113,7 @@ function getOrder(id: any) {
 }
 
 function createOrder() {
-  ordersStore.createOrder().then(() => {
+  ordersStore.createOrder(form.value).then(() => {
     Notify.create({
       color: 'positive',
       textColor: 'white',
