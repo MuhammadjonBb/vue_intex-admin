@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
-import { Notify } from 'quasar'
 import { useInputStore } from './input'
 
 const inputStore = useInputStore()
@@ -54,22 +53,7 @@ export const useOrdersStore: any = defineStore('orders', {
           ...this.mapSelectedProducts()
         ]
       }
-      api.post('orders', data).then(r => {
-        Notify.create({
-          color: 'positive',
-          textColor: 'white',
-          message: 'Заказ успешно создан',
-          position: 'top-right',
-        })
-      })
-        .catch(e => {
-          Notify.create({
-            color: 'negative',
-            textColor: 'white',
-            message: 'Ошибка создания заказа',
-            position: 'top-right',
-          })
-        })
+      return api.post('orders', data)
     },
     getProducts() {
       api.get('products').then(r => {

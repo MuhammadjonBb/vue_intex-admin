@@ -30,26 +30,31 @@
                 :style="`${!scope.files.length ? 'border: 1px dashed #CDCDCD;' : ''}`" class="upload-img" />
               <q-img v-if="!scope.files.length" type="a" @click="scope.pickFiles" src="/src/assets/uploadIcon.svg"
                 class="upload-preview" />
+              <span v-if="!scope.files.length" style="color: #04009A; position: absolute;top: 70%;left: 25%;">
+                <q-icon name="upload"></q-icon>
+                {{
+                  $t('users.modal.load')
+                }}</span>
             </template>
           </q-uploader>
 
         </div>
         <div class="row no-wrap" style="gap:10px;">
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'userDialog', inputName: 'name' }" name="name" :label="$t('users.modal.inputs.name')"
             :placeholder="$t('placeholder.name')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'userDialog', inputName: 'surname' }" name="surname"
             :label="$t('users.modal.inputs.surname')" :placeholder="$t('placeholder.surname')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'userDialog', inputName: 'email' }" name="email" label="Email"
             :placeholder="$t('placeholder.email')" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'userDialog', inputName: 'phone' }" />
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'userDialog', inputName: 'birth' }" name="birth"
             :label="$t('users.modal.inputs.birthday')" type="date" placeholder="" />
         </div>
@@ -117,9 +122,9 @@
 
 .upload-preview {
   position: absolute;
-  width: 137px;
-  height: 85px;
-  left: 10px;
+  width: 60px;
+  height: 60px;
+  left: 30%;
   top: 25%;
 }
 
@@ -137,10 +142,13 @@ import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
 import { useInputStore } from 'src/stores/moduls/input'
+import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n'
 import { useUsersStore } from 'src/stores/moduls/users'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import cutPhoneString from "src/helpers/cutPhoneString"
 
+const { t } = useI18n()
 const usersStore = useUsersStore()
 const inputStore = useInputStore()
 const modalStore = useModalStore()
@@ -184,10 +192,43 @@ function save() {
   })
 
   if (props.modalName === 'create') {
-    usersStore.createUser(data.value).then(() => closeModal())
+    usersStore.createUser(data.value).then(() => {
+      closeModal()
+      Notify.create({
+        color: 'positive',
+        textColor: 'white',
+        icon: 'done',
+        message: t('notification.users.created'),
+        position: 'top-right',
+      })
+    }).catch(() => {
+      Notify.create({
+        color: 'negative',
+        textColor: 'white',
+        icon: 'warning',
+        position: 'top-right',
+        message: t('notification.users.createError'),
+      })
+    })
   } else if (props.modalName === 'edit') {
-    const editObject = Object.assign(data.value, { id: props.userData.id })
-    usersStore.editUser(editObject)
+    const editObject = Object.assign(data.value, { id: Number(props.userData.id) })
+    usersStore.editUser(editObject).then(() => {
+      Notify.create({
+        color: 'positive',
+        textColor: 'white',
+        icon: 'done',
+        message: t('notification.users.edited'),
+        position: 'top-right',
+      })
+    }).catch(() => {
+      Notify.create({
+        color: 'negative',
+        textColor: 'white',
+        icon: 'warning',
+        message: t('notification.users.editError'),
+        position: 'top-right',
+      })
+    })
   }
 }
 

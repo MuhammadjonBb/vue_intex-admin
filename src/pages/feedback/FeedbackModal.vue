@@ -11,11 +11,11 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
             :placeholder="$t('placeholder.name')" type="text" :label="$t('consultations.modal.inputs.name')" />
 
-          <phone-input :rules="[(v: any) => !!v || 'Обязательное поле']"
+          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]"
             :inputData="{ component: 'feedbackDialog', inputName: 'phone' }" />
         </div>
         <div class="row q-mt-lg">
@@ -39,10 +39,12 @@ import { useFeedbackStore } from 'src/stores/moduls/feedback'
 import { useInputStore } from 'src/stores/moduls/input'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
 import { useQuasar } from 'quasar'
+import { useI18n } from 'vue-i18n'
 import cutPhoneString from "src/helpers/cutPhoneString"
 
 
 const props = defineProps(['modalName', 'label', 'feedbackData'])
+const { t } = useI18n()
 const modalStore = useModalStore()
 const feedbackStore = useFeedbackStore()
 const inputStore = useInputStore()
@@ -63,14 +65,14 @@ function save() {
       closeModal()
 
       $q.notify({
-        message: 'Обратная связь успешно создана',
+        message: t('notification.consultation.created'),
         color: 'positive',
         position: 'top-right',
       })
     })
       .catch(() => {
         $q.notify({
-          message: 'Ошибка создания обратной связи',
+          message: t('notification.consultation.createError'),
           color: 'negative',
           position: 'top-right',
         })

@@ -92,7 +92,7 @@
             </q-item>
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn @click="feedbackStore.deleteFeedback(props.row.id)" dense flat class="text-capitalize text-left"
+                <q-btn @click="deleteFeedback(props.row.id)" dense flat class="text-capitalize text-left"
                   text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
@@ -169,7 +169,10 @@ import { useModalStore } from 'src/stores/moduls/modal';
 import { Ref, ref } from 'vue'
 import beautifyDate from 'src/helpers/beautifyDate'
 import { useFeedbackStore } from 'src/stores/moduls/feedback';
+import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['onEdit'])
 defineProps(['data'])
 
@@ -201,5 +204,25 @@ function getPageNums(n: number): number[] {
 function toEdit(data: object) {
   modalStore.modal.feedback.edit = true
   emit('onEdit', data)
+}
+
+function deleteFeedback(id: number) {
+  feedbackStore.deleteFeedback(id).then(() => {
+    Notify.create({
+      color: 'positive',
+      textColor: 'white',
+      message: t('notification.consultation.deleted'),
+      position: 'top-right',
+      group: false
+    })
+  }).catch(() => {
+    Notify.create({
+      color: 'negative',
+      message: t('notification.consultation.deleteError'),
+      textColor: 'white',
+      position: 'top-right',
+      group: false
+    })
+  })
 }
 </script>

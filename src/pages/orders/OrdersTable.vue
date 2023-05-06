@@ -34,7 +34,7 @@
           align: 'left'
         },
         {
-          name: 'ids',
+          name: 'count',
           label: `${$t('orders.table.tableHead.products')}`,
           field: 'count',
           headerStyle: 'background-color: #f2f2f2;',
@@ -133,11 +133,11 @@
     <!-- STATUS -->
 
     <!-- PRODUCTS -->
-    <template #body-cell-ids="props">
+    <template #body-cell-count="props">
       <q-td :props="props" v-if="ordersStore.products">
         <div style="color: #109EF4;text-decoration: underline; cursor: pointer;">
           <div>
-            {{ getRightWord(props.row.count) }}{{ props.row.ids }}
+            {{ getRightWord(props.row.count) }}
           </div>
         </div>
       </q-td>
@@ -304,5 +304,4 @@ function getProduct(id: any) {
   const product = ordersStore.products.result.find((p: any) => p.id === id)
   return product ? product.name_ru : ''
 }
-
 </script>

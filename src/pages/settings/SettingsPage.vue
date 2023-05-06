@@ -17,7 +17,7 @@
                   </q-item-section>
                   <q-item-section avatar>
                     <q-toggle v-model="siteSettingsStore.langStatus.lang_ru"
-                      @click="siteSettingsStore.siteLangUpdate('ru', siteSettingsStore.langStatus.lang_ru)" />
+                      @click="siteLangUpdate('ru', siteSettingsStore.langStatus.lang_ru)" />
                   </q-item-section>
                 </q-item>
 
@@ -27,7 +27,7 @@
                   </q-item-section>
                   <q-item-section avatar>
                     <q-toggle v-model="siteSettingsStore.langStatus.lang_uz"
-                      @click="siteSettingsStore.siteLangUpdate('uz', siteSettingsStore.langStatus.lang_uz)" />
+                      @click="siteLangUpdate('uz', siteSettingsStore.langStatus.lang_uz)" />
                   </q-item-section>
                 </q-item>
 
@@ -37,7 +37,7 @@
                   </q-item-section>
                   <q-item-section avatar>
                     <q-toggle v-model="siteSettingsStore.langStatus.lang_en"
-                      @click="siteSettingsStore.siteLangUpdate('en', siteSettingsStore.langStatus.lang_en)" />
+                      @click="siteLangUpdate('en', siteSettingsStore.langStatus.lang_en)" />
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -127,12 +127,13 @@ import EditContactsDialog from 'src/pages/settings/EditContactsDialog.vue'
 import { useModalStore } from 'src/stores/moduls/modal';
 import { useSiteSettingsStore } from 'src/stores/moduls/siteSettings'
 import { useI18n } from 'vue-i18n'
+import { Notify } from 'quasar'
 
 function getLocale() {
   const { locale } = useI18n()
   return locale.value.slice(0, -3)
 }
-
+const { t } = useI18n()
 const modalStore = useModalStore()
 const siteSettingsStore = useSiteSettingsStore()
 const defaultLang: any = ref({
@@ -150,11 +151,11 @@ onMounted(() => {
     islangDefault(siteSettingsStore.siteInfo.default_lang)
   })
 
-  siteSettingsStore.getSocialNetworks()
+  getSocialNetworks()
 })
 
 function toggleLang([key1, key2]: [string, string], upadeLang: string): void {
-  siteSettingsStore.updateDefaultLang(upadeLang)
+  updateDefaultLang(upadeLang)
   defaultLang.value[key1] = false
   defaultLang.value[key2] = false
 }
@@ -169,5 +170,53 @@ function openDialog(dialog: string): void {
   } else if (dialog === 'socials') {
     modalStore.modal.settings.socials = true
   }
+}
+
+function getSocialNetworks() {
+  siteSettingsStore.getSocialNetworks()
+    .catch(() => {
+      Notify.create({
+        message: t('notification.siteSettings.socials.getError'),
+        color: 'negative',
+        position: 'top-right',
+        group: false
+      })
+    })
+}
+
+function siteLangUpdate(name: string, status: string): void {
+  siteSettingsStore.siteLangUpdate(name, status).then(() => {
+    Notify.create({
+      message: t('notification.siteSettings.siteLang.updated'),
+      color: 'positive',
+      position: 'top-right',
+      group: false
+    })
+  }).catch(() => {
+    Notify.create({
+      message: t('notification.siteSettings.siteLang.updateError'),
+      color: 'negative',
+      position: 'top-right',
+      group: false
+    })
+  })
+}
+
+function updateDefaultLang(lang: string) {
+  siteSettingsStore.updateDefaultLang(lang).then(() => {
+    Notify.create({
+      message: t('notification.siteSettings.defaultLang.updated'),
+      color: 'positive',
+      position: 'top-right',
+      group: false
+    })
+  }).catch(() => {
+    Notify.create({
+      message: t('notification.siteSettings.defaultLang.updateError'),
+      color: 'negative',
+      position: 'top-right',
+      group: false
+    })
+  })
 }
 </script>

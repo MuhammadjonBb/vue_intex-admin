@@ -1,10 +1,10 @@
 <template>
   <div class="auth">
     <h1 class="modal__title">Авторизоваться</h1>
-    <DefaultInput :rules="[(v: any) => !!v || 'Обязательное поле']" name="name"
+    <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="name"
       :inputData="{ component: 'mainAuth', inputName: 'email' }" label="Email" placeholder="Введите ваш email"
       type="text" />
-    <PhoneInput :rules="[(v: any) => !!v || 'Обязательное поле']"
+    <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]"
       :input-data="{ component: 'mainAuth', inputName: 'phone' }"></PhoneInput>
     <password-input label="Введите пароль" :inputData="{ component: 'mainAuth', inputName: 'password' }" />
 
@@ -25,8 +25,9 @@ import { ref, Ref, defineEmits } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
+import { useI18n } from 'vue-i18n'
 
-
+const { t } = useI18n()
 const router = useRouter()
 const $q = useQuasar()
 const inputStore = useInputStore()
@@ -40,7 +41,7 @@ function login() {
     $q.notify({
       group: false,
       type: 'positive',
-      message: 'Вы успешно авторизовались',
+      message: t('notification.user.authorized'),
       position: 'top-right',
     })
     router.push('/')
@@ -50,7 +51,7 @@ function login() {
     $q.notify({
       group: false,
       type: 'negative',
-      message: 'Ошибка авторизации',
+      message: t('notification.user.authErr'),
       position: 'top-right',
     })
   })

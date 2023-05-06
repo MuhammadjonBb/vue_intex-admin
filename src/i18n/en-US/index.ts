@@ -1,6 +1,3 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   // Product list page
   product: {
@@ -50,6 +47,20 @@ export default {
         orderTime: 'Order time',
         status: 'Status',
       }
+    },
+    form: {
+      addTitle: 'Add order',
+      editTitle: 'Edit order',
+      addProducts: 'Add products',
+      inputs: {
+        name: 'Name',
+        surname: 'Surname',
+        phone: 'Phone',
+        address: 'Address',
+        products: 'Products',
+        amount: 'Amount',
+        status: 'Status',
+      }
     }
   },
   consultations: {
@@ -71,6 +82,7 @@ export default {
   },
   users: {
     title: 'Users',
+    info: 'User information',
     table: {
       tableHead: {
         name: 'Name',
@@ -109,8 +121,26 @@ export default {
     subTitles: {
       defaultLang: 'Default language',
       siteLangs: 'Site languages',
-      contactIno: 'Contact information',
+      contactInfo: 'Contact information',
       socials: 'Socials',
+    },
+    modal: {
+      title: 'Edit information',
+      contacts: {
+        address: 'Address',
+        schedule: 'Work schedule',
+        lang: {
+          uz: 'Uzbek language',
+          ru: 'Russian language',
+          en: 'English language',
+        }
+      },
+      socials: {
+        add: 'Add social network',
+        delete: 'Delete social network',
+        type: 'Type of social network',
+        link: 'Link',
+      }
     }
   },
   categories: {
@@ -120,6 +150,16 @@ export default {
         categoryName: 'Category name',
         subCategoryAmount: 'Subcategory amount',
         subCategories: 'Subcategories',
+      }
+    },
+    form: {
+      addTitle: 'Add category',
+      editTitle: 'Edit category',
+      inputs: {
+        categoryName: 'Category name',
+        subCategory: 'Subcategory name',
+        typeName: 'Type category name',
+        typeSubCategory: 'Type subcategory name',
       }
     }
   },
@@ -156,7 +196,77 @@ export default {
     addOrder: 'Add order',
     editOrder: 'Edit order',
   },
-
+  notification: {
+    user: {
+      userNotAuthorized: 'User is not authorized',
+      tokenExpired: 'Token expired, please login again',
+      authorized: 'You are authorized successfully',
+      authErr: 'Authorization error',
+    },
+    users: {
+      created: 'User was created successfully',
+      createError: 'Error on creating user',
+      deleted: 'User was deleted successfully',
+      deleteError: 'Error on deleting user',
+      edited: 'User was edited successfully',
+      editError: 'Error on editing user',
+    },
+    consultation: {
+      created: 'Consultation was created successfully',
+      createError: 'Error on creating consultation',
+      deleted: 'Consultation was deleted successfully',
+      deleteError: 'Error on deleting consultation',
+    },
+    categories: {
+      created: 'Category was created successfully',
+      createError: 'Error on creating category',
+      equalError: 'The number of values in subcategories must match the number of values in other subcategories',
+      deleted: 'Category was deleted successfully',
+      deleteError: 'Error on deleting category',
+    },
+    orders: {
+      created: 'Order was created successfully',
+      createError: 'Error on creating order',
+    },
+    siteSettings: {
+      siteInfo: {
+        updated: 'Site information was updated successfully',
+        updateError: 'Error on updating site information',
+      },
+      socials: {
+        getError: 'Error on getting socials',
+        deleted: 'Social network was deleted successfully',
+        deleteError: 'Error on deleting social network',
+        created: 'Social network was created successfully',
+        createError: 'Error on creating social network',
+        updated: 'Social network was updated successfully',
+        updateError: 'Error on updating social network',
+      },
+      siteLang: {
+        updated: 'Site language was updated successfully',
+        updateError: 'Error on updating site language',
+      },
+      defaultLang: {
+        updated: 'Default language was updated successfully',
+        updateError: 'Error on updating default language',
+      }
+    }
+  },
+  filterPanel: {
+    filter: 'Filter',
+    sort: 'Sorting',
+    add: 'Add',
+    search: 'Search',
+    filterOptions: {
+      byName: 'By name',
+      byPrice: 'By price',
+      byIncrease: 'By increase',
+    }
+  },
+  validation: {
+    required: 'This field is required',
+  },
+  search: 'Search',
   failed: 'Action failed',
   success: 'Action was successful',
   cancel: 'Action was cancelled',
