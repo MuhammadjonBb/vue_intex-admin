@@ -69,10 +69,8 @@
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
-          <password-input class="full-width" :label="$t('password.new')"
-            :inputData="{ component: 'userDialog', inputName: 'newPassword' }" />
-          <password-input class="full-width" :label="$t('password.confirm')"
-            :inputData="{ component: 'userDialog', inputName: 'confirmPassword' }" />
+          <password-input class="full-width" :label="$t('password.new')" v-model:text="form.newPassword" />
+          <password-input class="full-width" :label="$t('password.confirm')" v-model:text="form.confirmPassword" />
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
