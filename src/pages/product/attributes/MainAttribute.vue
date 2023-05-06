@@ -1,8 +1,15 @@
 <script lang="ts" setup>
-// eslint-disable-next-line
 import SearchFilterCreatePanel from "components/SearchFilterCreatePanel.vue";
-// eslint-disable-next-line
 import TableAttribute from "./TableAttribute.vue";
+import { onMounted} from "vue";
+import {useAboutStore} from "stores/moduls/products/attribute";
+
+const store = useAboutStore()
+
+onMounted(() => {
+  store.getAtributes()
+  console.log( 'Attribute',store.listData)
+})
 </script>
 
 <template>
@@ -10,7 +17,7 @@ import TableAttribute from "./TableAttribute.vue";
     <div class="text-h5 text-weight-bold q-my-md">
       Атрибуты
     </div>
-    <SearchFilterCreatePanel :dynamicRoute="'attributes-create'" :isModal="false" />
+    <SearchFilterCreatePanel :dynamicRoute="'/product/attributes/create'" :isModal="false" />
 
     <TableAttribute />
   </div>

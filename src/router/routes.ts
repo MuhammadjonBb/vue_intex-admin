@@ -8,15 +8,15 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: 'product/list', component: () => import('pages/product/list/ProductList.vue') },
       { path: 'product/create', component: () => import('pages/product/list/ProductCreate.vue') },
-      { path: 'product/update/:id', component: () => import('pages/product/list/ProductCreate.vue') }
+      { path: 'product/update/:id', component: () => import('pages/product/list/ProductCreate.vue') },
     ]
   },
   {
-    path: '/product/attributes',
+    path: '/product',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '/product/attributes', component: () => import('pages/product/attributes/MainAttribute.vue') },
-      { path: '/product/attributes-create', component: () => import('pages/product/attributes/CreateAtribute.vue') }
+      { path: '/product/attributes/create', component: () => import('pages/product/attributes/CreateAtribute.vue') }
     ]
   },
   {

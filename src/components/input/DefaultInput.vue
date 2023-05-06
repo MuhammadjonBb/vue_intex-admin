@@ -14,5 +14,6 @@
 <script setup lang="ts">
 defineProps(['text', 'label', 'placeholder', 'type', 'name', 'icon', 'rules'])
 
-const emit = defineEmits(['update:text']);
+const inputStore = useInputStore()
+const props = defineProps(['inputData', 'label', 'placeholder', 'type', 'name', 'icon', 'rules'])
 </script>

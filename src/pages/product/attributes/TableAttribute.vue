@@ -1,7 +1,7 @@
 <template>
   <q-table dense table-class="q-mx-none" flat class="my-table" color="primary" :virtual-scroll="true"
     card-class="text-black" table-header-style="font-weight: 500;font-size: 14px; background-color: #f2f2f2;"
-    table-header-class="text-grey-7 q-pa-none" :rows="data.data" row-key="id" v-model:selected="selected"
+    table-header-class="text-grey-7 q-pa-none" :rows="store.listData.result" row-key="id" v-model:selected="selected"
     selection="multiple" :columns="[
         {
           name: 'id',
@@ -12,17 +12,17 @@
           align: 'left'
         },
         {
-          name: 'client',
-          label: 'Имя клиента',
-          field: 'client',
+          name: 'attribute_ru',
+          label: 'Название атрибута',
+          field: 'attribute_ru',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
         },
         {
-          name: 'status',
-          label: 'Статус',
-          field: 'status',
+          name: 'view',
+          label: 'Вид формы',
+          field: 'view',
           sortable: true,
           align: 'left',
           headerStyle: 'background-color: #f2f2f2;',
@@ -30,7 +30,7 @@
         {
           name: 'goods',
           label: 'Значение атрибута',
-          field: 'goods',
+          field: 'uz',
           sortable: true,
           headerStyle: 'background-color: #f2f2f2;',
           align: 'left'
@@ -95,12 +95,12 @@
     <!-- BODY  -->
     <template #body-cell-goods="props">
       <q-td :props="props">
-        <div v-if="props.row.goods.length > 1" class="row">
+        <div v-if="props.row.uz.length > 1" class="row">
           <q-chip style="background: #9CDAFF;" square v-for="(item, index) in props.row.goods" :key="index">
             {{ item }}
           </q-chip>
         </div>
-        <div v-else>1 x {{ props.row.goods[0] }}</div>
+        <div v-else>1 x {{ props.row.uz[0] }}</div>
       </q-td>
     </template>
     <!-- DATE -->
@@ -131,7 +131,7 @@
             </q-item>
             <q-item v-close-popup>
               <q-item-section>
-                <q-btn dense flat class="text-capitalize text-left" @click="deleteItem(props.row.id)" text-color="grey-8">
+                <q-btn dense flat class="text-capitalize text-left" @click="store.deleteAtribute(props.row.id)" text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить
                 </q-btn>
@@ -188,18 +188,19 @@
       </div>
     </template>
     <!-- PAGINATION -->
-  </q-table>
+  </q-table>{{selected}}
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import datas from 'src/helpers/orderData'
+import {useAboutStore} from "stores/moduls/products/attribute";
 
+const store = useAboutStore()
 const router = useRouter()
 const selected = ref([])
 const allSelect = ref(false)
-const data = computed(() => datas)
+// const data = computed(() => datas)
 
 // eslint-disable-next-line space-before-function-paren
 function getPageNums(n: number) {
@@ -211,7 +212,7 @@ function getPageNums(n: number) {
 }
 
 function deleteItem(id: string) {
-  data = data.filter(item => item.id != id)
+
 }
 
 // eslint-disable-next-line space-before-function-paren
@@ -234,6 +235,7 @@ function getStatusClass(status: string) {
 
 // eslint-disable-next-line space-before-function-paren
 function clearSelections() {
+
   selected.value.splice(0)
 }
 </script>

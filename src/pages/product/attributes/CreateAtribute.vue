@@ -1,18 +1,34 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
+import {useAboutStore} from "stores/moduls/products/attribute";
+import {useInputStore} from "stores/moduls/input";
+import {storeToRefs} from "pinia";
 
 const lang = ref({
   ru: false,
   uz: false,
   en: false
 })
-const isToggled = ref(false);
+const inputStore = useInputStore()
+const isToggled = ref(null);
 const selectedOption = ref('')
+const store = useAboutStore()
+const { toggle } = storeToRefs(store)
+const createAttribute = reactive({
+  name_uz: '',
+  name_ru: '',
+  name_en: ''})
+
+function addAttribute() {
+  store.toggle.about_uz.resetValidation()
+
+  console.log(isToggled)
+}
 </script>
 <template>
   <div class="header__title">
-    Добавить aтрибуты
+    Добавить aтрибуты {{`${store.toggle.about_uz}`}}
   </div>
   <q-card flat class=" q-ma-md card__attribute q-pa-md">
     <div class="toggle-container">
@@ -27,17 +43,19 @@ const selectedOption = ref('')
       <div v-if="lang.ru" class="content">
         <div class="input__group">
           <div class="input__name">
-            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameRu' }" :label="'Название атрибута'"
-              placeholder="Введите название атрибута" />
+            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameRu', ref:'refNameRu' }"
+                           :label="'Значение атрибута'" :rules="[val => !!val || 'Field is required']"
+                           placeholder="Введите значение атрибута" />
           </div>
           <div class="input__dropdown">
-            <label for="select">Тип ввода</label>
-            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
-            <select id="select" v-model="selectedOption">
-              <option>Num</option>
-              <option>Num</option>
-              <option>Num</option>
-            </select>
+              <span class="text-weight-bold">Тип ввода</span>
+              <q-select outlined
+                        :ref="toggle.about_uz"
+                        class="q-pt-sm"
+                        :options="['Range','Dropdown', 'Checkbox','Radio button']"
+                        label="Введите значение атрибута"
+                        :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
+
           </div>
         </div>
 
@@ -64,12 +82,12 @@ const selectedOption = ref('')
           </div>
           <div class="input__dropdown">
             <label for="select">Тип ввода</label>
-            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
-            <select id="select" v-model="selectedOption">
-              <option>Num</option>
-              <option>Num</option>
-              <option>Num</option>
-            </select>
+
+            <q-select outlined
+                      class="q-pt-sm"
+                      :options="['Range','Dropdown', 'Checkbox','Radio button']"
+                      label="Введите значение атрибута"
+                      :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
           </div>
         </div>
 
@@ -96,12 +114,12 @@ const selectedOption = ref('')
           </div>
           <div class="input__dropdown">
             <label for="select">Тип ввода</label>
-            <div :class="!selectedOption ? 'input__label' : 'hidden'">Введите значение атрибута</div>
-            <select id="select" v-model="selectedOption">
-              <option value="num">Num</option>
-              <option>Num</option>
-              <option>Num</option>
-            </select>
+
+            <q-select outlined
+                      class="q-pt-sm"
+                      :options="['Range','Dropdown', 'Checkbox','Radio button']"
+                      label="Введите значение атрибута"
+                      :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
           </div>
         </div>
 
@@ -112,9 +130,9 @@ const selectedOption = ref('')
       </div>
     </div>
     <q-card-actions align="center" class="row no-wrap q-mx-auto" style="gap: 20px; max-width: 50%;">
-      <q-btn color="indigo-10" flat label="Отменить" style="border-radius: 12px;"
+      <q-btn color="indigo-10" flat @click="addAttribute" label="Отменить" style="border-radius: 12px;"
         class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;"
+      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;" @click="store.postAttribute(selectedOption)"
         class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
     </q-card-actions>
   </q-card>
@@ -172,6 +190,7 @@ const selectedOption = ref('')
   &__group {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 50%;
   }
 
@@ -185,6 +204,7 @@ const selectedOption = ref('')
   &__dropdown {
     width: 48%;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     position: relative;
   }
