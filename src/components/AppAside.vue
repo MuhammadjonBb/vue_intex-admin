@@ -2,11 +2,19 @@
   <aside class="aside column">
     <img src="/src/assets/intex-logo.svg" alt="Logo" class="aside__logo">
     <q-list>
-      <q-expansion-item expand-icon-class="text-primary" :label="`${$t('aside.items.products')}`" icon="summarize"
-        header-class="text-primary q-pl-lg q-py-md" class="aside__products-parent text-weight-medium"
+      <q-expansion-item expand-icon-class="text-primary" icon="summarize" header-class="text-primary q-pl-lg q-py-md"
+        class="aside__products-parent text-weight-medium"
         :style="`${route.path.includes('product') ? 'filter: grayscale(0)' : ''}`" default-opened>
-        <q-list>
+        <template v-slot:header="scope">
+          <q-item-section avatar>
+            <q-img src="/src/assets/products.svg" alt="Orders" width="24px" height="24px" class=" q-mr-md" />
+          </q-item-section>
 
+          <q-item-section>
+            {{ $t('aside.items.products') }}
+          </q-item-section>
+        </template>
+        <q-list>
           <q-item clickable :active="true" active-class="text-primary"
             :class="isPageActive(['product/list', 'product/create'])" @click="$router.push('/product/list')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
@@ -50,8 +58,8 @@
 
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
         :class="isPageActive(['/orders/'])" @click="$router.push('/orders/')">
-        <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="email" size="24px" class="q-mr-md" />
+        <q-item-section class="items-center items-row-start no-wrap">
+          <q-img src="/src/assets/orders.svg" alt="Orders" width="24px" height="24px" class=" q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/orders/">
             {{ $t('aside.items.orders') }}
           </router-link>
@@ -61,7 +69,8 @@
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
         :class="isPageActive(['/feedback/'])" @click="$router.push('/feedback/')">
         <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="phone" size="24px" class="q-mr-md" />
+          <q-img color="primary" src="/src/assets/feedback.svg" alt="Feedback" width="24px" height="24px"
+            class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/feedback/">
             {{ $t('aside.items.feedback') }}
           </router-link>
@@ -71,7 +80,7 @@
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
         :class="isPageActive(['/users/'])" @click="$router.push('/users/')">
         <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="account_circle" size="24px" class="q-mr-md" />
+          <q-img color="primary" src="/src/assets/users.svg" alt="users" width="24px" height="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/users/">
             {{ $t('aside.items.users') }}
           </router-link>
@@ -81,7 +90,9 @@
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
         :class="isPageActive(['/settings/'])" @click="$router.push('/settings/')">
         <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="settings" size="24px" class="q-mr-md" />
+          <q-img color="primary" src="/src/assets/settings.svg" alt="settings" width="24px" height="24px"
+            class="q-mr-md" />
+
           <router-link class="aside__link text-primary text-weight-medium" to="/settings/">
             {{ $t('aside.items.siteSettings') }}
           </router-link>
@@ -91,7 +102,7 @@
       <q-item clickable class="items-center aside__item q-pl-lg q-py-md" :active="true" active-class="text-primary"
         :class="isPageActive(['/exit/'])" @click="$router.push('/exit/')">
         <q-item-section class="items-center items-row-start">
-          <q-icon color="primary" name="logout" size="24px" class="q-mr-md" />
+          <q-img color="primary" src="/src/assets/exit.svg" alt="settings" width="24px" height="24px" class="q-mr-md" />
           <router-link class="aside__link text-primary text-weight-medium" to="/exit/">
             {{ $t('aside.items.exit') }}
           </router-link>
