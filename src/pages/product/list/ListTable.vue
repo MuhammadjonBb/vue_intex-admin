@@ -98,7 +98,7 @@
               </q-item-section>
             </q-item>
             <q-item v-close-popup>
-              <q-item-section>
+              <q-item-section @click="store.deleteProduct(data.row.id)">
                 <q-btn dense flat class="text-capitalize text-left" text-color="grey-8">
                   <q-icon name="delete" size="xs" color="negative" class="on-left" />
                   Удалить

@@ -33,7 +33,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive(['/product/attributes'])"
+          <q-item clickable :active="true" active-class="text-primary" :class="isPageActive(['product/attributes'])"
             @click="$router.push('/product/attributes')">
             <q-item-section class="q-pl-lg items-center no-wrap aside__products-item items-row-start">
               <q-icon name="circle" color="primary" class="q-mr-md products-icon"

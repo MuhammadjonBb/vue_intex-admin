@@ -4,9 +4,7 @@ import {useInputStore} from "stores/moduls/input";
 import {Notify} from 'quasar'
 const inputStore = useInputStore()
 
-
-
-export const useListStore = defineStore('categories', {
+export const useListStore = defineStore('lists', {
   state: () => ({
     listData: [],
     attributes: [],
@@ -26,6 +24,13 @@ export const useListStore = defineStore('categories', {
     responseType: '',
   }),
   actions: {
+    async deleteProduct(id:number) {
+      // await api.delete(`products/${id}`)
+      //   .catch(err=>{
+          console.log(id,'delete product')
+        // })
+    },
+
     async postList(path: any) {
 
       console.log(path, inputStore.input.productCreate.inputRef)

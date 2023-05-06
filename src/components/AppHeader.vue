@@ -51,7 +51,7 @@
     <q-toolbar dense class="text-grey-6 q-mt-md" style="border-top: 1px solid #6666661c;">
       <q-breadcrumbs>
         <q-breadcrumbs-el icon="home" />
-        <q-breadcrumbs-el>{{ returnPageName($route.path) }}</q-breadcrumbs-el>
+        <q-breadcrumbs-el >{{ returnPageName($route.path) }}</q-breadcrumbs-el>
         <q-breadcrumbs-el v-if="isChildPage($route.path)">{{ returnPageChild($route.path)
         }}</q-breadcrumbs-el>
       </q-breadcrumbs>
