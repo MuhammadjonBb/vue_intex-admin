@@ -3,11 +3,6 @@ import { ref } from 'vue'
 
 export const useInputStore: any = defineStore('input', () => {
   const input = ref({
-    categoriesForm: {
-      ruName: '',
-      enName: '',
-      uzName: '',
-    },
     attributesAdd: {
       nameRu: '',
       nameEn: '',
@@ -17,30 +12,11 @@ export const useInputStore: any = defineStore('input', () => {
       valueUz: '',
     },
     userDialog: {
-      name: '',
-      surname: '',
-      birth: '',
-      email: '',
-      phone: '',
       newPassword: '',
       confirmPassword: '',
     },
-    feedbackDialog: {
-      name: '',
-      phone: '',
-    },
     resetPassword: {
       phone: '',
-    },
-    editContactsDialog: {
-      phone: '',
-      email: '',
-      address_ru: '',
-      address_en: '',
-      address_uz: '',
-      work_uz: '',
-      work_ru: '',
-      work_en: '',
     },
     mainAuth: {
       password: '',

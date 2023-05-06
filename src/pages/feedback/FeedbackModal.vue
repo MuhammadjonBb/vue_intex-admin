@@ -11,9 +11,6 @@
 
       <q-card-section class="q-pt-none column">
         <div class="row no-wrap" style="gap: 20px;">
-          <!-- <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]"
-            :inputData="{ component: 'feedbackDialog', inputName: 'name' }" name="name"
-            :placeholder="$t('placeholder.name')" type="text" :label="$t('consultations.modal.inputs.name')" /> -->
           <DefaultInput v-model:text="inputName" :rules="[required]" name="name" :placeholder="$t('placeholder.name')"
             :label="$t('consultations.modal.inputs.name')">
           </DefaultInput>
