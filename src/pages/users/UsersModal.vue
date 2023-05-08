@@ -40,17 +40,17 @@
 
         </div>
         <div class="row no-wrap" style="gap:10px;">
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.name" name="name"
-            :label="$t('users.modal.inputs.name')" :placeholder="$t('placeholder.name')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.surname" name="surname"
+          <DefaultInput :rules="[required]" v-model:text="form.name" name="name" :label="$t('users.modal.inputs.name')"
+            :placeholder="$t('placeholder.name')" type="text" />
+          <DefaultInput :rules="[required]" v-model:text="form.surname" name="surname"
             :label="$t('users.modal.inputs.surname')" :placeholder="$t('placeholder.surname')" type="text" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.email" name="email"
-            label="Email" :placeholder="$t('placeholder.email')" type="text" />
+          <DefaultInput :rules="[required]" v-model:text="form.email" name="email" label="Email"
+            :placeholder="$t('placeholder.email')" type="text" />
         </div>
 
         <div class="row no-wrap" style="gap:20px;">
-          <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.phone" />
-          <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="form.birth" name="birth"
+          <PhoneInput :rules="[phoneRequired]" v-model:text="form.phone" />
+          <DefaultInput :rules="[required]" v-model:text="form.birth" name="birth"
             :label="$t('users.modal.inputs.birthday')" type="date" placeholder="" />
         </div>
         <div class="row no-wrap q-mb-md" style="gap: 20px;">
@@ -69,8 +69,10 @@
           </label>
         </div>
         <div class="row no-wrap" style="gap: 20px;">
-          <password-input class="full-width" :label="$t('password.new')" v-model:text="form.newPassword" />
-          <password-input class="full-width" :label="$t('password.confirm')" v-model:text="form.confirmPassword" />
+          <password-input :rules="[required, passwordValid]" class="full-width" :label="$t('password.new')"
+            v-model:text="form.newPassword" />
+          <password-input :rules="[required, passwordValid]" class="full-width" :label="$t('password.confirm')"
+            v-model:text="form.confirmPassword" />
         </div>
 
         <q-card-actions class="row q-mt-lg no-wrap" style="gap: 20px;">
@@ -90,7 +92,6 @@ import DefaultInput from 'src/components/input/DefaultInput.vue'
 import PhoneInput from 'src/components/input/PhoneInput.vue'
 import PasswordInput from 'src/components/input/PasswordInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
-import { useInputStore } from 'src/stores/moduls/input'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n'
 import { useUsersStore } from 'src/stores/moduls/users'
@@ -99,8 +100,9 @@ import cutPhoneString from "src/helpers/cutPhoneString"
 
 const { t } = useI18n()
 const usersStore = useUsersStore()
-const inputStore = useInputStore()
 const modalStore = useModalStore()
+
+const validation = ref(false)
 
 const form = ref({
   name: '',
@@ -112,6 +114,33 @@ const form = ref({
   confirmPassword: ''
 })
 
+function passwordValid() {
+  if (form.value.newPassword === form.value.confirmPassword) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.passwordNotMatch')
+}
+
+function required(v: string | number) {
+  if (!!v) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
+}
+
+function phoneRequired(str: string) {
+  const digitRegex = /\d/g;
+  const matches = str.match(digitRegex);
+  const amount = matches ? matches.length : 0;
+
+  if (amount > 8) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
+}
 const statusArr = [
   { label: 'Активный', value: 'registered' },
   { label: 'Неактивный', value: 'not_registered' }
@@ -137,6 +166,14 @@ if (props.modalName === 'edit') {
 }
 
 function save() {
+  if (!validation.value) {
+    Notify.create({
+      color: 'negative',
+      message: t('validation.fail'),
+      position: 'top-right',
+    })
+    return
+  }
   const data = ref({
     first_name: form.value.name,
     last_name: form.value.surname,
