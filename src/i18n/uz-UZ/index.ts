@@ -250,6 +250,7 @@ export default {
   },
   validation: {
     required: 'Ushbu qator to\'ldirilishi shart',
+    fail: 'Maydonlar noto‘g‘ri kiritilgan, xatolarni tekshiring va qayta urinib ko‘ring',
   },
   search: 'Qidirish',
   failed: 'Действие не выполнено',

@@ -265,6 +265,7 @@ export default {
   },
   validation: {
     required: 'This field is required',
+    fail: 'Fields are not valid, check errors and try again',
   },
   search: 'Search',
   failed: 'Action failed',

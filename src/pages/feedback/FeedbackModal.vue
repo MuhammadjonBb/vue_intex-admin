@@ -15,7 +15,7 @@
             :label="$t('consultations.modal.inputs.name')">
           </DefaultInput>
 
-          <phone-input :rules="[(v: any) => !!v || $t('validation.required')]" v-model:text="inputPhone" />
+          <phone-input :rules="[phoneRequired]" v-model:text="inputPhone" />
         </div>
         <div class="row q-mt-lg">
           <q-space />
@@ -36,12 +36,14 @@ import PhoneInput from 'src/components/input/PhoneInput.vue'
 import { useModalStore } from 'src/stores/moduls/modal'
 import { useFeedbackStore } from 'src/stores/moduls/feedback'
 import { getPrefix, removeCharacters } from 'src/helpers/formatPhoneNum'
-import { useQuasar } from 'quasar'
+import { Notify, useQuasar } from 'quasar'
 import { useI18n } from 'vue-i18n'
 import cutPhoneString from "src/helpers/cutPhoneString"
 
-const inputName = ref('')
-const inputPhone = ref('')
+const validation: Ref<boolean> = ref(false)
+
+const inputName: Ref<string> = ref('')
+const inputPhone: Ref<string> = ref('')
 
 const props = defineProps(['modalName', 'label', 'feedbackData'])
 const { t } = useI18n()
@@ -50,7 +52,23 @@ const feedbackStore = useFeedbackStore()
 const $q = useQuasar()
 
 function required(v: string | number) {
-  return !!v || t('validation.required')
+  if (!!v) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
+}
+
+function phoneRequired(str: string) {
+  const digitRegex = /\d/g;
+  const matches = str.match(digitRegex);
+  const amount = matches ? matches.length : 0;
+
+  if (amount > 8) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
 }
 
 watch(props, () => {
@@ -58,6 +76,14 @@ watch(props, () => {
 })
 
 function save() {
+  if (!validation.value) {
+    $q.notify({
+      message: t('validation.fail'),
+      color: 'negative',
+      position: 'top',
+    })
+    return
+  }
   const data = {
     name: inputName.value,
     phone: getPrefix(inputPhone.value) + removeCharacters(inputPhone.value),
