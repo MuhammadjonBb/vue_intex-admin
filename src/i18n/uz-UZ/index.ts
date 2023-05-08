@@ -252,6 +252,7 @@ export default {
     required: 'Ushbu qator to\'ldirilishi shart',
     fail: 'Maydonlar noto‘g‘ri kiritilgan, xatolarni tekshiring va qayta urinib ko‘ring',
     passwordNotMatch: 'Parollar mos kelmayapti',
+    email: 'Email noto‘g‘ri kiritilgan',
   },
   search: 'Qidirish',
   failed: 'Действие не выполнено',

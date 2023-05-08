@@ -2,18 +2,17 @@
   <q-form class="q-mt-md q-pa-xl column q-mx-auto bg-white" style="border-radius: 12px;" v-if="ordersStore.products">
     <div class="column no-wrap q-mb-md" style="gap:20px;">
       <div class="row no-wrap" style="gap: 20px;">
-        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="name"
-          :label="$t('orders.form.inputs.name')" v-model:text="form.first_name" class="full-width" />
-        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="surname"
-          :label="$t('orders.form.inputs.surname')" v-model:text="form.last_name" class="full-width" />
-        <PhoneInput :rules="[(v: any) => !!v || $t('validation.required')]" class="full-width"
-          v-model:text="form.phone" />
-        <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="email" label="Email"
-          v-model:text="form.email" class="full-width" />
+        <DefaultInput :rules="[required]" name="name" :label="$t('orders.form.inputs.name')"
+          v-model:text="form.first_name" class="full-width" />
+        <DefaultInput :rules="[required]" name="surname" :label="$t('orders.form.inputs.surname')"
+          v-model:text="form.last_name" class="full-width" />
+        <PhoneInput :rules="[phoneRequired]" class="full-width" v-model:text="form.phone" />
+        <DefaultInput :rules="[required, isValidEmail]" name="email" label="Email" v-model:text="form.email"
+          class="full-width" />
       </div>
 
-      <DefaultInput :rules="[(v: any) => !!v || $t('validation.required')]" name="address" icon="location_on"
-        :label="$t('orders.form.inputs.address')" v-model:text="form.address" />
+      <DefaultInput :rules="[required]" name="address" icon="location_on" :label="$t('orders.form.inputs.address')"
+        v-model:text="form.address" />
     </div>
     <!-- ==================== -->
     <div class="column no-wrap q-mb-lg">
@@ -83,13 +82,12 @@ import { useOrdersStore } from 'src/stores/moduls/orders';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { Notify } from 'quasar';
-import { useInputStore } from 'src/stores/moduls/input';
 
 const { t } = useI18n()
-const inputStore = useInputStore()
 const route = useRoute()
 const ordersStore = useOrdersStore()
 
+const validation = ref(false)
 const form = ref({
   first_name: '',
   last_name: '',
@@ -106,13 +104,21 @@ onMounted(() => {
 
 if (route.params.id && ordersStore.orders) {
   const thisOrder = getOrder(route.params.id)
-  console.log(thisOrder);
 }
 function getOrder(id: any) {
   return ordersStore.orders.result.find((item: any) => item.order_number === `#${id}`)
 }
 
+
 function createOrder() {
+  if (!validation.value) {
+    Notify.create({
+      color: 'negative',
+      position: 'top-right',
+      message: t('validation.fail'),
+    })
+    return
+  }
   ordersStore.createOrder(form.value).then(() => {
     Notify.create({
       color: 'positive',
@@ -128,6 +134,35 @@ function createOrder() {
       position: 'top-right',
     })
   })
+}
+
+function required(v: string | number) {
+  if (!!v) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
+}
+
+function isValidEmail(email: string) {
+  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (pattern.test(email)) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.email')
+}
+
+function phoneRequired(str: string) {
+  const digitRegex = /\d/g;
+  const matches = str.match(digitRegex);
+  const amount = matches ? matches.length : 0;
+
+  if (amount > 8) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.required')
 }
 </script>
 

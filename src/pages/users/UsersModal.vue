@@ -44,7 +44,7 @@
             :placeholder="$t('placeholder.name')" type="text" />
           <DefaultInput :rules="[required]" v-model:text="form.surname" name="surname"
             :label="$t('users.modal.inputs.surname')" :placeholder="$t('placeholder.surname')" type="text" />
-          <DefaultInput :rules="[required]" v-model:text="form.email" name="email" label="Email"
+          <DefaultInput :rules="[required, isValidEmail]" v-model:text="form.email" name="email" label="Email"
             :placeholder="$t('placeholder.email')" type="text" />
         </div>
 
@@ -128,6 +128,15 @@ function required(v: string | number) {
   }
   validation.value = false
   return t('validation.required')
+}
+
+function isValidEmail(email: string) {
+  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (pattern.test(email)) {
+    return validation.value = true
+  }
+  validation.value = false
+  return t('validation.email')
 }
 
 function phoneRequired(str: string) {

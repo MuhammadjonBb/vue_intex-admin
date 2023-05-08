@@ -267,6 +267,7 @@ export default {
     required: 'This field is required',
     fail: 'Fields are not valid, please check errors and try again',
     passwordNotMatch: 'Passwords do not match',
+    email: 'Email is not valid',
   },
   search: 'Search',
   failed: 'Action failed',
