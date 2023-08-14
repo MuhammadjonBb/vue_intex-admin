@@ -4,7 +4,7 @@
       <q-card-section class=" flex justify-center items-center " horizontal>
         <q-btn flat size="10px" class="bg-blue flex justify-center items-center q-mr-md q-pa-sm btn q-pr-md"
           color="white">
-          <img src="/src/assets/filter.svg" alt="filter_icon" sizes="10px" class="q-mr-sm">
+          <img src="../assets/filter.svg" alt="filter_icon" sizes="10px" class="q-mr-sm">
           {{ $t('filterPanel.filter') }}
         </q-btn>
         <q-input dense v-model="search" borderless class="search-input q-px-md" :placeholder="$t('search')">

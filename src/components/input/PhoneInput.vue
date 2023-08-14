@@ -6,9 +6,9 @@
       style="position: relative;" :mask="returnMask()" fill-mask>
       <template #prepend>
         <div class="q-mr-xs">
-          <q-img class="country-img" v-if="phoneCountry === '+998'" src="/src/assets/lang/2-lang.png" width="22px"
+          <q-img class="country-img" v-if="phoneCountry === '+998'" src="../../assets/lang/2-lang.png" width="22px"
             height="15px" />
-          <q-img class="country-img" v-else-if="phoneCountry === '+7'" src="/src/assets/lang/0-lang.png" width="22px"
+          <q-img class="country-img" v-else-if="phoneCountry === '+7'" src="../../assets/lang/0-lang.png" width="22px"
             height="15px" />
         </div>
 

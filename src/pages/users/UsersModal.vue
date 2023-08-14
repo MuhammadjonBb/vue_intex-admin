@@ -28,7 +28,7 @@
             <template #list="scope">
               <q-img :src="scope.files[0]?.__img?.src" alt="Profile image"
                 :style="`${!scope.files.length ? 'border: 1px dashed #CDCDCD;' : ''}`" class="upload-img" />
-              <q-img v-if="!scope.files.length" type="a" @click="scope.pickFiles" src="/src/assets/uploadIcon.svg"
+              <q-img v-if="!scope.files.length" type="a" @click="scope.pickFiles" src="../../assets/uploadIcon.svg"
                 class="upload-preview" />
               <span v-if="!scope.files.length" style="color: #04009A; position: absolute;top: 70%;left: 25%;">
                 <q-icon name="upload"></q-icon>

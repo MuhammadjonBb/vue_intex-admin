@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import DefaultInput from 'components/input/DefaultInput.vue'
-import {useAboutStore} from "stores/moduls/products/attribute";
-import {useInputStore} from "stores/moduls/input";
-import {storeToRefs} from "pinia";
+import { useAboutStore } from "stores/moduls/products/attribute";
+import { useInputStore } from "stores/moduls/input";
+import { storeToRefs } from "pinia";
 
 const lang = ref({
   ru: false,
@@ -18,7 +18,8 @@ const { toggle } = storeToRefs(store)
 const createAttribute = reactive({
   name_uz: '',
   name_ru: '',
-  name_en: ''})
+  name_en: ''
+})
 
 function addAttribute() {
   store.toggle.about_uz.resetValidation()
@@ -28,14 +29,14 @@ function addAttribute() {
 </script>
 <template>
   <div class="header__title">
-    Добавить aтрибуты {{`${store.toggle.about_uz}`}}
+    Добавить aтрибуты {{ `${store.toggle.about_uz}` }}
   </div>
   <q-card flat class=" q-ma-md card__attribute q-pa-md">
     <div class="toggle-container">
       <div class="expansion__header " @click="lang.ru = !lang.ru">
         <span class="expansion__title">Ruscha</span>
         <div>
-          <q-img :class="lang.ru ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+          <q-img :class="lang.ru ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="../../../assets/Vector.svg"
             width="20px"></q-img>
         </div>
       </div>
@@ -43,18 +44,15 @@ function addAttribute() {
       <div v-if="lang.ru" class="content">
         <div class="input__group">
           <div class="input__name">
-            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameRu', ref:'refNameRu' }"
-                           :label="'Значение атрибута'" :rules="[val => !!val || 'Field is required']"
-                           placeholder="Введите значение атрибута" />
+            <default-input :input-data="{ component: 'attributesAdd', inputName: 'nameRu', ref: 'refNameRu' }"
+              :label="'Значение атрибута'" :rules="[val => !!val || 'Field is required']"
+              placeholder="Введите значение атрибута" />
           </div>
           <div class="input__dropdown">
-              <span class="text-weight-bold">Тип ввода</span>
-              <q-select outlined
-                        :ref="toggle.about_uz"
-                        class="q-pt-sm"
-                        :options="['Range','Dropdown', 'Checkbox','Radio button']"
-                        label="Введите значение атрибута"
-                        :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
+            <span class="text-weight-bold">Тип ввода</span>
+            <q-select outlined :ref="toggle.about_uz" class="q-pt-sm"
+              :options="['Range', 'Dropdown', 'Checkbox', 'Radio button']" label="Введите значение атрибута"
+              :rules="[val => !!val || 'Field is required']" id="select" v-model="selectedOption" />
 
           </div>
         </div>
@@ -69,7 +67,7 @@ function addAttribute() {
       <div class="expansion__header " @click="lang.en = !lang.en">
         <span class="expansion__title">Engilish</span>
         <div>
-          <q-img :class="lang.en ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+          <q-img :class="lang.en ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="../../../assets/Vector.svg"
             width="20px"></q-img>
         </div>
       </div>
@@ -83,11 +81,9 @@ function addAttribute() {
           <div class="input__dropdown">
             <label for="select">Тип ввода</label>
 
-            <q-select outlined
-                      class="q-pt-sm"
-                      :options="['Range','Dropdown', 'Checkbox','Radio button']"
-                      label="Введите значение атрибута"
-                      :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
+            <q-select outlined class="q-pt-sm" :options="['Range', 'Dropdown', 'Checkbox', 'Radio button']"
+              label="Введите значение атрибута" :rules="[val => !!val || 'Field is required']" id="select"
+              v-model="selectedOption" />
           </div>
         </div>
 
@@ -101,7 +97,7 @@ function addAttribute() {
       <div class="expansion__header " @click="lang.uz = !lang.uz">
         <span class="expansion__title">O'zbekcha</span>
         <div>
-          <q-img :class="lang.uz ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="/src/assets/Vector.svg"
+          <q-img :class="lang.uz ? 'rotateActive' : ' noActive'" class="q-mr-sm" src="../../../assets/Vector.svg"
             width="20px"></q-img>
         </div>
       </div>
@@ -115,11 +111,9 @@ function addAttribute() {
           <div class="input__dropdown">
             <label for="select">Тип ввода</label>
 
-            <q-select outlined
-                      class="q-pt-sm"
-                      :options="['Range','Dropdown', 'Checkbox','Radio button']"
-                      label="Введите значение атрибута"
-                      :rules="[val => !!val || 'Field is required']" id="select"  v-model="selectedOption"/>
+            <q-select outlined class="q-pt-sm" :options="['Range', 'Dropdown', 'Checkbox', 'Radio button']"
+              label="Введите значение атрибута" :rules="[val => !!val || 'Field is required']" id="select"
+              v-model="selectedOption" />
           </div>
         </div>
 
@@ -132,8 +126,8 @@ function addAttribute() {
     <q-card-actions align="center" class="row no-wrap q-mx-auto" style="gap: 20px; max-width: 50%;">
       <q-btn color="indigo-10" flat @click="addAttribute" label="Отменить" style="border-radius: 12px;"
         class="full-width q-py-sm bg-grey-2  q-px-xl q-mr-md" no-caps />
-      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;" @click="store.postAttribute(selectedOption)"
-        class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
+      <q-btn color="white" flat label="Сохранить" style="border-radius: 12px;"
+        @click="store.postAttribute(selectedOption)" class="full-width q-py-sm  q-px-xl bg-indigo-10" no-caps />
     </q-card-actions>
   </q-card>
 </template>

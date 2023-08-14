@@ -239,7 +239,7 @@ onMounted(() => {
         <div class="card__img">
           <div class="dropzone" @drop.prevent="handleDrop" @dragover.prevent>
             <div class="img__container" style="z-index: -1">
-              <q-img alt="img" class="img__main" height="68px" src="/src/assets/upload_img.png" width="68px" />
+              <q-img alt="img" class="img__main" height="68px" src="../../../assets/upload_img.png" width="68px" />
               <span class="q-mt-sm">Загрузите изображения продукта</span>
             </div>
           </div>
@@ -249,10 +249,10 @@ onMounted(() => {
                 height="100%" style="border-radius: 15px" width="100%">
                 <div class="absolute-top icon__card">
                   <div class="icon__item">
-                    <q-img class="icon__upload" name="uploud" src="/src/assets/fi_upload-cloud.png" />
+                    <q-img class="icon__upload" name="uploud" src="../../../assets/fi_upload-cloud.png" />
                   </div>
                   <div class="icon__item">
-                    <q-img class="icon__upload" name="delete" src="/src/assets/trash.png" @click="deleteImg(link)" />
+                    <q-img class="icon__upload" name="delete" src="../../../assets/trash.png" @click="deleteImg(link)" />
                   </div>
                 </div>
               </q-img>

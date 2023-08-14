@@ -77,11 +77,14 @@ watch(props, () => {
 
 function save() {
   if (!validation.value) {
+    inputName.value = ''
+    inputPhone.value = ''
     $q.notify({
       message: t('validation.fail'),
       color: 'negative',
       position: 'top',
     })
+    validation.value = false
     return
   }
   const data = {
